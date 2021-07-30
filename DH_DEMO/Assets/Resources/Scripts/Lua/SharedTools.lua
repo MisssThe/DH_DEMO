@@ -37,7 +37,7 @@ function CreateList()
     list.count = 0
     -- 添加数据
     function list.Add(key,value)
-        if (key ~= nil) then
+        if (key ~= nil and value ~= nil) then
             list.real_list[key] = value
             list.count = list.count + 1
         end
@@ -56,6 +56,7 @@ function CreateList()
     function list.Clear()
         list.real_list = {}
         list.count = 0
+        InitIter()
     end
     -- 打印所有数据
     function list.Print()
@@ -64,7 +65,23 @@ function CreateList()
             print("key:" .. k .. ",value:" .. v)
         end
     end
+    -- 获取迭代器
+    list.key = nil
+    function list.Iterator()
+        list.key = next(list.real_list,list.key)
+        return list.Search(list.key),(list.key ~= nil)
+    end
+    function list.InitIter()
+        list.key = nil
+    end
     return list
+end
+
+-- 与选择对象相关的操作
+Select = {}
+-- 返回选择的对象
+function GetSelectObj()
+    return CS.UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject
 end
 
 -- 实现关闭直接创建全局变量功能
