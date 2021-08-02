@@ -3,7 +3,7 @@ local _g = _G
 
 -- 存放CS代码中的数据
 cs_self = {}
-
+UE = CS.UnityEngine
 -- 实现创建枚举功能
 function CreateEnum(t)
     local enum_table = {}
@@ -46,6 +46,7 @@ function CreateList()
     function list.Delete(key)
         if (key ~= nil) then
             list.real_list[key] = nil
+            list.count = list.count - 1;
         end
     end
     -- 查找数据
@@ -56,7 +57,7 @@ function CreateList()
     function list.Clear()
         list.real_list = {}
         list.count = 0
-        InitIter()
+        list.InitIter()
     end
     -- 打印所有数据
     function list.Print()
@@ -81,7 +82,7 @@ end
 Select = {}
 -- 返回选择的对象
 function GetSelectObj()
-    return CS.UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject
+    return UE.EventSystems.EventSystem.current.currentSelectedGameObject
 end
 
 -- 实现关闭直接创建全局变量功能
