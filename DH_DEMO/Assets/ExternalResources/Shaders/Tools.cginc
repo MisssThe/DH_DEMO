@@ -19,6 +19,10 @@ half _BloomThreshold;
 #define CENTER_COORD fixed2(0.5,0.5)            
 #define BASE_OFFSET _MainTex_TexelSize
 #define GAUSSIAN_KERNEL fixed3(0.0947416,0.118318,0.147761)
+#define PI 3.1415926
+#define RADIAN_ANGLE 180 / PI 
+#define Angle_RADIAN PI / 180
+#define TIME _Time.y
 
 //----------------------------------------顶点偏移----------------------------------------
 //sin函数
@@ -34,12 +38,12 @@ inline float3 sin3(float3 x)
     temp = float3(sin(x.x),sin(x.y),sin(x.z));
     return temp;
 }
-inline float3 offsetBySin(float3 vertex,float3 offsetDir,SinValue value)
+//保证方向为正数（有点玩具，可以不用）
+inline float3 offsetBySin(float3 vertex,float3 offset_dir,SinValue sv)
 {
-    float3 outVertex;
-    float3 tempSin = value.A * sin3(value.B * vertex + value.C);
-    outVertex = vertex + offsetDir * tempSin;
-    return outVertex;
+    float3 out_vertex = (fixed3(1,1,1) - offset_dir) * sv.A * sin3(vertex * sv.B + sv.C) + offset_dir;
+    out_vertex = offset_dir * (out_vertex.x * out_vertex.y * out_vertex.z);
+    return out_vertex;
 }
 
 
@@ -120,7 +124,7 @@ inline fixed3 MotionBlur()
 /*
     Bloom效果
 */
-inline fixed Luminances(fixed3 color)
+inline fixed GetLuminance(fixed3 color)
 {
     return 0.2125 * color.r + 0.7154 * color.g + 0.0721 * color.b; 
 }
@@ -129,7 +133,7 @@ inline fixed3 Bloom(fixed2 uv)
     fixed3 color = tex2D(_MainTex,uv);
     // fixed luminance = Luminance(color);
     // fixed factor = clamp(luminance - _BloomThreshold,0.0f,1.0f);
-    // return factor * color;
+    // return factor * color;dddd
 }
 //----------------------------------------边缘检测----------------------------------------
 
@@ -153,6 +157,14 @@ inline fixed3 Bliin_Phong(fixed3 ambientColor,fixed3 lightColor,fixed3 albedo,fi
     return ambient_diffuse + specular;
 }
 //----------------------------------------物理光照----------------------------------------
+/*
+    菲尼尔效应
+*/
+inline fixed3 Fresnel(fixed3 F0,fixed nv)
+{
+    fixed3 fre = F0 + (fixed3(1,1,1) - F0) * pow(1 - nv ,5);
+    return fre;
+}
 //金属流
 //镜面流
 #endif
