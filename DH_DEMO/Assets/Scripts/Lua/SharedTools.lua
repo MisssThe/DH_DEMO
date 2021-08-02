@@ -3,7 +3,6 @@ local _g = _G
 
 -- 存放CS代码中的数据
 cs_self = {}
-UE = CS.UnityEngine
 -- 实现创建枚举功能
 function CreateEnum(t)
     local enum_table = {}
