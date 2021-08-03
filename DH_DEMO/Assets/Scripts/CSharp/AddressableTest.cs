@@ -30,7 +30,6 @@ public class AssetManager
     /// <returns> 资产列表 </returns>
     public GameObject[] LoadAsset(string[] keys, float time = -1)
     {
-        Guid guid = Guid.NewGuid();     // 当前批次的Guid
         this._gameObjectWaitting = new GameObject[keys.Length];
         this.count = keys.Length;
 
