@@ -12,7 +12,7 @@ public class MyLuaBehaviour : MonoBehaviour
     LuaEnv lua_env;
     LuaTable lua_table;
 
-    public TextAsset lua_text;//记得改为private
+    public LuaAsset lua_text;//记得改为private
 
     static float last_gc_time = 0;
 
@@ -52,7 +52,7 @@ public class MyLuaBehaviour : MonoBehaviour
 
         lua_table.Set("self",this);
 
-        lua_env.DoString(lua_text.text,this.gameObject.name,lua_table);
+        lua_env.DoString(lua_text.data,this.gameObject.name,lua_table);
 
         lua_table.Get("Event",out Event);
         lua_table.Get("Awake",out awake);

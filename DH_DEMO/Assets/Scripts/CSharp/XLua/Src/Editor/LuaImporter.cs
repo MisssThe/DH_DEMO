@@ -114,7 +114,7 @@ public class LuaImporter : ScriptedImporter
 
     private Texture2D LoadIconTexture(string prefax)
     {
-        return AssetDatabase.LoadAssetAtPath("Assets/XLua/Editor/lua.png", typeof(Texture2D)) as
+        return AssetDatabase.LoadAssetAtPath("Assets/Scripts/CSharp/XLua/Editor/lua.png", typeof(Texture2D)) as
             Texture2D;
     }
 }
