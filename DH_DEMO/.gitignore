@@ -70,7 +70,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# add by xiaodou
+# add by xiaodou 
 .vsconfig
 .vscode
 .idea
