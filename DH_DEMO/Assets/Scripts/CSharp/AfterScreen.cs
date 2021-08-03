@@ -19,11 +19,15 @@ public class AfterScreen : MonoBehaviour
     {
         if (mat != null && mat.Count > 0)
         {
-            dest = src;
-            foreach (var item in mat)
-            {
-                Graphics.Blit(dest,dest,item);
-            }
+            // dest = src;
+            // foreach (var item in mat)
+            // {
+            //     Graphics.Blit(src,dest,item);
+            //     Debug.Log("blit");
+            // }
+            RenderTexture temp = new RenderTexture(Screen.width,Screen.height,24);
+            Graphics.Blit(src,temp,mat[0],0);
+            Graphics.Blit(temp,dest,mat[0],1);
         }
         else
         {
