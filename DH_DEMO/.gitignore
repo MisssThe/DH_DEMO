@@ -72,4 +72,5 @@ crashlytics-build.properties
 
 # add by xiaodou
 .vsconfig
+.vscode
 .idea
