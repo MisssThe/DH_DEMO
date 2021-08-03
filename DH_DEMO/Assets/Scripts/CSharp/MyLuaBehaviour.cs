@@ -17,7 +17,7 @@ public class MyLuaBehaviour : MonoBehaviour
     static float last_gc_time = 0;
 
     const float gc_interval = 1;
-    
+    Action Event;
     Action awake;
     Action start;
     Action fixupdate;
@@ -54,6 +54,7 @@ public class MyLuaBehaviour : MonoBehaviour
 
         lua_env.DoString(lua_text.text,this.gameObject.name,lua_table);
 
+        lua_table.Get("Event",out Event);
         lua_table.Get("Awake",out awake);
         lua_table.Get("Start",out start);
         lua_table.Get("FixUpdate",out fixupdate);
@@ -62,7 +63,6 @@ public class MyLuaBehaviour : MonoBehaviour
         lua_table.Get("OnDestroy",out ondestroy);
 
     }
-
     void Awake()
     {
         Init();
