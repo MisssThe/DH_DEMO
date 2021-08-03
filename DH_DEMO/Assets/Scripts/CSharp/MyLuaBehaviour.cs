@@ -5,6 +5,12 @@ using System;
 using System.IO;
 using XLua;
 
+[Serializable]
+public class obj
+{
+    public string name;
+    public GameObject gameObject;
+}
 
 [Hotfix]
 public class MyLuaBehaviour : MonoBehaviour
@@ -12,6 +18,8 @@ public class MyLuaBehaviour : MonoBehaviour
     LuaEnv lua_env;
     LuaTable lua_table;
 
+    [SerializeField]
+    private obj[] object_list;
     public LuaAsset lua_text;//记得改为private
 
     static float last_gc_time = 0;
@@ -51,6 +59,10 @@ public class MyLuaBehaviour : MonoBehaviour
         //初始化lua_text
 
         lua_table.Set("self",this);
+        foreach(var temp in object_list)
+        {
+            lua_table.Set(temp.name,temp.gameObject);
+        }
 
         lua_env.DoString(lua_text.data,this.gameObject.name,lua_table);
 

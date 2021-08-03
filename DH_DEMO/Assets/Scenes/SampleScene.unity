@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6232bb5e939b6c54ca16c127897d1a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  object_list: []
   lua_text: {fileID: 4900000, guid: 6691d1508d4ef2f48a8ca469fd100d99, type: 3}
 --- !u!4 &324402657
 Transform:
