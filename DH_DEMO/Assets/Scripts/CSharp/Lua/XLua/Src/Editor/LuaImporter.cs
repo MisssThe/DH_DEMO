@@ -16,7 +16,11 @@ using UnityEditor.AssetImporters;
 using UnityEditor.Experimental.AssetImporters;
 #endif
 
+<<<<<<< HEAD:DH_DEMO/Assets/Scripts/CSharp/Lua/XLua/Src/Editor/LuaImporter.cs
 [ScriptedImporter(2, new[] { "luac" })]
+=======
+[ScriptedImporter(2, new[] {"luaAsset"})]
+>>>>>>> 70810b1164ccc67c713a70d3ab3ac4c9a03508e9:DH_DEMO/Assets/Scripts/CSharp/XLua/Src/Editor/LuaImporter.cs
 public class LuaImporter : ScriptedImporter
 {
     const string Tag = "LuaImporter";

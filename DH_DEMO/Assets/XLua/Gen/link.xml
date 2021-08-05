@@ -2,4 +2,12 @@
 
 <linker>
 
+<<<<<<< HEAD
+=======
+	<assembly fullname="Assembly-CSharp">
+	    <type fullname="NetWork" preserve="all"/>
+		
+	</assembly>
+
+>>>>>>> 70810b1164ccc67c713a70d3ab3ac4c9a03508e9
 </linker>

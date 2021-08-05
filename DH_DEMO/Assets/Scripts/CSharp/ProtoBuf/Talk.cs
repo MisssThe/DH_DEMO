@@ -24,13 +24,12 @@ namespace Network {
     static TalkReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgpUYWxrLnByb3RvEgduZXR3b3JrGgtFdmVudC5wcm90byJTCgRUYWxrEh0K",
-            "BWV2ZW50GAEgASgLMg4ubmV0d29yay5FdmVudBIOCgZteU5hbWUYAiABKAkS",
-            "DwoHaGlzTmFtZRgDIAEoCRILCgNtc2cYBCABKAliBnByb3RvMw=="));
+            "CgpUYWxrLnByb3RvEgduZXR3b3JrIjQKBFRhbGsSDgoGbXlOYW1lGAEgASgJ",
+            "Eg8KB2hpc05hbWUYAiABKAkSCwoDbXNnGAMgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Network.EventReflection.Descriptor, },
+          new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.Talk), global::Network.Talk.Parser, new[]{ "Event", "MyName", "HisName", "Msg" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.Talk), global::Network.Talk.Parser, new[]{ "MyName", "HisName", "Msg" }, null, null, null)
           }));
     }
     #endregion
@@ -62,7 +61,6 @@ namespace Network {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Talk(Talk other) : this() {
-      event_ = other.event_ != null ? other.event_.Clone() : null;
       myName_ = other.myName_;
       hisName_ = other.hisName_;
       msg_ = other.msg_;
@@ -74,19 +72,8 @@ namespace Network {
       return new Talk(this);
     }
 
-    /// <summary>Field number for the "event" field.</summary>
-    public const int EventFieldNumber = 1;
-    private global::Network.Event event_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Network.Event Event {
-      get { return event_; }
-      set {
-        event_ = value;
-      }
-    }
-
     /// <summary>Field number for the "myName" field.</summary>
-    public const int MyNameFieldNumber = 2;
+    public const int MyNameFieldNumber = 1;
     private string myName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string MyName {
@@ -97,7 +84,7 @@ namespace Network {
     }
 
     /// <summary>Field number for the "hisName" field.</summary>
-    public const int HisNameFieldNumber = 3;
+    public const int HisNameFieldNumber = 2;
     private string hisName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string HisName {
@@ -108,7 +95,7 @@ namespace Network {
     }
 
     /// <summary>Field number for the "msg" field.</summary>
-    public const int MsgFieldNumber = 4;
+    public const int MsgFieldNumber = 3;
     private string msg_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Msg {
@@ -131,7 +118,6 @@ namespace Network {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Event, other.Event)) return false;
       if (MyName != other.MyName) return false;
       if (HisName != other.HisName) return false;
       if (Msg != other.Msg) return false;
@@ -141,7 +127,6 @@ namespace Network {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (event_ != null) hash ^= Event.GetHashCode();
       if (MyName.Length != 0) hash ^= MyName.GetHashCode();
       if (HisName.Length != 0) hash ^= HisName.GetHashCode();
       if (Msg.Length != 0) hash ^= Msg.GetHashCode();
@@ -158,20 +143,16 @@ namespace Network {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (event_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Event);
-      }
       if (MyName.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(10);
         output.WriteString(MyName);
       }
       if (HisName.Length != 0) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(18);
         output.WriteString(HisName);
       }
       if (Msg.Length != 0) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(26);
         output.WriteString(Msg);
       }
       if (_unknownFields != null) {
@@ -182,9 +163,6 @@ namespace Network {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (event_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Event);
-      }
       if (MyName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(MyName);
       }
@@ -204,12 +182,6 @@ namespace Network {
     public void MergeFrom(Talk other) {
       if (other == null) {
         return;
-      }
-      if (other.event_ != null) {
-        if (event_ == null) {
-          Event = new global::Network.Event();
-        }
-        Event.MergeFrom(other.Event);
       }
       if (other.MyName.Length != 0) {
         MyName = other.MyName;
@@ -232,21 +204,14 @@ namespace Network {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (event_ == null) {
-              Event = new global::Network.Event();
-            }
-            input.ReadMessage(Event);
-            break;
-          }
-          case 18: {
             MyName = input.ReadString();
             break;
           }
-          case 26: {
+          case 18: {
             HisName = input.ReadString();
             break;
           }
-          case 34: {
+          case 26: {
             Msg = input.ReadString();
             break;
           }

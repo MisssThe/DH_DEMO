@@ -24,13 +24,12 @@ namespace Network {
     static LogInReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtMb2dJbi5wcm90bxIHbmV0d29yaxoLRXZlbnQucHJvdG8iRgoFTG9nSW4S",
-            "HQoFZXZlbnQYASABKAsyDi5uZXR3b3JrLkV2ZW50EgwKBG5hbWUYAiABKAkS",
-            "EAoIcGFzc3dvcmQYAyABKAliBnByb3RvMw=="));
+            "CgtMb2dJbi5wcm90bxIHbmV0d29yayInCgVMb2dJbhIMCgRuYW1lGAEgASgJ",
+            "EhAKCHBhc3N3b3JkGAIgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Network.EventReflection.Descriptor, },
+          new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.LogIn), global::Network.LogIn.Parser, new[]{ "Event", "Name", "Password" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.LogIn), global::Network.LogIn.Parser, new[]{ "Name", "Password" }, null, null, null)
           }));
     }
     #endregion
@@ -62,7 +61,6 @@ namespace Network {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public LogIn(LogIn other) : this() {
-      event_ = other.event_ != null ? other.event_.Clone() : null;
       name_ = other.name_;
       password_ = other.password_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -73,19 +71,8 @@ namespace Network {
       return new LogIn(this);
     }
 
-    /// <summary>Field number for the "event" field.</summary>
-    public const int EventFieldNumber = 1;
-    private global::Network.Event event_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Network.Event Event {
-      get { return event_; }
-      set {
-        event_ = value;
-      }
-    }
-
     /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 2;
+    public const int NameFieldNumber = 1;
     private string name_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Name {
@@ -96,7 +83,7 @@ namespace Network {
     }
 
     /// <summary>Field number for the "password" field.</summary>
-    public const int PasswordFieldNumber = 3;
+    public const int PasswordFieldNumber = 2;
     private string password_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Password {
@@ -119,7 +106,6 @@ namespace Network {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Event, other.Event)) return false;
       if (Name != other.Name) return false;
       if (Password != other.Password) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -128,7 +114,6 @@ namespace Network {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (event_ != null) hash ^= Event.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Password.Length != 0) hash ^= Password.GetHashCode();
       if (_unknownFields != null) {
@@ -144,16 +129,12 @@ namespace Network {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (event_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Event);
-      }
       if (Name.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(10);
         output.WriteString(Name);
       }
       if (Password.Length != 0) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(18);
         output.WriteString(Password);
       }
       if (_unknownFields != null) {
@@ -164,9 +145,6 @@ namespace Network {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (event_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Event);
-      }
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
@@ -183,12 +161,6 @@ namespace Network {
     public void MergeFrom(LogIn other) {
       if (other == null) {
         return;
-      }
-      if (other.event_ != null) {
-        if (event_ == null) {
-          Event = new global::Network.Event();
-        }
-        Event.MergeFrom(other.Event);
       }
       if (other.Name.Length != 0) {
         Name = other.Name;
@@ -208,17 +180,10 @@ namespace Network {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (event_ == null) {
-              Event = new global::Network.Event();
-            }
-            input.ReadMessage(Event);
-            break;
-          }
-          case 18: {
             Name = input.ReadString();
             break;
           }
-          case 26: {
+          case 18: {
             Password = input.ReadString();
             break;
           }

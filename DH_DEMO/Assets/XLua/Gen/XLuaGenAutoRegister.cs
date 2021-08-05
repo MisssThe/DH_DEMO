@@ -19,13 +19,29 @@ namespace XLua.CSObjectWrap
 	{
         
         
+<<<<<<< HEAD
         
         
         
+=======
+        static void wrapInit0(LuaEnv luaenv, ObjectTranslator translator)
+        {
+        
+            translator.DelayWrapLoader(typeof(NetWork), NetWorkWrap.__Register);
+        
+        
+        
+        }
+>>>>>>> 70810b1164ccc67c713a70d3ab3ac4c9a03508e9
         
         static void Init(LuaEnv luaenv, ObjectTranslator translator)
         {
             
+<<<<<<< HEAD
+=======
+            wrapInit0(luaenv, translator);
+            
+>>>>>>> 70810b1164ccc67c713a70d3ab3ac4c9a03508e9
             
         }
         

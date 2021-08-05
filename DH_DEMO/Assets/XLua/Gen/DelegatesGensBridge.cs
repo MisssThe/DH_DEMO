@@ -16,6 +16,7 @@ namespace XLua
     public partial class DelegateBridge : DelegateBridgeBase
     {
 		
+<<<<<<< HEAD
 		public void __Gen_Delegate_Imp0()
 		{
 #if THREAD_SAFE || HOTFIX_ENABLE
@@ -127,6 +128,9 @@ namespace XLua
 		}
         
 		public void __Gen_Delegate_Imp5(object p0)
+=======
+		public byte[] __Gen_Delegate_Imp0(object p0, ref string p1)
+>>>>>>> 70810b1164ccc67c713a70d3ab3ac4c9a03508e9
 		{
 #if THREAD_SAFE || HOTFIX_ENABLE
             lock (luaEnv.luaEnvLock)
@@ -136,6 +140,7 @@ namespace XLua
                 int errFunc = LuaAPI.pcall_prepare(L, errorFuncRef, luaReference);
                 ObjectTranslator translator = luaEnv.translator;
                 translator.PushAny(L, p0);
+<<<<<<< HEAD
                 
                 PCall(L, 1, 0, errFunc);
                 
@@ -143,12 +148,27 @@ namespace XLua
                 
                 LuaAPI.lua_settop(L, errFunc - 1);
                 
+=======
+                LuaAPI.lua_pushstring(L, p1);
+                
+                PCall(L, 2, 2, errFunc);
+                
+                p1 = LuaAPI.lua_tostring(L, errFunc + 2);
+                
+                byte[] __gen_ret = LuaAPI.lua_tobytes(L, errFunc + 1);
+                LuaAPI.lua_settop(L, errFunc - 1);
+                return  __gen_ret;
+>>>>>>> 70810b1164ccc67c713a70d3ab3ac4c9a03508e9
 #if THREAD_SAFE || HOTFIX_ENABLE
             }
 #endif
 		}
         
+<<<<<<< HEAD
 		public void __Gen_Delegate_Imp6(object p0, bool p1)
+=======
+		public void __Gen_Delegate_Imp1(object p0)
+>>>>>>> 70810b1164ccc67c713a70d3ab3ac4c9a03508e9
 		{
 #if THREAD_SAFE || HOTFIX_ENABLE
             lock (luaEnv.luaEnvLock)
@@ -158,9 +178,14 @@ namespace XLua
                 int errFunc = LuaAPI.pcall_prepare(L, errorFuncRef, luaReference);
                 ObjectTranslator translator = luaEnv.translator;
                 translator.PushAny(L, p0);
+<<<<<<< HEAD
                 LuaAPI.lua_pushboolean(L, p1);
                 
                 PCall(L, 2, 0, errFunc);
+=======
+                
+                PCall(L, 1, 0, errFunc);
+>>>>>>> 70810b1164ccc67c713a70d3ab3ac4c9a03508e9
                 
                 
                 
@@ -180,6 +205,7 @@ namespace XLua
 		public override Delegate GetDelegateByType(Type type)
 		{
 		
+<<<<<<< HEAD
 		    if (type == typeof(System.Action))
 			{
 			    return new System.Action(__Gen_Delegate_Imp0);
@@ -210,6 +236,8 @@ namespace XLua
 			    return new System.Action<bool>(__Gen_Delegate_Imp4);
 			}
 		
+=======
+>>>>>>> 70810b1164ccc67c713a70d3ab3ac4c9a03508e9
 		    return null;
 		}
 	}
