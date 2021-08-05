@@ -4,6 +4,7 @@
     {
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _TempTex ("Temp Texture",2D) = ""{}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _BloomThreshold ("Bloom Threshold",Range(0,1)) = 0
@@ -27,6 +28,7 @@
             float4 pos:SV_POSITION;
             float2 uv:TEXCOORD0;
         };
+        sampler2D _TempTex;
         v2f main_v(a2v i)
         {
             v2f o;
@@ -54,21 +56,8 @@
             #pragma fragment main_f
             fixed4 main_f(v2f i):SV_TARGET
             {
-                fixed3 color = RadialBlur(6,i.uv); 
-                // fixed3 color = Bloom(i.uv);
-                return fixed4(color,1);
-            }
-            ENDCG
-        }
-        pass
-        {
-            CGPROGRAM
-            #pragma vertex main_v
-            #pragma fragment main_f
-            fixed4 main_f(v2f i):SV_TARGET
-            {
-                fixed3 color = RadialBlur(6,i.uv); 
-                // fixed3 color = Bloom(i.uv);
+                fixed3 color = RadialBlur(6,i.uv);
+                color += tex2D(_TempTex,i.uv);
                 return fixed4(color,1);
             }
             ENDCG

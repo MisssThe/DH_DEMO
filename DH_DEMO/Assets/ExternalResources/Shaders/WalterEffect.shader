@@ -2,8 +2,7 @@
 
 /*
     模拟海面效果
-    使用顶点偏移+法线重构模拟海浪效果（可预计算到纹理上）,使用细分着色提升效果
-    采样一个噪声提升波浪细节
+    使用顶点偏移+法线重构模拟海浪效果,使用细分着色提升效果
     海浪高处会有气泡
     浅水处更亮
 */
@@ -76,21 +75,30 @@ Shader "Custom/WalterEffect"
             sv.B = _Cycle;
             sv.C = 0;
             half3 base_vertex = i.vertex.xyz + TIME * _Speed2;
-            half height = offsetBySin(base_vertex,fixed3(0,1,0),sv).y;
-            half temp_y;
-            temp_y = offsetBySin(base_vertex + fixed3(0,0,1) * _MiniOffset,fixed3(0,1,0),sv).y -height;
-            half3 v0 = half3(0,temp_y,_MiniOffset);
-            temp_y = offsetBySin(base_vertex + fixed3(1,0,-1) * _MiniOffset,fixed3(0,1,0),sv).y -height;
-            half3 v1 = half3(_MiniOffset,temp_y,-_MiniOffset);
-            temp_y = offsetBySin(base_vertex + fixed3(-1,0,-1) * _MiniOffset,fixed3(0,1,0),sv).y -height;
-            half3 v2 = half3(-_MiniOffset,temp_y,-_MiniOffset);
-            fixed3 n0 = normalize(cross(v0,v1));
-            fixed3 n1 = normalize(cross(v1,v2));
-            fixed3 n2 = normalize(cross(v2,v0));
-            fixed3 n = normalize((n0 + n1 + n2) * 0.333333);
-            i.vertex.y += height;
+            // half height = offsetBySin(base_vertex,fixed3(0,1,0),sv).y;
+            // half temp_y;
+            // temp_y = offsetBySin(base_vertex + fixed3(0,0,1) * _MiniOffset,fixed3(0,1,0),sv).y -height;
+            // half3 v0 = half3(0,temp_y,_MiniOffset);
+            // temp_y = offsetBySin(base_vertex + fixed3(1,0,-1) * _MiniOffset,fixed3(0,1,0),sv).y -height;
+            // half3 v1 = half3(_MiniOffset,temp_y,-_MiniOffset);
+            // temp_y = offsetBySin(base_vertex + fixed3(-1,0,-1) * _MiniOffset,fixed3(0,1,0),sv).y -height;
+            // half3 v2 = half3(-_MiniOffset,temp_y,-_MiniOffset);
+            // fixed3 n0 = normalize(cross(v0,v1));
+            // fixed3 n1 = normalize(cross(v1,v2));
+            // fixed3 n2 = normalize(cross(v2,v0));
+            // fixed3 n = normalize((n0 + n1 + n2) * 0.333333);
+
+
+            // height = _Height * sin(i.vertex.x * _Cycle) * cos(i.vertex.y * _Cycle) * 0;
+
+
+
+
+
+
+            // i.vertex.y += height;
             o.pos = UnityObjectToClipPos(i.vertex);
-            o.world_normal = UnityObjectToWorldNormal(n);
+            o.world_normal = UnityObjectToWorldNormal(i.normal);
             o.world_pos = mul(unity_ObjectToWorld,i.vertex);
             return o;
         }

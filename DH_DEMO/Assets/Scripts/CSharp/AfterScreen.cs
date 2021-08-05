@@ -25,9 +25,13 @@ public class AfterScreen : MonoBehaviour
             //     Graphics.Blit(src,dest,item);
             //     Debug.Log("blit");
             // }
-            RenderTexture temp = new RenderTexture(Screen.width,Screen.height,24);
-            Graphics.Blit(src,temp,mat[0],0);
-            Graphics.Blit(temp,dest,mat[0],1);
+            RenderTexture temp1 = new RenderTexture(Screen.width,Screen.height,24);
+            RenderTexture temp2 = new RenderTexture(Screen.width,Screen.height,24);
+            Graphics.Blit(src,temp1,mat[0],0);
+            mat[0].SetTexture("_TempTex",src);
+            Graphics.Blit(temp1,dest,mat[0],1);
+            // Graphics.Blit(temp2,dest,mat[0],2);
+            // dest = temp;
         }
         else
         {
