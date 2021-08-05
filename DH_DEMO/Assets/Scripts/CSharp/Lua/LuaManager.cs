@@ -125,7 +125,7 @@ public sealed class LuaManager : MonoBehaviour
 #if UNITY_EDITOR
         else
         {
-            Debug.LogError("指定脚本未注册，或者是否忘了载入脚本？");
+            Debug.LogError("指定脚本\"" + key + "\"未注册，或者是否忘了登记脚本？");
         }
 #else
         else
