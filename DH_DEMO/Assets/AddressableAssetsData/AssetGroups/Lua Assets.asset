@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Lua Assets
+  m_EditorClassIdentifier: 
+  m_GroupName: Lua Assets
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 1f75a4c9a5144b44e9565f4a69944caa
+  m_SerializeEntries:
+  - m_GUID: 87b85bdabc897e64c9c9c903c0660994
+    m_Address: Assets/Scripts/Lua/LogIn.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 89bb96de9a365054c8f551beed31eff7
+    m_Address: Assets/Scripts/Lua/Register.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: d2a8758cd314b0b47a2cdf5f233b9497
+    m_Address: Assets/Scripts/Lua/SharedTools.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 92c983e32ad481c42acbf10a186f9949
+    m_Address: Assets/Scripts/Lua/SourceManager.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 2c8c70c96389d2c488901f8c36892a42
+    m_Address: Assets/Scripts/Lua/test.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 5efee21e0d2a8e944a5ddbd2ec63b699
+    m_Address: Assets/Scripts/Lua/UIBase.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: dd004e21810299f4798c7289bfd84fd4
+    m_Address: Assets/Scripts/Lua/UIManager.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 3edf33d58ecedee47b01723235cbbb1e
+    m_Address: Assets/Scripts/Lua/UI/UIView.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: aeb2c0a413526b84eafb2928683a6781
+    m_Address: Assets/Scripts/Lua/UI/UIManager.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: e87feaa48873cd04d81971c2189e6541
+    m_Address: Assets/Scripts/Lua/Dedicated/Overture/OvertureManager.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 5dfc188f2273d194daf5b080e22ac3ea
+    m_Address: framework.App
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 16d980ef1fc44b048b88b903d1058418
+    m_Address: framework.LogUtils
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 3ca4335ff3357f040bad17547b26f5f1
+    m_Address: app.Global
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: e4ff962c9d5945c4da1db5de56831dfd, type: 2}
+    - {fileID: 11400000, guid: 23df9908985f5dc40b573a14b18304e1, type: 2}
