@@ -16,7 +16,7 @@ using UnityEditor.AssetImporters;
 using UnityEditor.Experimental.AssetImporters;
 #endif
 
-[ScriptedImporter(2, new[] {"lua"})]
+[ScriptedImporter(2, new[] {"luaAsset"})]
 public class LuaImporter : ScriptedImporter
 {
     const string Tag = "LuaImporter";

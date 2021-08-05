@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
 using XLua;
-
 [Serializable]
 public class obj
 {
@@ -20,8 +19,7 @@ public class MyLuaBehaviour : MonoBehaviour
 
     [SerializeField]
     private obj[] object_list;
-    public LuaAsset lua_text;//记得改为private
-
+    public TextAsset lua_text;//记得改为private
     static float last_gc_time = 0;
 
     const float gc_interval = 1;
@@ -58,13 +56,15 @@ public class MyLuaBehaviour : MonoBehaviour
 
         //初始化lua_text
 
+        NetWork.Init();
         lua_table.Set("self",this);
+
         foreach(var temp in object_list)
         {
             lua_table.Set(temp.name,temp.gameObject);
         }
 
-        lua_env.DoString(lua_text.data,this.gameObject.name,lua_table);
+        lua_env.DoString(lua_text.text,this.gameObject.name,lua_table);
 
         lua_table.Get("Event",out Event);
         lua_table.Get("Awake",out awake);
