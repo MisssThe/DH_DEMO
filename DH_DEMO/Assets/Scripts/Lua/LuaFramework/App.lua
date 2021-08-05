@@ -11,14 +11,13 @@ end
 
 --第一次进入游戏
 function App.startGame()
-    LogUtils.info("初始化 Lua 脚本")
+    LogUtils.info("首次进入游戏")
 end
 
 --游戏运行时快速重启
 function App.restartGame()
     LogUtils.info("刷新游戏")
     App.clearAll()
-    CS.LuaManager.ClearAll();
     --下面是重启游戏逻辑
 end
 
