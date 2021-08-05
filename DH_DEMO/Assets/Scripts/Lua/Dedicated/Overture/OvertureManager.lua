@@ -3,6 +3,18 @@
 require("Assets/Scripts/Lua/UI/UIManager")
 local OvertureManager = {}
 
-function awake()
+function Awake()
+    print ("a")
+end
+
+function Start()
+    
+end
+
+function OnApplicationFocus(boolean)
+    
+end
+
+function OnApplicationPause(boolean)
     
 end

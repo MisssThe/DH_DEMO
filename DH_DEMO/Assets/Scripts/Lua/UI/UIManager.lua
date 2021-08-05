@@ -36,7 +36,7 @@ function Global.UIManager:ReleaseUI()
 end
 
 -- 实现manager打开UI功能
- function UIManager:OpenUI(ui_name)
+function UIManager:OpenUI(ui_name)
     -- 判断ui是否已加载
     local temp_ui = UIManager.ui_list.Search(ui_id)
     if temp_ui ~= nil then

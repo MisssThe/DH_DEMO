@@ -31,11 +31,12 @@ namespace XLua.CSObjectWrap
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 10, 1, 1);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 11, 1, 1);
 			Utils.RegisterFunc(L, Utils.CLS_IDX, "Init", _m_Init_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "Serialize", _m_Serialize_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "Deserialize", _m_Deserialize_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "AsynSend", _m_AsynSend_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "AsynRecive", _m_AsynRecive_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendRegister", _m_SendRegister_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendLogIn", _m_SendLogIn_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendTalk", _m_SendTalk_xlua_st_);
@@ -174,6 +175,32 @@ namespace XLua.CSObjectWrap
                     byte[] _data = LuaAPI.lua_tobytes(L, 2);
                     
                     NetWork.AsynSend( _tcpClient, _data );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_AsynRecive_xlua_st_(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+            
+                
+                {
+                    System.Net.Sockets.Socket _tcpClient = (System.Net.Sockets.Socket)translator.GetObject(L, 1, typeof(System.Net.Sockets.Socket));
+                    
+                    NetWork.AsynRecive( _tcpClient );
                     
                     
                     

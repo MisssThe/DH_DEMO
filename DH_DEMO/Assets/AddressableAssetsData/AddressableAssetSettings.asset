@@ -38,6 +38,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: f59a68b3295bf4340883bfe6f522f7a9, type: 2}
   - {fileID: 11400000, guid: 54469e64a1cdba643959cb5023403343, type: 2}
+  - {fileID: 11400000, guid: 2d61481266409d24faa77807250906d7, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -79,6 +80,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - lua
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 2ca20799b8c4e63448a3706dac30c69c, type: 2}
