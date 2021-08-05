@@ -43,7 +43,7 @@ end
         temp_ui.Resume()
     else
         -- 若不存在则使用资源管理器加载
-        Addressiable:GetObjAsync(ui_name)
+        AAS.InstantiateAsync(ui_name)
     end
 end
 

@@ -131,9 +131,9 @@ inline fixed GetLuminance(fixed3 color)
 inline fixed3 Bloom(fixed2 uv)
 {
     fixed3 color = tex2D(_MainTex,uv);
-    // fixed luminance = Luminance(color);
-    // fixed factor = clamp(luminance - _BloomThreshold,0.0f,1.0f);
-    // return factor * color;dddd
+    fixed luminance = GetLuminance(color);
+    fixed factor = clamp(luminance - _BloomThreshold,0.0f,1.0f);
+    return factor * color;
 }
 //----------------------------------------边缘检测----------------------------------------
 

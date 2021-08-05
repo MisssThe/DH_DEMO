@@ -5,8 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class AfterScreen : MonoBehaviour
 {
-    public static Material base_material;
-    public static bool use_base = true;
+    public List<Material> mat;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,16 +17,21 @@ public class AfterScreen : MonoBehaviour
     }
     private void OnRenderImage(RenderTexture src, RenderTexture dest) 
     {
-        if (!use_base)
+        if (mat != null && mat.Count > 0)
         {
-            Graphics.Blit(src,dest);            
+            // dest = src;
+            // foreach (var item in mat)
+            // {
+            //     Graphics.Blit(src,dest,item);
+            //     Debug.Log("blit");
+            // }
+            RenderTexture temp = new RenderTexture(Screen.width,Screen.height,24);
+            Graphics.Blit(src,temp,mat[0],0);
+            Graphics.Blit(temp,dest,mat[0],1);
         }
         else
         {
-            if (base_material != null)
-            {
-                Graphics.Blit(src,dest,base_material);
-            }
+            Graphics.Blit(src,dest);
         }
     }
 }

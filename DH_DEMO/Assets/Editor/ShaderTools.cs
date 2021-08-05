@@ -11,59 +11,6 @@ public class ShaderTools
 {
     //所需shader存放于Shader/Editor目录下
     private static Dictionary<string,Shader> shader_list;
-    private static RenderTexture rt;
-    //保留所有操作，用于撤销,运行后会清空
-    private enum Operation
-    {
-        CREATE_HEIGHT_TEXTURE,
-        CREATE_HEIGHT_TEXTURE_UNDER_SEA
-    }
-    private static List<Operation> operation_list;
-    //添加操作
-    private static bool add_flag = false;
-    private static void AddOperation(Operation op)
-    {
-        if (add_flag)
-        {
-            add_flag = false;
-            return;
-        }
-        if (operation_list == null)
-        {
-            operation_list = new List<Operation>();
-        }
-        if (op != null)
-        {
-            operation_list.Add(op);
-        }
-    }
-    private static void CloseAddNext()
-    {
-        //关闭一次写入
-        add_flag = true;   
-    }
-    //撤销操作并调用对应撤销函数
-    private static void RevokeOperation()
-    {
-        if (operation_list != null && operation_list.Count > 0)
-        {
-            foreach (var item in operation_list)
-            {
-                switch (item)
-                {
-                    case Operation.CREATE_HEIGHT_TEXTURE:
-                        RevokeCreateHeightTex();
-                        break;
-                    case Operation.CREATE_HEIGHT_TEXTURE_UNDER_SEA:
-                        RevokeCreateHeightTexUnderSea();
-                        break;
-                }
-                
-            }
-            operation_list.Clear();
-        }
-    }
-
     //更新shader列表
     [MenuItem("Shader/Update Shader List")]
     public static void UpdateShaderList()
@@ -97,11 +44,11 @@ public class ShaderTools
             Graphics.Blit(rt,rt,mt);
         }
     }
+
     //将rt图输出为一张纹理
     private static string png_name;
     private static string contents;
-    [MenuItem("Shader/Save Render Texture")]
-    private static void KeepRenderTexture()
+    private static void KeepRenderTexture(RenderTexture rt)
     {
         if (rt != null)
         {
@@ -123,6 +70,7 @@ public class ShaderTools
             RenderTexture.active = prev;
         }
     }
+
     //添加rt图
     private static void AddRenderTexture(RenderTexture m_rt)
     {
@@ -132,6 +80,7 @@ public class ShaderTools
             item.GetComponent<Camera>().targetTexture = m_rt;
         }
     }
+
     //移动相机
     private static void MoveCamera(Vector3 pos,Vector3 rot)
     {
@@ -144,9 +93,10 @@ public class ShaderTools
     }
     private static void MoveCameraToTop()
     {
-        MoveCamera(new Vector3(500,700,500),new Vector3(90,0,0));
+        MoveCamera(new Vector3(500,800,500),new Vector3(90,0,0));
     }
-    //获取当前场景海平面深度图
+
+    //根据指定材质获取顶部RT图
     private struct TempTransform
     {
         public TempTransform(Vector3 pos, Quaternion rot)
@@ -158,23 +108,17 @@ public class ShaderTools
         public Quaternion rotation;
     }
     private static List<TempTransform> temp_transform_list;
-    [MenuItem("Shader/Create Height Texture")]
-    public static void CreateHeightTex()
+    private static RenderTexture RenderTextureOnTop(string shader_name)
     {
-        AddOperation(Operation.CREATE_HEIGHT_TEXTURE);
-        //将摄像机移动到顶部渲染一帧并输出深度图
-        string shader_key = "GetDepthTexture";
         UpdateShaderList();
-        Shader shader = shader_list[shader_key];
+        Shader shader = shader_list[shader_name];
         if (shader == null)
         {
             Debug.Log("shader not exist!");
-            return;
+            return null;
         }
         Material mat = new Material(shader);
-        AfterScreen.base_material = mat;
-        AfterScreen.use_base = true;
-        rt = new RenderTexture(UnityEngine.Screen.width,UnityEngine.Screen.height,24);
+        RenderTexture rt = new RenderTexture(UnityEngine.Screen.width,UnityEngine.Screen.height,24);
         AddRenderTexture(rt);
         // 移动相机位置
         if (temp_transform_list == null)
@@ -187,13 +131,12 @@ public class ShaderTools
             temp_transform_list.Add(new  TempTransform(item.transform.position,item.transform.rotation));
         }
         MoveCameraToTop();
-        AddRenderTexture(null);
         ProcessTexture(rt,mat);
-        AddOperation(Operation.CREATE_HEIGHT_TEXTURE);
-        png_name = "depth";
-        contents = @"C:\Users\dh_xly1\Desktop\新建文件夹";
+        AddRenderTexture(null);
+        RestoreCameraTransfrom();
+        return rt;
     }
-    private static void RevokeCreateHeightTex()
+    private static void RestoreCameraTransfrom()
     {
         //返回摄像机位置
         GameObject[] camera = GameObject.FindGameObjectsWithTag("MainCamera");
@@ -203,8 +146,18 @@ public class ShaderTools
             item.transform.position = temp_transform_list[offset].position;
             item.transform.rotation = temp_transform_list[offset].rotation;
         }
-        AfterScreen.use_base = false;
-        AddRenderTexture(null);
+        temp_transform_list.Clear();
+    }
+
+
+    //获取当前场景海平面深度图
+    [MenuItem("Shader/Create Height Texture")]
+    public static void CreateHeightTex()
+    {
+        RenderTexture rt = RenderTextureOnTop("GetDepthTexture");
+        png_name = "depth";
+        contents = @"Assets/ExternalResources/Picture/RenderTexture";
+        KeepRenderTexture(rt);
     }
 
     //获取海底深度图
@@ -218,24 +171,15 @@ public class ShaderTools
         {
             item.SetActive(false);
         }
-        CreateHeightTex();
-        AddOperation(Operation.CREATE_HEIGHT_TEXTURE_UNDER_SEA);
+        RenderTexture rt = RenderTextureOnTop("GetDepthTexture");
         png_name = "depth_under_sea";
-    }
-    private static void RevokeCreateHeightTexUnderSea()
-    {
+        contents = @"Assets/ExternalResources/Picture/RenderTexture";
+        KeepRenderTexture(rt);
         //恢复海面
         foreach (var item in seas)
         {
             item.SetActive(true);
         }
         seas = null;
-    }
-
-    //物体复原，对所做操作进行撤销
-    [MenuItem("Shader/Revoke All Operation")]
-    public static void Reset() 
-    {
-        RevokeOperation();
     }
 }
