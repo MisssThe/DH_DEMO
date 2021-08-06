@@ -24,13 +24,12 @@ namespace Network {
     static FightReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtGaWdodC5wcm90bxIHbmV0d29yaxoLRXZlbnQucHJvdG8iWQoFRmlnaHQS",
-            "HQoFZXZlbnQYASABKAsyDi5uZXR3b3JrLkV2ZW50Eg4KBm15TmFtZRgCIAEo",
-            "CRIPCgdoaXNOYW1lGAMgASgJEhAKCGNhckluZGV4GAQgASgFYgZwcm90bzM="));
+            "CgtGaWdodC5wcm90bxIHbmV0d29yayI6CgVGaWdodBIOCgZteU5hbWUYASAB",
+            "KAkSDwoHaGlzTmFtZRgCIAEoCRIQCghjYXJJbmRleBgDIAEoBWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Network.EventReflection.Descriptor, },
+          new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.Fight), global::Network.Fight.Parser, new[]{ "Event", "MyName", "HisName", "CarIndex" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.Fight), global::Network.Fight.Parser, new[]{ "MyName", "HisName", "CarIndex" }, null, null, null)
           }));
     }
     #endregion
@@ -62,7 +61,6 @@ namespace Network {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Fight(Fight other) : this() {
-      event_ = other.event_ != null ? other.event_.Clone() : null;
       myName_ = other.myName_;
       hisName_ = other.hisName_;
       carIndex_ = other.carIndex_;
@@ -74,19 +72,8 @@ namespace Network {
       return new Fight(this);
     }
 
-    /// <summary>Field number for the "event" field.</summary>
-    public const int EventFieldNumber = 1;
-    private global::Network.Event event_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Network.Event Event {
-      get { return event_; }
-      set {
-        event_ = value;
-      }
-    }
-
     /// <summary>Field number for the "myName" field.</summary>
-    public const int MyNameFieldNumber = 2;
+    public const int MyNameFieldNumber = 1;
     private string myName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string MyName {
@@ -97,7 +84,7 @@ namespace Network {
     }
 
     /// <summary>Field number for the "hisName" field.</summary>
-    public const int HisNameFieldNumber = 3;
+    public const int HisNameFieldNumber = 2;
     private string hisName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string HisName {
@@ -108,7 +95,7 @@ namespace Network {
     }
 
     /// <summary>Field number for the "carIndex" field.</summary>
-    public const int CarIndexFieldNumber = 4;
+    public const int CarIndexFieldNumber = 3;
     private int carIndex_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CarIndex {
@@ -131,7 +118,6 @@ namespace Network {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Event, other.Event)) return false;
       if (MyName != other.MyName) return false;
       if (HisName != other.HisName) return false;
       if (CarIndex != other.CarIndex) return false;
@@ -141,7 +127,6 @@ namespace Network {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (event_ != null) hash ^= Event.GetHashCode();
       if (MyName.Length != 0) hash ^= MyName.GetHashCode();
       if (HisName.Length != 0) hash ^= HisName.GetHashCode();
       if (CarIndex != 0) hash ^= CarIndex.GetHashCode();
@@ -158,20 +143,16 @@ namespace Network {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (event_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Event);
-      }
       if (MyName.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(10);
         output.WriteString(MyName);
       }
       if (HisName.Length != 0) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(18);
         output.WriteString(HisName);
       }
       if (CarIndex != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(24);
         output.WriteInt32(CarIndex);
       }
       if (_unknownFields != null) {
@@ -182,9 +163,6 @@ namespace Network {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (event_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Event);
-      }
       if (MyName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(MyName);
       }
@@ -204,12 +182,6 @@ namespace Network {
     public void MergeFrom(Fight other) {
       if (other == null) {
         return;
-      }
-      if (other.event_ != null) {
-        if (event_ == null) {
-          Event = new global::Network.Event();
-        }
-        Event.MergeFrom(other.Event);
       }
       if (other.MyName.Length != 0) {
         MyName = other.MyName;
@@ -232,21 +204,14 @@ namespace Network {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (event_ == null) {
-              Event = new global::Network.Event();
-            }
-            input.ReadMessage(Event);
-            break;
-          }
-          case 18: {
             MyName = input.ReadString();
             break;
           }
-          case 26: {
+          case 18: {
             HisName = input.ReadString();
             break;
           }
-          case 32: {
+          case 24: {
             CarIndex = input.ReadInt32();
             break;
           }

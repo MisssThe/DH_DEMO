@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 116149988}
   - component: {fileID: 116149990}
   - component: {fileID: 116149989}
+  - component: {fileID: 116149991}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
@@ -192,6 +193,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116149987}
   m_CullTransparentMesh: 0
+--- !u!114 &116149991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116149987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6232bb5e939b6c54ca16c127897d1a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  object_list: []
+  lua_text: {fileID: 1042094116111776886, guid: e87feaa48873cd04d81971c2189e6541,
+    type: 3}
 --- !u!1 &371090043
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   object_list: []
-  lua_text: {fileID: 5022602860645237092, guid: aeb2c0a413526b84eafb2928683a6781,
+  lua_text: {fileID: 1042094116111776886, guid: aeb2c0a413526b84eafb2928683a6781,
     type: 3}
 --- !u!4 &826950578
 Transform:
