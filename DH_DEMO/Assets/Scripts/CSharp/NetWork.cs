@@ -9,12 +9,13 @@ using System.IO;
 using Network;
 using Google.Protobuf;
 using XLua;
-
+using System.Threading.Tasks;
 
 [LuaCallCSharp]
 public class NetWork
 {
     public static Socket client;
+
     public static void Init()
     {
         client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -32,7 +33,6 @@ public class NetWork
             Debug.Log("连接服务器失败    " + e.Message);
 
         }
-        Debug.Log("链接成功");
         ///////////////////////////////////////////////////////////到时候根据需求改收到服务器回复的处理
         //ThreadStart receive = new ThreadStart(() =>
         //{
@@ -90,7 +90,8 @@ public class NetWork
             if(length == 1)
             {
 
-                //0 false  1 true  2 un register  3 offline
+                //0 false  1 true  2 un register  3 offline、
+                
             }else
             {
 
@@ -107,7 +108,7 @@ public class NetWork
         }, null);
     }
     //发送注册消息
-    public static void SendRegister(string name, string password)
+    public static void  SendRegister(string name, string password)
     {
         Register temp = new Register();
         temp.Name = name;
@@ -120,6 +121,7 @@ public class NetWork
         data.CopyTo(new_data, 1);
         
         AsynSend(client, new_data);
+
     }
     //发送登录消息
     public static void SendLogIn(string name, string password)
