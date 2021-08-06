@@ -90,7 +90,8 @@ public class NetWork
             if(length == 1)
             {
 
-                //0 false  1 true  2 un register  3 offline
+                //0 false  1 true  2 un register  3 offline、
+                
             }else
             {
 
