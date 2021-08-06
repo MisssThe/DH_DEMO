@@ -6,6 +6,8 @@ using UnityEngine;
 public class AfterScreen : MonoBehaviour
 {
     public List<Material> mat;
+    private RenderTexture temp1;
+    private RenderTexture temp2;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,8 @@ public class AfterScreen : MonoBehaviour
         {
             camera.depthTextureMode = DepthTextureMode.DepthNormals;
         }
+        temp1 = new RenderTexture(Screen.width,Screen.height,24);
+        temp2 = new RenderTexture(Screen.width,Screen.height,24);
     }
     private void OnRenderImage(RenderTexture src, RenderTexture dest) 
     {
@@ -25,13 +29,9 @@ public class AfterScreen : MonoBehaviour
             //     Graphics.Blit(src,dest,item);
             //     Debug.Log("blit");
             // }
-            RenderTexture temp1 = new RenderTexture(Screen.width,Screen.height,24);
-            RenderTexture temp2 = new RenderTexture(Screen.width,Screen.height,24);
             Graphics.Blit(src,temp1,mat[0],0);
             mat[0].SetTexture("_TempTex",src);
             Graphics.Blit(temp1,dest,mat[0],1);
-            // Graphics.Blit(temp2,dest,mat[0],2);
-            // dest = temp;
         }
         else
         {

@@ -23,6 +23,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _CubeMap:
+        m_Texture: {fileID: 8900000, guid: e52c3867faab0ba4f96abdb690db00a4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -35,9 +39,17 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DistortTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ForthTex:
+        m_Texture: {fileID: 2800000, guid: d17a6cb13c9fc5c46a9b15c8f7b886e5, type: 3}
+        m_Scale: {x: 100, y: 100}
         m_Offset: {x: 0, y: 0}
     - _HeigthTex:
         m_Texture: {fileID: 2800000, guid: 9e2c6050be108954fbb657a03bd89dd4, type: 3}
@@ -52,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6976215ddcaae8844aaa9b020a6a27b4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -66,29 +78,39 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Cycle: 1
+    - _Cycle: 2
     - _DetailNormalMapScale: 1
+    - _DistortScale: 0
     - _DstBlend: 0
-    - _FresnelStrenth: 0.6
+    - _ForthThreshold: 0.8
+    - _FresnelScale: 0.5
+    - _FresnelStrenth: 0.2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Height: 1
+    - _HalfDiffuse: 1
+    - _Height: 100
+    - _LevelMax: 10
+    - _LevelStrenth: 3
     - _Metallic: 0
     - _MiniOffset: 1
     - _Mode: 0
-    - _NoiseStrenth: 6
+    - _NoiseStrenth: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RefractAmount: 8
+    - _RefractRatio: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _Speed: 2
     - _Speed1: 1
     - _Speed2: 1
     - _SrcBlend: 1
-    - _TessMax: 10
+    - _TessMax: 100
     - _TessStrenth: 0
     - _UVSec: 0
+    - _WindDir: 90
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.078431375, g: 0.8862745, b: 1, a: 0}
+    - _Color: {r: 0, g: 0.21568628, b: 0.47058824, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
