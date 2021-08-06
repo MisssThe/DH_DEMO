@@ -5,6 +5,7 @@
 /// </summary>
 [Hotfix]
 [LuaObject]
+[LuaCallCSharp]
 public class DefaultLuaBehaviour : LuaScriptBehaviour
 {
     new void Awake()
