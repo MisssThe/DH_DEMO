@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: b7806e3f3f022cf4abc95627abbd2d2f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -69,6 +69,7 @@ Material:
     - _Cycle: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FresnelStrenth: 0.6
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -76,18 +77,18 @@ Material:
     - _Metallic: 0
     - _MiniOffset: 1
     - _Mode: 0
-    - _NoiseStrenth: 12.04
+    - _NoiseStrenth: 6
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed1: 0
-    - _Speed2: 0
+    - _Speed1: 1
+    - _Speed2: 1
     - _SrcBlend: 1
     - _TessMax: 10
     - _TessStrenth: 0
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.25490198, g: 0.3764706, b: 0.34117648, a: 0}
+    - _Color: {r: 0.078431375, g: 0.8862745, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
