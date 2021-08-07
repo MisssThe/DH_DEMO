@@ -3,7 +3,7 @@
 /*
     使用几何着色器扩散物体
 */
-Shader "Custom/CardSeaEffect"
+Shader "Custom/CardSeaEffect1"
 {
     Properties
     {

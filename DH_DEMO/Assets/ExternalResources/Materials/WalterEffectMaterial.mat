@@ -89,16 +89,16 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _HalfDiffuse: 1
-    - _Height: 100
-    - _LevelMax: 10
-    - _LevelStrenth: 3
+    - _Height: 40
+    - _LevelMax: 3
+    - _LevelStrenth: 4
     - _Metallic: 0
     - _MiniOffset: 1
     - _Mode: 0
     - _NoiseStrenth: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RefractAmount: 8
+    - _RefractAmount: 15
     - _RefractRatio: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -106,7 +106,7 @@ Material:
     - _Speed1: 1
     - _Speed2: 1
     - _SrcBlend: 1
-    - _TessMax: 100
+    - _TessMax: 10
     - _TessStrenth: 0
     - _UVSec: 0
     - _WindDir: 90
