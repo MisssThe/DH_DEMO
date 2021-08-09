@@ -1,3 +1,4 @@
+require("app.Global")
 -- 存放所有工具方法
 local _g = _G
 
@@ -9,7 +10,6 @@ function CreateEnum(t)
     for i,v in ipairs(t)
     do
         enum_table[v] = i
-        print("create enum table succed!")
     end
     return enum_table
 end
@@ -20,7 +20,6 @@ setmetatable(Global,
     {
         _g,
         __newindex = function(_,name,value)
-            print("create global value")
             rawset(_g,name,value)
         end,
         __index = function(_,name)
@@ -36,6 +35,8 @@ function CreateList()
     list.count = 0
     -- 添加数据
     function list.Add(key,value)
+        print(key == nil)
+        print(value == nil)
         if (key ~= nil and value ~= nil) then
             list.real_list[key] = value
             list.count = list.count + 1
@@ -98,3 +99,5 @@ local function DisableGlobal()
     )
 end
 DisableGlobal()
+
+print("load shadred tools!")
