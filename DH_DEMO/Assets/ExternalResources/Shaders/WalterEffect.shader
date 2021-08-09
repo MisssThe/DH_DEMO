@@ -29,6 +29,9 @@ Shader "Custom/WalterEffect"
         _MiniOffset ("_MiniOffset",Range(0,1)) = 0
         _FresnelStrenth ("_Fresnel Strenth",Float) = 0
         _RefractAmount ("Refract Amount",Float) = 0
+        //描边控制
+        _OutlineStrenth ("Outline Strenth",Float) = 0
+        _OutlineColor ("Outline Color",Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -56,6 +59,10 @@ Shader "Custom/WalterEffect"
             float2 uv:TEXCOORD4;
             half height:TEXCOORD5;
         };
+        struct v2f_back
+        {
+            float4 pos:SV_POSITION;
+        };
         //element
         half _Height;
         half _Cycle;
@@ -74,15 +81,14 @@ Shader "Custom/WalterEffect"
         fixed _HalfDiffuse;
         float _LevelStrenth;
         half _RefractAmount;
+        half _OutlineStrenth;
         
         //function
         v2f vert(a2v i)
         {
             v2f o;
-            o.uv = TRANSFORM_TEX(i.texcoord,_NoiseTex);
-            fixed noise = tex2Dlod(_NoiseTex,float4(o.uv,0,0)).r * _NoiseStrenth;
             float level = ceil(length(_LevelMax * i.vertex.xz / 6)) * _LevelStrenth;
-            float A = (_Height + noise) / level; 
+            float A = (_Height) / level; 
             float C = _Speed * TIME;
             float c1 = i.vertex.x * _Cycle + C * sin(_WindDir);
             float c2 = i.vertex.z * _Cycle + C * cos(_WindDir);
@@ -90,11 +96,32 @@ Shader "Custom/WalterEffect"
             A *= _Cycle;
             i.normal = float3(A * cos(c1) * sin(c2),1,A * sin(c1) * cos(c2));
             i.vertex.y += height;
+
             o.pos = UnityObjectToClipPos(i.vertex);
             o.world_normal = UnityObjectToWorldNormal(i.normal);
             o.world_pos = mul(unity_ObjectToWorld,i.vertex);
             o.grab_uv  = ComputeGrabScreenPos(o.pos);
             o.height = height;
+            return o;
+        }
+        v2f_back vert_back(a2v i)
+        {
+            v2f_back o;
+            float level = ceil(length(_LevelMax * i.vertex.xz / 6)) * _LevelStrenth;
+            float A = (_Height) / level; 
+            float C = _Speed * TIME;
+            float c1 = i.vertex.x * _Cycle + C * sin(_WindDir);
+            float c2 = i.vertex.z * _Cycle + C * cos(_WindDir);
+            fixed height = A * sin(c1) * sin(c2);
+            A *= _Cycle;
+            i.normal = float3(A * cos(c1) * sin(c2),1,A * sin(c1) * cos(c2));
+            i.vertex.y += height;
+
+            float3 view_normal = mul(UNITY_MATRIX_IT_MV,i.normal);
+            float3 view_pos = UnityObjectToViewPos(i.vertex);
+            view_normal.z = -0.5;
+            view_pos += view_normal * _OutlineStrenth;
+            o.pos = UnityViewToClipPos(view_pos);
             return o;
         }
         t2v main_v(a2v v) {
@@ -139,6 +166,16 @@ Shader "Custom/WalterEffect"
             v2f o = vert(v);
             return o;
         }
+        [UNITY_domain("tri")]
+        v2f_back main_d_back(UnityTessellationFactors tessFactors,const OutputPatch<t2v,3> i,float3 bary:SV_DomainLocation) 
+        {
+            a2v v;
+            v.vertex = i[0].vertex*bary.x + i[1].vertex*bary.y + i[2].vertex*bary.z;
+            v.normal = i[0].normal*bary.x + i[1].normal*bary.y + i[2].normal*bary.z;
+            v.texcoord = i[0].texcoord*bary.x + i[1].texcoord*bary.y + i[2].texcoord*bary.z;
+            v2f_back o = vert_back(v);
+            return o;
+        }
         ENDCG
 
         GrabPass
@@ -147,6 +184,22 @@ Shader "Custom/WalterEffect"
         }
         pass
         {
+            Cull Front
+            CGPROGRAM
+            #pragma vertex main_v
+            #pragma fragment main_f
+            #pragma hull main_h
+            #pragma domain main_d_back
+            fixed4 _OutlineColor;
+            fixed4 main_f(v2f i):SV_TARGET
+            {
+                return _OutlineColor;
+            }
+            ENDCG
+        }
+        pass
+        {
+            Cull Back
             Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             #pragma vertex main_v
@@ -167,8 +220,9 @@ Shader "Custom/WalterEffect"
                 fixed3 color = 0;
                 fixed3 height = tex2D(_HeigthTex,i.uv).r;
                 //根据深度值改变漫反射
-                fixed3 refract_color = tex2Dproj(_GrabTempTex,i.grab_uv + float4(tex2D(_NoiseTex,i.uv) * _RefractAmount));
-                refract_color = lerp(refract_color,_Color,0.9);
+                fixed4 grab_color = tex2Dproj(_GrabTempTex,i.grab_uv + float4(tex2D(_NoiseTex,i.uv) * _RefractAmount));
+                grab_color.rgb = lerp(_Color,grab_color.rgb,grab_color.a);
+                fixed3 refract_color = lerp(grab_color,_Color,0.9);
                 fixed3 diffuse_color = _LightColor0.rgb * refract_color * saturate(nl * _HalfDiffuse + (1 - _HalfDiffuse));
                 // refract_color = _Color;
                 fixed3 reflect_color = DecodeHDR(UNITY_SAMPLE_TEXCUBE_LOD(unity_SpecCube0, reflect_dir, 0), unity_SpecCube0_HDR);
