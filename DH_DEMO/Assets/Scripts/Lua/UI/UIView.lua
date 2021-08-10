@@ -1,23 +1,28 @@
+
+--------------------------------------------------------------------------------------------------------------
 -- UI基类，封装基本功能，后续UI继承此类并拓展
 -- 不能直接使用
-require("Assets/Scripts/Lua/SharedTools")
+require("Assets/Scripts/Lua/EventSystem.lua")
+local status_enum = {"OPEN","CLOSE","HIDE"}
+status_enum = CreateEnum(status_enum)
 Global.UIView = {}
 UIView.__index = UIView
-UIView.status = {"OPEN","CLOSE","HIDE"}
-UIView.status = CreateEnum(UIView.status)
+UIView.status = nil
 UIView.ui_name = nil
-
 ----------------------------功能实现----------------------------
-function UIView:New()
+function UIView:New(gameObject)
     local temp_ui = {}
     setmetatable(temp_ui,self)
-    if (cs_self ~= nil) then
-        cs_self.gameObject:SetActive(false)
+    if (gameObject ~= nil) then
+        temp_ui.gameObject = gameObject
+        temp_ui.gameObject:SetActive(false)
+        temp_ui.status = status_enum["HIDE"]
+        temp_ui.ui_name = gameObject.name
+        EventSystem.Send("AddUI",temp_ui)
+        EventSystem.Send("OpenUI",temp_ui.ui_name)
+    else
+        return nil
     end
-    temp_ui.status = UIView.status["HIDE"]
-    temp_ui.ui_name = cs_self.gameObject.name
-    UIManager:AddUI(temp_ui)
-    UIManager:OpenUI(temp_ui.ui_name)
     return temp_ui
 end
 
@@ -27,22 +32,22 @@ end
 
 -- 从资源中加载UI
 function UIView:Resume()
-    if self.status == UIView.status[HIDE] then
-        self.status = UIView.status[OPEN]
-        cs_self.gameObject:SetActive(true)
+    if self.status == status_enum["HIDE"] then
+        self.status = status_enum["OPEN"]
+        self.gameObject:SetActive(true)
     end
 end
 
 function UIView:Hide()
-    if self.status == UIView.status[OPEN] then
-        cs_self.gameObject:SetActive(false)
-        self.status = UIView.status[HIDE]
+    if self.status == status_enum["OPEN"] then
+        self.gameObject:SetActive(false)
+        self.status = status_enum["HIDE"]
     end
 end
 
 function UIView:Close()
-    if self.status ~= UIView.status[CLOSE] then
-        self.status = UIView.status[CLOSE]
+    if self.status ~= status_enum["CLOSE"] then
+        self.status = status_enum["CLOSE"]
         CS.UnityEngine.Destroy(cs_self)
     end
 end

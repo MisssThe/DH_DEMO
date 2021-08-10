@@ -17,18 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 1f75a4c9a5144b44e9565f4a69944caa
   m_SerializeEntries:
-  - m_GUID: 87b85bdabc897e64c9c9c903c0660994
-    m_Address: Assets/Scripts/Lua/LogIn.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
   - m_GUID: 89bb96de9a365054c8f551beed31eff7
     m_Address: Assets/Scripts/Lua/Register.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: d2a8758cd314b0b47a2cdf5f233b9497
-    m_Address: Assets/Scripts/Lua/SharedTools.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
@@ -49,11 +39,6 @@ MonoBehaviour:
     - lua
   - m_GUID: dd004e21810299f4798c7289bfd84fd4
     m_Address: Assets/Scripts/Lua/UIManager.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: 3edf33d58ecedee47b01723235cbbb1e
-    m_Address: Assets/Scripts/Lua/UI/UIView.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
@@ -84,6 +69,36 @@ MonoBehaviour:
     - lua
   - m_GUID: 3093b7346d9e69840b5c55822d4e6226
     m_Address: Assets/Scripts/Lua/Dedicated/TestScene/TestScene.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 05ba56844ec53bd4192d96cd1cfcc2fc
+    m_Address: Assets/Scripts/Lua/Ship/Ship.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: fb91d45e5d432724c9f630563ebbf7b3
+    m_Address: framework.SharedTools
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: dbf02ab1c86b35344b5da67f466f3d20
+    m_Address: Assets/Scripts/Lua/Ship/U3DShip.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: b8031aa170ef1aa4ca867d561adbfdc1
+    m_Address: Assets/Scripts/Lua/EventSystem.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 8e388364cfad6d34e95793e707a1bd12
+    m_Address: Assets/Scripts/Lua/UI/UIButton.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: e3eb107638a357d42b1187dd7d7eb183
+    m_Address: Assets/Scripts/Lua/UI/UIImage.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua

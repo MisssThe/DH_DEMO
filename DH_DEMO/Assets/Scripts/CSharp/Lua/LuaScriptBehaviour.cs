@@ -137,7 +137,7 @@ public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript
                     _local,
                     new object[]
                     {
-                            "self", this
+                            "cs_self", this
                     });
             }
 
