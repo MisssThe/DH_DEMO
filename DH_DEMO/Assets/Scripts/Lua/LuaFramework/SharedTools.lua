@@ -1,4 +1,4 @@
-require("app.Global")
+-- require("app.Global")
 -- 存放所有工具方法
 local _g = _G
 
@@ -29,54 +29,58 @@ setmetatable(Global,
 )
 
 -- 返回一个包含基本功能的list
-function CreateList()
-    local list = {}
-    list.real_list = {}
-    list.count = 0
-    -- 添加数据
-    function list.Add(key,value)
-        print(key == nil)
-        print(value == nil)
-        if (key ~= nil and value ~= nil) then
-            list.real_list[key] = value
-            list.count = list.count + 1
-        end
+List = {}
+List.real_list = {}
+List.count = 0
+List.__index = List
+List.key = nil
+-- 添加数据
+function List:Add(key,value)
+    if (key ~= nil and value ~= nil) then
+        self.real_list[key] = value
+        self.count = self.count + 1
     end
-    -- 删除数据
-    function list.Delete(key)
-        if (key ~= nil) then
-            list.real_list[key] = nil
-            list.count = list.count - 1;
-        end
-    end
-    -- 查找数据
-    function list.Search(key)
-        return list.real_list[key]
-    end
-    -- 清空数据
-    function list.Clear()
-        list.real_list = {}
-        list.count = 0
-        list.InitIter()
-    end
-    -- 打印所有数据
-    function list.Print()
-        for k,v in pairs(list.real_list)
-        do
-            print("key:" .. k .. ",value:" .. v)
-        end
-    end
-    -- 获取迭代器
-    list.key = nil
-    function list.Iterator()
-        list.key = next(list.real_list,list.key)
-        return list.Search(list.key),(list.key ~= nil)
-    end
-    function list.InitIter()
-        list.key = nil
-    end
-    return list
 end
+-- 删除数据
+function List:Delete(key)
+    if (key ~= nil) then
+        self.real_list[key] = nil
+        self.count = list.count - 1;
+    end
+end
+-- 查找数据
+function List:Search(key)
+    return self.real_list[key]
+end
+-- 清空数据
+function List:Clear()
+    self.real_list = {}
+    self.count = 0
+    self.InitIter()
+end
+-- 打印所有数据
+function List:Print()
+    for k,v in pairs(self.real_list)
+    do
+        print("key:" .. k .. ",value:" .. v)
+    end
+end
+-- 获取迭代器
+function List:Iterator()
+    self.key = next(self.real_list,self.key)
+    return self.Search(self.key),(self.key ~= nil)
+end
+function List:InitIter()
+    self.key = nil
+end
+-- 实例化
+function List:New()
+    local temp = {}
+    setmetatable(temp,List)
+    return temp
+end
+
+
 
 -- 与选择对象相关的操作
 Select = {}
