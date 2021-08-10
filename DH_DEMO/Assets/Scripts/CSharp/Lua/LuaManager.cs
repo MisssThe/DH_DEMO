@@ -12,6 +12,7 @@ using XLua;
 /// 建议挂在 "GameManager" 类似的脚本下
 ///                     -- 20210805
 /// </summary>
+[RequireComponent(typeof(GameManager))]
 public sealed class LuaManager : MonoBehaviour
 {
     [SerializeField]
@@ -52,7 +53,7 @@ public sealed class LuaManager : MonoBehaviour
     /// <summary>
     /// 是否正在读取代码
     /// </summary>
-    private bool _isLoading;
+    private bool _isLoading = false;
     /// <summary>
     /// 实例
     /// </summary>
@@ -327,6 +328,15 @@ public sealed class LuaManager : MonoBehaviour
     {
         _isLoading = true;
         _percentProcess = 0.0f;
+
+#if UNITY_EDITOR
+        if (luaLabels.Count == 0)
+        {
+            Debug.LogWarning("没有指定任何Lua脚本标签");
+            return;
+        }
+#endif
+
         var locationss = new LinkedList<(IResourceLocation loc, string label)>();
         foreach (var luaLabel in luaLabels)
         {
