@@ -107,6 +107,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+  - m_GUID: d25f3bc3663169245a53e78aeba37ab4
+    m_Address: Assets/Scripts/Lua/Fight/BagSystemModel.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 48fe446656736c249a2abd27051d6ca8
+    m_Address: Assets/Scripts/Lua/Fight/BagSystemView.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 28b5dbd419dcf494589a305f5baf9c0f
+    m_Address: Assets/Scripts/Lua/UI/UIModel.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:

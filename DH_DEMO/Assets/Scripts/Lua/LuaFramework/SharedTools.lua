@@ -68,10 +68,25 @@ end
 -- 获取迭代器
 function List:Iterator()
     self.key = next(self.real_list,self.key)
-    return self.Search(self.key),(self.key ~= nil)
+    return self:Search(self.key),(self.key ~= nil)
 end
 function List:InitIter()
     self.key = nil
+end
+-- 返回复制体
+function List:Copy()
+    self:InitIter()
+    local flag = true
+    local value = nil
+    local temp_list = List:New()
+    if temp_list ~= nil then
+        while flag 
+        do
+            value,flag = self:Iterator()
+            temp_list.Add(self.key,value)
+        end
+    end
+    return temp_list
 end
 -- 实例化
 function List:New()
