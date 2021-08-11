@@ -19,7 +19,7 @@ public class NetWork
     public static void Init()
     {
         client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        EndPoint end_point = new IPEndPoint(IPAddress.Parse("10.0.9.66"), 8800);
+        EndPoint end_point = new IPEndPoint(IPAddress.Parse("10.0.9.66"), 10000);
         try
         {
             client.BeginConnect(end_point, asyncResult =>
@@ -203,4 +203,9 @@ public class NetWork
         Debug.Log(his_name + "say: " + message);
     }
 
+    public static void close()
+    {
+        client.Shutdown(SocketShutdown.Both);
+        client.Close();
+    }
 }

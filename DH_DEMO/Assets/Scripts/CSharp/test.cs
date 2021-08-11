@@ -13,6 +13,7 @@ public class test : MonoBehaviour
     }
     void Start()
     {
+        Debug.Log("发送消息");
         NetWork.SendTalk("111", "111", "你好呀");
     }
 
@@ -20,5 +21,9 @@ public class test : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void Destroy()
+    {
     }
 }

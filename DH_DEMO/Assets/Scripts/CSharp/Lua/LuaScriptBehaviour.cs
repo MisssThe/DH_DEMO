@@ -218,6 +218,10 @@ public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript
 #endif
 
         _key = location[0].PrimaryKey;
+        while (LuaManager.Instance == null)
+        {
+            await Task.Delay(LuaManager.DelayTime);
+        }
         await LuaManager.Instance.AddLuaScript(this);
         if(_luaScriptBehavioutsLodingCount!=0) _luaScriptBehavioutsLodingCount--;
 

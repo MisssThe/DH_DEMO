@@ -72,8 +72,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+  - m_GUID: 05ba56844ec53bd4192d96cd1cfcc2fc
+    m_Address: Assets/Scripts/Lua/Ship/Ship.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
   - m_GUID: fb91d45e5d432724c9f630563ebbf7b3
     m_Address: framework.SharedTools
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: dbf02ab1c86b35344b5da67f466f3d20
+    m_Address: Assets/Scripts/Lua/Ship/U3DShip.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
@@ -92,13 +102,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: 2043c9fed0862824180ff9e9f79760ea
-    m_Address: Assets/Scripts/Lua/move.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: 05ba56844ec53bd4192d96cd1cfcc2fc
-    m_Address: ship.lua
+  - m_GUID: e4b067f773cbd244198caa85ee6d4211
+    m_Address: Assets/Scripts/Lua/UI/UIView.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
