@@ -16,6 +16,7 @@ Shader "UI/Overture/BottomCardsWave"
         _SpeedCard("卡速度", Float) = 1
         _OffsetCard("卡牌偏移", Range(0, 1)) = 0
         _OffsetWave("波形偏移", Float) = 0
+        _OffsetUV("贴图偏移", Vector) = (0, 0, 1, 1)
 
 
         // 蒙版
@@ -126,6 +127,7 @@ Shader "UI/Overture/BottomCardsWave"
                 float _SpeedWave;
                 float _OffsetCard;
                 float _OffsetWave;
+                float4 _OffsetUV;
 
                 fixed4 frag(v2f IN) : SV_Target
                 {
@@ -134,17 +136,19 @@ Shader "UI/Overture/BottomCardsWave"
                     // 裁切掉多余的部分
                     float texcX = (IN.texcoord.x  +  _Time.x * _SpeedCard);
                     float left_edge = floor(texcX / _CycleCard);
-                    float offset = sin(left_edge * _CycleWave + _Time.x * _SpeedWave + _SpeedCard) * _Amplitude*0.5 + _Amplitude*0.5;
+                    float offset = sin(left_edge * _CycleWave + _Time.x * _SpeedWave) * _Amplitude * 0.5 + _Amplitude * 0.5;
                     float2 uv_reCulc = 
                         float2(
                             texcX / _CycleCard - left_edge + _OffsetCard,
-                            IN.texcoord.y / (1 - _Amplitude) - offset
+                            (IN.texcoord.y / (1 - _Amplitude) - offset)
                         );
                     uv_reCulc.x = uv_reCulc.x / (1 - _AmWide);
                     clip(1 - uv_reCulc.x);
                     clip(uv_reCulc.y);
                     clip(1 - uv_reCulc.y);
-                    half4 color = IN.color * (tex2D(_MainTex, uv_reCulc) + _TextureSampleAdd);
+
+                    uv_reCulc.x = left_edge + uv_reCulc.x;
+                    half4 color = IN.color * (tex2D(_MainTex, uv_reCulc * _OffsetUV.zw + _OffsetUV.xy) + _TextureSampleAdd);
                     // color = half4(0, 0, 0, 1);
                     // color.x = uv_reCulc.y;
 

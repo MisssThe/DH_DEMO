@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using XLua;
@@ -78,12 +79,11 @@ public sealed class LuaScript : ILuaScript
     /// </summary>
     /// <param name="scriptPath"> Lua 脚本资源地址 </param>
     /// <param name="objectsToLua"> 要传到 Lua 环境中的对象们 </param>
-    public LuaScript(string scriptPath, Dictionary<string, Object> objectsToLua = null)
+    public LuaScript(string scriptPath, Dictionary<string, Object> objectsToLua = null, Action completedFunc = null)
     {
-        if (objectsToLua != null)
-            _objectsToLuaCache = new Dictionary<string, Object>(objectsToLua);
+        Key = scriptPath;
         _isBuilding = true;
-        var task = LuaManager.Instance.AddLuaScript(this);
+        Init();
     }
 
     #region 继承于ILuaScript
@@ -117,6 +117,8 @@ public sealed class LuaScript : ILuaScript
     }
     public void SetObjsToLua(LuaManager luaMan)
     {
+        if (_objectsToLuaCache == null || _objectsToLuaCache.Count == 0) return;
+
         var localSet = typeof(LuaTable).GetMethod("Set");
         foreach (var obj in _objectsToLuaCache)
         {
@@ -145,6 +147,20 @@ public sealed class LuaScript : ILuaScript
             }
         }
         _objectsToLuaCache.Clear();
+    }
+    private async void Init(Dictionary<string, Object> objectsToLua = null, Action completedFunc = null)
+    {
+        while (LuaManager.Instance == null)
+        {
+            await Task.Delay(LuaManager.DelayTime);
+        }
+        await LuaManager.Instance.AddLuaScript(this);
+        if (objectsToLua != null)
+            _objectsToLuaCache = new Dictionary<string, Object>(objectsToLua);
+
+        _isBuilding = false;
+
+        completedFunc?.Invoke();
     }
     #endregion
 }
