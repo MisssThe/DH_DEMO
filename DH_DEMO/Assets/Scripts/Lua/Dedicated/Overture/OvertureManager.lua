@@ -17,5 +17,7 @@ function overtureFunc.CardFalling()
     cardsFalling:SetActive(true)
 end
 
-print (a)
-EES.Add("CardsFalling", false, overtureFunc.CardFalling)
+-- print("a: ", _G.a)
+-- print("EES: ", EES)
+-- print("EventSystem: ", EventSystem)
+--EES.EventSystem.Add("CardsFalling", false, overtureFunc.CardFalling)

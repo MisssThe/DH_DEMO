@@ -9,6 +9,7 @@ public class OvertureAfterEffect : MonoBehaviour
     public List<AssetReference> materials;
     public AssetReference blendMaterial;
     public AssetReference blendRendertexture;
+    [Range(0, 1)] public float blendAlpha;
 
     private List<Material> mats = new List<Material>();
     private RenderTexture blendRt;
@@ -48,6 +49,7 @@ public class OvertureAfterEffect : MonoBehaviour
         if(blendMat != null && blendRt != null)
         {
             blendMat.SetTexture("_BlendTex", blendRt);
+            blendMat.SetFloat("_Alpha", blendAlpha);
             Graphics.Blit(src, temp1, blendMat);
         }
 
