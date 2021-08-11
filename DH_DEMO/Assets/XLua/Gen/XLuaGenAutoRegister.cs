@@ -19,12 +19,22 @@ namespace XLua.CSObjectWrap
 	{
         
         
+        static void wrapInit0(LuaEnv luaenv, ObjectTranslator translator)
+        {
+        
+            translator.DelayWrapLoader(typeof(DefaultLuaBehaviour), DefaultLuaBehaviourWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(NetWork), NetWorkWrap.__Register);
         
         
         
+        }
         
         static void Init(LuaEnv luaenv, ObjectTranslator translator)
         {
+            
+            wrapInit0(luaenv, translator);
             
             
         }
