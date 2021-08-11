@@ -1,8 +1,45 @@
 local EventSystem = {}
 
--- 事件 类型-回调 表
+-- 判断是否为空表
+-- @params t: 表
+-- @return: 判断结果
+local function TableEmpty(t)
+    if type(t) ~= "table" then
+        return true
+    end
+
+    for _, _ in pairs(t) do
+        return false
+    end
+    return true
+end
+
+-- 事件类型-回调表
+-- 记录事件类型及所对应的回调
+-- 其结构为:
+-- EventSystem.fuc = {
+--     eventTypeA = {
+--         async = {
+--             __dirDelegate = {无主的回调函数...},
+--             instNameA = A实例的回调,
+--             instNameB = B实例的回调, ...
+--         },
+--         sync = {
+--             __dirDelegate = {无主的回调函数...},
+--             instNameA = A实例的回调,
+--             instNameB = B实例的回调, ...
+--         },
+--     }
+--     eventTypeB = {...}, ...
+-- }
 EventSystem.fuc = {}
 -- 事件实例表
+-- 记录注册有事件的实例
+-- 其结构为:
+-- EventSystem.inst = {
+--     instNameA = { eventTypeA = true, eventTypeB = false, ... }
+--     -- 这里的true和false表示是否异步, 若该实例注销了事件 eventTypeA, 设置其为 nil 即可
+-- }
 EventSystem.inst = {}
 
 -- 事件类
@@ -25,18 +62,21 @@ function EventSystem.Event:New(o, instName, isAsync, eventType, delegate)
     self.__index = self
 
     if isAsync ~= nil then
+        if type(isAsync) ~= "boolean" then
+            self.IsAsync = false
+        end
         self.IsAsync = isAsync
     end
-    if instName ~= nil then
+    if instName ~= nil and type(instName) == "string" then
         self.InstName = instName
     end
-    if eventType ~= nil then
+    if eventType ~= nil and type(eventType) == "string" then
         self.EventIndex = eventType
     else
         print("试图创建非法事件!")
         return nil
     end
-    if delegate ~= nil then
+    if delegate ~= nil and (type(delegate) ~= "function") then
         self.Delegate = delegate
     else
         print("试图创建非法事件!")
@@ -58,56 +98,60 @@ function EventSystem.Add(event)
         print("注册了不合规范的 event")
     end
 
+    -- 检查类型
+    if type(event.InstName) ~= "string" then
+        print("注册了不合规范的 event")
+        return false
+    end
+    if type(event.EventIndex) ~= "string" then
+        print("注册了不合规范的 event")
+        return false
+    end
+    if type(event.Delegate) ~= "function" then
+        print("注册了不合规范的 event")
+        return false
+    end
+    if type(event.IsAsync) ~= "boolean" then
+        print("注册了不合规范的 event")
+        return false
+    end
+
     -- 注册事件
     if event.EventIndex ~= nil then
         if event.InstName ~= nil or event.InstName ~= ""  then
-            -- 检查类型
-            if type(event.InstName) ~= "string" then
-                print("注册了不合规范的 event")
-                return false
-            end
-            if type(event.EventIndex) ~= "string" then
-                print("注册了不合规范的 event")
-                return false
-            end
-
+            -- 有目标实例的事件
             -- 加入实例到实例表中
             if EventSystem.inst[event.InstName] == nil then
                 EventSystem.inst[event.InstName] = {}
             end
-            table.insert(EventSystem.inst[event.InstName], event.EventIndex)
+            (EventSystem.inst[event.InstName])[event.EventIndex] = ~event.IsAsync
 
             -- 加入到事件类型-回调表中
             if ~event.IsAsync then
-                if event.Delegate ~= nil then
-                    if EventSystem.fuc[event.EventIndex].sync == nil then
-                        EventSystem.fuc[event.EventIndex].sync = {}
-                    end
-                    EventSystem.fuc[event.EventIndex].sync[event.InstName] = event.Delegate
-                else
-                    print("注册了不合规范的 event")
-                    return false
+                if EventSystem.fuc[event.EventIndex].sync == nil then
+                    EventSystem.fuc[event.EventIndex].sync = {}
                 end
+                EventSystem.fuc[event.EventIndex].sync[event.InstName] = event.Delegate
             else
-                if event.Delegate ~= nil then
-                    if EventSystem.fuc[event.EventIndex].async == nil then
-                        EventSystem.fuc[event.EventIndex].async = {}
-                    end
-                    EventSystem.fuc[event.EventIndex].async[event.InstName] = event.Delegate
-                else
-                    print("注册了不合规范的 event")
-                    return false
+                if EventSystem.fuc[event.EventIndex].async == nil then
+                    EventSystem.fuc[event.EventIndex].async = {}
                 end
+                EventSystem.fuc[event.EventIndex].async[event.InstName] = event.Delegate
             end
         else
+            -- 没有目标实例的事件
             if ~event.IsAsync then
                 if EventSystem.fuc[event.EventIndex].sync == nil then
                     EventSystem.fuc[event.EventIndex].sync = {__dirDelegate = {}}
+                elseif EventSystem.fuc[event.EventIndex].sync.__dirDelegate == nil then
+                    EventSystem.fuc[event.EventIndex].sync.__dirDelegate = {}
                 end
-                    table.insert(EventSystem.fuc[event.EventIndex].__dirDelegate, event.Delegate)
+                    table.insert(EventSystem.fuc[event.EventIndex].sync.__dirDelegate, event.Delegate)
             else
                 if EventSystem.fuc[event.EventIndex].async == nil then
                     EventSystem.fuc[event.EventIndex].async = {__dirDelegate = {}}
+                elseif EventSystem.fuc[event.EventIndex].async.__dirDelegate == nil then
+                    EventSystem.fuc[event.EventIndex].async.__dirDelegate = {}
                 end
                     table.insert(EventSystem.fuc[event.EventIndex].async.__dirDelegate, event.Delegate)
             end
@@ -122,6 +166,23 @@ end
 -- 移除事件类型
 -- @params eventType: 事件类型
 function EventSystem.DeleteType(eventType)
+    if EventSystem.fuc[eventType] == nil then
+        return
+    end
+
+    if EventSystem.fuc[eventType].sync ~= nil then
+        for key, _ in pairs(EventSystem.fuc[eventType].sync) do
+            if EventSystem.inst[key] ~= nil then
+                (EventSystem.inst[key])[eventType] = nil
+            end
+        end
+        for key, _ in pairs(EventSystem.fuc[eventType].async) do
+            if EventSystem.inst[key] ~= nil then
+                (EventSystem.inst[key])[eventType] = nil
+            end
+        end
+    end
+
     EventSystem.fuc[eventType] = nil
 end
 
@@ -134,8 +195,37 @@ function EventSystem.DeleteInstInType(eventType, instName)
     end
     
     -- 移除异步和同步中记录的实例
-    EventSystem.fuc[eventType].sync[instName] = nil
-    EventSystem.fuc[eventType].async[instName] = nil
+    local syncIsEmpty = false
+    if EventSystem.fuc[eventType].sync ~= nil then
+        EventSystem.fuc[eventType].sync[instName] = nil
+        if TableEmpty(EventSystem.fuc[eventType].sync) then
+            EventSystem.fuc[eventType].sync = nil
+            syncIsEmpty = true
+        end
+    else
+        syncIsEmpty = true
+    end
+    if EventSystem.fuc[eventType].async ~= nil then
+        EventSystem.fuc[eventType].async[instName] = nil
+        if TableEmpty(EventSystem.fuc[eventType].async) then
+            EventSystem.fuc[eventType].async = nil
+            if syncIsEmpty then
+                EventSystem.fuc[eventType] = nil
+            end
+        end
+    else
+        if syncIsEmpty then
+            EventSystem.fuc[eventType] = nil
+        end
+    end
+    -- 移除该实例在实例表中所记录的事件
+    if EventSystem.inst[instName] ~= nil then
+        (EventSystem.inst[instName])[eventType] = nil
+
+        if TableEmpty(EventSystem.inst[instName]) then
+            EventSystem.inst[instName] = nil
+        end
+    end
 end
 
 -- 移除该实例注册的所有信息
@@ -146,8 +236,8 @@ function EventSystem.DeleteInst(instName)
     end
 
     -- 移除所有该实例的事件
-    for _,v in ipairs(EventSystem.inst[instName]) do
-        EventSystem.DeleteInstInType(v, instName)
+    for key,_ in pairs(EventSystem.inst[instName]) do
+        EventSystem.DeleteInstInType(key, instName)
     end
     
     EventSystem.inst[instName] = nil
@@ -157,7 +247,7 @@ end
 -- @params eventType: 事件类型
 -- @params instName: 目标实例，没有实例时(事件会被广播)请填""
 -- @return: 事件是否成功找到了目标
-function EventSystem.Send(eventType, instName,...)
+function EventSystem.Send(eventType, instName, ...)
     -- 检查类型
     if type(eventType) ~= "string" or type(instName) ~= "string" then
         print("妄图发送错误的事件格式")
@@ -169,15 +259,18 @@ function EventSystem.Send(eventType, instName,...)
         if instName == "" then
             local success = false;
             if EventSystem.fuc[eventType].sync ~= nil then
-                for _, value in ipairs(EventSystem.fuc[eventType].sync) do
+                -- 运行无目的的事件
+                if EventSystem.func[eventType].sync.__dirDelegate ~= nil then
+                    for _, value in pairs(EventSystem.func[eventType].sync.__dirDelegate) do
+                        if type(value) == "function" then
+                            value(...)
+                        end
+                    end
+                end
+                -- 给所有目的发送该事件
+                for _, value in pairs(EventSystem.fuc[eventType].sync) do
                     if type(value) == "function" then
                         value(...)
-                    elseif type(value) == "table" then
-                        for _, value in ipairs(value) do
-                            if type(value) == "function" then
-                                value(...)
-                            end
-                        end
                     end
                 end
                 success = true
@@ -185,18 +278,20 @@ function EventSystem.Send(eventType, instName,...)
                 success = false;
             end
             if EventSystem.fuc[eventType].async ~= nil then
-                for _, value in ipairs(EventSystem.fuc[eventType].async) do
-                    print("run event!" .. eventType)
+                -- 运行无目的的事件
+                if EventSystem.func[eventType].async.__dirDelegate ~= nil then
+                    for _, value in pairs(EventSystem.func[eventType].async.__dirDelegate) do
+                        if type(value) == "function" then
+                            local controler = coroutine.create(value)
+                            coroutine.resume(controler,...)
+                        end
+                    end
+                end
+                -- 给所有目的发送该事件
+                for _, value in pairs(EventSystem.fuc[eventType].async) do
                     if type(value) == "function" then
                         local controler = coroutine.create(value)
                         coroutine.resume(controler,...)
-                    elseif type(value) == "table" then
-                        for _, value in ipairs(value) do
-                            if type(value) == "function" then
-                                local controler = coroutine.create(value)
-                                coroutine.resume(controler,...)
-                            end
-                        end
                     end
                 end
             else
@@ -211,24 +306,15 @@ function EventSystem.Send(eventType, instName,...)
         if EventSystem.fuc[eventType].sync[instName] ~= nil then
             if type(EventSystem.fuc[eventType].sync[instName]) == "function" then
                 EventSystem.fuc[eventType].sync[instName](...)
-            elseif type(EventSystem.fuc[eventType].sync[instName]) == "table" then
-                for _, value in ipairs(EventSystem.fuc[eventType].sync[instName]) do
-                    if type(value) == "function" then
-                        value(...)
-                    end
-                end
+            else
+                return false
             end
         elseif EventSystem.fuc[eventType].async[instName] ~= nil then
             if type(EventSystem.fuc[eventType].async[instName]) == "function" then
                 local controler = coroutine.create(EventSystem.fuc[eventType].async[instName])
                 coroutine.resume(controler,...)
-            elseif type(EventSystem.fuc[eventType].async[instName]) == "table" then
-                for _, value in ipairs(EventSystem.fuc[eventType].async[instName]) do
-                    if type(value) == "function" then
-                        local controler = coroutine.create(value)
-                        coroutine.resume(controler,...)
-                    end
-                end
+            else
+                return false
             end
         else
             return false

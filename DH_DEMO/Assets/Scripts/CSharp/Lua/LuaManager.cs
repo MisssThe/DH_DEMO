@@ -24,7 +24,7 @@ public sealed class LuaManager : MonoBehaviour
     [SerializeField]
     [Tooltip("在一开始就加载lua脚本")]
     private bool LoadLuaAtOnce = true;
-    
+
     /// <summary>
     /// 轮询是否加载完成的间隔时间
     /// </summary>
@@ -43,7 +43,7 @@ public sealed class LuaManager : MonoBehaviour
     /// <summary>
     /// 存放所有lua资产
     /// </summary>
-    private readonly Dictionary<string, (byte[] data, string label)> _luaAssets 
+    private readonly Dictionary<string, (byte[] data, string label)> _luaAssets
         = new Dictionary<string, (byte[] data, string label)>();
     /// <summary>
     /// 全局的lua环境
@@ -121,7 +121,7 @@ public sealed class LuaManager : MonoBehaviour
     public async Task AddLuaScript(ILuaScript luaScript)
     {
         while (_isLoading) { await Task.Delay(DelayTime); }
-        
+
         luaScript.CreateEnv(this);
         var key = luaScript.Key;
         if (_luaAssets.ContainsKey(key))
@@ -133,7 +133,7 @@ public sealed class LuaManager : MonoBehaviour
             metatable.Dispose();
 
             luaScript.SetObjsToLua(this);
-            
+
             _luaEnv.DoString(AddressableLoader(ref key),
                 luaScript.Key + luaScript.GetHashCode().ToString(),
                 luaScript.Local);
@@ -370,24 +370,24 @@ public sealed class LuaManager : MonoBehaviour
         var idx = 0;
         foreach (var location in locationss)
         {
-            if(_luaAssets.ContainsKey(location.loc.PrimaryKey)) continue;
+            if (_luaAssets.ContainsKey(location.loc.PrimaryKey)) continue;
             if (location.loc.ResourceType == typeof(LuaAsset))
             {
                 var asset = await Addressables.LoadAssetAsync<LuaAsset>(location.loc.PrimaryKey).Task;
-                _luaAssets[location.loc.PrimaryKey] = 
+                _luaAssets[location.loc.PrimaryKey] =
                     asset.encode ?
                     (asset.GetDecodeBytes(), location.label) : (asset.data, location.label);
             }
             else if (location.loc.ResourceType == typeof(TextAsset))
             {
                 _luaAssets[location.loc.PrimaryKey] =
-                    ((await Addressables.LoadAssetAsync<TextAsset>(location.loc.PrimaryKey).Task).bytes, location.label); 
+                    ((await Addressables.LoadAssetAsync<TextAsset>(location.loc.PrimaryKey).Task).bytes, location.label);
             }
 
             idx++;
             _percentProcess = (idx / locationCount) - 0.001f;
         }
-        
+
 
 #if UNITY_EDITOR
         if (_luaAssets.Count == 0)
@@ -442,7 +442,6 @@ public sealed class LuaManager : MonoBehaviour
         _luaEnv.DoString("require(\"framework.App\").init()", "lua init");
         foreach (var globalLua in _globalLuaAssets)
         {
-
             if (globalLua.Value != null && globalLua.Value != "")
             {
                 _luaEnv.DoString(
