@@ -36,9 +36,12 @@ List.__index = List
 List.key = nil
 -- 添加数据
 function List:Add(key,value)
+    print("try to add data")
     if (key ~= nil and value ~= nil) then
         self.real_list[key] = value
         self.count = self.count + 1
+    else
+        print("add failed!")
     end
 end
 -- 删除数据
@@ -56,7 +59,7 @@ end
 function List:Clear()
     self.real_list = {}
     self.count = 0
-    self.InitIter()
+    self:InitIter()
 end
 -- 打印所有数据
 function List:Print()
@@ -68,6 +71,7 @@ end
 -- 获取迭代器
 function List:Iterator()
     self.key = next(self.real_list,self.key)
+    -- if ( self:Search(self.key) == nil) t
     return self:Search(self.key),(self.key ~= nil)
 end
 function List:InitIter()
@@ -79,11 +83,12 @@ function List:Copy()
     local flag = true
     local value = nil
     local temp_list = List:New()
+    local a  = 0
     if temp_list ~= nil then
         while flag 
         do
             value,flag = self:Iterator()
-            temp_list.Add(self.key,value)
+            temp_list:Add(self.key,value)
         end
     end
     return temp_list
@@ -101,10 +106,16 @@ Array.real_array = {}
 Array.count = 0
 Array.index = 0
 Array.__index = Array
+-- 实例化
+function Array:New()
+    local temp = {}
+    setmetatable(temp,Array)
+    return temp
+end
 -- 添加数据
-function Array:Add(value)
-    if value ~= nil then
-        self.real_array[self.index] = value
+function Array:Add(v)
+    if v ~= nil then
+        self.real_array[self.index] = v
         self.index = self.index + 1
         self.count = self.count + 1
     end
@@ -121,13 +132,29 @@ function Array:Delete(index)
 end
 -- 获取数据
 function Array:Get(index)
+    -- if type(index) == "number" then
     return self.real_array[index]
+    -- else
+    --     local n = self:GetIndex(index)
+    --     return self.real_array[n] 
+    -- end
 end
--- 实例化
-function Array:New()
-    local temp = {}
-    setmetatable(temp,Array)
-    return temp
+function Array:GetIndex(value)
+    for i = 0,self.count,1 
+    do
+        if value == self.real_array[i] then
+            return i
+        end
+    end
+    return nil
+end
+-- 返回复制体
+function Array:Copy()
+    local temp_array = Array:New()
+    for i = 0,self.count,1 do
+        temp_array:Add(self:Get(i))
+    end
+    return temp_array
 end
 
 -- 静态变量

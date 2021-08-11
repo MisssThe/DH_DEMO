@@ -13,8 +13,8 @@ function UIModel:New(list)
         if temp_list ~= nil then
             self.data_list = temp_list
         end
+        temp.flag = true
     end
-    temp.flag = true
     return temp
 end
 
@@ -36,4 +36,9 @@ function UIModel:Get()
     self.flag = false
     local temp_list = self.data_list:Copy()
     return temp_list
+end
+
+function UIModel:Clear()
+    self.data_list:Clear()
+    self.flag = true
 end

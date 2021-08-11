@@ -82,11 +82,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: dbf02ab1c86b35344b5da67f466f3d20
-    m_Address: Assets/Scripts/Lua/Ship/U3DShip.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
   - m_GUID: b8031aa170ef1aa4ca867d561adbfdc1
     m_Address: Assets/Scripts/Lua/EventSystem.lua
     m_ReadOnly: 0
@@ -107,18 +102,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: d25f3bc3663169245a53e78aeba37ab4
-    m_Address: Assets/Scripts/Lua/Fight/BagSystemModel.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: 48fe446656736c249a2abd27051d6ca8
-    m_Address: Assets/Scripts/Lua/Fight/BagSystemView.lua
+  - m_GUID: fd90f6519d0b1654e87249b8822f1f04
+    m_Address: Assets/Scripts/Lua/Fight/BagSystem.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
   - m_GUID: 28b5dbd419dcf494589a305f5baf9c0f
     m_Address: Assets/Scripts/Lua/UI/UIModel.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: a5108abdd6ef5b547bd3b2a8f3f06a5a
+    m_Address: Assets/Scripts/Lua/Fight/CardsControl.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 2b2e0f26a58be8740a0cd7bd76ad5bf5
+    m_Address: Assets/Scripts/Lua/Fight/StoreSystem.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua

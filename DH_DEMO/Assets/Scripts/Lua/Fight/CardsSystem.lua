@@ -32,7 +32,6 @@ function CardsSystem:New(base_cards,num,random)
     temp.cards_pool.bag_cards = base_cards
     temp.cards_attri.num = num
     temp.cards_attri.random = random
-    math.randomseed(os.time())
     return temp
 end
 
