@@ -18,6 +18,10 @@ Shader "UI/Overture/BottomCardsWave"
         _OffsetWave("波形偏移", Float) = 0
         _OffsetUV("贴图偏移", Vector) = (0, 0, 1, 1)
 
+        // 
+        _AlphaBottom("透明度衰减(底部)", Range(0, 1)) = 0
+        _AlphaTop("透明度衰减(顶部)", Range(0, 1)) = 0
+
 
         // 蒙版
         _StencilComp("Stencil Comparison", Float) = 8
@@ -129,6 +133,9 @@ Shader "UI/Overture/BottomCardsWave"
                 float _OffsetWave;
                 float4 _OffsetUV;
 
+                float _AlphaBottom;
+                float _AlphaTop;
+
                 fixed4 frag(v2f IN) : SV_Target
                 {
                     // half4 color = IN.color * (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd);
@@ -149,6 +156,9 @@ Shader "UI/Overture/BottomCardsWave"
 
                     uv_reCulc.x = left_edge + uv_reCulc.x;
                     half4 color = IN.color * (tex2D(_MainTex, uv_reCulc * _OffsetUV.zw + _OffsetUV.xy) + _TextureSampleAdd);
+                    color.a = _AlphaBottom == _AlphaTop ? color.a : color.a * saturate(
+                        uv_reCulc.y * (1 / (_AlphaTop - _AlphaBottom)) +
+                         -(1 / (_AlphaTop - _AlphaBottom)) * _AlphaBottom);
                     // color = half4(0, 0, 0, 1);
                     // color.x = uv_reCulc.y;
 

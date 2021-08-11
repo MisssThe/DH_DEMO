@@ -9,7 +9,6 @@ public class EventManager : MonoBehaviour
 {
     [Tooltip("事件系统的require路径")]
     public string eventSystemLuaScriptKey = "";
-    private LuaScript eventEnv;
 
     static private EventManager inst = null;
     /// <summary>
@@ -39,10 +38,11 @@ public class EventManager : MonoBehaviour
 #endif
         }
 
-        LuaManager.Instance.Env.DoString(
-            $"EES.Send({eventName})", 
-            $"doEvent{DateTime.Now}"
-            );
+        if (!LuaManager.Instance.IsLoading)
+            LuaManager.Instance.Env.DoString(
+                $"EES.Send({eventName})",
+                $"doEvent {DateTime.Now}"
+                );
     }
 
     /// <summary>
@@ -57,18 +57,12 @@ public class EventManager : MonoBehaviour
             );
     }
 
-    void AddToGlobal()
-    {
-        LuaManager.Instance.Env.Global.Set("EES", eventEnv.Local);
-    }
-
     void Awake()
     {
         if (inst == null)
         {
             inst = this;
             DontDestroyOnLoad(gameObject);
-            eventEnv = new LuaScript(eventSystemLuaScriptKey, null, AddToGlobal);
         }
         else
             Destroy(gameObject);

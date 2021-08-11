@@ -19,6 +19,9 @@ public sealed class LuaManager : MonoBehaviour
     [Tooltip("需要载入的Lua脚本的标签")]
     private List<AssetLabelReference> luaLabels;
     [SerializeField]
+    [Tooltip("需要在一开始初始化的全局管理器")]
+    private List<GlobalLuaAsset> globalLuas;
+    [SerializeField]
     [Tooltip("在一开始就加载lua脚本")]
     private bool LoadLuaAtOnce = true;
     
@@ -54,6 +57,7 @@ public sealed class LuaManager : MonoBehaviour
     /// 是否正在读取代码
     /// </summary>
     private bool _isLoading = false;
+    private Dictionary<string, string> _globalLuaAssets = new Dictionary<string, string>();
     /// <summary>
     /// 实例
     /// </summary>
@@ -62,6 +66,13 @@ public sealed class LuaManager : MonoBehaviour
     /// 上一次垃圾清理的时间
     /// </summary>
     private static float _lastGCTime = 0;
+
+    [Serializable]
+    private class GlobalLuaAsset
+    {
+        public AssetReference asset = null;
+        public string luaNamespace = null;
+    }
 
     /// <summary>
     /// 实例访问器
@@ -96,6 +107,10 @@ public sealed class LuaManager : MonoBehaviour
         foreach (var luaScr in _luaLocals)
         {
             foreach (var lualocal in luaScr.Value) lualocal.Restart();
+        }
+        foreach (var globalLua in _globalLuaAssets)
+        {
+            _luaEnv.DoString(_luaAssets[globalLua.Key].data, $"globalLuaScript: {globalLua}");
         }
     }
     #region 与 ILuaScript 通信
@@ -370,13 +385,38 @@ public sealed class LuaManager : MonoBehaviour
             }
 
             idx++;
-            _percentProcess = idx / locationCount;
+            _percentProcess = (idx / locationCount) - 0.001f;
         }
+        
 
 #if UNITY_EDITOR
         if (_luaAssets.Count == 0)
             throw new ApplicationException("该标签下没有找到Lua脚本。");
 #endif
+
+        // 载入全局脚本
+        foreach (var globalLua in globalLuas)
+        {
+            var globalLocations = await Addressables.LoadResourceLocationsAsync(globalLua.asset).Task;
+            if (globalLocations.Count == 0)
+            {
+#if UNITY_EDITOR
+                Debug.LogWarning("没有找到到该全局脚本");
+#endif
+                break;
+            }
+
+#if UNITY_EDITOR
+            if (globalLocations.Count != 1)
+            {
+                Debug.LogWarning("是否挂载了非脚本物体？");
+            }
+#endif
+            if (globalLua.luaNamespace != null && globalLua.luaNamespace != "")
+                _globalLuaAssets[globalLocations[0].PrimaryKey] = globalLua.luaNamespace;
+            else
+                _globalLuaAssets[globalLocations[0].PrimaryKey] = "";
+        }
 
         InitLua();
 
@@ -400,6 +440,22 @@ public sealed class LuaManager : MonoBehaviour
     {
         //方便切换任意场景 执行一次lua初始化
         _luaEnv.DoString("require(\"framework.App\").init()", "lua init");
+        foreach (var globalLua in _globalLuaAssets)
+        {
+
+            if (globalLua.Value != null && globalLua.Value != "")
+            {
+                _luaEnv.DoString(
+                    $"{globalLua.Value} = require(\"{globalLua.Key}\")",
+                    $"globalLuaScript: {globalLua.Key}"
+                    );
+            }
+            else
+                _luaEnv.DoString(
+                    $"require(\"{globalLua.Key}\")",
+                    $"globalLuaScript: {globalLua.Key}",
+                    _luaEnv.Global);
+        }
     }
     #endregion
     #endregion

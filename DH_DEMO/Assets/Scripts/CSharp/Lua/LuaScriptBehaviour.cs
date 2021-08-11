@@ -21,7 +21,7 @@ public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript
     [Tooltip("需要送到Lua脚本中的物体")] 
     private GameOBJ[] gameObjectsToLua;
     [Serializable]
-    private struct GameOBJ { public GameObject data; public string key; }
+    private class GameOBJ { public GameObject data = null; public string key = null; }
     
     private static ulong _luaScriptBehavioutsLodingCount = 0;
     private bool _isBuilding = true;
@@ -242,6 +242,11 @@ public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript
 
         _isBuilding = false;
         _local.Get("Awake", out luaFunc); luaFunc?.Invoke();
+        while (_luaScriptBehavioutsLodingCount != 0)
+        {
+            await Task.Delay(LuaManager.DelayTime);
+        }
+        _luaStart?.Invoke();
     }
     #endregion
 
@@ -249,10 +254,6 @@ public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript
     protected void Awake()
     {
         LuaBehaviourConstructor();
-    }
-    protected void Start()
-    {
-        _luaStart?.Invoke();
     }
     protected void Update()
     {
