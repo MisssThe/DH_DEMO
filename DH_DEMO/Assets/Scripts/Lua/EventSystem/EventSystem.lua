@@ -1,3 +1,5 @@
+-- 事件系统 xd 20210811
+
 local EventSystem = {}
 
 -- 判断是否为空表
@@ -87,7 +89,7 @@ function EventSystem.Event:New(o, instName, isAsync, eventType, delegate)
 end
 
 -- 注册信息
--- @params event: 事件
+-- @params event: 事件(类型为 EventSystem.Event, 建议通过 EventSystem.Event:New(...) 实例化)
 -- @params instName: 实例名称(全局唯一), 建议使用 gameobject.name + gameObject.GetHashCode()
 -- @params eventType: 事件类型
 -- @params delegate: 回调函数
@@ -244,8 +246,8 @@ function EventSystem.DeleteInst(instName)
 end
 
 -- 触发事件
--- @params eventType: 事件类型
--- @params instName: 目标实例，没有实例时(事件会被广播)请填""
+-- @params eventType: 事件类型(string)
+-- @params instName: 目标实例(string)，没有实例时(事件会被广播)请填""
 -- @return: 事件是否成功找到了目标
 function EventSystem.Send(eventType, instName, ...)
     -- 检查类型
