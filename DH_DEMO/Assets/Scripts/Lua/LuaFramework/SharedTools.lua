@@ -80,6 +80,49 @@ function List:New()
     return temp
 end
 
+-- 返回一个支持删除的array
+Array = {}
+Array.real_array = {}
+Array.count = 0
+Array.index = 0
+Array.__index = Array
+-- 添加数据
+function Array:Add(value)
+    if value ~= nil then
+        self.real_array[self.index] = value
+        self.index = self.index + 1
+        self.count = self.count + 1
+    end
+end
+-- 删除数据
+function Array:Delete(index)
+    if self.real_array[index] ~= nil then
+        for i = index,self.count,1
+        do
+            self.real_array[i] = self.real_array[i + 1]
+        end
+        self.count = self.count - 1
+    end
+end
+-- 获取数据
+function Array:Get(index)
+    return self.real_array[index]
+end
+-- 实例化
+function Array:New()
+    local temp = {}
+    setmetatable(temp,Array)
+    return temp
+end
+
+-- 静态变量
+function StaticNum()
+    local i = 0
+    return function()
+        i = i + 1
+        return i
+    end
+end
 
 
 -- 与选择对象相关的操作
