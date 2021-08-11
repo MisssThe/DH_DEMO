@@ -1,56 +1,39 @@
--- -- 抽象ship所有的操作
-require("framework.SharedTools")
------------------------------------ 生命周期 --------------------------------
-local ship
+Ship = {["name"] = 'none',["money"] = 0,["position_x"] = 0,["position_z"] = 0}
 
-function Awake()
-    if (cs_self ~= nil) then
-        -- worldToLocalMatrix
-    end
-end
-function Start()
-end
-function Update()
-    -- print(UE.Time.time)
-end
-function FixedUpdate()
-end
-function LateUpdate()
-end
-function OnDestroy()
-    print("destroy object")
-end
-
-Global.Ship = {}
 Ship.__index = Ship
 
--------------------------------- 船体属性 --------------------------------
-Ship.base_attri = {}
-Ship.move_attri = {}
-Ship.world_model = {}
+function Ship:new(name,money,position_x,position_z)
+    local temp_obj = {}
+    temp_obj.name = name
+    temp_obj.money = money
+    temp_obj.position_x = position_x
+    temp_obj.position_z = position_z
+    setmetatable(temp_obj,Ship)
+    return temp_obj
+end
 
--- -------------------------------- 功能实现 --------------------------------
--- 实现船体初始化
+function Ship:GetName()
+    return self.name
+end
 
--- 实现船体移动
-local function GetHeight(p,x,y)
-    local pos = {p,p,p,p}
-    -- for 
-    -- pos[0] = pos.x + x
-    -- pos[1] = pos.x - x
-    -- pos[2] = pos.y + y
-    -- pos[3] = p.y - y
-    -- local model_pos
-    -- for i in pairs(pos) do
-        
-    -- end
+function Ship:SetName(name)
+    self.name = name
 end
-local function Move()
-    -- 实现水平方向移动
-    -- 实现垂直方向移动
-    local pos = cs.transform.position
-    GetHeight(pos,1,2)
+
+function Ship:GetMoney()
+    return self.money
 end
--- 实现战斗发起
-local function RequireFight()
+
+function Ship:SetMoney(money)
+    self.money = self.money + money
 end
+
+function Ship:GetPosition()
+    return self.position_x,self.position_z
+end
+
+function Ship:SetPosition(position_x,position_z)
+    self.position_x = position_x
+    self.position_z = position_z
+end
+

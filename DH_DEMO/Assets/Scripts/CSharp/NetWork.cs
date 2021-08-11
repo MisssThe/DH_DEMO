@@ -94,7 +94,17 @@ public class NetWork
                 
             }else
             {
+                byte[] new_data = new byte[length - 1];
+                Array.Copy(data, 1, new_data, 0, length - 1);
 
+                int num = data[0];
+                Debug.Log("收到消息："+num);
+                switch(num)
+                {
+                    case 2:
+                        ReceiveTalk(new_data);
+                        break;
+                }
             }
 
 
@@ -181,6 +191,16 @@ public class NetWork
         data.CopyTo(new_data, 1);
 
         AsynSend(client, new_data);
+    }
+
+    public static void ReceiveTalk(byte[] data)
+    {
+        Talk temp = new Talk();
+        Deserialize(temp, data);
+        string his_name = temp.MyName;
+        string my_name = temp.HisName;
+        string message = temp.Msg;
+        Debug.Log(his_name + "say: " + message);
     }
 
 }
