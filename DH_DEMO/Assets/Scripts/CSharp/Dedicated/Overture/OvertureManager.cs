@@ -17,7 +17,7 @@ public class OvertureManager : MonoBehaviour
         }
         if (overtureManager.IsBuilding == false)
         {
-            EventManager.Instance.Send("CardsFalling");
+            EventManager.Instance.Send("0 [[CardsFalling]]");
             yield break;
         }
         yield return new WaitForSeconds(1);

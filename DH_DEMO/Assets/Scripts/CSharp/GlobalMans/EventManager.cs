@@ -56,7 +56,7 @@ public class EventManager : MonoBehaviour
             int startPtr = 0;
             if (singleEventContent[0] == "0")
             {
-                finalEventContent = singleEventContent[1];
+                finalEventContent = singleEventContent[1] + ", [[]]";
                 startPtr = 2;
             }
             else
@@ -78,10 +78,12 @@ public class EventManager : MonoBehaviour
             }
 
             if (!LuaManager.Instance.IsLoading)
+            {
                 LuaManager.Instance.Env.DoString(
-                    $"--EES.Send({finalEventContent})",
-                    $"doEvent {DateTime.Now}"
+                    $"EES.Send({finalEventContent})",
+                    $"doEvent {DateTime.Now}", LuaManager.Instance.Env.Global
                 );
+            }
             else
 #if UNITY_EDITOR
                 Debug.LogError("尝试在事件系统初始化前发送事件");

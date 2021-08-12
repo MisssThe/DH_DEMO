@@ -1,6 +1,3 @@
--- 这是关于开始动画和开始界面的管理器
-require("Assets/Scripts/Lua/EventSystem.lua")
-
 -- 所有状态
 local Circuit = {
     "CardsFalling",
@@ -14,10 +11,9 @@ local cardsFalling = {}
 local waitTime = 0
 
 function overtureFunc.CardFalling()
-    cardsFalling:SetActive(true)
+    print("cardfalled")
+    EES.DeleteType("CardsFalling")
 end
 
--- print("a: ", _G.a)
--- print("EES: ", EES)
--- print("EventSystem: ", EventSystem)
---EES.EventSystem.Add("CardsFalling", false, overtureFunc.CardFalling)
+local event = EES.Event:New(nil, "overtureManager", false, "CardsFalling", overtureFunc.CardFalling)
+EES.Add(event)

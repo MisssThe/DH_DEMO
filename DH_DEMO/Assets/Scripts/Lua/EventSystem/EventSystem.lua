@@ -78,7 +78,7 @@ function EventSystem.Event:New(o, instName, isAsync, eventType, delegate)
         print("试图创建非法事件!")
         return nil
     end
-    if delegate ~= nil and (type(delegate) ~= "function") then
+    if delegate ~= nil and type(delegate) == "function" then
         self.Delegate = delegate
     else
         print("试图创建非法事件!")
@@ -126,10 +126,13 @@ function EventSystem.Add(event)
             if EventSystem.inst[event.InstName] == nil then
                 EventSystem.inst[event.InstName] = {}
             end
-            (EventSystem.inst[event.InstName])[event.EventIndex] = ~event.IsAsync
+            (EventSystem.inst[event.InstName])[event.EventIndex] = not event.IsAsync
 
             -- 加入到事件类型-回调表中
-            if ~event.IsAsync then
+            if EventSystem.fuc[event.EventIndex] == nil then
+                EventSystem.fuc[event.EventIndex] = {}
+            end
+            if not event.IsAsync then
                 if EventSystem.fuc[event.EventIndex].sync == nil then
                     EventSystem.fuc[event.EventIndex].sync = {}
                 end
@@ -142,7 +145,7 @@ function EventSystem.Add(event)
             end
         else
             -- 没有目标实例的事件
-            if ~event.IsAsync then
+            if not event.IsAsync then
                 if EventSystem.fuc[event.EventIndex].sync == nil then
                     EventSystem.fuc[event.EventIndex].sync = {__dirDelegate = {}}
                 elseif EventSystem.fuc[event.EventIndex].sync.__dirDelegate == nil then
@@ -178,6 +181,7 @@ function EventSystem.DeleteType(eventType)
                 (EventSystem.inst[key])[eventType] = nil
             end
         end
+    elseif EventSystem.fuc[eventType].async ~= nil then
         for key, _ in pairs(EventSystem.fuc[eventType].async) do
             if EventSystem.inst[key] ~= nil then
                 (EventSystem.inst[key])[eventType] = nil
@@ -255,6 +259,7 @@ function EventSystem.Send(eventType, instName, ...)
         print("妄图发送错误的事件格式")
         return false
     end
+    print("EESLog: try to send Event: "..eventType.." to: "..instName)
 
     if EventSystem.fuc[eventType] ~= nil then
         -- 若未指定发送的对象
@@ -262,8 +267,8 @@ function EventSystem.Send(eventType, instName, ...)
             local success = false;
             if EventSystem.fuc[eventType].sync ~= nil then
                 -- 运行无目的的事件
-                if EventSystem.func[eventType].sync.__dirDelegate ~= nil then
-                    for _, value in pairs(EventSystem.func[eventType].sync.__dirDelegate) do
+                if EventSystem.fuc[eventType].sync.__dirDelegate ~= nil then
+                    for _, value in pairs(EventSystem.fuc[eventType].sync.__dirDelegate) do
                         if type(value) == "function" then
                             value(...)
                         end
@@ -279,10 +284,13 @@ function EventSystem.Send(eventType, instName, ...)
             else
                 success = false;
             end
+            if EventSystem.fuc[eventType] == nil then
+                return true
+            end
             if EventSystem.fuc[eventType].async ~= nil then
                 -- 运行无目的的事件
-                if EventSystem.func[eventType].async.__dirDelegate ~= nil then
-                    for _, value in pairs(EventSystem.func[eventType].async.__dirDelegate) do
+                if EventSystem.fuc[eventType].async.__dirDelegate ~= nil then
+                    for _, value in pairs(EventSystem.fuc[eventType].async.__dirDelegate) do
                         if type(value) == "function" then
                             local controler = coroutine.create(value)
                             coroutine.resume(controler,...)
@@ -297,7 +305,7 @@ function EventSystem.Send(eventType, instName, ...)
                     end
                 end
             else
-                if ~success then
+                if not success then
                     return false
                 end
             end
