@@ -33,3 +33,8 @@ local event2 = ExEES.Event:New(nil, "OvertureManager", false, 'CardsFallFin', ov
 ExEES.Add(event2)
 local event3 = ExEES.Event:New(nil, "OvertureManager", false, 'CardsFallDestroy', overtureFunc.CardFallDest)
 ExEES.Add(event3)
+
+-- 检查
+function Update()
+    
+end

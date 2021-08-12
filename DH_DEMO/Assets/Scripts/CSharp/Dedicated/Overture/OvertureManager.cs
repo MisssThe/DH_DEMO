@@ -13,7 +13,7 @@ public class OvertureManager : MonoBehaviour
     {
         if (atTheBeginning)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(4);
             atTheBeginning = false;
         }
         if (overtureManager.IsBuilding == false)
