@@ -1,19 +1,35 @@
 -- 所有状态
 local Circuit = {
     "CardsFalling",
+    'CardsFallFin',
     "BeginningUI"
 }
 local overtureFunc = {}
 -- 当前状态
 local precentCircuit = {}
-local cameraInLoading = {}
-local cardsFalling = {}
 local waitTime = 0
 
+-- 卡片开始落下
 function overtureFunc.CardFalling()
-    print("cardfalled")
-    EES.DeleteType("CardsFalling")
+    cardsFalling:SetActive(true)
+    ExEES.DeleteType("CardsFalling")
 end
 
-local event = EES.Event:New(nil, "overtureManager", false, "CardsFalling", overtureFunc.CardFalling)
-EES.Add(event)
+-- 卡片结束落下
+function overtureFunc.CardFallfin()
+    quad:SetActive(false)
+end
+
+-- 删除卡片
+function overtureFunc.CardFallDest()
+    cameraInLoading:SetActive(false)
+    
+end
+
+-- 注册事件
+local event = ExEES.Event:New(nil, "OvertureManager", false, "CardsFalling", overtureFunc.CardFalling)
+ExEES.Add(event)
+local event2 = ExEES.Event:New(nil, "OvertureManager", false, 'CardsFallFin', overtureFunc.CardFallfin)
+ExEES.Add(event2)
+local event3 = ExEES.Event:New(nil, "OvertureManager", false, 'CardsFallDestroy', overtureFunc.CardFallDest)
+ExEES.Add(event3)

@@ -34,6 +34,10 @@ MonoBehaviour:
     m_Address: Assets/ExternalResources/Overture/Blend.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: a85c8f24a9a85804883a274bdb272f9e
+    m_Address: Assets/Scripts/Lua/Dedicated/Overture/CameraInLoading.lua
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:
