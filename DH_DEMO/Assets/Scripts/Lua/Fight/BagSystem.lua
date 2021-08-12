@@ -24,25 +24,32 @@ function BagSystemView.EventFunc2()
 end
 
 local grid_list = List:New()
-function BagSystemView:EventFunc3()
+function BagSystemView.EventFunc3()
     -- 出售卡牌
+    -- 删除卡牌并增加金币
     local t_card = GetSelectObj()
     local card_name = t_card.name
     bag_model.Delete(card_name)
 end
+local card_index = 0
+function BagSystemView.EventFunc4(card_name)
+    -- 购买卡牌并减少金币
+    print("购买卡牌")
+    bag_model:Add(card_index,card_name)
+    card_index = card_index + 1
+    print(bag_model.flag)
+end
+EventSystem.Add("BuyCard",false,BagSystemView.EventFunc4)
 
 function BagSystemView:UpdateView()
     -- 读取model数据
     if bag_model.flag then
+        print("updaye bag")
         local card_list = bag_model:Get()
         self.ClearGrid()
-        card_list:InitIter()
-        local flag = true
-        local value = nil
-        while flag
+        for i,v in pairs(card_list)
         do
-            value,flag = card_list:Iterator()
-            self:CreateGrid(value)
+            BagSystemView:CreateGrid(v)
         end
     end
 end
@@ -55,6 +62,8 @@ function BagSystemView:CreateGrid(card_name)
         if t_card ~= nil then
             grid = UE.Object.Instantiate(t_card)
             grid.transform:SetParent(bag_main_panel.transform)
+            -- 设置监听事件
+            grid:GetComponent(typeof(UI.Button)).onClick:AddListener(BagSystemView.EventFunc3)
         end
     end
 end
@@ -74,9 +83,7 @@ function Global.Awake()
     close_view = UIView:New(bag_close_button.gameObject)
     -- 获取背包数据
     local name_list = List:New()
-    name_list:Add(1,"card_0")
-    name_list:Add(2,"card_2")
-    bag_model = UIModel:New(name_list)
+    bag_model = UIModel:New()
     if main_view ~= nil and open_view ~= nil and close_view ~= nil then
         close = bag_close_button.gameObject:GetComponent(typeof(UI.Button))
         if (close ~= nil) then
