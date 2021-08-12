@@ -8,37 +8,25 @@ local open_view = nil
 local close_view = nil
 local store_model = nil
 local StoreSystemView = {}
-StoreSystemView.is_close = true;
+local interval_time = 100
+local wait_time = 300
+local is_open = true
 Global.store_main_panel = nil
 Global.store_open_button = nil
 Global.store_close_button = nil
 ------------------------------------- 功能函数 -------------------------------------
 function StoreSystemView.EventFunc1()
     -- 退出当前背包
-    if StoreSystemView.is_close ~= true then
-        EventSystem.Send("CloseUI","StoreClose")
-        EventSystem.Send("CloseUI","StoreBase")
-    end
-    StoreSystemView.is_close = true
+    EventSystem.Send("CloseUI","StoreClose")
+    EventSystem.Send("CloseUI","StoreBase")
+    is_open = false
 end
 function StoreSystemView.EventFunc2()
     -- 打开当前背包
-    if StoreSystemView.is_close == true then
-        EventSystem.Send("OpenUI","StoreBase")
-        EventSystem.Send("OpenUI","StoreClose")
-        main_view:MoveTop(store_main_panel.transform.parent.gameObject)
-        -- 打开后从卡池中随机获取三（暂定）张牌
-        math.randomseed(os.time())
-        print(store_model.flag)
-
-        store_model:Clear()
-        local random_name = nil
-        for i = 0,2,1 do
-            random_name = "card_" .. math.random(0,CardsControl.cards_num)
-            store_model:Add(i,random_name)
-        end
-    end
-    StoreSystemView.is_close = false
+    EventSystem.Send("OpenUI","StoreBase")
+    EventSystem.Send("OpenUI","StoreClose")
+    main_view:MoveTop(store_main_panel.transform.parent.gameObject)
+    is_open = true
 end
 
 local grid_list = List:New()
@@ -46,24 +34,47 @@ function StoreSystemView:EventFunc3()
     -- 购买卡牌
     local t_card = GetSelectObj()
     local card_name = t_card.name
-    store_model.Delete(card_name)
+    local length = #card_name
+    card_name = string.sub(card_name,1,length - 7)
+    -- 找到第一张name相同的卡牌
+    store_model:DeleteByValue(card_name)
+    EventSystem.Send("BuyCard",card_name)
 end
 function StoreSystemView:UpdateView()
-    -- 读取model数据
-    if store_model.flag then
-        local card_list = store_model:Get()
-        self:ClearGrid()
-        card_list:InitIter()
-        local flag = true
-        local value = nil
-        while flag
-        do
-            value,flag = card_list:Iterator()
-            self:CreateGrid(value)
+   StoreSystemView:AddData()
+   StoreSystemView:UpdateData()
+end
+function StoreSystemView:AddData()
+     -- 固定间隔时间刷新商店,背包打开时刷新
+    -- 打开后从卡池中随机获取三（暂定）张牌
+    if (wait_time > interval_time) then
+        if is_open == true then
+            math.randomseed(os.time())
+            store_model:Clear()
+            local random_name = nil
+            for i = 0,2,1 do
+                random_name = "card_" .. math.random(0,CardsControl.cards_num)
+                store_model:Add(i,random_name)
+            end
+            wait_time = 0
         end
+    else
+        wait_time = wait_time + UE.Time.deltaTime
     end
 end
-
+function StoreSystemView:UpdateData()
+    --  读取model数据
+    if store_model.flag then
+        local card_list = store_model:Get()
+        if (card_list ~= nil) then
+            StoreSystemView:ClearGrid()
+            for i,v in pairs(card_list)
+            do
+                StoreSystemView:CreateGrid(v)
+            end
+        end    
+    end
+end
 function StoreSystemView:CreateGrid(card_name)
     if card_name ~= nil then
         local t_card = nil
@@ -73,6 +84,8 @@ function StoreSystemView:CreateGrid(card_name)
             grid = UE.Object.Instantiate(t_card)
             grid.transform:SetParent(store_main_panel.transform)
             grid.transform.localScale = UE.Vector3(3,6,1)
+            -- 设置监听事件
+            grid:GetComponent(typeof(UI.Button)).onClick:AddListener(StoreSystemView.EventFunc3)
         end
     end
 end
@@ -90,7 +103,7 @@ function Global.Awake()
     main_view = UIView:New(store_main_panel.gameObject)
     open_view = UIView:New(store_open_button.gameObject)
     close_view = UIView:New(store_close_button.gameObject)
-    store_model = UIModel:New(nil)
+    store_model = UIModel:New()
     if main_view ~= nil and open_view ~= nil and close_view ~= nil then
         close = store_close_button.gameObject:GetComponent(typeof(UI.Button))
         if (close ~= nil) then

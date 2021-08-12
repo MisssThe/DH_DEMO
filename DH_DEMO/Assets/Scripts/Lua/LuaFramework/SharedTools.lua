@@ -36,19 +36,16 @@ List.__index = List
 List.key = nil
 -- 添加数据
 function List:Add(key,value)
-    print("try to add data")
     if (key ~= nil and value ~= nil) then
         self.real_list[key] = value
         self.count = self.count + 1
-    else
-        print("add failed!")
     end
 end
 -- 删除数据
 function List:Delete(key)
     if (key ~= nil) then
         self.real_list[key] = nil
-        self.count = list.count - 1;
+        self.count = self.count - 1;
     end
 end
 -- 查找数据
@@ -57,6 +54,7 @@ function List:Search(key)
 end
 -- 清空数据
 function List:Clear()
+    self.real_list = nil
     self.real_list = {}
     self.count = 0
     self:InitIter()
@@ -68,14 +66,20 @@ function List:Print()
         print("key:" .. k .. ",value:" .. v)
     end
 end
--- 获取迭代器
+-- 获取迭代
+List.index = 1
 function List:Iterator()
+    if (self.index > self.count) then
+        return nil,nil
+    end
+    self.index = self.index + 1
     self.key = next(self.real_list,self.key)
     -- if ( self:Search(self.key) == nil) t
     return self:Search(self.key),(self.key ~= nil)
 end
 function List:InitIter()
     self.key = nil
+    self.index = 1
 end
 -- 返回复制体
 function List:Copy()
@@ -83,13 +87,9 @@ function List:Copy()
     local flag = true
     local value = nil
     local temp_list = List:New()
-    local a  = 0
-    if temp_list ~= nil then
-        while flag 
-        do
-            value,flag = self:Iterator()
-            temp_list:Add(self.key,value)
-        end
+    for i,v in pairs(self.real_list)
+    do
+        temp_list:Add(i,v)
     end
     return temp_list
 end
