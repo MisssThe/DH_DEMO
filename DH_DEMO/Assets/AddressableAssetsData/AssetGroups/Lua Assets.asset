@@ -122,7 +122,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+<<<<<<< HEAD
   - m_GUID: d9f8770bd80e0ab46a9bbfb09c3a615f
+=======
+  - m_GUID: b8031aa170ef1aa4ca867d561adbfdc1
+>>>>>>> d0eeaf25b622868614ae5abb771b401bacc92f44
     m_Address: Assets/Scripts/Lua/EventSystem.lua
     m_ReadOnly: 0
     m_SerializedLabels:

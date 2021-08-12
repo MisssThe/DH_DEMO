@@ -35,16 +35,17 @@ function StoreSystemView:EventFunc3()
     local t_card = GetSelectObj()
     local card_name = t_card.name
     local length = #card_name
-    print("llll:" .. length)
     card_name = string.sub(card_name,1,length - 7)
-    print(card_name)
-    store_model:Delete(card_name)
-    print("buy card")
-    store_model:Clear()
-    print(store_model:Get().count)
+    -- 找到第一张name相同的卡牌
+    store_model:DeleteByValue(card_name)
+    EventSystem.Send("BuyCard",card_name)
 end
 function StoreSystemView:UpdateView()
-    -- 固定间隔时间刷新商店,背包打开时刷新
+   StoreSystemView:AddData()
+   StoreSystemView:UpdateData()
+end
+function StoreSystemView:AddData()
+     -- 固定间隔时间刷新商店,背包打开时刷新
     -- 打开后从卡池中随机获取三（暂定）张牌
     if (wait_time > interval_time) then
         if is_open == true then
@@ -60,22 +61,20 @@ function StoreSystemView:UpdateView()
     else
         wait_time = wait_time + UE.Time.deltaTime
     end
-    -- 读取model数据
+end
+function StoreSystemView:UpdateData()
+    --  读取model数据
     if store_model.flag then
-        print("update card")
         local card_list = store_model:Get()
         if (card_list ~= nil) then
-            self:ClearGrid()
-            local value = nil
-            for i = 0,2,1 do
-                value = card_list:Search(i)
-                self:CreateGrid(value)
-                print(value)
+            StoreSystemView:ClearGrid()
+            for i,v in pairs(card_list)
+            do
+                StoreSystemView:CreateGrid(v)
             end
         end    
     end
 end
-
 function StoreSystemView:CreateGrid(card_name)
     if card_name ~= nil then
         local t_card = nil
@@ -104,7 +103,7 @@ function Global.Awake()
     main_view = UIView:New(store_main_panel.gameObject)
     open_view = UIView:New(store_open_button.gameObject)
     close_view = UIView:New(store_close_button.gameObject)
-    store_model = UIModel:New(nil)
+    store_model = UIModel:New()
     if main_view ~= nil and open_view ~= nil and close_view ~= nil then
         close = store_close_button.gameObject:GetComponent(typeof(UI.Button))
         if (close ~= nil) then
