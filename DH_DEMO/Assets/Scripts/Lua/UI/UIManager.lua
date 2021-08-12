@@ -1,5 +1,4 @@
 -- 实现UI管理功能（最基本的打开及关闭UI，以及UI排序）
-require("framework.SharedTools")
 require("Assets/Scripts/Lua/SourceManager")
 require("Assets/Scripts/Lua/EventSystem.lua")
 

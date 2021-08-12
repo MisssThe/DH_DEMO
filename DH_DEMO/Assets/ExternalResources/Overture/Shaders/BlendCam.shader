@@ -4,6 +4,8 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         _BlendTex ("混合贴图", 2D) = "white" {}
+
+        _Alpha ("混合透明度", Range(0, 1)) = 1
     }
     SubShader
     {
@@ -41,11 +43,13 @@
             sampler2D _MainTex;
             sampler2D _BlendTex;
 
+            float _Alpha;
+
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
                 fixed4 blendt = tex2D(_BlendTex, i.uv);
-                col = col * (1 - blendt.a) + blendt * blendt.a;
+                col = col * (1 - blendt.a * _Alpha) + blendt * blendt.a * _Alpha;
                 
                 return col;
             }

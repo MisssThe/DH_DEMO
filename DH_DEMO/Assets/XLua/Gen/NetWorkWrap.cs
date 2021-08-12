@@ -31,7 +31,7 @@ namespace XLua.CSObjectWrap
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 11, 1, 1);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 12, 1, 1);
 			Utils.RegisterFunc(L, Utils.CLS_IDX, "Init", _m_Init_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "Serialize", _m_Serialize_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "Deserialize", _m_Deserialize_xlua_st_);
@@ -42,6 +42,7 @@ namespace XLua.CSObjectWrap
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendTalk", _m_SendTalk_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendToFight", _m_SendToFight_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendFight", _m_SendFight_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "ReceiveTalk", _m_ReceiveTalk_xlua_st_);
             
 			
             
@@ -328,6 +329,30 @@ namespace XLua.CSObjectWrap
                     int _carIndex = LuaAPI.xlua_tointeger(L, 3);
                     
                     NetWork.SendFight( _myName, _hisName, _carIndex );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_ReceiveTalk_xlua_st_(RealStatePtr L)
+        {
+		    try {
+            
+            
+            
+                
+                {
+                    byte[] _data = LuaAPI.lua_tobytes(L, 1);
+                    
+                    NetWork.ReceiveTalk( _data );
                     
                     
                     

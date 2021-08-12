@@ -24,6 +24,7 @@ public class NetWork
         {
             client.BeginConnect(end_point, asyncResult =>
             {
+                Debug.Log("连接");
                 client.EndConnect(asyncResult);
                 AsynRecive(client);
             }, null);
