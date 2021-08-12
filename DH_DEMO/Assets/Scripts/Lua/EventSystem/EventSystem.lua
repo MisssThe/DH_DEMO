@@ -1,6 +1,6 @@
 -- 原事件系统
 
-local EventSystem = {}
+Global.EventSystem = {}
 EventSystem.fuc = {}
 
 function EventSystem.Add(event,is_asyn,delegate)

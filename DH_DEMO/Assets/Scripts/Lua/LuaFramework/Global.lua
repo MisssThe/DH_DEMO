@@ -5,3 +5,4 @@ UE = CS.UnityEngine
 ASS = CS.UnityEngine.AddressableAssets.Addressables
 UI = CS.UnityEngine.UI
 LogUtils = require("framework.LogUtils")
+require("framework.SharedTools")
