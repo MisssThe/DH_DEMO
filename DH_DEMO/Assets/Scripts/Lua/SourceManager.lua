@@ -1,4 +1,4 @@
-local AAS = {}
+AAS = {}
 
 setmetatable(AAS, CS.UnityEngine.AddressableAsset.Addressables)
 

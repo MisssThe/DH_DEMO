@@ -455,6 +455,7 @@ public sealed class LuaManager : MonoBehaviour
                     $"globalLuaScript: {globalLua.Key}",
                     _luaEnv.Global);
         }
+        
     }
     #endregion
     #endregion

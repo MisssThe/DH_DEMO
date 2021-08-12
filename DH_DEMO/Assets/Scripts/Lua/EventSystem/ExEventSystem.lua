@@ -53,13 +53,13 @@ EventSystem.Event = {
 }
 
 -- 新建事件
--- @params instName: 实例名称(全局唯一), 建议使用 gameobject.name + gameObject.GetHashCode()
--- @params isAsync: 是否异步
 -- @params eventType: 事件类型
 -- @params delegate: 回调函数
+-- @params instName: 实例名称(全局唯一), 建议使用 gameobject.name + gameObject.GetHashCode()
+-- @params isAsync: 是否异步
 -- instName可以为空
-function EventSystem.Event:New(o, instName, isAsync, eventType, delegate)
-    o = o or {}
+function EventSystem.Event:New(eventType, delegate, instName, isAsync)
+    local o = {}
     setmetatable(o, self)
     self.__index = self
 
@@ -306,7 +306,7 @@ function EventSystem.Send(eventType, instName, ...)
                 end
             else
                 if not success then
-                    print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName)
+                    print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName.." - 0")
                     return false
                 end
             end
@@ -318,7 +318,7 @@ function EventSystem.Send(eventType, instName, ...)
             if type(EventSystem.fuc[eventType].sync[instName]) == "function" then
                 EventSystem.fuc[eventType].sync[instName](...)
             else
-                print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName)
+                print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName.." - 1")
                 return false
             end
         elseif EventSystem.fuc[eventType].async[instName] ~= nil then
@@ -326,15 +326,15 @@ function EventSystem.Send(eventType, instName, ...)
                 local controler = coroutine.create(EventSystem.fuc[eventType].async[instName])
                 coroutine.resume(controler,...)
             else
-                print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName)
+                print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName.." - 2")
                 return false
             end
         else
-            print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName)
+            print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName.." - 3")
             return false
         end
     else
-        print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName)
+        print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName.." - 4")
         return false
     end
 
