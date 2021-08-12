@@ -72,3 +72,5 @@ end
 EventSystem.Add("OpenUI",false,UIManager.OpenUI)          
 EventSystem.Add("CloseUI",false,UIManager.CloseUI)
 EventSystem.Add("AddUI",false,UIManager.AddUI)
+
+return UIManager

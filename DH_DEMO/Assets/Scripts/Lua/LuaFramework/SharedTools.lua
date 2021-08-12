@@ -36,19 +36,16 @@ List.__index = List
 List.key = nil
 -- 添加数据
 function List:Add(key,value)
-    print("try to add data")
     if (key ~= nil and value ~= nil) then
         self.real_list[key] = value
         self.count = self.count + 1
-    else
-        print("add failed!")
     end
 end
 -- 删除数据
 function List:Delete(key)
     if (key ~= nil) then
         self.real_list[key] = nil
-        self.count = list.count - 1;
+        self.count = self.count - 1;
     end
 end
 -- 查找数据
@@ -57,6 +54,7 @@ function List:Search(key)
 end
 -- 清空数据
 function List:Clear()
+    self.real_list = nil
     self.real_list = {}
     self.count = 0
     self:InitIter()
@@ -99,6 +97,7 @@ function List:New()
     setmetatable(temp,List)
     return temp
 end
+
 
 -- 返回一个支持删除的array
 Array = {}

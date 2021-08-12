@@ -23,7 +23,6 @@ function UIView:New(gameObject)
         EventSystem.Send("OpenUI",temp_ui.ui_name)
         -- 查找父物体CANVAS
         local tran = gameObject.transform
-        print("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
         while tran ~= nil
         do
             if tran.tag == "Canvas" then
@@ -67,7 +66,6 @@ function UIView:Close()
 end
 
 function UIView:MoveTop(m_object)
-    print("move to top")
     if (m_object ~= nil) then
         m_object.gameObject.transform:SetSiblingIndex(self.base_canvas.childCount)
     end

@@ -26,8 +26,11 @@ function UIModel:Add(data_name,data)
 end
 
 function UIModel:Delete(key)
+    print("ccccccccccccccc")
     if key ~= nil then
-        self.data_list:Delete(key)
+        -- self.data_list:Delete(key)
+        self:Clear()
+        print("clear")
         self.flag = true
     end
 end
