@@ -1,5 +1,6 @@
-require("framework.SharedTools")
-Global.EventSystem = {}
+-- 原事件系统
+
+local EventSystem = {}
 EventSystem.fuc = {}
 
 function EventSystem.Add(event,is_asyn,delegate)
