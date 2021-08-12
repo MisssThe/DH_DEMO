@@ -38,7 +38,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - lua
   - m_GUID: dd004e21810299f4798c7289bfd84fd4
-    m_Address: Assets/Scripts/Lua/UIManager.lua
+    m_Address: anager.luaipts/Lua/UIManager.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
@@ -73,7 +73,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - lua
   - m_GUID: 05ba56844ec53bd4192d96cd1cfcc2fc
-    m_Address: Assets/Scripts/Lua/Ship/Ship.lua
+    m_Address: ship.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
@@ -119,6 +119,11 @@ MonoBehaviour:
     - lua
   - m_GUID: 2b2e0f26a58be8740a0cd7bd76ad5bf5
     m_Address: Assets/Scripts/Lua/Fight/StoreSystem.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 2043c9fed0862824180ff9e9f79760ea
+    m_Address: Assets/Scripts/Lua/move.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua

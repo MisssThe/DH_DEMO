@@ -6,7 +6,6 @@ public class test : MonoBehaviour
 {
 
 
-
     void Awake()
     {
         NetWork.Init();
