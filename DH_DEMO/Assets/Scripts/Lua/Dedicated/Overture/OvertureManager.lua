@@ -1,3 +1,6 @@
+--require("Assets/Scripts/Lua/SourceManager")
+
+
 -- 所有状态
 local Circuit = {
     "CardsFalling",
@@ -5,9 +8,8 @@ local Circuit = {
     "BeginningUI"
 }
 local overtureFunc = {}
--- 当前状态
-local precentCircuit = {}
-local waitTime = 0
+local overtureMaskAnimator = overtureMask.gameObject:GetComponent(typeof(UE.Animator))
+
 
 -- 卡片开始落下
 function overtureFunc.CardFalling()
@@ -26,15 +28,36 @@ function overtureFunc.CardFallDest()
     
 end
 
--- 注册事件
-local event = ExEES.Event:New(nil, "OvertureManager", false, "CardsFalling", overtureFunc.CardFalling)
-ExEES.Add(event)
-local event2 = ExEES.Event:New(nil, "OvertureManager", false, 'CardsFallFin', overtureFunc.CardFallfin)
-ExEES.Add(event2)
-local event3 = ExEES.Event:New(nil, "OvertureManager", false, 'CardsFallDestroy', overtureFunc.CardFallDest)
-ExEES.Add(event3)
+-- 注册页面逻辑
+local hadLoadLogin = false
+local loginAnimator = {}
+function overtureFunc.Login()
+    if not hadLoadLogin then
+        ASS.InstantiateAsync("Overture/LoginPages")
+        overtureMaskAnimator:SetBool("Hidden", true)
+    else
+        loginAnimator:SetTrigger("Show")
+        overtureMaskAnimator:SetBool("Hidden", true)
+    end
+end
+function overtureFunc.ReciveLogin(trans, animator)
+    trans:SetParent(canvas.transform, false)
+    animator:SetTrigger("Show")
+    loginAnimator = animator
+    hadLoadLogin = true
+end
+function overtureFunc.ComebackToMain()
+    overtureMaskAnimator:SetBool("Hidden", false)
+end
 
--- 检查
-function Update()
-    
+-- 注册事件
+ExEES.Add(ExEES.Event:New("CardsFalling", overtureFunc.CardFalling, "OvertureManager"))
+ExEES.Add(ExEES.Event:New('CardsFallFin', overtureFunc.CardFallfin, "OvertureManager"))
+ExEES.Add(ExEES.Event:New('CardsFallDestroy', overtureFunc.CardFallDest, "OvertureManager"))
+ExEES.Add(ExEES.Event:New('pushLogin', overtureFunc.Login, "OvertureManager"))
+ExEES.Add(ExEES.Event:New('ReciveLogin', overtureFunc.ReciveLogin, "OvertureManager"))
+ExEES.Add(ExEES.Event:New('backMain', overtureFunc.ComebackToMain, "OvertureManager"))
+
+function OnDestroy()
+    ExEES.DeleteInst("OvertureManager")
 end
