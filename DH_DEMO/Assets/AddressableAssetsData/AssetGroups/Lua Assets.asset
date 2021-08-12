@@ -127,6 +127,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+  - m_GUID: 4d37d38e6c887a84c8daecd0208f521f
+    m_Address: Assets/Scripts/Lua/Fight/RoleAttribute.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: b68f11c15ad56b147b6cd70d291700ee
+    m_Address: Assets/Scripts/Lua/Fight/FightSystem.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 1e979871dba41b942b1a6e649c509a59
+    m_Address: Assets/Scripts/Lua/UI/UIAttribute.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:

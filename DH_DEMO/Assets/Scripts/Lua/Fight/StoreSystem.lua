@@ -65,11 +65,13 @@ end
 function StoreSystemView:UpdateData()
     --  读取model数据
     if store_model.flag then
+        print("load store!!!!!!!!!!!")
         local card_list = store_model:Get()
         if (card_list ~= nil) then
             StoreSystemView:ClearGrid()
             for i,v in pairs(card_list)
             do
+                print("key:" .. i .. "value:" .. v)
                 StoreSystemView:CreateGrid(v)
             end
         end    
@@ -80,8 +82,10 @@ function StoreSystemView:CreateGrid(card_name)
         local t_card = nil
         local grid = nil
         t_card = CardsControl:GetCard(card_name)
+        print(t_card)
         if t_card ~= nil then
             grid = UE.Object.Instantiate(t_card)
+            print(grid)
             grid.transform:SetParent(store_main_panel.transform)
             grid.transform.localScale = UE.Vector3(3,6,1)
             -- 设置监听事件

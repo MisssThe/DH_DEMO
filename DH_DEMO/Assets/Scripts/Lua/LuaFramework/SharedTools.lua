@@ -187,6 +187,7 @@ local function DisableGlobal()
         }
     )
 end
+
 DisableGlobal()
 
 print("load shadred tools!")
