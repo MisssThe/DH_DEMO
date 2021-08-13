@@ -10,6 +10,11 @@ local Circuit = {
 local overtureFunc = {}
 local overtureMaskAnimator = overtureMask.gameObject:GetComponent(typeof(UE.Animator))
 
+-- NetWork相关 -------------------
+-- CS.NetWork.Init()
+-- CS.NetWork.SendRegister("NAME", "******")
+---------------------------------
+
 
 -- 卡片开始落下
 function overtureFunc.CardFalling()
@@ -19,13 +24,13 @@ end
 
 -- 卡片结束落下
 function overtureFunc.CardFallfin()
-    quad:SetActive(false)
+    cameraInLoading.gameObject:GetComponent(typeof(UE.Camera)).cullingMask = 33554432
 end
 
 -- 删除卡片
 function overtureFunc.CardFallDest()
     cameraInLoading:SetActive(false)
-    
+    UE.GameObject.Destroy(cameraInLoading)
 end
 
 -- 注册页面逻辑

@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sea
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 570886af76ee2a648af6eefaabc0afac, type: 3}
+  m_ShaderKeywords: _USE_SKYBOX
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -47,11 +47,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FoamTex:
+        m_Texture: {fileID: 2800000, guid: d17a6cb13c9fc5c46a9b15c8f7b886e5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ForthTex:
         m_Texture: {fileID: 2800000, guid: d17a6cb13c9fc5c46a9b15c8f7b886e5, type: 3}
         m_Scale: {x: 100, y: 100}
         m_Offset: {x: 0, y: 0}
     - _GlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HeightMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -71,6 +79,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 5390d57745818444dbef4f8b03452099, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 3173f4256f92e8441961596594449652, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -79,18 +91,42 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ReflectionBlockTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Skybox:
+        m_Texture: {fileID: 8900000, guid: 5150e018d86cb094d923181d6d38e41f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _TerrainHolesTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WaterBackground:
+        m_Texture: {fileID: 2800000, guid: 808cda242d64fce468711a2f9e5a1ddd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AirRefractiveIndex: 1.5
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _Cycle: 0
     - _DetailNormalMapScale: 1
+    - _DirectTranslucencyPow: 1.058
     - _DistortScale: 0
     - _DstBlend: 0
+    - _EmissionStrength: 0.425
     - _ForthThreshold: 0.8
+    - _FresnelPower: 1.2
     - _FresnelScale: 0.5
     - _FresnelStrenth: 0
     - _GlossMapScale: 1
@@ -104,12 +140,16 @@ Material:
     - _MiniOffset: 0
     - _Mode: 0
     - _NoiseStrenth: 0
+    - _NormalSpeed: 3
     - _OcclusionStrength: 1
     - _OutlineStrenth: 0
     - _Parallax: 0.02
+    - _ReflectionAlpha: 1
+    - _ReflectionDistortionStrength: 0.25
     - _RefractAmount: 0
     - _RefractRatio: 0.5
-    - _Shininess: 0.078125
+    - _RefractionStrength: 1
+    - _Shininess: 253
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 0
@@ -117,15 +157,28 @@ Material:
     - _Speed2: 1
     - _SquashAmount: 1
     - _SrcBlend: 1
+    - _SunAnglePow: 1.039
     - _TessMax: 0
     - _TessStrenth: 0
     - _UVSec: 0
+    - _UseSkybox: 1
+    - _WaterClarity: 29.45
+    - _WaterClarityAttenuationFactor: 2.775
+    - _WaterDepthChangeFactor: 0.47
+    - _WaterEdgeogHeightAndLow: 0.838
+    - _WaterRefractiveIndex: 1.07
     - _WindDir: 4
     - _ZWrite: 1
+    - _waveMaxHeight: 12.82
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _DeepColor: {r: 0, g: 0.07025512, b: 0.103773594, a: 1}
+    - _DirectionalScatteringColor: {r: 1, g: 0.71758074, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HeightMapTransform: {r: 810, g: 810, b: 12.86, a: 6.2}
     - _OutlineColor: {r: 0.1509434, g: 0.101815596, b: 0.101815596, a: 1}
+    - _ShallowColor: {r: 0.076317206, g: 0.27777645, b: 0.3301887, a: 1}
+    - _ShallowMaskOffset: {r: -0.07, g: 0.2, b: 0, a: 0}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
