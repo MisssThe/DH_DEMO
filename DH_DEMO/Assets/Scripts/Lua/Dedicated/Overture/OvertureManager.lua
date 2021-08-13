@@ -24,6 +24,7 @@ end
 
 -- 卡片结束落下
 function overtureFunc.CardFallfin()
+    sea.gameObject:GetComponent(typeof(UE.MeshRenderer)).material:SetFloat("_FogAlpha", 0)
     cameraInLoading.gameObject:GetComponent(typeof(UE.Camera)).cullingMask = 33554432
 end
 

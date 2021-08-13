@@ -125,7 +125,7 @@ Material:
     - _DistortScale: 0
     - _DstBlend: 0
     - _EmissionStrength: 0.425
-    - _FogAlpha: 0
+    - _FogAlpha: 1
     - _ForthThreshold: 0.8
     - _FresnelPower: 1.2
     - _FresnelScale: 0.5
@@ -163,8 +163,8 @@ Material:
     - _TessStrenth: 0
     - _UVSec: 0
     - _UseSkybox: 1
-    - _WaterClarity: 29.45
-    - _WaterClarityAttenuationFactor: 2.775
+    - _WaterClarity: 19.3
+    - _WaterClarityAttenuationFactor: 2.01
     - _WaterDepthChangeFactor: 0.47
     - _WaterEdgeogHeightAndLow: 0.838
     - _WaterRefractiveIndex: 1.07
