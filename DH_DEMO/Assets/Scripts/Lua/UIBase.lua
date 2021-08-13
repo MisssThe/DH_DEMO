@@ -1,5 +1,5 @@
 -- UI基类，封装基本功能，后续UI继承此类并拓展
-require("Assets/Resources/Scripts/Lua/SharedTools")
+require("framework.SharedTools")
 Global.UIBase = {}
 Global.UIBase.status = {"OPEN","CLOSE","HIDE"}
 Global.UIBase.status = CreateEnum(Global.UIBase.status)

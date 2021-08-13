@@ -1,6 +1,6 @@
 -- 实现UI管理功能（最基本的打开及关闭UI，以及UI排序）
-require("Assets/Resources/Scripts/Lua/SharedTools")
-require("Assets/Resources/Scripts/Lua/UIBase")
+require("framework.SharedTools")
+require("Assets/Scripts/Lua/UIBase.lua")
 Global.UIManager = {}
 -----------------------------------------UI管理具体功能实现-----------------------------------------
 

@@ -22,12 +22,12 @@ public class NetWork
         EndPoint end_point = new IPEndPoint(IPAddress.Parse("10.0.9.66"), 10000);
         try
         {
-            client.BeginConnect(end_point, asyncResult =>
+            var a = client.BeginConnect(end_point, asyncResult =>
             {
-                Debug.Log("连接");
                 client.EndConnect(asyncResult);
                 AsynRecive(client);
             }, null);
+
         }
         catch (SocketException e)
         {
@@ -104,6 +104,15 @@ public class NetWork
                 {
                     case 2:
                         ReceiveTalk(new_data);
+                        break;
+                    case 3:
+                        ReceiveToFight(new_data);
+                        break;
+                    case 4:
+                        ReceiveFight(new_data);
+                        break;
+                    case 5:
+                        StartToFight(new_data);
                         break;
                 }
             }
@@ -204,4 +213,52 @@ public class NetWork
         Debug.Log(his_name + "say: " + message);
     }
 
+    public static void ReceiveToFight(byte[] data)
+    {
+        ToFight temp = new ToFight();
+        Deserialize(temp,data);
+        string his_name = temp.MyName;
+        string my_name = temp.HisName;
+        Debug.Log(his_name+"向你发起了战斗邀请");
+        temp.HisName = his_name;
+        temp.MyName = my_name;
+        data = Serialize(temp);
+        byte[] new_data = new byte[data.Length + 1];
+        //同意 发一个ToFight回去
+        {
+            new_data[0] = 3;
+            data.CopyTo(new_data, 1);
+
+        }
+        //拒绝 首字节改成5发回去
+        {
+            new_data[0] = 5;
+            data.CopyTo(new_data,1);
+        }
+        AsynSend(client, new_data);
+
+    }
+
+    public static void ReceiveFight(byte[] data)
+    {
+        Fight temp = new Fight();
+        Deserialize(temp,data);
+        string his_name = temp.MyName;
+        int index = temp.CarIndex;
+        Debug.Log(his_name + "使用了"+index+"号牌");
+    }
+
+    public static void StartToFight(byte[] data)
+    {
+        ToFight temp = new ToFight();
+        Deserialize(temp,data);
+        string his_name = temp.HisName;
+        //进入战斗
+
+    }
+    public static void close()
+    {
+        client.Shutdown(SocketShutdown.Both);
+        client.Close();
+    }
 }

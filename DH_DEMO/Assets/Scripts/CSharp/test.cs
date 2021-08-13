@@ -5,24 +5,24 @@ using UnityEngine;
 public class test : MonoBehaviour
 {
 
+
     void Awake()
     {
         NetWork.Init();
     }
-
     void Start()
     {
-        //StartCoroutine(Time());
+        Debug.Log("发送消息");
         NetWork.SendTalk("111", "111", "你好呀");
     }
 
-    IEnumerator Time()
+    // Update is called once per frame
+    void Update()
     {
-        while (!NetWork.client.Connected)
-        {
-            yield return new WaitForSeconds(1);
-        }
-        NetWork.SendTalk("111", "111", "你好呀");
+        
     }
 
+    void Destroy()
+    {
+    }
 }
