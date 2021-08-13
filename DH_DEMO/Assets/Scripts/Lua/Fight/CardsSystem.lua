@@ -24,6 +24,7 @@ CardsSystem.cards_attri = {}
 CardsSystem.cards_attri.num = 0
 -- 随机度
 CardsSystem.cards_attri.random = 0
+CardsSystem.flag = true
 
 -- 初始化卡牌系统
 function CardsSystem:New(base_cards,num,random)
@@ -57,6 +58,15 @@ function CardsSystem:UseCardFromHand(index)
     self.cards_pool.throw_cards.Add(card)
     self.cards_pool.hand_cards.Delete(index)
     return card
+end
+
+function CardsSystem:GetHandCard()
+    local temp_cards = {}
+    for i,v in pairs(self.hand_cards) 
+    do
+        temp_cards[i] = v
+    end
+    return temp_cards
 end
 
 

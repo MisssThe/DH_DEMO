@@ -142,6 +142,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+  - m_GUID: d009dc0daf99cd748aaacacecb61fa02
+    m_Address: Assets/Scripts/Lua/Fight/BaseCard.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:

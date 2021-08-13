@@ -1,5 +1,10 @@
 ﻿using XLua;
 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 /// <summary>
 /// 默认的 Lua 脚本加载器
 /// </summary>
@@ -47,5 +52,17 @@ public class DefaultLuaBehaviour : LuaScriptBehaviour
     new void OnDestroy()
     {
         base.OnDestroy();
+    }
+    new void OnBeginDrag(PointerEventData eventData)
+    {
+        base.OnBeginDrag(eventData);
+    }
+    new void OnDrag(PointerEventData eventData)
+    {
+        base.OnDrag(eventData);
+    }
+    new void OnEndDrag(PointerEventData eventData)
+    {
+        base.OnEndDrag(eventData);
     }
 }

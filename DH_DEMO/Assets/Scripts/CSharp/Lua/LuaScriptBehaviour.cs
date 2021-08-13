@@ -2,16 +2,22 @@
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;  
 using UnityEngine.AddressableAssets;
 using XLua;
 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 /// <summary>
 ///  <para> 能够挂在在物体上的Lua脚本本地环境 </para>
 ///  <para> 继承后的 void Awake() 函数中记得加上 base.Awake()! </para>
 ///  <para> 其他的 unity 内建函数也是类似的做法！ </para>
 ///  <para> 默认不传递CS类本身到 Lua，若有必要，请给类本身加上 [LuaObject] 注解 </para>
 /// </summary>
-public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript
+public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHandler, IDragHandler,IEndDragHandler
 {
     [SerializeField]
     [Tooltip("lua脚本的PrimaryKey")] 
@@ -37,6 +43,9 @@ public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript
     private Action _luaOnDisable;
     private Action _luaOnEnable;
     private Action _luaOnDestroy;
+    private Action<PointerEventData> _luaOnBeginDrag;
+    private Action<PointerEventData> _luaOnDrag;
+    private Action<PointerEventData> _luaOnEndDrag;
     private Action<bool> _luaOnApplicationFocus;
     private Action<bool> _luaOnApplicationPause;
     // ----------------------------------------------------
@@ -235,6 +244,10 @@ public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript
         _local.Get("OnEnable", out luaFunc); if (luaFunc != null) _luaOnEnable = luaFunc;
         _local.Get("OnGUI", out luaFunc); if (luaFunc != null) _luaOnGUI = luaFunc;
         _local.Get("OnDestroy", out luaFunc); if (luaFunc != null) _luaOnDestroy = luaFunc;
+        Action<PointerEventData> luaPointFunc;
+        _local.Get("OnDrag",out luaPointFunc); if (luaPointFunc != null) _luaOnDrag = luaPointFunc;
+        _local.Get("OnBeginDrag",out luaPointFunc); if (luaPointFunc != null) _luaOnBeginDrag = luaPointFunc;
+        _local.Get("OnEndDrag",out luaPointFunc); if (luaPointFunc != null) _luaOnEndDrag = luaPointFunc;
         Action<bool> luafocusFunc;
         _local.Get("OnApplicationFocus", out luafocusFunc); _luaOnApplicationFocus = luafocusFunc;
         _local.Get("OnApplicationPause", out luafocusFunc); _luaOnApplicationPause = luafocusFunc;
@@ -291,6 +304,18 @@ public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript
     {
         _luaOnDestroy?.Invoke();
         Destroy();
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        _luaOnDrag?.Invoke(eventData);
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        _luaOnBeginDrag?.Invoke(eventData);
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        _luaOnEndDrag?.Invoke(eventData);
     }
     #endregion
 

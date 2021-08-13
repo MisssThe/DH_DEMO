@@ -38,15 +38,15 @@ function Global.Awake()
 end
 
 function Global.Update()
-    if Player_Attri.flag == true then
+    if FightSystem.Player_Attri.flag == true then
         -- 更新生命值、法力值、护甲值
-        p_hp_material:SetFloat("_Percent",Player_Attri:GetPercentHP())
-        p_mp_material:SetFloat("_Percent",Player_Attri:GetPercentMP())
-        p_sp_material:SetFloat("_Percent",Player_Attri:GetPercentSP())
+        p_hp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentHP())
+        p_mp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentMP())
+        p_sp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentSP())
     end
-    if Rivial_Attri.flag == true then
-        r_hp_material:SetFloat("_Percent",Rivial_Attri:GetPercentHP())
-        r_mp_material:SetFloat("_Percent",Rivial_Attri:GetPercentMP())
-        r_sp_material:SetFloat("_Percent",Rivial_Attri:GetPercentSP())
+    if FightSystem.Rivial_Attri.flag == true then
+        r_hp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentHP())
+        r_mp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentMP())
+        r_sp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentSP())
     end
 end
