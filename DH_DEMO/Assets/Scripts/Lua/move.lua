@@ -1,5 +1,5 @@
 --require "ship.lua"
-require "anager.luaipts/Lua/UIManager.lua"
+require ("Assets/Scripts/Lua/UIManager.lua")
 local UE = CS.UnityEngine
 local speed_x 
 local speed_y 
