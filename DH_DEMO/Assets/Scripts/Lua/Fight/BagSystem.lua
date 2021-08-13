@@ -34,17 +34,14 @@ end
 local card_index = 0
 function BagSystemView.EventFunc4(card_name)
     -- 购买卡牌并减少金币
-    print("购买卡牌")
     bag_model:Add(card_index,card_name)
     card_index = card_index + 1
-    print(bag_model.flag)
 end
 EventSystem.Add("BuyCard",false,BagSystemView.EventFunc4)
 
 function BagSystemView:UpdateView()
     -- 读取model数据
     if bag_model.flag then
-        print("updaye bag")
         local card_list = bag_model:Get()
         self.ClearGrid()
         for i,v in pairs(card_list)

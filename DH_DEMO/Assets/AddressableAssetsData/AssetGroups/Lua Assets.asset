@@ -83,7 +83,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - lua
   - m_GUID: 42af5a3aeab2ddb4db3b63de4316ed44
-    m_Address: Assets/Scripts/Lua/EventSystem/EventSystem.lua
+    m_Address: Event.ExEventSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
@@ -122,8 +122,27 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+<<<<<<< HEAD
+  - m_GUID: d9f8770bd80e0ab46a9bbfb09c3a615f
+=======
   - m_GUID: b8031aa170ef1aa4ca867d561adbfdc1
+>>>>>>> d0eeaf25b622868614ae5abb771b401bacc92f44
     m_Address: Assets/Scripts/Lua/EventSystem.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 4d37d38e6c887a84c8daecd0208f521f
+    m_Address: Assets/Scripts/Lua/Fight/RoleAttribute.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: b68f11c15ad56b147b6cd70d291700ee
+    m_Address: Assets/Scripts/Lua/Fight/FightSystem.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 1e979871dba41b942b1a6e649c509a59
+    m_Address: Assets/Scripts/Lua/UI/UIAttribute.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua

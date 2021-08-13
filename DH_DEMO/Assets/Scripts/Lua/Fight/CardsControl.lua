@@ -1,16 +1,11 @@
 require("Assets/Scripts/Lua/EventSystem.lua")
-require("Assets/Scripts/Lua/EventSystem.lua")
 -- 管理所有卡牌
 Global.CardsControl = {}
 CardsControl.cards_list = List:New()
 CardsControl.cards_num = 3
 CardsControl.__index = CardsControl
 ---------------------------------------- 所有卡牌数据 ----------------------------------------
-Global.card_0 = nil
--- Global.card_1
--- Global.card_2
--- Global.card_3
--- Global.card_4
+
 -- Global.card_5
 ----------------------------------------------------------------------------------------------
 
