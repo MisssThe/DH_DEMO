@@ -125,6 +125,7 @@ Material:
     - _DistortScale: 0
     - _DstBlend: 0
     - _EmissionStrength: 0.425
+    - _FogAlpha: 0
     - _ForthThreshold: 0.8
     - _FresnelPower: 1.2
     - _FresnelScale: 0.5

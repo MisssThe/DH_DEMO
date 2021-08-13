@@ -45,6 +45,9 @@
         [Header(Specular)]
 		_SunAnglePow("阳光角度影响因子", Range(0.1,2)) = 1
 		_Shininess("高光",Range(50,800)) = 400
+
+		[Header(Fog)]
+		_FogAlpha("雾的影响", Range(0, 1)) = 0.5
     }
     SubShader
     {
@@ -58,9 +61,13 @@
 	            #pragma vertex vert
 	            #pragma fragment frag
 	            #pragma multi_compile_fwdbase
+				#pragma multi_compile_fog
+
 	            #include "UnityCG.cginc"
 	            #include "autolight.cginc"
 	            #include "lighting.cginc"
+
+				#define USING_FOG (defined(FOG_LINEAR) || defined(FOG_EXP) || defined(FOG_EXP2))
 
 	            samplerCUBE _Skybox;                // 天空盒
 	            sampler2D _FoamTex;                 // 泡沫贴图
@@ -107,6 +114,7 @@
 				float _waveMaxHeight;                   // 高度影响因子
 				float _ReflectionDistortionStrength;    // 反射失真程度
 				float _WaterEdgeogHeightAndLow;
+				float _FogAlpha;
 
 				int _resolution;                        // 
 
@@ -126,8 +134,6 @@
 	                float4 vertex : POSITION;
 	                float3 normal : NORMAL;
 	                float3 uv : TEXCOORD0;
-	               
-
 	            };
 
                 // 顶点着色器输出
@@ -137,6 +143,10 @@
 	                float2 uv : TEXCOORD0;
 	                float3 worldPos : TEXCOORD1;
 	                float4 grabPos : TEXCOORD2;
+
+					#if USING_FOG
+						fixed fog : TEXCOORD3;
+					#endif
 	            };
 
                 // 新建一个结构体缓冲区
@@ -396,6 +406,14 @@
 
     				output.worldPos = worldPos;
     				output.grabPos = ComputeGrabScreenPos(output.pos);
+
+					#if USING_FOG
+						float3 eyePos = UnityObjectToViewPos(input.vertex);
+						float fogCoord = length(eyePos.xyz);
+						UNITY_CALC_FOG_FACTOR_RAW(fogCoord);
+						output.fog = saturate(unityFogFactor);
+					#endif
+
 	                return output;
 	            }
 
@@ -459,7 +477,12 @@
 
                     // 混合颜色并返回 --------------------------------------------------------------
 					float4 col = float4(lerp(refractiveColor ,reflectedColor , F * _ReflectionAlpha),1) + float4(specularColor,1) * shadowFactor; //* blockFactor;
-	                return col;
+	                
+					#if USING_FOG
+                		col.rgb = lerp(lerp(unity_FogColor.rgb, col.rgb, input.fog), col.rgb, _FogAlpha);
+            		#endif
+
+					return col;
 	            }
 	            ENDCG
 		}
