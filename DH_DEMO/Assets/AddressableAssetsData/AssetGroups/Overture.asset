@@ -25,10 +25,6 @@ MonoBehaviour:
     m_Address: Assets/ExternalResources/Overture/Blend.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 7931ac7a83a54904699542244a2d83a3
-    m_Address: Assets/ExternalResources/Overture/HSB.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: df4e0ffab181d4c449d2a81f436997b4
     m_Address: Assets/Scripts/Lua/Dedicated/Overture/UI/loginpage.lua
     m_ReadOnly: 0
