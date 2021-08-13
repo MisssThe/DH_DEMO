@@ -8,6 +8,7 @@ Global.FightSystem = {}
 FightSystem.Rivial_Attri = RoleAttribute:New(10,10,10,10,1)
 FightSystem.Player_Attri = RoleAttribute:New(10,10,10,10,1)
 FightSystem.player_card_system = CardsSystem:New()
+FightSystem.round_num = 0
 
 ------------------------------------ 功能实现 ------------------------------------
 
@@ -25,6 +26,7 @@ end
 
 -- 因某种事件结束战斗时调用
 function FightSystem:EndFight()
+    self.round_num = 0
 end
 
 -- 事件注册
