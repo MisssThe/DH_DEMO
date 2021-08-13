@@ -56,6 +56,7 @@ function CardsSystem:UseCardFromHand(index)
     local card = self.cards_pool.hand_cards.Get(index)
     self.cards_pool.throw_cards.Add(card)
     self.cards_pool.hand_cards.Delete(index)
+    return card
 end
 
 

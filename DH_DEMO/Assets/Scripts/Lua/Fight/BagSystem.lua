@@ -73,6 +73,12 @@ function BagSystemView:ClearGrid()
         UE.Object.Destroy(obj_list[i].gameObject)
     end
 end
+
+-- 获得一份背包卡牌的复制
+function BagSystemView.GetBagCards()
+    return bag_model:Get()
+end
+EventSystem:Add("GetBagCards",false,BagSystemView.GetBagCards)
 ------------------------------------- 生命周期 -------------------------------------
 function Global.Awake()
     main_view = UIView:New(bag_main_panel.gameObject)

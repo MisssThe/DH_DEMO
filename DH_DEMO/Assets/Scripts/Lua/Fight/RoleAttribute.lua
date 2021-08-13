@@ -33,19 +33,24 @@ Global.caculate_type = {"AS","MD"}
 buff_type = CreateEnum(buff_type)
 caculate_type = CreateEnum(caculate_type)
 -------------------------------------- 功能实现 --------------------------------------
-function RoleAttribute:New(hp,mmp,sp,one_sp,ned_sp)
+function RoleAttribute:New(hp,mp,sp,one_sp,ned_sp)
     local temp = {}
     setmetatable(temp,RoleAttribute)
-    temp.health_point.max_hp = hp
-    temp.health_point.now_hp = hp
-    temp.magic_point.max_mp = mp
-    temp.magic_point.now_mp = mp
-    -- * 0.5
-    temp.shield_point.max_sp = sp
-    temp.shield_point.now_sp = 0
-    temp.shield_point.one_sp = one_sp
-    temp.shield_point.ned_sp = ned_sp
-    temp.is_alive = true
+    if (hp ~= nil and mp ~= nil and sp ~= nil and one_sp ~= nil and ned_sp ~= nil) then
+        temp.health_point.max_hp = hp
+        print(temp.health_point.max_hp)
+        temp.health_point.now_hp = hp
+        print(temp.health_point.now_hp)
+        temp.magic_point.max_mp = mp
+        print(temp.magic_point.max_mp)
+        temp.magic_point.now_mp = mp * 0.3
+        print(temp.magic_point.now_mp)
+        temp.shield_point.max_sp = sp
+        temp.shield_point.now_sp = sp * 0.2
+        temp.shield_point.one_sp = one_sp
+        temp.shield_point.ned_sp = ned_sp
+        temp.is_alive = true
+    end
     return temp
 end
 -- 造成伤害
@@ -195,9 +200,9 @@ function RoleAttribute:GetPercentHP()
     return self.health_point.now_hp / self.health_point.max_hp
 end
 function RoleAttribute:GetPercentMP()
-    return self.health_point.now_mp / self.health_point.max_mp
+    return self.magic_point.now_mp / self.magic_point.max_mp
 end
 
 function RoleAttribute:GetPercentSP()
-    return self.health_point.now_sp / self.health_point.max_sp
+    return self.shield_point.now_sp / self.shield_point.max_sp
 end
