@@ -1,4 +1,5 @@
-require "ship.lua"
+--require "ship.lua"
+require ("Assets/Scripts/Lua/UIManager.lua")
 local UE = CS.UnityEngine
 local speed_x 
 local speed_y 
@@ -78,7 +79,7 @@ function Awake()
     transform = cs_self.transform
     camera = transform:Find("Main Camera")
     camera_transform = camera.transform
-    ship = Ship:new("user",0,0,0)
+    --ship = Ship:new("user",0,0,0)
 end
 
 function Update()

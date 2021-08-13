@@ -1,5 +1,7 @@
 -- 原事件系统
 
+require("framework.SharedTools")
+
 Global.EventSystem = {}
 EventSystem.fuc = {}
 
