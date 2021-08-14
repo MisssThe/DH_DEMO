@@ -4,88 +4,71 @@ require("framework.SharedTools")
 
 Global.CardsSystem = {}
 CardsSystem.__index = CardsSystem
---------------------------------------- 卡池 ---------------------------------------
-CardsSystem.cards_pool = {}
--- 背包中
-CardsSystem.cards_pool.bag_cards = Array:New()
-CardsSystem.cards_pool.bag_cards_num = 0
--- 手牌
-CardsSystem.cards_pool.hand_cards = Array:New()
-CardsSystem.cards_pool.hand_cards_num = 0
--- 随机卡牌池
-CardsSystem.cards_pool.random_cards = Array:New()
-CardsSystem.cards_pool.random_cards_num = 0
--- 弃牌堆
-CardsSystem.cards_pool.throw_cards = Array:New()
-CardsSystem.cards_pool.throw_cards_num = 0
---------------------------------------- 属性 ---------------------------------------
-CardsSystem.cards_attri = {}
--- 抽牌数
-CardsSystem.cards_attri.num = 0
--- 随机度
-CardsSystem.cards_attri.random = 0
+CardsSystem.attri = {}
+CardsSystem.card_pool = {}
 CardsSystem.flag = true
+--------------------------------------- 卡池 ---------------------------------------
+CardsSystem.card_pool.bag_pool = nil
+CardsSystem.card_pool.bag_pool_index = 0
+CardsSystem.card_pool.hand_pool = nil
+CardsSystem.card_pool.hand_pool_index = 0
 
--- 初始化卡牌系统
-function CardsSystem:New(base_cards,num,random)
-    local temp
+--------------------------------------- 属性 ---------------------------------------
+CardsSystem.attri.num = nil
+
+---------------------------------------功能实现--------------------------------------- 
+-- 实例化卡牌系统
+function CardsSystem:New(bag_cards,num)
+    local temp = {}
     setmetatable(temp,CardsSystem)
-    temp.cards_pool.bag_cards = base_cards
-    temp.cards_attri.num = num
-    temp.cards_attri.random = random
+    temp.card_pool.bag_cards = bag_cards
+    temp.card_pool.hand_pool = {}
+    temp.attri.num = num
     return temp
 end
-
--- 从背包取牌
-function CardsSystem:GetCardFromBag()
+-- 实现取牌功能（回合开始；特殊卡牌）
+function CardsSystem:GetCardFromBag(card_num)
+    if card_num == nil then
+        card_num = self.attri.num
+    end
+    local temp_list = {}
     local index = 0
-    local card
-    for i = 0,self.cards_attri.num,1 
+    for i,v in pairs(self.card_pool.bag_pool)
     do
-        index = math.random(0,self.cards_attri.random)
-        if index > self.cards_pool.bag_cards.count then
-            index = self.cards_pool.bag_cards.count
+        temp_list[index] = v
+        self.card_pool.bag_pool[i] = nil
+        index = index + 1
+    end
+    self.flag = true
+    return temp_list
+end
+-- 实现用牌功能
+function CardsSystem:UseCardFromHand(card_name)
+    if card_name ~= nil then
+        for i,v in pairs(self.card_pool.hand_pool)
+        do
+            if v == card_name then
+                self.card_pool.hand_pool[i] = nil
+                break
+            end
         end
-        card = self.cards_pool.bag_cards.Get(index)
-        self.cards_pool.hand_cards.Add(card)
-        self.cards_pool.bag_cards.Delete(index)
+        self.flag = true
     end
 end
 
--- 使用手牌
-function CardsSystem:UseCardFromHand(index)
-    local card = self.cards_pool.hand_cards.Get(index)
-    self.cards_pool.throw_cards.Add(card)
-    self.cards_pool.hand_cards.Delete(index)
-    return card
+function CardsSystem:UseCardFromBag()
 end
 
+
+-- 获取手牌
 function CardsSystem:GetHandCard()
-    local temp_cards = {}
-    for i,v in pairs(self.hand_cards) 
+    local temp = {}
+    local index = 0
+    for i,v in pairs(self.card_pool.hand_pool)
     do
-        temp_cards[i] = v
+        temp[index] = v 
+        index = index + 1
     end
-    return temp_cards
+    self.flag = false
+    return temp
 end
-
-
-
-
-
-
-
-
-
-
-
-
--- -- 向手牌堆添加牌
--- function CardsSystem:AddCardIntoHand(card)
---     if self.cards_pool.hand_cards ~= nil then
---         self.cards_pool.hand_cards
---     end
--- end
--- -- 向弃牌堆添加牌
--- function CardsSystem:AddCardInto()
--- end

@@ -6,7 +6,6 @@ require("Assets/Scripts/Lua/EventSystem.lua")
 local status_enum = {"OPEN","CLOSE","HIDE"}
 status_enum = CreateEnum(status_enum)
 Global.UIView = {}
-UIView.base_canvas = nil
 UIView.__index = UIView
 UIView.status = nil
 UIView.ui_name = nil
@@ -20,19 +19,6 @@ function UIView:New(gameObject)
         temp_ui.status = status_enum["HIDE"]
         temp_ui.ui_name = gameObject.name
         EventSystem.Send("AddUI",temp_ui)
-        EventSystem.Send("OpenUI",temp_ui.ui_name)
-        -- 查找父物体CANVAS
-        local tran = gameObject.transform
-        while tran ~= nil
-        do
-            if tran.tag == "Canvas" then
-                break
-            end
-            tran = tran.parent
-        end
-        if tran.tag == "Canvas" then
-            temp_ui.base_canvas = tran
-        end
     else
         return nil
     end
@@ -48,6 +34,7 @@ function UIView:Resume()
     if self.status == status_enum["HIDE"] then
         self.status = status_enum["OPEN"]
         self.gameObject:SetActive(true)
+        print(self.gameObject.name .. "resume")
     end
 end
 
@@ -67,7 +54,11 @@ end
 
 function UIView:MoveTop(m_object)
     if (m_object ~= nil) then
-        m_object.gameObject.transform:SetSiblingIndex(self.base_canvas.childCount)
+        m_object.gameObject.transform:SetSiblingIndex(m_object.childCount)
     end
+end
+
+function UIView:MoveTopSelf()
+    self.gameObject.transform:SetSiblingIndex(self.transform.parent.childCount)
 end
 setmetatable(UIView,__metatable)
