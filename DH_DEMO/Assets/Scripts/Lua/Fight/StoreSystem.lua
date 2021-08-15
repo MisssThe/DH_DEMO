@@ -53,7 +53,7 @@ function StoreSystemView:AddData()
             store_model:Clear()
             local random_name = nil
             for i = 0,2,1 do
-                random_name = "card_" .. math.random(0,CardsControl.cards_num)
+                random_name = "card_" .. math.random(0,6)
                 store_model:Add(i,random_name)
             end
             wait_time = 0
@@ -84,12 +84,13 @@ function StoreSystemView:CreateGrid(card_name)
         t_card = CardsControl:GetCard(card_name)
         if t_card ~= nil then
             grid = UE.Object.Instantiate(t_card)
-            print(grid)
+            --print(grid)
             if store_main_panel.transform ~= nil then
-                grid.transform:SetParent(store_main_panel.transform)
-                -- !!!!!!!!!!!!!!!!!!!!!!!!!!
-                grid.transform.localScale = UE.Vector3(3,6,1)
-                -- print(grid.transform.localScale)
+                --print(store_main_panel.name)
+                -- grid.transform:SetParent(store_main_panel.transform)
+                -- -- !!!!!!!!!!!!!!!!!!!!!!!!!!
+                -- grid.transform.localScale = UE.Vector3(3,6,1)
+                -- --print(grid.transform.localScale)
                 -- -- 设置监听事件
                 grid:GetComponent(typeof(UI.Button)).onClick:AddListener(StoreSystemView.EventFunc3)
             end

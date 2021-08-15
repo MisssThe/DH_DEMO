@@ -24,12 +24,12 @@ namespace Network {
     static FightReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtGaWdodC5wcm90bxIHbmV0d29yayI6CgVGaWdodBIOCgZteU5hbWUYASAB",
-            "KAkSDwoHaGlzTmFtZRgCIAEoCRIQCghjYXJJbmRleBgDIAEoBWIGcHJvdG8z"));
+            "CgtGaWdodC5wcm90bxIHbmV0d29yayI5CgVGaWdodBIOCgZteU5hbWUYASAB",
+            "KAkSDwoHaGlzTmFtZRgCIAEoCRIPCgdjYXJOYW1lGAMgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.Fight), global::Network.Fight.Parser, new[]{ "MyName", "HisName", "CarIndex" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.Fight), global::Network.Fight.Parser, new[]{ "MyName", "HisName", "CarName" }, null, null, null)
           }));
     }
     #endregion
@@ -63,7 +63,7 @@ namespace Network {
     public Fight(Fight other) : this() {
       myName_ = other.myName_;
       hisName_ = other.hisName_;
-      carIndex_ = other.carIndex_;
+      carName_ = other.carName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -94,14 +94,14 @@ namespace Network {
       }
     }
 
-    /// <summary>Field number for the "carIndex" field.</summary>
-    public const int CarIndexFieldNumber = 3;
-    private int carIndex_;
+    /// <summary>Field number for the "carName" field.</summary>
+    public const int CarNameFieldNumber = 3;
+    private string carName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CarIndex {
-      get { return carIndex_; }
+    public string CarName {
+      get { return carName_; }
       set {
-        carIndex_ = value;
+        carName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -120,7 +120,7 @@ namespace Network {
       }
       if (MyName != other.MyName) return false;
       if (HisName != other.HisName) return false;
-      if (CarIndex != other.CarIndex) return false;
+      if (CarName != other.CarName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -129,7 +129,7 @@ namespace Network {
       int hash = 1;
       if (MyName.Length != 0) hash ^= MyName.GetHashCode();
       if (HisName.Length != 0) hash ^= HisName.GetHashCode();
-      if (CarIndex != 0) hash ^= CarIndex.GetHashCode();
+      if (CarName.Length != 0) hash ^= CarName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -151,9 +151,9 @@ namespace Network {
         output.WriteRawTag(18);
         output.WriteString(HisName);
       }
-      if (CarIndex != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(CarIndex);
+      if (CarName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(CarName);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -169,8 +169,8 @@ namespace Network {
       if (HisName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(HisName);
       }
-      if (CarIndex != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CarIndex);
+      if (CarName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CarName);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -189,8 +189,8 @@ namespace Network {
       if (other.HisName.Length != 0) {
         HisName = other.HisName;
       }
-      if (other.CarIndex != 0) {
-        CarIndex = other.CarIndex;
+      if (other.CarName.Length != 0) {
+        CarName = other.CarName;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -211,8 +211,8 @@ namespace Network {
             HisName = input.ReadString();
             break;
           }
-          case 24: {
-            CarIndex = input.ReadInt32();
+          case 26: {
+            CarName = input.ReadString();
             break;
           }
         }

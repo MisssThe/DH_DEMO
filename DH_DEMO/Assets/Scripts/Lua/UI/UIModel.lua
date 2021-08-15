@@ -53,6 +53,12 @@ function UIModel:Get()
     return temp_list
 end
 
+function UIModel:GetNotFlush()
+    local temp_list = UIModel:Get()
+    self.flag = true
+    return temp_list
+end
+
 function UIModel:Clear()
     self.data_list = {}
     self.flag = true

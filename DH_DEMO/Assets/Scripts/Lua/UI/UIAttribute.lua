@@ -1,6 +1,5 @@
 require("Assets/Scripts/Lua/EventSystem.lua")
 require("Assets/Scripts/Lua/UI/UIView.lua")
-require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 Global.p_hp_obj = nil
 Global.p_mp_obj = nil
 Global.p_sp_obj = nil
@@ -38,15 +37,17 @@ function Global.Awake()
 end
 
 function Global.Update()
-    if FightSystem.Player_Attri.flag == true then
-        -- 更新生命值、法力值、护甲值
-        p_hp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentHP())
-        p_mp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentMP())
-        p_sp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentSP())
-    end
-    if FightSystem.Rivial_Attri.flag == true then
-        r_hp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentHP())
-        r_mp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentMP())
-        r_sp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentSP())
+    if FightSystem.Player_Attri ~= nil then
+        if FightSystem.Player_Attri.flag == true then
+            -- 更新生命值、法力值、护甲值
+            p_hp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentHP())
+            p_mp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentMP())
+            p_sp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentSP())
+        end
+        if FightSystem.Rivial_Attri.flag == true then
+            r_hp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentHP())
+            r_mp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentMP())
+            r_sp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentSP())
+        end
     end
 end
