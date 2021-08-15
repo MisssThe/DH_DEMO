@@ -104,7 +104,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Skybox:
-        m_Texture: {fileID: 8900000, guid: 5150e018d86cb094d923181d6d38e41f, type: 3}
+        m_Texture: {fileID: 8900000, guid: 707cd4349f956954fbe1eda5e374d59c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TerrainHolesTexture:
@@ -121,13 +121,13 @@ Material:
     - _Cutoff: 0.5
     - _Cycle: 0
     - _DetailNormalMapScale: 1
-    - _DirectTranslucencyPow: 1.058
+    - _DirectTranslucencyPow: 3
     - _DistortScale: 0
     - _DstBlend: 0
-    - _EmissionStrength: 0.425
+    - _EmissionStrength: 2
     - _FogAlpha: 1
     - _ForthThreshold: 0.8
-    - _FresnelPower: 1.2
+    - _FresnelPower: 1
     - _FresnelScale: 0.5
     - _FresnelStrenth: 0
     - _GlossMapScale: 1
@@ -146,11 +146,11 @@ Material:
     - _OutlineStrenth: 0
     - _Parallax: 0.02
     - _ReflectionAlpha: 1
-    - _ReflectionDistortionStrength: 0.25
+    - _ReflectionDistortionStrength: 0
     - _RefractAmount: 0
     - _RefractRatio: 0.5
     - _RefractionStrength: 1
-    - _Shininess: 253
+    - _Shininess: 800
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 0
@@ -158,7 +158,7 @@ Material:
     - _Speed2: 1
     - _SquashAmount: 1
     - _SrcBlend: 1
-    - _SunAnglePow: 1.039
+    - _SunAnglePow: 2
     - _TessMax: 0
     - _TessStrenth: 0
     - _UVSec: 0
@@ -166,15 +166,15 @@ Material:
     - _WaterClarity: 19.3
     - _WaterClarityAttenuationFactor: 2.01
     - _WaterDepthChangeFactor: 0.47
-    - _WaterEdgeogHeightAndLow: 0.838
+    - _WaterEdgeogHeightAndLow: 0.118
     - _WaterRefractiveIndex: 1.07
     - _WindDir: 4
     - _ZWrite: 1
-    - _waveMaxHeight: 12.82
+    - _waveMaxHeight: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
-    - _DeepColor: {r: 0, g: 0.07025512, b: 0.103773594, a: 1}
-    - _DirectionalScatteringColor: {r: 1, g: 0.71758074, b: 0, a: 1}
+    - _DeepColor: {r: 0, g: 0, b: 0, a: 1}
+    - _DirectionalScatteringColor: {r: 1, g: 0.228701, b: 0.16470587, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HeightMapTransform: {r: 810, g: 810, b: 12.86, a: 6.2}
     - _OutlineColor: {r: 0.1509434, g: 0.101815596, b: 0.101815596, a: 1}
