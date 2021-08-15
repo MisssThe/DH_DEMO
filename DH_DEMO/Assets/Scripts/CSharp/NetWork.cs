@@ -122,7 +122,7 @@ public class NetWork
 
                         break;
                     case 9://你的回合
-
+                        LuaManager.Instance.Env.DoString("FightSystem:StartRound()");
                         break;
                     default:
                         break;
@@ -292,7 +292,8 @@ public class NetWork
         Fight temp = new Fight();
         Deserialize(temp,data);
         string his_name = temp.MyName;
-        int index = temp.CarIndex;
+        int index = temp.CarIndex;//////////////////////////////////////////
+
         Debug.Log(his_name + "使用了"+index+"号牌");
     }
 
@@ -305,6 +306,7 @@ public class NetWork
         Deserialize(temp,new_data);
         string his_name = temp.HisName;
         //进入战斗
+        LuaManager.Instance.Env.DoString("FightSystem.StartFight("+IsFirst+ ",100,100,100,10,1,3,100,100,100,10,1)");
         //传入参数 对手名字，先手后手
         
     }
