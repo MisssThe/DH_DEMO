@@ -299,10 +299,6 @@ namespace XLua.CSObjectWrap
         static int _m_SendToFight_xlua_st_(RealStatePtr L)
         {
 		    try {
-            
-            
-            
-                
                 {
                     string _myName = LuaAPI.lua_tostring(L, 1);
                     string _hisName = LuaAPI.lua_tostring(L, 2);

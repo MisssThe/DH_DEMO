@@ -89,7 +89,8 @@ public class NetWork
         tcpClient.BeginReceive(data, 0, data.Length, SocketFlags.None, asyncResult =>
         {
             int length = tcpClient.EndReceive(asyncResult);
-            if(length == 1)
+            Debug.Log("lENG:" + length);
+            if(length == 10)
             {
                 int num = data[0];
                 switch(num)
@@ -107,7 +108,7 @@ public class NetWork
 
                         break;
                     case 4://代表用户登录成功
-
+                    Debug.Log("登录成功");
                         break;
                     case 5://聊天发送消息对方不在线
 
@@ -304,6 +305,7 @@ public class NetWork
         bool IsFirst = data[0] == 1 ? true : false;
         Array.Copy(data,1,new_data,0,data.Length-1);
         ToFight temp = new ToFight();
+        Debug.Log("qqqqqqqqqqqqqqqqq");
         Deserialize(temp,new_data);
         string his_name = temp.HisName;
         //进入战斗

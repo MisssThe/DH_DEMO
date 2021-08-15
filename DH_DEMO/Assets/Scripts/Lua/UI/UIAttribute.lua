@@ -1,4 +1,3 @@
-require("Assets/Scripts/Lua/EventSystem.lua")
 require("Assets/Scripts/Lua/UI/UIView.lua")
 Global.p_hp_obj = nil
 Global.p_mp_obj = nil
