@@ -41,6 +41,8 @@ function UIManager.OpenUI(ui_name)
         ui_temp:Resume()
     else
         ASS.InstantiateAsync(ui_name)
+        UIManager.OpenUI(ui_name)
+        print("load ui" .. ui_name)
     end
 end
 
@@ -69,8 +71,13 @@ function Global.UIManager.CloseUI(ui_name)
     end
 end
 
+-- 获取ui对象
+function UIManager.GetUI(ui_name)
+    return UIManager.ui_list:Search(ui_name)
+end
 EventSystem.Add("OpenUI",false,UIManager.OpenUI)          
 EventSystem.Add("CloseUI",false,UIManager.CloseUI)
 EventSystem.Add("AddUI",false,UIManager.AddUI)
+EventSystem.Add("GetUI",false,UIManager.GetUI)
 
 return UIManager

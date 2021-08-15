@@ -8,8 +8,8 @@ local open_view = nil
 local close_view = nil
 local store_model = nil
 local StoreSystemView = {}
-local interval_time = 100
-local wait_time = 300
+local interval_time = 300
+local wait_time = 400
 local is_open = true
 Global.store_main_panel = nil
 Global.store_open_button = nil
@@ -53,7 +53,7 @@ function StoreSystemView:AddData()
             store_model:Clear()
             local random_name = nil
             for i = 0,2,1 do
-                random_name = "card_" .. math.random(0,CardsControl.cards_num)
+                random_name = "card_" .. math.random(0,6)
                 store_model:Add(i,random_name)
             end
             wait_time = 0
@@ -62,34 +62,38 @@ function StoreSystemView:AddData()
         wait_time = wait_time + UE.Time.deltaTime
     end
 end
+
 function StoreSystemView:UpdateData()
     --  读取model数据
     if store_model.flag then
-        print("load store!!!!!!!!!!!")
         local card_list = store_model:Get()
         if (card_list ~= nil) then
             StoreSystemView:ClearGrid()
             for i,v in pairs(card_list)
             do
-                print("key:" .. i .. "value:" .. v)
                 StoreSystemView:CreateGrid(v)
             end
         end    
     end
 end
+
 function StoreSystemView:CreateGrid(card_name)
     if card_name ~= nil then
         local t_card = nil
         local grid = nil
         t_card = CardsControl:GetCard(card_name)
-        print(t_card)
         if t_card ~= nil then
             grid = UE.Object.Instantiate(t_card)
-            print(grid)
-            grid.transform:SetParent(store_main_panel.transform)
-            grid.transform.localScale = UE.Vector3(3,6,1)
-            -- 设置监听事件
-            grid:GetComponent(typeof(UI.Button)).onClick:AddListener(StoreSystemView.EventFunc3)
+            --print(grid)
+            if store_main_panel.transform ~= nil then
+                --print(store_main_panel.name)
+                -- grid.transform:SetParent(store_main_panel.transform)
+                -- -- !!!!!!!!!!!!!!!!!!!!!!!!!!
+                -- grid.transform.localScale = UE.Vector3(3,6,1)
+                -- --print(grid.transform.localScale)
+                -- -- 设置监听事件
+                grid:GetComponent(typeof(UI.Button)).onClick:AddListener(StoreSystemView.EventFunc3)
+            end
         end
     end
 end

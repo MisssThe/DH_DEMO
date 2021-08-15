@@ -8,7 +8,11 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags
+        { 
+            "RenderType"="Transparent"
+            "RenderQueue" = ""
+        }
         pass
         {
             CGPROGRAM

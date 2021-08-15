@@ -39,6 +39,13 @@ function BagSystemView.EventFunc4(card_name)
 end
 EventSystem.Add("BuyCard",false,BagSystemView.EventFunc4)
 
+function BagSystemView.EventFunc5()
+    -- 获取当前背包所有卡牌
+    local bag_card_set = bag_model:GetNotFlush()
+    return bag_card_set
+end
+EventSystem.Add("GetBagCard",false,BagSystemView.EventFunc5)
+
 function BagSystemView:UpdateView()
     -- 读取model数据
     if bag_model.flag then
@@ -73,6 +80,7 @@ function BagSystemView:ClearGrid()
         UE.Object.Destroy(obj_list[i].gameObject)
     end
 end
+
 ------------------------------------- 生命周期 -------------------------------------
 function Global.Awake()
     main_view = UIView:New(bag_main_panel.gameObject)

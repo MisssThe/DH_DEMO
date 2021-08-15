@@ -92,11 +92,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: e3eb107638a357d42b1187dd7d7eb183
-    m_Address: Assets/Scripts/Lua/UI/UIImage.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
   - m_GUID: e4b067f773cbd244198caa85ee6d4211
     m_Address: Assets/Scripts/Lua/UI/UIView.lua
     m_ReadOnly: 0
@@ -142,8 +137,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: 2043c9fed0862824180ff9e9f79760ea
-    m_Address: Assets/Scripts/Lua/move.lua
+  - m_GUID: d009dc0daf99cd748aaacacecb61fa02
+    m_Address: Assets/Scripts/Lua/Fight/BaseCard.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: ba745e14ac49a42498392ef1943ba4b2
+    m_Address: Assets/Scripts/Lua/UI/UIRudder.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 10d0a0dceb4a2c6418b398a5fe8a1c88
+    m_Address: Assets/Scripts/Lua/UI/UICardSet.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: d44d459140dc0734395ea8bdaf1f865a
+    m_Address: Assets/Scripts/Lua/Fight/CardsSystem.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua

@@ -1,68 +1,94 @@
 -- 管理卡牌战斗
 -- 接收玩家指令并执行逻辑
 -- 接收双方玩家操作并通过网络交互
-require("Assets/Scripts/Lua/EventSystem.lua")
 require("Assets/Scripts/Lua/Fight/RoleAttribute.lua")
 require("Assets/Scripts/Lua/Fight/CardsSystem.lua")
--- -- 战斗角色
--- local FightRole = {}
--- FightRole.__index = FightRole
--- FightRole.HP = 0        -- 初始生命值
--- FightRole.MP = 0        -- 初始法力值
--- FightRole.CN = 0        -- 抽牌数
--- FightRole.IC = nil      -- 初始卡牌
--- FightRole.CS = nil      -- 初始卡牌系统
--- function FightRole:New(HP,MP,CN)
---     local temp = {}
---     setmetatable(temp,FightRole)
---     if HP ~= nil and MP ~= nil and CN ~= nil then
---         temp.HP = HP
---         temp.MP = MP
---         temp.CN = CN
---     end
---     return temp
--- end
--- function FightRole:UseCard(card_name)
---     card = self.CS.UseCard(card_name)
--- end
+Global.FightSystem = {}
 
--- Global.FightSystem = {}
--- -- 读取玩家（属性，资源）
--- function FightSystem.StartFight(player1,player2)
---     -- 根据玩家数据初始化卡牌系统
+FightSystem.Rivial_Attri = nil 
+-- RoleAttribute:New(10,10,10,10,1)
+FightSystem.Player_Attri = nil
+-- RoleAttribute:New(10,10,10,10,1)
+FightSystem.card_system = nil
+-- CardsSystem:New({},1)
+FightSystem.Round = {}
+FightSystem.Round.round_num = 0
+FightSystem.Round.is_first = true
+FightSystem.Round.is_self = true
 
--- end
+------------------------------------ 功能实现 ------------------------------------
+function FightSystem.InitFightUI(command)
+    EventSystem.Send(command,"player_rudder")
+    EventSystem.Send(command,"rivial_rudder")
+    EventSystem.Send(command,"PHP")
+    EventSystem.Send(command,"PMP")
+    EventSystem.Send(command,"PSP")
+    EventSystem.Send(command,"RHP")
+    EventSystem.Send(command,"RMP")
+    EventSystem.Send(command,"RSP")
+    EventSystem.Send(command,"CardSet")
+end
+-- 双方约定战斗后调用
+function FightSystem.StartFight(
+    isFirst,
+    p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,p_card_num,
+    r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp
+)
+    -- 初始化人物属性
+    FightSystem.Player_Attri = RoleAttribute:New(p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp)
+    FightSystem.Rivial_Attri = RoleAttribute:New(r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp)
+    -- 初始化卡牌系统
+    local p_bag_card = EventSystem.Send("GetBagCard")
+    FightSystem.card_system = CardsSystem:New(p_bag_card,p_card_num)
+    -- 初始化round
+    FightSystem.Round.round_num = 0
+    FightSystem.Round.is_first = isFirst
+    FightSystem.Round.is_self = isFirst
+    -- 初始化UI
+    FightSystem.InitFightUI("OpenUI")
+end
 
--- function FightSystem.UseCard(card_name,isSelf)
-
--- end
-
--- EventSystem.Add("StartFight",false,FightSystem.StartFight)
--- EventSystem.Add("UseCard",false,FightSystem.UseCard)
-
--- print("ssssssssssssssssssssssssss")
--- print(RoleAttribute == nil)
-Global.Rivial_Attri = RoleAttribute:New(10,10,10,10,1)
-Global.Player_Attri = RoleAttribute:New(10,10,10,10,1)
-
-local card
-Global.Player_card = CardsSystem:New({},1)
-
-
-local function MouseHit()
-    local mouse_left = UE.Input.GetMouseButtonDown(0)
-    if mouse_left then
-        local ray = UE.Camera.main:ScreenPointToRay(UE.Input.mousePosition)
-        local go = CS.Tools.MouseRaycast()--获得点击的物体Gameobject
-        if go ~= nil then
-            if go.tag == "boat" then
-                local go_name = go.name
-                return go_name
-            end
+-- 某一方玩家使用卡牌时调用
+function FightSystem.SendCard(card_name,to_self)
+    if FightSystem.is_self == true then
+        self.card_system:UseCardFromHand(card_name)
+        if to_self then
+            EventSystem.Send(card_name .. "_Effect",self.Player_Attri,self.Rivial_Attri)
+        else
+            EventSystem.Send(card_name .. "_Effect",self.Rivial_Attri,self.Player_Attri)
         end
+        EventSystem.Send(card_name .. "_Display")
+        return true
+    end
+    return false
+end
+
+-- 超时或玩家结束回合时调用
+function FightSystem:EndRound()
+    if self.is_self == true then
+        self.Round.round_num = self.Round.round_num + 0.5
+        -- 把控制权移交给对手
+        self.is_self = false
+        -- 发送控制切换请求
+        -- Net
     end
 end
 
-function Update()
-    
+-- 轮到自己回合,接收到转换请求时回调
+function FightSystem:StartRound()
+    -- 获取控制权
+    self.is_self = true
+    -- 更新卡牌系统
+    self.card_system:GetCardFromBag()
 end
+
+-- 因某种事件结束战斗时调用
+function FightSystem:EndFight()
+    FightSystem.Round.round_num = 0
+    FightSystem.Rivial_Attri = nil
+    FightSystem.Player_Attri = nil
+    FightSystem.card_system = nil
+    FightSystem.InitFightUI("CloseUI")
+end
+
+return FightSystem

@@ -15,4 +15,9 @@ public class EventManagerCaller : MonoBehaviour
     {
         EventManager.Instance.Send(eventContent);
     }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 }
