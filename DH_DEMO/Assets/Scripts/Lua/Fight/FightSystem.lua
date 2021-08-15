@@ -60,6 +60,7 @@ function FightSystem.SendCard(card_name,to_self)
         EventSystem.Send(card_name .. "_Display")
         return true
     end
+    CS.NetWork.SendFight()//你的名字 ， 对手名字， 卡牌名字
     return false
 end
 
@@ -70,6 +71,7 @@ function FightSystem:EndRound()
         -- 把控制权移交给对手
         self.is_self = false
         -- 发送控制切换请求
+        CS.NetWork.SendTurnEnd()//你的名字，对手名字
         -- Net
     end
 end
