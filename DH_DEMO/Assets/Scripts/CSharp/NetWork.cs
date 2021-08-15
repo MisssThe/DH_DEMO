@@ -305,6 +305,7 @@ public class NetWork
         Deserialize(temp,new_data);
         string his_name = temp.HisName;
         //进入战斗
+        LuaManager.instance.Env.Dostring("FightSystem.StartFight"kl);
         //传入参数 对手名字，先手后手
         
     }
