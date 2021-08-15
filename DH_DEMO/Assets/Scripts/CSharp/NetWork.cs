@@ -1,15 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Google.Protobuf;
+using Network;
 using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
-using System.IO;
-using Network;
-using Google.Protobuf;
+using UnityEngine;
 using XLua;
-using System.Threading.Tasks;
 
 [LuaCallCSharp]
 public class NetWork
@@ -89,77 +85,59 @@ public class NetWork
         tcpClient.BeginReceive(data, 0, data.Length, SocketFlags.None, asyncResult =>
         {
             int length = tcpClient.EndReceive(asyncResult);
-            Debug.Log("lENG:" + length);
-            if(length == 10)
+            Debug.Log("收到消息长度："+length);
+
+            byte[] new_data = new byte[length - 1];
+            Array.Copy(data, 1, new_data, 0, length - 1);
+            int num = data[0];
+
+            switch (num)
             {
-                int num = data[0];
-                switch(num)
-                {
-                    case 0://代表用户注册失败，用户名已存在
+                case 2:
+                    ReceiveTalk(new_data);
+                    break;
+                case 3:
+                    ReceiveToFight(new_data);
+                    break;
+                case 4:
+                    ReceiveFight(new_data);
+                    break;
+                case 5:
+                    StartToFight(new_data);
+                    break;
+                case 6://代表用户注册失败，用户名已存在
 
-                        break;
-                    case 1://代表用户注册成功
+                    break;
+                case 7://代表用户注册成功
 
-                        break;
-                    case 2://代表用户登录失败，未注册
+                    break;
+                case 8://代表用户登录失败，未注册
 
-                        break;
-                    case 3://代表用户登陆失败，密码错误
+                    break;
+                case 9://代表用户登陆失败，密码错误
 
-                        break;
-                    case 4://代表用户登录成功
-                    Debug.Log("登录成功");
-                        break;
-                    case 5://聊天发送消息对方不在线
+                    break;
+                case 10://代表用户登录成功
 
-                        break;
-                    case 6://发送战斗邀请对方不在线
+                    break;
+                case 11://聊天发送消息对方不在线
 
-                        break;
-                    case 7://战斗时对方不在线
+                    break;
+                case 12://发送战斗邀请对方不在线
 
-                        break;
-                    case 8://对方拒绝战斗
+                    break;
+                case 13://战斗时对方不在线
 
-                        break;
-                    case 9://你的回合
-                        LuaManager.Instance.Env.DoString("FightSystem:StartRound()");
-                        break;
-                    default:
-                        break;
-                }
-                //0 false  1 true  2 un register  3 offline、
-                
-            }else
-            {
-                byte[] new_data = new byte[length - 1];
-                Array.Copy(data, 1, new_data, 0, length - 1);
+                    break;
+                case 14://对方拒绝战斗
 
-                int num = data[0];
-                Debug.Log("收到消息："+num);
-                switch(num)
-                {
-                    case 2:
-                        ReceiveTalk(new_data);
-                        break;
-                    case 3:
-                        ReceiveToFight(new_data);
-                        break;
-                    case 4:
-                        ReceiveFight(new_data);
-                        break;
-                    case 5:
-                        StartToFight(new_data);
-                        break;
-                }
+                    break;
+                case 15://你的回合
+                    LuaManager.Instance.Env.DoString("FightSystem:StartRound()");
+                    break;
+                default:
+                    break;
             }
-
-
-
-
-
-
-
 
             AsynRecive(tcpClient);
         }, null);
@@ -280,10 +258,10 @@ public class NetWork
 
         }
         //拒绝 首字节改成5发回去
-        {
-            new_data[0] = 5;
-            data.CopyTo(new_data,1);
-        }
+        //{
+        //    new_data[0] = 5;
+        //    data.CopyTo(new_data,1);
+        //}
         AsynSend(client, new_data);
 
     }
@@ -305,7 +283,6 @@ public class NetWork
         bool IsFirst = data[0] == 1 ? true : false;
         Array.Copy(data,1,new_data,0,data.Length-1);
         ToFight temp = new ToFight();
-        Debug.Log("qqqqqqqqqqqqqqqqq");
         Deserialize(temp,new_data);
         string his_name = temp.HisName;
         //进入战斗
@@ -316,6 +293,5 @@ public class NetWork
     public static void close()
     {
         client.Shutdown(SocketShutdown.Both);
-        client.Close();
     }
 }

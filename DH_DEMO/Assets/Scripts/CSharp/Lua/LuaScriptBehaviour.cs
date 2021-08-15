@@ -2,33 +2,28 @@
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.EventSystems;  
+using UnityEngine.EventSystems;
 using UnityEngine.AddressableAssets;
 using XLua;
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 /// <summary>
 ///  <para> 能够挂在在物体上的Lua脚本本地环境 </para>
 ///  <para> 继承后的 void Awake() 函数中记得加上 base.Awake()! </para>
 ///  <para> 其他的 unity 内建函数也是类似的做法！ </para>
 ///  <para> 默认不传递CS类本身到 Lua，若有必要，请给类本身加上 [LuaObject] 注解 </para>
 /// </summary>
-public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHandler, IDragHandler,IEndDragHandler
+public abstract class LuaScriptBehaviour : MonoBehaviour, ILuaScript, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField]
-    [Tooltip("lua脚本的PrimaryKey")] 
+    [Tooltip("lua脚本的PrimaryKey")]
     private AssetReference luaAsset;
 
     [SerializeField]
-    [Tooltip("需要送到Lua脚本中的物体")] 
+    [Tooltip("需要送到Lua脚本中的物体")]
     private GameOBJ[] gameObjectsToLua;
     [Serializable]
     private class GameOBJ { public GameObject data = null; public string key = null; }
-    
+
     private static ulong _luaScriptBehavioutsLodingCount = 0;
     private bool _isBuilding = true;
     private LuaTable _local = null;
@@ -73,7 +68,7 @@ public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHa
     /// <summary>
     /// 重设 Lua 资源
     /// </summary>
-    public AssetReference LuaAssetRef 
+    public AssetReference LuaAssetRef
     {
         set
         {
@@ -96,7 +91,7 @@ public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHa
     }
     public async void Destroy()
     {
-        while(_isBuilding) { await Task.Delay(LuaManager.DelayTime); }
+        while (_isBuilding) { await Task.Delay(LuaManager.DelayTime); }
 
         if (_local != null)
         {
@@ -159,11 +154,11 @@ public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHa
             {
                 if (attr.GetType() != typeof(LuaObjectAttribute)) continue;
 
-                if (((LuaObjectAttribute) attr).LuaName != null)
+                if (((LuaObjectAttribute)attr).LuaName != null)
                 {
                     MethodInfo preMethod = localSet.MakeGenericMethod(typeof(string), field.FieldType);
                     preMethod.Invoke(
-                            _local, 
+                            _local,
                             new object[]
                             {
                                 ((LuaObjectAttribute) attr).LuaName, field.GetValue(this)
@@ -173,12 +168,12 @@ public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHa
                 {
                     MethodInfo preMethod = localSet.MakeGenericMethod(typeof(string), field.FieldType);
                     preMethod.Invoke(
-                        _local, 
+                        _local,
                         new object[]
                         {
                             field.Name, field.GetValue(this)
                         });
-                    
+
                 }
                 break;
             }
@@ -218,7 +213,7 @@ public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHa
             _luaScriptBehavioutsLodingCount--;
             return;
         }
-        
+
 #if UNITY_EDITOR
         if (location.Count != 1)
         {
@@ -232,7 +227,7 @@ public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHa
             await Task.Delay(LuaManager.DelayTime);
         }
         await LuaManager.Instance.AddLuaScript(this);
-        if(_luaScriptBehavioutsLodingCount!=0) _luaScriptBehavioutsLodingCount--;
+        if (_luaScriptBehavioutsLodingCount != 0) _luaScriptBehavioutsLodingCount--;
 
         // ---------------------- 映射 lua 中的函数到 CS 中 ---------------------------------
         Action luaFunc;
@@ -245,9 +240,9 @@ public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHa
         _local.Get("OnGUI", out luaFunc); if (luaFunc != null) _luaOnGUI = luaFunc;
         _local.Get("OnDestroy", out luaFunc); if (luaFunc != null) _luaOnDestroy = luaFunc;
         Action<PointerEventData> luaPointFunc;
-        _local.Get("OnDrag",out luaPointFunc); if (luaPointFunc != null) _luaOnDrag = luaPointFunc;
-        _local.Get("OnBeginDrag",out luaPointFunc); if (luaPointFunc != null) _luaOnBeginDrag = luaPointFunc;
-        _local.Get("OnEndDrag",out luaPointFunc); if (luaPointFunc != null) _luaOnEndDrag = luaPointFunc;
+        _local.Get("OnDrag", out luaPointFunc); if (luaPointFunc != null) _luaOnDrag = luaPointFunc;
+        _local.Get("OnBeginDrag", out luaPointFunc); if (luaPointFunc != null) _luaOnBeginDrag = luaPointFunc;
+        _local.Get("OnEndDrag", out luaPointFunc); if (luaPointFunc != null) _luaOnEndDrag = luaPointFunc;
         Action<bool> luafocusFunc;
         _local.Get("OnApplicationFocus", out luafocusFunc); _luaOnApplicationFocus = luafocusFunc;
         _local.Get("OnApplicationPause", out luafocusFunc); _luaOnApplicationPause = luafocusFunc;
@@ -324,13 +319,13 @@ public abstract class LuaScriptBehaviour : MonoBehaviour,ILuaScript,IBeginDragHa
     /// 要传送到 Lua 中的对象
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Class | 
+        AttributeTargets.Class |
         AttributeTargets.Field
         , Inherited = true)]
     internal class LuaObjectAttribute : Attribute
     {
         private readonly string _name;
-        
+
         /// <summary>
         /// 在 Lua 中的名称
         /// </summary>
