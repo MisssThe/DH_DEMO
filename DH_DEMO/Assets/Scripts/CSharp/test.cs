@@ -12,8 +12,8 @@ public class test : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("发送消息");
-        NetWork.SendTalk("111", "111", "你好呀");
+        NetWork.SendLogIn("111", "333");
+        NetWork.SendTalk("111","222","648848");
     }
 
     // Update is called once per frame
