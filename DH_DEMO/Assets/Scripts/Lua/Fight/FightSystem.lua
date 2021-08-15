@@ -3,6 +3,7 @@
 -- 接收双方玩家操作并通过网络交互
 require("Assets/Scripts/Lua/EventSystem.lua")
 require("Assets/Scripts/Lua/Fight/RoleAttribute.lua")
+require("Assets/Scripts/Lua/Fight/CardsSystem.lua")
 -- -- 战斗角色
 -- local FightRole = {}
 -- FightRole.__index = FightRole
@@ -43,3 +44,25 @@ require("Assets/Scripts/Lua/Fight/RoleAttribute.lua")
 -- print(RoleAttribute == nil)
 Global.Rivial_Attri = RoleAttribute:New(10,10,10,10,1)
 Global.Player_Attri = RoleAttribute:New(10,10,10,10,1)
+
+local card
+Global.Player_card = CardsSystem:New({},1)
+
+
+local function MouseHit()
+    local mouse_left = UE.Input.GetMouseButtonDown(0)
+    if mouse_left then
+        local ray = UE.Camera.main:ScreenPointToRay(UE.Input.mousePosition)
+        local go = CS.Tools.MouseRaycast()--获得点击的物体Gameobject
+        if go ~= nil then
+            if go.tag == "boat" then
+                local go_name = go.name
+                return go_name
+            end
+        end
+    end
+end
+
+function Update()
+    
+end
