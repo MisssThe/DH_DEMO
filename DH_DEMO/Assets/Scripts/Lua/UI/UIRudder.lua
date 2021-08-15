@@ -27,7 +27,6 @@ local function EventFunc()
         end
         EventSystem.Send("EndRound")
     end
-    print("into func")
 end
 function Global.Awake()
     rr_view = UIView:New(rivial_rudder.gameObject)

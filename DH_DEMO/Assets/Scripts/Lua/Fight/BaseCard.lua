@@ -38,6 +38,7 @@ function Global.OnEndDrag(data)
         -- 卡牌被使用销毁卡牌
         UE.Object.Destroy(cs_self.gameObject)
         BaseCard.card_move.flag = EventSystem.Send("SendCard",cs_self.name,true)
+        
         if BaseCard.card_move.flag ~= true then
             OnEndDrag(nil)
         end
