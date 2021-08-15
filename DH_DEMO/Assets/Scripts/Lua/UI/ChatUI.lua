@@ -1,7 +1,8 @@
 require("Assets/Scripts/Lua/UI/UIView.lua")
+require("Assets/Scripts/Lua/EventSystem.lua")
 
 ----------------------------------逻辑层----------------------------------
-Gloabal.ChatModel = {}
+Global.ChatModel = {}
 ChatModel.flag = true
 ChatModel.new_msg = {}
 ChatModel.msg_index = 0
@@ -9,19 +10,22 @@ ChatModel.msg_index = 0
 function ChatModel.InitMsg()
     ChatModel.flag = true
     -- 可以用stringbuilder代替提高效率！！！！！！！！！！！！！！！！！！
-    ChatModel.new_msg = nil
+    ChatModel.new_msg = ""
     ChatModel.msg_index = 0
 end
 -- 发送信息
 function ChatModel.SendMsg(msg,sender_name)
-    ChatModel.new_msg = ChatModel.new_msg .. msg
+    ChatModel.new_msg = ChatModel.new_msg .. msg .. "\n"
     ChatModel.msg_index = ChatModel.msg_index + 1
     ChatModel.flag = true
 end
+EventSystem.Add("SendChatMsg",false,ChatModel.SendMsg)
 -- 获取更新的信息
 function ChatModel.GetNewMsg()
-    Gloabal.flag = false
-    return ChatModel.new_msg
+    local temp_str = ChatModel.new_msg
+    ChatModel.new_msg = ""
+    ChatModel.flag = false
+    return temp_str
 end
 ----------------------------------显示层----------------------------------
 Global.chat_input_obj = nil
@@ -38,13 +42,10 @@ local chat_input_text = nil
 local function EventFunc1()
     -- 发送消息
     -- 获取input下text并添加到model中
-    local msg = chat_input_text.
+    local msg = chat_input_text.text
+    ChatModel.SendMsg(msg,FightSystem.player_info.self_name)
+    chat_input_text.text = ""
 end
-
-
-
-
-
 
 function Global.Awake()
     input_view  =UIView:New(chat_input_obj)
@@ -54,7 +55,7 @@ function Global.Awake()
     -- 初始化逻辑层
     ChatModel.InitMsg()
     chat_display_text = chat_panel_obj.gameObject:GetComponent(typeof(UI.Text))
-    chat_input_text = chat_input_obj.gameObject:GetComponent(typeof(UI.InputFiled))
+    chat_input_text = chat_input_obj.gameObject:GetComponent(typeof(UI.InputField))
     chat_button_obj.gameObject:GetComponent(typeof(UI.Button)).onClick:AddListener(EventFunc1)
 end
 
@@ -62,7 +63,6 @@ function Global.Update()
     if ChatModel.flag == true then
         local msg = ChatModel.GetNewMsg()
         -- 更新聊天内容
-        chat_display_text.text = chat_text .. msg
-        ChatModel.new_msg = nil
+        chat_display_text.text = chat_display_text.text .. msg
     end
 end

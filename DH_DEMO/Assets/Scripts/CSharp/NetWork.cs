@@ -237,6 +237,7 @@ public class NetWork
         string his_name = temp.MyName;
         string my_name = temp.HisName;
         string message = temp.Msg;
+        LuaManager.Instance.Env.DoString("require('Assets/Scripts/Lua/UI/ChatUI.lua') EventSystem.Send('SendChatMsg',"+msg+","+his_name+")");
         Debug.Log(his_name + "say: " + message);
     }
 
