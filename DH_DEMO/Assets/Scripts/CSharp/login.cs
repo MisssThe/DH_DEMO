@@ -7,6 +7,6 @@ public class login : MonoBehaviour
     void Start()
     {
         NetWork.Init();
-        NetWork.SendLogIn("111","333");
+        NetWork.SendLogIn("Sean","2000619");
     }
 }
