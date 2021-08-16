@@ -106,18 +106,23 @@ public class NetWork
                     StartToFight(new_data);
                     break;
                 case 6://代表用户注册失败，用户名已存在
+                    EventManager.Instance.Send("1 'loginRecive' 'loginpage' 1");
                     Debug.Log("代表用户注册失败，用户名已存在");
                     break;
                 case 7://代表用户注册成功
+                    EventManager.Instance.Send("1 'loginRecive' 'loginpage' 2");
                     Debug.Log("代表用户注册成功");
                     break;
                 case 8://代表用户登录失败，未注册
+                    EventManager.Instance.Send("1 'loginRecive' 'loginpage' 3");
                     Debug.Log("代表用户登录失败，未注册");
                     break;
                 case 9://代表用户登陆失败，密码错误
+                    EventManager.Instance.Send("1 'loginRecive' 'loginpage' 4");
                     Debug.Log("代表用户登陆失败，密码错误");
                     break;
                 case 10://代表用户登录成功
+                    EventManager.Instance.Send("1 'loginRecive' 'loginpage' 5");
                     Debug.Log("代表用户登录成功");
                     break;
                 case 11://聊天发送消息对方不在线
