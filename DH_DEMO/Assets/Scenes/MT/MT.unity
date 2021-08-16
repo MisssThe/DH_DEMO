@@ -956,12 +956,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299791258}
-  m_LocalRotation: {x: 0.09917375, y: -0, z: -0.0000000037252907, w: 0.99507016}
-  m_LocalPosition: {x: 0, y: 3.55, z: -6.56}
-  m_LocalScale: {x: 1.5434353, y: 0.9800299, z: 1}
+  m_LocalRotation: {x: 0.07394231, y: -0.6631268, z: 0.066090584, w: 0.74190795}
+  m_LocalPosition: {x: 6.5189, y: 3.150003, z: -0.7333417}
+  m_LocalScale: {x: 1.5434351, y: 0.98002994, z: 1}
   m_Children: []
-  m_Father: {fileID: 733726492}
-  m_RootOrder: 0
+  m_Father: {fileID: 1982018631}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 11.383, y: 0, z: 0}
 --- !u!114 &299791260
 MonoBehaviour:
@@ -2571,7 +2571,6 @@ Transform:
   m_LocalPosition: {x: -305.7, y: 111.37, z: -342.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 299791259}
   - {fileID: 1982018631}
   - {fileID: 1258618890}
   m_Father: {fileID: 0}
@@ -3787,7 +3786,7 @@ Transform:
   - {fileID: 628852925}
   - {fileID: 187574327}
   m_Father: {fileID: 733726492}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -71.402, z: 0}
 --- !u!114 &1258618891
 MonoBehaviour:
@@ -5708,8 +5707,9 @@ Transform:
   - {fileID: 403426347623445129}
   - {fileID: 4447499562675379878}
   - {fileID: 500658503}
+  - {fileID: 299791259}
   m_Father: {fileID: 733726492}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 83.582, z: 0}
 --- !u!114 &1982018632
 MonoBehaviour:
@@ -5724,7 +5724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   luaAsset:
-    m_AssetGUID: 05ba56844ec53bd4192d96cd1cfcc2fc
+    m_AssetGUID: 2043c9fed0862824180ff9e9f79760ea
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

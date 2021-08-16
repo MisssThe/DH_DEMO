@@ -162,6 +162,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+  - m_GUID: 2043c9fed0862824180ff9e9f79760ea
+    m_Address: Assets/Scripts/Lua/move.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:
