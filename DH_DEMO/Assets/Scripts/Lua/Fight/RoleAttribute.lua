@@ -29,7 +29,6 @@ RoleAttribute.flag = true
 --     减少治疗效果 RTE
 --     增加法力消耗 IMC
 Global.buff_type = {"IMD","RYD","ITE","RMC","IYD","RMD","RTE","IMC"}
-Global.caculate_type = {"AS","MD"}
 buff_type = CreateEnum(buff_type)
 caculate_type = CreateEnum(caculate_type)
 -------------------------------------- 功能实现 --------------------------------------
@@ -69,18 +68,22 @@ function RoleAttribute:IncreaseHP(num)
     end
 end
 -- 受到伤害
-function RoleAttribute:ReduceHP(num)
+function RoleAttribute:ReduceHP(num,fixed)
     self.flag = true
-    num  = self:CaculateBuff(num,buff_type["RYD"],buff_type["IYD"])
-    -- 先计算护甲
-    local one_def = self.shield_point.now_sp // self.shield_point.ned_sp * self.shield_point
-    self.shield_point.now_sp = self.shield_point.now_sp - num / one_def
-    if (self.shield_point.now_sp < 0) then
-        self.health_point.now_hp = self.health_point.now_hp - self.shield_point.now_sp * one_def
-        self.shield_point.now_sp = 0
+    if fixed then
+        self.health_point.now_hp = self.health_point.now_hp - num
+    else
+        num  = self:CaculateBuff(num,buff_type["RYD"],buff_type["IYD"])
+        -- 先计算护甲
+        local one_def = self.shield_point.now_sp // self.shield_point.ned_sp * self.shield_point
+        self.shield_point.now_sp = self.shield_point.now_sp - num / one_def
+        if (self.shield_point.now_sp < 0) then
+            self.health_point.now_hp = self.health_point.now_hp - self.shield_point.now_sp * one_def
+            self.shield_point.now_sp = 0
+        end
     end
     -- 若生命值小于零则死亡
-    if self.health_point <= 0 then
+    if self.health_point.now_hp <= 0 then
         self.is_alive = false
     end
 end
@@ -116,22 +119,20 @@ end
 
 Global.Buff = {}
 Buff.type = nil
-Buff.cacu_type = nil
 Buff.value = nil
 
 Buff.__index = Buff
-function Buff:New(bt,ct,value)
+function Buff:New(bt,value)
     local temp = {}
     setmetatable(temp,Buff)
     temp.type = bt
-    temp.cacu_type = ct
     temp.value = value
     return temp
 end
 
 -- 添加一个buff（增加造成伤害，减少受到伤害，持续时间）
-function RoleAttribute:AddBuff(time,bt,ct,value)
-    local buff = Buff:New(bt,ct,value)
+function RoleAttribute:AddBuff(time,bt,value)
+    local buff = Buff:New(bt,value)
     self.buff_list[self.buff_index] = buff
     self.buff_index = self.buff_index + 1
     self.flag = true
@@ -150,8 +151,8 @@ function RoleAttribute:DeleteBuff(n)
     end
 end
 -- 添加一个debuff（增加受到伤害，减少造成伤害，持续时间）
-function RoleAttribute:AddDebuff(time,bt,ct,value)
-    local buff = Buff:New(bt,ct,value)
+function RoleAttribute:AddDebuff(time,bt,value)
+    local buff = Buff:New(bt,value)
     self.flag = true
     self.debuff_list[self.debuff_index] = buff
     self.debuff_index = self.debuff_index + 1
@@ -175,22 +176,14 @@ function RoleAttribute:CaculateBuff(value,type1,type2)
     for i,v in pairs(self.buff_list)
     do
         if v.type == type1 then
-            if v.cacu_type == caculate_type["AS"] then
-                value = value + v.value
-            elseif v.cacu_type == caculate_type["MD"] then
-                value = value * v.value
-            end
+            value = value + v.value
         end
     end
 
     for i,v in pairs(self.debuff_list)
     do
         if v.type == type2 then
-            if v.cacu_type == caculate_type["AS"] then
-                value = value + v.value
-            elseif v.cacu_type == caculate_type["MD"] then
-                value = value * v.value
-            end
+            value = value + v.value
         end
     end
     return value
