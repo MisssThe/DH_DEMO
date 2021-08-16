@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using XLua;
 
 [RequireComponent(typeof(Text))]
 public class LoadingText : MonoBehaviour
 {
     Text text;
-    [SerializeField] private string textShow;
+    private string textShow;
     Coroutine textChange;
 
     IEnumerator TextChange()
@@ -19,8 +20,9 @@ public class LoadingText : MonoBehaviour
                 text.text = textShow + "..";
             else if (text.text == textShow)
                 text.text = textShow + ".";
-            else if (text.text == textShow + "...")
+            else
                 text.text = textShow;
+
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -31,6 +33,7 @@ public class LoadingText : MonoBehaviour
         if (text == null)
         {
             text = GetComponent<Text>();
+            textShow = text.text;
             StartCoroutine(TextChange());
         }
     }
@@ -40,6 +43,7 @@ public class LoadingText : MonoBehaviour
         if (text == null)
         {
             text = GetComponent<Text>();
+            textShow = text.text;
             StartCoroutine(TextChange());
         }
     }

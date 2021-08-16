@@ -228,7 +228,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u767B\u5F55\u4E2D..."
+  m_Text: "\u767B\u5F55\u4E2D"
 --- !u!114 &5599409653660256806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +447,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 819087192161216767}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4372170923446579555}
+        m_MethodName: Send
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 1 'Register' 'loginpage'
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4372170922348455019
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,7 +732,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 464501961195638368}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4372170923446579555}
+        m_MethodName: Send
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 1 'Login' 'loginpage'
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4372170922631857380
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,8 +863,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4372170922631857401}
   m_TextComponent: {fileID: 4372170924047895592}
   m_Placeholder: {fileID: 4372170923237044826}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -859,8 +881,8 @@ MonoBehaviour:
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
   m_Text: 
-  m_CaretBlinkRate: 0.85
-  m_CaretWidth: 1
+  m_CaretBlinkRate: 0.8
+  m_CaretWidth: 5
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
 --- !u!1 &4372170922729397748
@@ -1000,8 +1022,8 @@ MonoBehaviour:
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
   m_Text: 
-  m_CaretBlinkRate: 0.85
-  m_CaretWidth: 1
+  m_CaretBlinkRate: 0.8
+  m_CaretWidth: 5
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
 --- !u!1 &4372170922828986514
@@ -1518,6 +1540,12 @@ MonoBehaviour:
   gameObjectsToLua:
   - data: {fileID: 300130608778425170}
     key: failedLog
+  - data: {fileID: 4372170922631857380}
+    key: password
+  - data: {fileID: 4372170922729397748}
+    key: username
+  - data: {fileID: 2372382137912412179}
+    key: loginWaiting
 --- !u!114 &8327605646097425289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1830,10 +1858,10 @@ RectTransform:
   m_Father: {fileID: 3347406573923783036}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.37152454, y: 0.27410054}
-  m_AnchorMax: {x: 0.6264428, y: 0.71900004}
-  m_AnchoredPosition: {x: 2, y: 4}
-  m_SizeDelta: {x: -2, y: 6}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1, y: 0}
+  m_SizeDelta: {x: 502, y: 502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1057920526768669584
 CanvasRenderer:
