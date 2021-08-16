@@ -19,7 +19,7 @@ end, "loginpage"))
 
 -- 登录按钮
 ExEES.Add(ExEES.Event:New("Login", function()
-    if faillog.IsActive then
+    if faillog.isActiveAndEnabled then
         faillog.gameObject:SetActive(false)
     end
     if un.text == "" or un.text == nil then
@@ -30,16 +30,15 @@ ExEES.Add(ExEES.Event:New("Login", function()
         faillog.text = "请先输入密码"
     else
         loginwait.text = "登录中"
+        CS.NetWork.SendLogIn(un.text, pw.text)
         animator:SetBool("LoginWaiting", true)
     end
-
-    CS.NetWork.SendLogIn(un.text, pw.text)
 
 end, "loginpage"))
 
 -- 注册按钮
 ExEES.Add(ExEES.Event:New("Register", function()
-    if faillog.IsActive then
+    if faillog.isActiveAndEnabled then
         faillog.gameObject:SetActive(false)
     end
     if un.text == "" or un.text == nil then
@@ -56,10 +55,17 @@ end, "loginpage"))
 
 -- 接受消息的处理
 ExEES.Add(ExEES.Event:New("loginRecive", function(reciveInfo)
-
-        print("登录成功")
-        animator:SetBool("LoginWaiting", false)
-
+        print(reciveInfo)
+        print("------登录成功A----------------------------")
+        -- animator 是获取到的挂在本 Object 上的组件实例
+        -- animator = cs_self.gameObject:GetComponent(typeof(UE.Animator))
+        print(animator)
+        print("-----新增--------------------")
+        print(animator.isActiveAndEnabled)
+        if animator ~= nil and animator.SetBool ~= nil then
+            animator:SetBool("LoginWaiting", false)
+        end
+        print("------登录成功B----------------------------")
 end, "loginpage"))
 
 function OnDestroy()
