@@ -765,6 +765,8 @@ MonoBehaviour:
     key: cameraInLoading
   - data: {fileID: 3979678536961052279}
     key: canvas
+  - data: {fileID: 3979678536919049559}
+    key: loginText
   - data: {fileID: 3979678536387443690}
     key: overtureMask
 --- !u!4 &1508551305
@@ -1271,7 +1273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.646001}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -53, y: -296.00003}
+  m_AnchoredPosition: {x: -53, y: -296.00006}
   m_SizeDelta: {x: 105.78955, y: 8.399948}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3979678535725974011
@@ -2056,7 +2058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.357}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -63, y: -363.00015}
+  m_AnchoredPosition: {x: -63, y: -363.00018}
   m_SizeDelta: {x: 105.78955, y: 8.399948}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3979678536088184547
@@ -2151,7 +2153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.3300004}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 685.0039, y: -300.00015}
+  m_AnchoredPosition: {x: 685.0039, y: -300.00018}
   m_SizeDelta: {x: 105.78955, y: 8.399948}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3979678536141191642
@@ -3748,7 +3750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16.268002}
   m_AnchorMin: {x: 0, y: 0.41400003}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -381.19995, y: 168.2001}
+  m_AnchoredPosition: {x: -381.19995, y: 168.20013}
   m_SizeDelta: {x: -0.04711914, y: 81.852234}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3979678537126227343
@@ -3888,7 +3890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.29000002}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.8678784, y: 1}
-  m_AnchoredPosition: {x: 2659.999, y: -111.00006}
+  m_AnchoredPosition: {x: 2659.999, y: -111.00009}
   m_SizeDelta: {x: 8693.601, y: 650.57935}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3979678537223337250
@@ -3982,7 +3984,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3979678537302287060}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3979678535873146467}
+        m_MethodName: Send
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 1 'pushExit' 'OvertureManager'
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &3979678537302287022
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4548,7 +4561,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3979678537762236476}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3979678535873146467}
+        m_MethodName: Send
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 1 'pushStart' 'OvertureManager'
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3979678537762236476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4727,7 +4751,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 9.911}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 711.0039, y: -212.99872}
+  m_AnchoredPosition: {x: 711.0039, y: -212.99866}
   m_SizeDelta: {x: 105.78955, y: 8.399948}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3979678537769289522
