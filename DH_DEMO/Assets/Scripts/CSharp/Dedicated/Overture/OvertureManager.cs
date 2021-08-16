@@ -4,7 +4,6 @@ using UnityEngine.AddressableAssets;
 
 public class OvertureManager : MonoBehaviour
 {
-    [SerializeField] AssetReference SceneCamera;
     [SerializeField] private LuaScriptBehaviour overtureManager;
     [SerializeField] private Animator SceneTran;
     bool atTheBeginning = true;
