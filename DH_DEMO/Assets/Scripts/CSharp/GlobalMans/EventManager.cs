@@ -88,6 +88,7 @@ public class EventManager : MonoBehaviour
 #if UNITY_EDITOR
                 Debug.LogError("尝试在事件系统初始化前发送事件");
 #endif
+            ;
         }
     }
 
@@ -112,5 +113,19 @@ public class EventManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+    }
+}
+
+[LuaCallCSharp]
+static class ExitGame
+{
+    [LuaCallCSharp]
+    public static void Exit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

@@ -98,7 +98,7 @@ float3 VerticesDisplacement(float3 vert,float attenuationFac)
 
 
 
-[numthreads(1024,1,1)]
+[numthreads(64,1,1)]
 void Update(uint3 id : SV_DispatchThreadID)
 {
 	

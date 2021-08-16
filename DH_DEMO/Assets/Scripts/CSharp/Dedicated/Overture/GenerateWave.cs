@@ -131,7 +131,7 @@ public class GenerateWave : MonoBehaviour
 	RenderTexture foamTexture;
 	RenderTexture lastFoamTexture;
 
-	const int WARP_SIZE = 1024;
+	const int WARP_SIZE = 64;
 	int warpCount;
 	int kernelIndex;
 	waveSampler[] initBuffer;

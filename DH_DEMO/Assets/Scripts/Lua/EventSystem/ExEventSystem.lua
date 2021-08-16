@@ -314,14 +314,14 @@ function EventSystem.Send(eventType, instName, ...)
         end
 
         -- 若指定了发送的对象
-        if EventSystem.fuc[eventType].sync[instName] ~= nil then
+        if EventSystem.fuc[eventType].sync ~= nil and EventSystem.fuc[eventType].sync[instName] ~= nil then
             if type(EventSystem.fuc[eventType].sync[instName]) == "function" then
                 EventSystem.fuc[eventType].sync[instName](...)
             else
                 print("ExEESWarnning: failed to send Event: "..eventType.." to: "..instName.." - 1")
                 return false
             end
-        elseif EventSystem.fuc[eventType].async[instName] ~= nil then
+        elseif EventSystem.fuc[eventType].async ~= nil and EventSystem.fuc[eventType].async[instName] ~= nil then
             if type(EventSystem.fuc[eventType].async[instName]) == "function" then
                 local controler = coroutine.create(EventSystem.fuc[eventType].async[instName])
                 coroutine.resume(controler,...)
