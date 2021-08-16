@@ -8,6 +8,6 @@ public class login : MonoBehaviour
     {
         NetWork.Init();
         NetWork.SendLogIn("222","222");
-        NetWork.SendToFight("222","111");
+        // NetWork.SendToFight("222","111");
     }
 }

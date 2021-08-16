@@ -4,17 +4,20 @@ require("Assets/Scripts/Lua/EventSystem.lua")
 ----------------------------------逻辑层----------------------------------
 Global.ChatModel = {}
 ChatModel.flag = true
-ChatModel.new_msg = {}
+ChatModel.new_msg = ""
 ChatModel.msg_index = 0
+ChatModel.msg_num = 0
 -- 初始化逻辑模块
 function ChatModel.InitMsg()
     ChatModel.flag = true
     -- 可以用stringbuilder代替提高效率！！！！！！！！！！！！！！！！！！
     ChatModel.new_msg = ""
     ChatModel.msg_index = 0
+    ChatModel.msg_num = 0
 end
 -- 发送信息
 function ChatModel.SendMsg(msg,sender_name)
+    ChatModel.msg_num = ChatModel.msg_num + 1
     ChatModel.new_msg = ChatModel.new_msg .. msg .. "\n"
     ChatModel.msg_index = ChatModel.msg_index + 1
     ChatModel.flag = true
@@ -66,5 +69,8 @@ function Global.Update()
         local msg = ChatModel.GetNewMsg()
         -- 更新聊天内容
         chat_display_text.text = chat_display_text.text .. msg
+        -- 根据聊天内容改变滑块大小
+        -- ChatModel.msg_num
+        -- 滑动滑块改变内容
     end
 end
