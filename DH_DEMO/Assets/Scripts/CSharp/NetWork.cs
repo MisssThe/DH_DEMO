@@ -90,7 +90,7 @@ public class NetWork
             byte[] new_data = new byte[length - 1];
             Array.Copy(data, 1, new_data, 0, length - 1);
             int num = data[0];
-
+            Debug.Log("首字节:"+num);
             switch (num)
             {
                 case 2:
@@ -185,6 +185,7 @@ public class NetWork
         byte[] new_data = new byte[data.Length + 1];
         new_data[0] = 2;
         data.CopyTo(new_data, 1);
+        Debug.Log("发送消息");
         AsynSend(client, new_data);
     }
     //发送战斗邀请

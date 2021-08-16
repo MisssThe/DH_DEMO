@@ -49,7 +49,7 @@ local function EventFunc1()
     ChatModel.SendMsg(msg,FightSystem.player_info.self_name)
     chat_input_text.text = ""
     -- CS.NetWork.SendTalk(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,msg)
-        CS.NetWork.SendTalk("222","111",msg)
+        CS.NetWork.SendTalk("111","222",msg)
 end
 
 function Global.Awake()
