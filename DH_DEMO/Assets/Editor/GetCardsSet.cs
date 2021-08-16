@@ -145,69 +145,69 @@ public class GetCardsSet : MonoBehaviour
     }
     private static void SetConjurCards(string file_name)
     {
-        if (sw != null)
-        {
-            FileStream fs = new FileStream(@"C:\Users\dh_xly1\Desktop\" + file_name + ".csv", FileMode.Open, FileAccess.Read, FileShare.None);
-            StreamReader sr = new StreamReader(fs, System.Text.Encoding.GetEncoding(936));
-            string str = "";
-            sr.ReadLine();
-            while (str != null)
-            {    
-                str = sr.ReadLine();
-                if (str != null)
-                {
-                    string[] xu = str.Split(',');
-                    string card_name = xu[0];
-                    double mp_cost = Convert.ToDouble(xu[1]);
-                    double damage = Convert.ToDouble(xu[2]);
-                    double card_num = Convert.ToDouble(xu[3]);
-                    double assit_card = xu[4];
-                    bool main_is_self = Convert.ToBoolean(xu[5]);
-                    bool extra_is_self = Convert.ToBoolean(xu[6]);
-                    string card_code = "local "+card_name+" = {}\n";
-                    card_code += "function "+card_name+".Effect()\n";
-                    string attri = is_self?"Player_Attri":"Rivial_Attri";
-                    if (mp_cost > 0.01)
-                    {
-                        card_code += "  FightSystem.Player_Attri:ReduceMP("+mp_cost+")";
-                    }
-                    if (Math.Abs(damage) > 0.01)
-                    {
-                        card_code += "  FightSystem."+attri+":"+add_buff+damage+","+type+")\n";
-                    }
-                    if (Math.Abs(card_num) > 0.01)
-                    {
-                        type = "'ITE'";
-                        add_buff = "AddBuff(";
-                        if (treatment < 0)
-                        {
-                            add_buff = "AddDebuff(";
-                            type = "'RTE'";
-                        }
-                        card_code += "  FightSystem."+attri+":"+add_buff+treatment+","+type+")\n";
-                    }
-                        if (Math.Abs(mp_cost) > 0.01)
-                        {
-                            type = "'IMC'";
-                            add_buff = "AddBuff(";
-                            if (damage < 0)
-                            {
-                                add_buff = "AddDebuff(";
-                                type = "'RMC'";
-                            }
-                            card_code += "  FightSystem."+attri+":"+add_buff+mp_cost+","+type+")\n";
-                        }
-                    }
-                    card_code += "end\n";
-                    card_code += "function "+card_name+".Display()\r\n";
-                    card_code += "end\n";
-                    card_code += "EventSystem.Add('"+card_name+"_Effect',false,"+card_name+".Effect)\n";
-                    card_code += "EventSystem.Add('"+card_name+"_Display',false,"+card_name+".Display)\n";
-                    Debug.Log(card_code);
-                    sw.Write(card_code);
-                }
-            }   
-            sr.Close();
-        }
+        // if (sw != null)
+        // {
+        //     FileStream fs = new FileStream(@"C:\Users\dh_xly1\Desktop\" + file_name + ".csv", FileMode.Open, FileAccess.Read, FileShare.None);
+        //     StreamReader sr = new StreamReader(fs, System.Text.Encoding.GetEncoding(936));
+        //     string str = "";
+        //     sr.ReadLine();
+        //     while (str != null)
+        //     {    
+        //         str = sr.ReadLine();
+        //         if (str != null)
+        //         {
+        //             string[] xu = str.Split(',');
+        //             string card_name = xu[0];
+        //             double mp_cost = Convert.ToDouble(xu[1]);
+        //             double damage = Convert.ToDouble(xu[2]);
+        //             double card_num = Convert.ToDouble(xu[3]);
+        //             double assit_card = xu[4];
+        //             bool main_is_self = Convert.ToBoolean(xu[5]);
+        //             bool extra_is_self = Convert.ToBoolean(xu[6]);
+        //             string card_code = "local "+card_name+" = {}\n";
+        //             card_code += "function "+card_name+".Effect()\n";
+        //             string attri = is_self?"Player_Attri":"Rivial_Attri";
+        //             if (mp_cost > 0.01)
+        //             {
+        //                 card_code += "  FightSystem.Player_Attri:ReduceMP("+mp_cost+")";
+        //             }
+        //             if (Math.Abs(damage) > 0.01)
+        //             {
+        //                 card_code += "  FightSystem."+attri+":"+add_buff+damage+","+type+")\n";
+        //             }
+        //             if (Math.Abs(card_num) > 0.01)
+        //             {
+        //                 type = "'ITE'";
+        //                 add_buff = "AddBuff(";
+        //                 if (treatment < 0)
+        //                 {
+        //                     add_buff = "AddDebuff(";
+        //                     type = "'RTE'";
+        //                 }
+        //                 card_code += "  FightSystem."+attri+":"+add_buff+treatment+","+type+")\n";
+        //             }
+        //                 if (Math.Abs(mp_cost) > 0.01)
+        //                 {
+        //                     type = "'IMC'";
+        //                     add_buff = "AddBuff(";
+        //                     if (damage < 0)
+        //                     {
+        //                         add_buff = "AddDebuff(";
+        //                         type = "'RMC'";
+        //                     }
+        //                     card_code += "  FightSystem."+attri+":"+add_buff+mp_cost+","+type+")\n";
+        //                 }
+        //             }
+        //             card_code += "end\n";
+        //             card_code += "function "+card_name+".Display()\r\n";
+        //             card_code += "end\n";
+        //             card_code += "EventSystem.Add('"+card_name+"_Effect',false,"+card_name+".Effect)\n";
+        //             card_code += "EventSystem.Add('"+card_name+"_Display',false,"+card_name+".Display)\n";
+        //             Debug.Log(card_code);
+        //             sw.Write(card_code);
+        //         }
+        //     }   
+        //     sr.Close();
+        // }
     }
 }
