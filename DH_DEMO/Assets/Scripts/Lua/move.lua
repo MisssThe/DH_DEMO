@@ -50,6 +50,7 @@ function Move()
 
     transform.rotation = UE.Quaternion.Euler(target_angle)
     transform:Translate(UE.Vector3.forward * speed_y * UE.Time.deltaTime)
+    
 end
 
 function CameraLook()
@@ -63,12 +64,14 @@ end
 function MouseHit()
     mouse_left = UE.Input.GetMouseButtonDown(0)
     if mouse_left then
+        print("点击")
         ray = UE.Camera.main:ScreenPointToRay(UE.Input.mousePosition)
         go = CS.Tools.MouseRaycast()--获得点击的物体Gameobject
         if go ~= nil then
             --弹出对战邀请框？
             if go.tag == "UserShip" then
                 go_name = go.name
+                print(go_name)
                 CS.NetWork.SendToFight("Sean",go_name)
             end
             
