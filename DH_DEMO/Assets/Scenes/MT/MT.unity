@@ -348,6 +348,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1274740043}
   - component: {fileID: 1274740042}
+  - component: {fileID: 1274740045}
+  - component: {fileID: 1274740044}
   m_Layer: 0
   m_Name: SenceLoad
   m_TagString: Untagged
@@ -389,3 +391,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1274740044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274740041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb0adc882c382749bd4b186e0d7923c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1274740045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274740041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9afccc616260d24f96c3f964e916307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_ship_prefab: {fileID: 2067690196384379940, guid: cc567f484d362c142b2ebd90992b4686,
+    type: 3}
