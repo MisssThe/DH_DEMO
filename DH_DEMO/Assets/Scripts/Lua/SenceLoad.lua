@@ -22,4 +22,5 @@ ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/MainMap.prefab")
 -- 加载玩家
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/Ship.prefab")
 -- 加载战斗UI
--- ASS.
+ASS.InstantiateAsync("StartFight")
+ASS.InstantiateAsync("AcceptFight")

@@ -205,7 +205,7 @@ public class NetWork
         byte[] new_data = new byte[data.Length + 1];
         new_data[0] = 3;
         data.CopyTo(new_data, 1);
-
+        Debug.Log("发送战斗邀请");
         AsynSend(client, new_data);
     }
     //发送战斗信息

@@ -12,6 +12,7 @@ local boat_y
 local mouse_x
 local mouse_y
 local ship
+Global.go_name = nil
 
 
 function MyRotateAround(center,axis,angle)
@@ -66,10 +67,14 @@ function MouseHit()
         ray = UE.Camera.main:ScreenPointToRay(UE.Input.mousePosition)
         go = CS.Tools.MouseRaycast()--获得点击的物体Gameobject
         if go ~= nil then
+
+
             --弹出对战邀请框？
             if go.tag == "UserShip" then
+                UIManager.OpenUI("StartFight(Clone)")
                 go_name = go.name
-                CS.NetWork.SendToFight("Sean",go_name)
+                print("点击")
+                -- CS.NetWork.SendToFight("222",go_name)
             end
             
         end

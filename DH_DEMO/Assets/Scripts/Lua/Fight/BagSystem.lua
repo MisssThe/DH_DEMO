@@ -96,8 +96,12 @@ function Global.Awake()
     main_view = UIView:New(bag_main_panel.gameObject)
     open_view = UIView:New(bag_open_button.gameObject)
     close_view = UIView:New(bag_close_button.gameObject)
-    -- 获取背包数据
     bag_model = UIModel:New()
+    -- 获取背包数据
+    local bag_card_list = {"Normal1","Normal1","Normal2","Normal3","Normal5","Normal3","Normal2"}
+    for i,v in pairs(bag_card_list) do
+        bag_model:Add(v)
+    end
     if main_view ~= nil and open_view ~= nil and close_view ~= nil then
         close = bag_close_button.gameObject:GetComponent(typeof(UI.Button))
         if (close ~= nil) then
