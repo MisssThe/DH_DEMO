@@ -21,4 +21,4 @@ print("开始加载局部物体")
 -- 加载场景地图
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/MainMap.prefab")
 -- 加载玩家
-ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/PlayerShip.prefab")
+ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/Ship.prefab")

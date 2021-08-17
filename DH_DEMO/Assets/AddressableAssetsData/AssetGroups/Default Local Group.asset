@@ -75,6 +75,11 @@ MonoBehaviour:
     m_Address: Assets/ExternalResources/Prefabs/PlayerShip.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: cc567f484d362c142b2ebd90992b4686
+    m_Address: Assets/ExternalResources/Prefabs/Ship.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prefab
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:
