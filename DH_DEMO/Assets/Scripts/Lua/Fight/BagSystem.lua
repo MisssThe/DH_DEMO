@@ -11,6 +11,7 @@ Global.bag_main_panel = nil
 Global.bag_open_button = nil
 Global.bag_close_button = nil
 ------------------------------------- 功能函数 -------------------------------------
+
 function BagSystemView.EventFunc1()
     -- 退出当前背包
     EventSystem.Send("CloseUI","BagClose")
@@ -82,6 +83,11 @@ function BagSystemView:ClearGrid()
 end
 
 ------------------------------------- 生命周期 -------------------------------------
+local canvas = UE.GameObject.FindGameObjectsWithTag("Canvas")[0]
+cs_self.gameObject.transform:SetParent(canvas.transform)
+cs_self.transform.localPosition = UE.Vector3(0,0,0)
+cs_self.transform.localScale = UE.Vector3(1,1,1)
+
 function Global.Awake()
     main_view = UIView:New(bag_main_panel.gameObject)
     open_view = UIView:New(bag_open_button.gameObject)

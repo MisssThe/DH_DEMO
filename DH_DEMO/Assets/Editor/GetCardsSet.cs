@@ -161,42 +161,31 @@ public class GetCardsSet : MonoBehaviour
         //             double mp_cost = Convert.ToDouble(xu[1]);
         //             double damage = Convert.ToDouble(xu[2]);
         //             double card_num = Convert.ToDouble(xu[3]);
-        //             double assit_card = xu[4];
-        //             bool main_is_self = Convert.ToBoolean(xu[5]);
-        //             bool extra_is_self = Convert.ToBoolean(xu[6]);
+        //             string assit_card = xu[4];
+        //             bool is_self1 = Convert.ToBoolean(xu[5]);
+        //             bool is_self2 = Convert.ToBoolean(xu[6]);
+        //             bool is_self2 = Convert.ToBoolean(xu[7]);
         //             string card_code = "local "+card_name+" = {}\n";
         //             card_code += "function "+card_name+".Effect()\n";
-        //             string attri = is_self?"Player_Attri":"Rivial_Attri";
+        //             string attri = null;
         //             if (mp_cost > 0.01)
         //             {
         //                 card_code += "  FightSystem.Player_Attri:ReduceMP("+mp_cost+")";
         //             }
         //             if (Math.Abs(damage) > 0.01)
         //             {
+        //                 attri = is_self1?"Player_Attri":"Rivial_Attri";
         //                 card_code += "  FightSystem."+attri+":"+add_buff+damage+","+type+")\n";
         //             }
         //             if (Math.Abs(card_num) > 0.01)
         //             {
-        //                 type = "'ITE'";
-        //                 add_buff = "AddBuff(";
-        //                 if (treatment < 0)
-        //                 {
-        //                     add_buff = "AddDebuff(";
-        //                     type = "'RTE'";
-        //                 }
+        //                 attri = is_self2?"Player_Attri":"Rivial_Attri";"
         //                 card_code += "  FightSystem."+attri+":"+add_buff+treatment+","+type+")\n";
         //             }
-        //                 if (Math.Abs(mp_cost) > 0.01)
-        //                 {
-        //                     type = "'IMC'";
-        //                     add_buff = "AddBuff(";
-        //                     if (damage < 0)
-        //                     {
-        //                         add_buff = "AddDebuff(";
-        //                         type = "'RMC'";
-        //                     }
-        //                     card_code += "  FightSystem."+attri+":"+add_buff+mp_cost+","+type+")\n";
-        //                 }
+        //             if (!assit_card.Equals(""))
+        //             {
+        //                 attri
+        //                 card_code += "  EventSystem.Send('"+assit_card+"_Effect')\n";
         //             }
         //             card_code += "end\n";
         //             card_code += "function "+card_name+".Display()\r\n";

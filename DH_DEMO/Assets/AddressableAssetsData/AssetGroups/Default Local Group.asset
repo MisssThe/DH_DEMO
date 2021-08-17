@@ -26,6 +26,60 @@ MonoBehaviour:
     m_Address: Assets/Scenes/MT/MT.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: d218a8e3338e54048a838f73701856c0
+    m_Address: Assets/Scripts/Lua/SenceLoad.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 4c3889b2a5dde8d46936a3139bd9e680
+    m_Address: Assets/ExternalResources/Prefabs/CardsControl.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prefab
+  - m_GUID: 6a2a87a298601ce4b90a9ab7d6370d5b
+    m_Address: Assets/ExternalResources/Prefabs/BagSystem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prefab
+  - m_GUID: 3f9a884d1d9ff554eb3aea22ec4c9bfb
+    m_Address: Assets/ExternalResources/Prefabs/StoreSystem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prefab
+  - m_GUID: faf6ba8c60713a14a917b728e1f3b7d9
+    m_Address: Assets/ExternalResources/Prefabs/Canvas.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prefab
+  - m_GUID: 1f6b8a96a64273f48ac31bdbb1bbd690
+    m_Address: Assets/ExternalResources/Prefabs/EventSystem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3d65feade1cdfe041b3d0cea5b8a5b34
+    m_Address: Assets/ExternalResources/Prefabs/UICamera.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b514acf8c740e8e428ea7f0abe2d1239
+    m_Address: Assets/Scripts/Lua/UI/UICanvas.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 08e933315515151418158aff86ba14cd
+    m_Address: Assets/ExternalResources/Prefabs/FightSence.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8054a5b46efa2624285da58a269d540c
+    m_Address: Assets/ExternalResources/Prefabs/FightSystem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ae30854d3578fae4590b5c7183050f45
+    m_Address: Assets/ExternalResources/Prefabs/MainMap.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ee12dd8708b42d648bdb1ebaa2b6fdc5
+    m_Address: Assets/ExternalResources/Prefabs/PlayerShip.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:
