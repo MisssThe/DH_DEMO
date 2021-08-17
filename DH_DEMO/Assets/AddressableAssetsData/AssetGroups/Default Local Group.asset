@@ -17,17 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: d2688da24ab973346b8a2abf63018a86
   m_SerializeEntries:
-  - m_GUID: 87b85bdabc897e64c9c9c903c0660994
-    m_Address: a
+  - m_GUID: 02efb8f7dad30a64abb95d98bd91417e
+    m_Address: Assets/ExternalResources/Overture
     m_ReadOnly: 0
     m_SerializedLabels:
-    - lua
-  - m_GUID: af7c8b49e4dc1114d946d9a8d8a11eff
-    m_Address: Assets/ExternalResources/Overture/CardsFalling.renderTexture
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 7931ac7a83a54904699542244a2d83a3
-    m_Address: Assets/ExternalResources/Overture/Materials/HSB.mat
+    - overture
+  - m_GUID: 605d48c3bcec9c14cb51f338a18b978d
+    m_Address: Assets/Scenes/MT/MT.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

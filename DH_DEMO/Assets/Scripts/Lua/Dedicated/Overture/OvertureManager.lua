@@ -36,7 +36,7 @@ local hadLoadLogin = false
 local loginAnimator = {}
 function overtureFunc.Login()
     if not hadLoadLogin then
-        ASS.InstantiateAsync("Overture/LoginPages")
+        ASS.InstantiateAsync("Assets/ExternalResources/Overture/Prefabs/LoginPages.prefab")
         overtureMaskAnimator:SetBool("Hidden", true)
     else
         loginAnimator:SetTrigger("Show")
