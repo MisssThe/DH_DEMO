@@ -1,6 +1,5 @@
 
 -- 动画器
-print("游戏开始啦！")
 local animator = cs_self.gameObject:GetComponent(typeof(UE.Animator))
 local loadingScene = ""
 local sceneTran = ""
