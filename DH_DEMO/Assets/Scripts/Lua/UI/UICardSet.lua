@@ -1,5 +1,6 @@
 require("Assets/Scripts/Lua/UI/UIView.lua")
 require("Assets/Scripts/Lua/Fight/CardsControl.lua")
+require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 -- require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 
 local cardset_view = nil

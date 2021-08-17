@@ -1,4 +1,5 @@
 require("Assets/Scripts/Lua/UI/UIView.lua")
+require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 Global.p_hp_obj = nil
 Global.p_mp_obj = nil
 Global.p_sp_obj = nil

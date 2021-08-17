@@ -14,7 +14,7 @@ ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/StoreSystem.prefab")
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/BagSystem.prefab")
 -- 加载战斗系统
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/FightSystem.prefab")
--- ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/FightSence.prefab")
+ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/FightSence.prefab")
 ---------------------------------- 在加载局部物体 ----------------------------------
 print("开始加载局部物体")
 -- 加载场景地图
