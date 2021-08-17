@@ -236,6 +236,21 @@ public class NetWork
         AsynSend(client,new_data);
     }
 
+    public static void SendMyAttribute(string myName, float positionx,float positionz,float rotationy)
+    {
+        PlayerAttribute temp = new PlayerAttribute();
+        temp.MyName = myName;
+        temp.Positionx = positionx;
+        temp.Positionz = positionz;
+        temp.Rotationy = rotationy;
+
+        byte[] data = Serialize(temp);
+        byte[] new_data = new byte[data.Length + 1];
+        new_data[0] = 7;
+        data.CopyTo(new_data,1);
+        AsynSend(client,new_data);
+    }
+
     //public static void ReceiveTalk(byte[] data)
     //{
     //    Talk temp = new Talk();

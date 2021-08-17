@@ -22,13 +22,18 @@ class message
 
 public class NetWorkManager : MonoBehaviour
 {
+    [SerializeField]
+    public GameObject player_ship_prefab;
     static Queue<message> message_queue;
+    static Dictionary<string, GameObject> other_player;
     Socket client;
+
 
 
     private void Start()
     {
         message_queue = new Queue<message>();
+        other_player = new Dictionary<string, GameObject>();
         client = NetWork.client;
     }
 
@@ -129,6 +134,25 @@ public class NetWorkManager : MonoBehaviour
         //传入参数 对手名字，先手后手
 
     }
+
+    public void ReceivePlayerAttribute(byte[] data)
+    {
+        PlayerAttribute temp = new PlayerAttribute();
+        Deserialize(temp, data);
+        string his_name = temp.MyName;
+        if(other_player.ContainsKey(his_name))
+        {
+            GameObject other = other_player[his_name];
+            other.transform.rotation = Quaternion.Euler(new Vector3(0,temp.Rotationy,0));
+            other.transform.position = new Vector3(temp.Positionx,0.4f,temp.Positionz);
+        }else
+        {
+            GameObject other = Instantiate(player_ship_prefab,new Vector3(temp.Positionx,0.4f,temp.Positionz), Quaternion.Euler(new Vector3(0, temp.Rotationy, 0)));
+            other.name = his_name;
+            other_player.Add(his_name, other);
+        }
+        return;
+    }
     private void Receive(message msg)
     {
         int length = msg.length;
@@ -185,6 +209,9 @@ public class NetWorkManager : MonoBehaviour
                 break;
             case 15://你的回合
                 LuaManager.Instance.Env.DoString("FightSystem:StartRound()");
+                break;
+            case 16://更新玩家信息
+                ReceivePlayerAttribute(new_data);
                 break;
             default:
                 break;
