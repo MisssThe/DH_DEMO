@@ -60,12 +60,12 @@ end
 -- 某一方玩家使用卡牌时调用
 function FightSystem.SendCard(card_name,to_self)
     if FightSystem.is_self == true then
-        self.card_system:UseCardFromHand(card_name)
+        FightSystem.card_system:UseCardFromHand(card_name)
         if to_self then
-            EventSystem.Send(card_name .. "_Effect",self.Player_Attri,self.Rivial_Attri)
+            EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
             CS.NetWork.SendFight(FightSystem.player_info.self_name.player_info.self_name.rivial_name,card_name)
         else
-            EventSystem.Send(card_name .. "_Effect",self.Rivial_Attri,self.Player_Attri)
+            EventSystem.Send(card_name .. "_Effect",FightSystem.Rivial_Attri,FightSystem.Player_Attri)
         end
         EventSystem.Send(card_name .. "_Display")
         return true
@@ -74,28 +74,28 @@ function FightSystem.SendCard(card_name,to_self)
 end
 
 -- 超时或玩家结束回合时调用
-function FightSystem:EndRound()
-    if self.is_self == true then
-        self.Round.round_num = self.Round.round_num + 0.5
+function FightSystem.EndRound()
+    if FightSystem.is_self == true then
+        FightSystem.Round.round_num = FightSystem.Round.round_num + 0.5
         -- 把控制权移交给对手
-        self.is_self = false
+        FightSystem.is_self = false
         -- 发送控制切换请求
         CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     end
 end
 
 -- 轮到自己回合,接收到转换请求时回调
-function FightSystem:StartRound()
+function FightSystem.StartRound()
     -- 获取控制权
-    self.is_self = true
+    FightSystem.is_self = true
     -- 更新卡牌系统
-    self.card_system:GetCardFromBag()
+    FightSystem.card_system:GetCardFromBag()
 end
-function FightSystem:DrawCard(num)
-    self.card_system:GetCardFromBag(num)
+function FightSystem.DrawCard(num)
+    FightSystem.card_system:GetCardFromBag(num)
 end
 -- 因某种事件结束战斗时调用
-function FightSystem:EndFight()
+function FightSystem.EndFight()
     -- 发送战斗结束请求
     -- CS.NetWork.SendEndFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     FightSystem.Round.round_num = 0
