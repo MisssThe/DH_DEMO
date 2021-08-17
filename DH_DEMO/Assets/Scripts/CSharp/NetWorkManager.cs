@@ -124,13 +124,13 @@ public class NetWorkManager : MonoBehaviour
     public static void StartToFight(byte[] data)
     {
         byte[] new_data = new byte[data.Length - 1];
-        bool IsFirst = data[0] == 1 ? true : false;
+        string IsFirst = data[0] == 1 ? "true" : "false";
         Array.Copy(data, 1, new_data, 0, data.Length - 1);
         ToFight temp = new ToFight();
         Deserialize(temp, new_data);
         string his_name = temp.HisName;
         //进入战斗
-        LuaManager.Instance.Env.DoString("FightSystem.StartFight('"+temp.MyName+"','"+his_name+"',"+ IsFirst + ",100,100,100,10,1,3,100,100,100,10,1)");
+        LuaManager.Instance.Env.DoString("FightSystem.StartFight('"+temp.MyName+"','"+his_name+"',"+ IsFirst+ ",100,100,100,10,1,3,100,100,100,10,1)");
         //传入参数 对手名字，先手后手
 
     }

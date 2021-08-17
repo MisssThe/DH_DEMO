@@ -8,6 +8,8 @@ TagManager:
   - Canvas
   - CardSet
   - UserShip
+  - UICamera
+  - FightSence
   layers:
   - Default
   - TransparentFX

@@ -49,7 +49,10 @@ function FightSystem.StartFight(
     FightSystem.Round.round_num = 0
     FightSystem.Round.is_first = isFirst
     FightSystem.Round.is_self = isFirst
-    print("是我的先手吗：" .. isFirst)
+    print(self_name)
+    print(rivial_name)
+    print(isFirst)
+    print(p_max_hp)
     -- 初始化UI
     FightSystem.InitFightUI("OpenUI")
     if isFirst then
@@ -86,6 +89,7 @@ end
 
 -- 轮到自己回合,接收到转换请求时回调
 function FightSystem.StartRound()
+    print("start round")
     -- 获取控制权
     FightSystem.is_self = true
     -- 更新卡牌系统
