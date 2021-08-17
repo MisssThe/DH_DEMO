@@ -212,7 +212,8 @@ public class NetWorkManager : MonoBehaviour
                 Debug.Log("对方拒绝战斗");
                 break;
             case 15://你的回合
-                LuaManager.Instance.Env.DoString("FightSystem:StartRound()");
+                LuaManager.Instance.Env.DoString("EventSystem.Send('StartRound')");
+                Debug.Log("开始回合");
                 break;
             case 16://更新玩家信息
                 ReceivePlayerAttribute(new_data);

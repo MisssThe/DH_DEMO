@@ -51,6 +51,9 @@ function FightSystem.StartFight(
     FightSystem.Round.is_self = isFirst
     -- 初始化UI
     FightSystem.InitFightUI("OpenUI")
+    if isFirst then
+        FightSystem.StartRound()
+    end
 end
 
 -- 某一方玩家使用卡牌时调用

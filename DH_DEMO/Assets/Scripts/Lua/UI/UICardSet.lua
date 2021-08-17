@@ -1,7 +1,6 @@
 require("Assets/Scripts/Lua/UI/UIView.lua")
 require("Assets/Scripts/Lua/Fight/CardsControl.lua")
 require("Assets/Scripts/Lua/Fight/FightSystem.lua")
--- require("framework.SharedTools.lua")
 
 local cardset_view = nil
 function Global.Awake()
@@ -11,8 +10,11 @@ local old_card_set = {}
 
 function Global.Update()
     -- 监控战斗系统中的卡牌系统
+    print(2)
     if FightSystem.card_system ~= nil then
+        print(3)
         if FightSystem.card_system.flag then
+            print(4)
             -- 更新卡牌显示
             local card_set = FightSystem.card_system:GetHandCard()
             local new_card_set = {}
