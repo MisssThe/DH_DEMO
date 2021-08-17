@@ -31,6 +31,7 @@ end
 
 -- 从资源中加载UI
 function UIView:Resume()
+    print("try to open ui")
     if self.status == status_enum["HIDE"] then
         self.status = status_enum["OPEN"]
         self.gameObject:SetActive(true)
@@ -39,6 +40,7 @@ function UIView:Resume()
 end
 
 function UIView:Hide()
+    print("try to show ui")
     if self.status == status_enum["OPEN"] then
         self.gameObject:SetActive(false)
         self.status = status_enum["HIDE"]
@@ -59,6 +61,6 @@ function UIView:MoveTop(m_object)
 end
 
 function UIView:MoveTopSelf()
-    self.gameObject.transform:SetSiblingIndex(self.transform.parent.childCount)
+    self.gameObject.transform.parent:SetSiblingIndex(self.gameObject.transform.parent.parent.childCount)
 end
 setmetatable(UIView,__metatable)

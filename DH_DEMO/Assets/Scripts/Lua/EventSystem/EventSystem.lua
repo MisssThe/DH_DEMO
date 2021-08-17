@@ -23,5 +23,11 @@ function EventSystem.Send(event,...)
         end
     end 
 end
-
+function EventSystem.IsExit(event)
+    if EventSystem.fuc[event] ~= nil then
+        return true
+    else
+        return false
+    end
+end
 return EventSystem 

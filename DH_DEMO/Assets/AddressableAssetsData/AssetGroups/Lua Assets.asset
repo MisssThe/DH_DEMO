@@ -37,11 +37,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: dd004e21810299f4798c7289bfd84fd4
-    m_Address: Assets/Scripts/Lua/UIManager.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
   - m_GUID: aeb2c0a413526b84eafb2928683a6781
     m_Address: Assets/Scripts/Lua/UI/UIManager.lua
     m_ReadOnly: 0

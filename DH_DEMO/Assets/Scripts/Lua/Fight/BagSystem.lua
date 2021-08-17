@@ -11,6 +11,10 @@ Global.bag_main_panel = nil
 Global.bag_open_button = nil
 Global.bag_close_button = nil
 ------------------------------------- 功能函数 -------------------------------------
+local canvas = UE.GameObject.FindGameObjectsWithTag("Canvas")[0]
+cs_self.gameObject.transform:SetParent(canvas.transform)
+cs_self.transform.localPosition = UE.Vector3(0,0,0)
+cs_self.transform.localScale = UE.Vector3(1,1,1)
 
 function BagSystemView.EventFunc1()
     -- 退出当前背包
@@ -21,7 +25,7 @@ function BagSystemView.EventFunc2()
     -- 打开当前背包
     EventSystem.Send("OpenUI","BagBase")
     EventSystem.Send("OpenUI","BagClose")
-    main_view:MoveTop(bag_main_panel.transform.parent.gameObject)
+    main_view:MoveTopSelf()
 end
 
 local grid_list = List:New()
@@ -93,7 +97,6 @@ function Global.Awake()
     open_view = UIView:New(bag_open_button.gameObject)
     close_view = UIView:New(bag_close_button.gameObject)
     -- 获取背包数据
-    local name_list = List:New()
     bag_model = UIModel:New()
     if main_view ~= nil and open_view ~= nil and close_view ~= nil then
         close = bag_close_button.gameObject:GetComponent(typeof(UI.Button))
@@ -101,6 +104,7 @@ function Global.Awake()
             close.onClick:AddListener(BagSystemView.EventFunc1)
         end
         open = bag_open_button.gameObject:GetComponent(typeof(UI.Button))
+        UIManager.OpenUI(bag_open_button.gameObject.name)
         if open ~= nil then
             open.onClick:AddListener(BagSystemView.EventFunc2)
         end

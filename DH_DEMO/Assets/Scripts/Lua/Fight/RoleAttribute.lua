@@ -30,7 +30,6 @@ RoleAttribute.flag = true
 --     增加法力消耗 IMC
 Global.buff_type = {"IMD","RYD","ITE","RMC","IYD","RMD","RTE","IMC"}
 buff_type = CreateEnum(buff_type)
-caculate_type = CreateEnum(caculate_type)
 -------------------------------------- 功能实现 --------------------------------------
 function RoleAttribute:New(hp,mp,sp,one_sp,ned_sp)
     local temp = {}
