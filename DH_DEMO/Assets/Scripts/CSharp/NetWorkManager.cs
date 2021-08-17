@@ -124,7 +124,7 @@ public class NetWorkManager : MonoBehaviour
     public static void StartToFight(byte[] data)
     {
         byte[] new_data = new byte[data.Length - 1];
-        bool IsFirst = data[0] == 1 ? true : false;
+        string IsFirst = data[0] == 1 ? "true" : "false";
         Array.Copy(data, 1, new_data, 0, data.Length - 1);
         ToFight temp = new ToFight();
         Deserialize(temp, new_data);

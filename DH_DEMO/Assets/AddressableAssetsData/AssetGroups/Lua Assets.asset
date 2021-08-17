@@ -172,6 +172,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+  - m_GUID: 704c01e91cb3c4e43a2a490f076b86ec
+    m_Address: Assets/Scripts/Lua/UI/InitFightSence.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:
