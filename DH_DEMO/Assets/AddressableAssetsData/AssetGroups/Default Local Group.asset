@@ -46,10 +46,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - prefab
-  - m_GUID: 1f6b8a96a64273f48ac31bdbb1bbd690
-    m_Address: Assets/ExternalResources/Prefabs/EventSystem.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 3d65feade1cdfe041b3d0cea5b8a5b34
     m_Address: Assets/ExternalResources/Prefabs/UICamera.prefab
     m_ReadOnly: 0
@@ -73,6 +69,10 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: ee12dd8708b42d648bdb1ebaa2b6fdc5
     m_Address: Assets/ExternalResources/Prefabs/PlayerShip.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cc567f484d362c142b2ebd90992b4686
+    m_Address: Assets/ExternalResources/Prefabs/Ship.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

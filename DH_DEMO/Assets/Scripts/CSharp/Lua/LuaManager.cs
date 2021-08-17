@@ -438,6 +438,7 @@ public sealed class LuaManager : MonoBehaviour
     /// </summary>
     private void InitLua()
     {
+        if (_luaEnv == null) return;
         //方便切换任意场景 执行一次lua初始化
         _luaEnv.DoString("require(\"framework.App\").init()", "lua init");
         foreach (var globalLua in _globalLuaAssets)

@@ -8,7 +8,6 @@ ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/UICamera.prefab")
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/CardsControl.prefab")
 -- 加载Canvas
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/Canvas.prefab")
-ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/EventSystem.prefab")
 -- 加载商店系统
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/StoreSystem.prefab")
 -- 加载背包系统
@@ -21,4 +20,6 @@ print("开始加载局部物体")
 -- 加载场景地图
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/MainMap.prefab")
 -- 加载玩家
-ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/PlayerShip.prefab")
+ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/Ship.prefab")
+-- 加载战斗UI
+-- ASS.

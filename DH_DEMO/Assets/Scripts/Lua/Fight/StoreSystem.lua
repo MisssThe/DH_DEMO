@@ -28,9 +28,12 @@ function StoreSystemView.EventFunc1()
 end
 function StoreSystemView.EventFunc2()
     -- 打开当前背包
+    print("打开背包")
+    print(EventSystem.IsExit("OpenUI"))
     EventSystem.Send("OpenUI","StoreBase")
     EventSystem.Send("OpenUI","StoreClose")
-    main_view:MoveTop(store_main_panel.transform.parent.gameObject)
+    -- main_view:MoveTop(store_main_panel.transform.parent.gameObject)
+    main_view:MoveTopSelf()
     is_open = true
 end
 
@@ -123,6 +126,7 @@ function Global.Awake()
             close.onClick:AddListener(StoreSystemView.EventFunc1)
         end
         open = store_open_button.gameObject:GetComponent(typeof(UI.Button))
+        UIManager.OpenUI(store_open_button.gameObject.name)
         if open ~= nil then
             open.onClick:AddListener(StoreSystemView.EventFunc2)
         end
