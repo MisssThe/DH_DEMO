@@ -38,6 +38,7 @@ function FightSystem.StartFight(
     p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,p_card_num,
     r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp
 )
+    print("开始战斗")
     -- 初始化玩家基本信息
     FightSystem.player_info.self_name = self_name
     FightSystem.player_info.rivial_name = rivial_name

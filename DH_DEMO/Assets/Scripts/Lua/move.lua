@@ -67,8 +67,11 @@ function MouseHit()
         go = CS.Tools.MouseRaycast()--获得点击的物体Gameobject
         if go ~= nil then
             --弹出对战邀请框？
-            go_name = go.name
-            print(go_name)
+            if go.tag == "UserShip" then
+                go_name = go.name
+                CS.NetWork.SendToFight("Sean",go_name)
+            end
+            
         end
     end
 end

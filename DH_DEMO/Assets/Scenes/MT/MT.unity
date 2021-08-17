@@ -3764,9 +3764,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1258618890}
   - component: {fileID: 1258618891}
+  - component: {fileID: 1258618892}
   m_Layer: 0
-  m_Name: Ship (1)
-  m_TagString: Untagged
+  m_Name: 222
+  m_TagString: UserShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3808,6 +3809,19 @@ MonoBehaviour:
   gameObjectsToLua:
   - data: {fileID: 1258618889}
     key: cs_self
+--- !u!65 &1258618892
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258618889}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1327529371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5686,9 +5700,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1982018631}
   - component: {fileID: 1982018632}
+  - component: {fileID: 1982018633}
   m_Layer: 0
   m_Name: Ship
-  m_TagString: Untagged
+  m_TagString: UserShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5731,6 +5746,19 @@ MonoBehaviour:
   gameObjectsToLua:
   - data: {fileID: 1982018630}
     key: cs_self
+--- !u!65 &1982018633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982018630}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2003422793
 GameObject:
   m_ObjectHideFlags: 0

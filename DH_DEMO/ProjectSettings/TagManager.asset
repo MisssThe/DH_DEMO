@@ -7,6 +7,7 @@ TagManager:
   - Card
   - Canvas
   - CardSet
+  - UserShip
   layers:
   - Default
   - TransparentFX
