@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: d2688da24ab973346b8a2abf63018a86
   m_SerializeEntries:
-  - m_GUID: 02efb8f7dad30a64abb95d98bd91417e
-    m_Address: Assets/ExternalResources/Overture
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - overture
   - m_GUID: 605d48c3bcec9c14cb51f338a18b978d
     m_Address: Assets/Scenes/MT/MT.unity
     m_ReadOnly: 0

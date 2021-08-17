@@ -72,7 +72,7 @@ ExEES.Add(ExEES.Event:New('pushStart', function()
         overtureFunc.Login()
     else
         -- 加载正式场景
-        print("游戏开始啦！")
+        ExEES.Send('SceneLoad', 'SceneTran', 'Assets/Scenes/MT/MT.unity')
     end
 end, "OvertureManager"))
 ExEES.Add(ExEES.Event:New('pushExit', function()

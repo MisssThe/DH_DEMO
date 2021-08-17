@@ -3,7 +3,9 @@
 <linker>
 
 	<assembly fullname="Assembly-CSharp">
-	    <type fullname="DefaultLuaBehaviour" preserve="all"/>
+	    <type fullname="ExASS" preserve="all"/>
+		<type fullname="ExitGame" preserve="all"/>
+		<type fullname="DefaultLuaBehaviour" preserve="all"/>
 		<type fullname="NetWork" preserve="all"/>
 		
 	</assembly>

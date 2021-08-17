@@ -117,7 +117,7 @@ public class EventManager : MonoBehaviour
 }
 
 [LuaCallCSharp]
-static class ExitGame
+public static class ExitGame
 {
     [LuaCallCSharp]
     public static void Exit()
