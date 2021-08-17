@@ -157,6 +157,10 @@ public class NetWorkManager : MonoBehaviour
     {
         int length = msg.length;
         byte[] data = msg.data;
+        if(length == 0)
+        {
+            return;
+        }
         byte[] new_data = new byte[length - 1];
         Array.Copy(data, 1, new_data, 0, length - 1);
         int num = data[0];

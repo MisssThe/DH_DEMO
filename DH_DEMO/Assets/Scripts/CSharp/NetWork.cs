@@ -315,5 +315,6 @@ public class NetWork
     public static void close()
     {
         client.Shutdown(SocketShutdown.Both);
+        client.Close();
     }
 }

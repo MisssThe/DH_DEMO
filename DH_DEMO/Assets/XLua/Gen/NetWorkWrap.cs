@@ -31,7 +31,7 @@ namespace XLua.CSObjectWrap
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 13, 1, 1);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 14, 1, 1);
 			Utils.RegisterFunc(L, Utils.CLS_IDX, "Init", _m_Init_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "Serialize", _m_Serialize_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "Deserialize", _m_Deserialize_xlua_st_);
@@ -43,6 +43,7 @@ namespace XLua.CSObjectWrap
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendToFight", _m_SendToFight_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendFight", _m_SendFight_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendTurnEnd", _m_SendTurnEnd_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "SendMyAttribute", _m_SendMyAttribute_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "close", _m_close_xlua_st_);
             
 			
@@ -355,6 +356,33 @@ namespace XLua.CSObjectWrap
                     string _hisName = LuaAPI.lua_tostring(L, 2);
                     
                     NetWork.SendTurnEnd( _myName, _hisName );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_SendMyAttribute_xlua_st_(RealStatePtr L)
+        {
+		    try {
+            
+            
+            
+                
+                {
+                    string _myName = LuaAPI.lua_tostring(L, 1);
+                    float _positionx = (float)LuaAPI.lua_tonumber(L, 2);
+                    float _positionz = (float)LuaAPI.lua_tonumber(L, 3);
+                    float _rotationy = (float)LuaAPI.lua_tonumber(L, 4);
+                    
+                    NetWork.SendMyAttribute( _myName, _positionx, _positionz, _rotationy );
                     
                     
                     
