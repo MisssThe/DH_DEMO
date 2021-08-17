@@ -49,6 +49,7 @@ function FightSystem.StartFight(
     FightSystem.Round.round_num = 0
     FightSystem.Round.is_first = isFirst
     FightSystem.Round.is_self = isFirst
+    print("是我的先手吗：" .. isFirst)
     -- 初始化UI
     FightSystem.InitFightUI("OpenUI")
     if isFirst then
