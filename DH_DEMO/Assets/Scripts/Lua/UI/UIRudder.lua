@@ -10,25 +10,31 @@ local rr_animation = nil
 local pr_animation = nil
 local flag = true
 local old_time = 0
-local function EventFunc()
-    if FightSystem.Round.is_self then
-        local t = UE.Time.time
-        if t - old_time > 2 then
-            old_time = t
-            -- 播放一次动画
-            if flag then
-                pr_animation:Play("ChangeRound1")
-                rr_animation:Play("ChangeRound2")
-                flag = false
-            else
-                pr_animation:Play("ChangeRound2")
-                rr_animation:Play("ChangeRound1")
-                flag = true
-            end
-            EventSystem.Send("EndRound")
+local function EventFunc2()
+    local t = UE.Time.time
+    if t - old_time > 2 then
+        old_time = t
+        -- 播放一次动画
+        if flag then
+            pr_animation:Play("ChangeRound1")
+            rr_animation:Play("ChangeRound2")
+            flag = false
+        else
+            pr_animation:Play("ChangeRound2")
+            rr_animation:Play("ChangeRound1")
+            flag = true
         end
     end
 end
+
+local function EventFunc()
+    if FightSystem.Round.is_self then
+        EventFunc2()
+        EventSystem.Send("EndRound")
+    end
+end
+
+EventSystem.Add("ChangeRound",false,EventFunc2)
 function Global.Awake()
     rr_view = UIView:New(rivial_rudder.gameObject)
     pr_view = UIView:New(player_rudder.gameObject)

@@ -39,15 +39,19 @@ end
 function Global.Update()
     if FightSystem.Player_Attri ~= nil then
         if FightSystem.Player_Attri.flag == true then
+            print("属性发生变化")
             -- 更新生命值、法力值、护甲值
             p_hp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentHP())
             p_mp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentMP())
             p_sp_material:SetFloat("_Percent",FightSystem.Player_Attri:GetPercentSP())
+            FightSystem.Player_Attri.flag = false
         end
         if FightSystem.Rivial_Attri.flag == true then
+            print("敌方属性发生变化")
             r_hp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentHP())
             r_mp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentMP())
             r_sp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentSP())
+            FightSystem.Rivial_Attri.flag = false
         end
     end
 end

@@ -64,11 +64,14 @@ end
 -- 某一方玩家使用卡牌时调用
 function FightSystem.SendCard(card_name,to_self)
     if FightSystem.is_self == true then
+        card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
         FightSystem.card_system:UseCardFromHand(card_name)
         if to_self then
+            print("我方使用了卡牌" .. card_name)
             EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
             CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
         else
+            print("对方使用了卡牌" .. card_name)
             EventSystem.Send(card_name .. "_Effect",FightSystem.Rivial_Attri,FightSystem.Player_Attri)
         end
         EventSystem.Send(card_name .. "_Display")
@@ -79,7 +82,8 @@ end
 
 -- 超时或玩家结束回合时调用
 function FightSystem.EndRound()
-    if FightSystem.is_self == true then
+    print("尝试结束回合")
+    if FightSystem.Round.is_self == true then
         print("结束回合")
         FightSystem.Round.round_num = FightSystem.Round.round_num + 0.5
         -- 把控制权移交给对手
@@ -93,7 +97,9 @@ end
 function FightSystem.StartRound()
     print("start round")
     -- 获取控制权
-    FightSystem.is_self = true
+    FightSystem.Round.is_self = true
+    -- 播放回合切换
+    EventSystem.Send("ChangeRound")
     -- 更新卡牌系统
     FightSystem.card_system:GetCardFromBag()
 end
