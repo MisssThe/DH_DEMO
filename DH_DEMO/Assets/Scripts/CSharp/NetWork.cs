@@ -27,11 +27,14 @@ public class NetWork
             if (a.IsCompleted == false)
             {
                 Debug.Log("网络连接失败");
-            #if UNITY_EDITOR
-                            UnityEditor.EditorApplication.isPlaying = false;
-            #else
-                Application.Quit();
-            #endif
+                //#if UNITY_EDITOR
+                //                UnityEditor.EditorApplication.isPlaying = false;
+                //#else
+                //    Application.Quit();
+                //#endif
+                byte[] data = new byte[1];
+                data[0] = 18;
+                NetWorkManager.MsgAdd(data, 1);
             }
 
         }

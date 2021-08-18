@@ -6,7 +6,10 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" }
+        Tags 
+        { 
+            "Queue" = "Opaque"
+        }
         pass
         {
             CGPROGRAM

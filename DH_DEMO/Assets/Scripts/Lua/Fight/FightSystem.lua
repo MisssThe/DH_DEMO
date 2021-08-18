@@ -28,6 +28,11 @@ function FightSystem.InitFightUI(command)
     EventSystem.Send(command,"RMP")
     EventSystem.Send(command,"RSP")
     EventSystem.Send(command,"CardSet")
+    EventSystem.Send(command,"Image")
+    EventSystem.Send(command,"Scrollbar")
+    EventSystem.Send(command,"InputField")
+    EventSystem.Send(command,"talk1")
+    EventSystem.Send(command,"talk2")
 end
 -- 双方约定战斗后调用
 function FightSystem.StartFight(
@@ -49,10 +54,7 @@ function FightSystem.StartFight(
     FightSystem.Round.round_num = 0
     FightSystem.Round.is_first = isFirst
     FightSystem.Round.is_self = isFirst
-    print(self_name)
-    print(rivial_name)
-    print(isFirst)
-    print(p_max_hp)
+
     -- 初始化UI
     FightSystem.InitFightUI("OpenUI")
     if isFirst then
@@ -66,7 +68,7 @@ function FightSystem.SendCard(card_name,to_self)
         FightSystem.card_system:UseCardFromHand(card_name)
         if to_self then
             EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
-            CS.NetWork.SendFight(FightSystem.player_info.self_name.player_info.self_name.rivial_name,card_name)
+            CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
         else
             EventSystem.Send(card_name .. "_Effect",FightSystem.Rivial_Attri,FightSystem.Player_Attri)
         end
