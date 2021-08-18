@@ -64,6 +64,7 @@ end
 -- 某一方玩家使用卡牌时调用
 function FightSystem.SendCard(card_name,to_self)
     if FightSystem.is_self == true then
+        card_name = string.sub(card_name,1,string.find(card_name,"(Clone)"))
         FightSystem.card_system:UseCardFromHand(card_name)
         if to_self then
             EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
