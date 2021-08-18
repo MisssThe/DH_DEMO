@@ -6,12 +6,17 @@
     }
     SubShader
     {
-        Tags 
-        { 
-            "Queue" = "Opaque"
+        Tags
+        {
+            "Queue"="Transparent"
+            "IgnoreProjector"="True" 
+            "RenderType"="Transparent" 
+            "PreviewType"="Plane"
+            "CanUseSpriteAtlas"="True" 
         }
         pass
         {
+            ZWrite off
             CGPROGRAM
             #pragma vertex main_v
             #pragma fragment main_f

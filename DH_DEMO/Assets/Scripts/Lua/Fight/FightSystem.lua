@@ -52,7 +52,6 @@ function FightSystem.StartFight(
     FightSystem.card_system = CardsSystem:New(p_bag_card,p_card_num)
     -- 初始化round
     FightSystem.Round.round_num = 0
-    FightSystem.Round.is_first = isFirst
     FightSystem.Round.is_self = isFirst
 
     -- 初始化UI
@@ -81,9 +80,10 @@ end
 -- 超时或玩家结束回合时调用
 function FightSystem.EndRound()
     if FightSystem.is_self == true then
+        print("结束回合")
         FightSystem.Round.round_num = FightSystem.Round.round_num + 0.5
         -- 把控制权移交给对手
-        FightSystem.is_self = false
+        FightSystem.Round.is_self = false
         -- 发送控制切换请求
         CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     end

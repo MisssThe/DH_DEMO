@@ -4,7 +4,7 @@ require("Assets/Scripts/Lua/EventSystem.lua")
 local BaseCard = {}
 BaseCard.card_move = {}
 BaseCard.card_move.old_pos = nil
-BaseCard.card_move.move_speed = 0.3
+BaseCard.card_move.move_speed = 0.6
 BaseCard.card_move.parent = nil
 BaseCard.card_move.index = nil
 BaseCard.card_move.init_pos = nil
@@ -27,7 +27,7 @@ function Global.OnDrag(data)
     cs_self.transform.position = cs_self.transform.position + UE.Vector3(0,move.y,0)
     BaseCard.card_move.old_pos = data.position
     BaseCard.card_move.percent = BaseCard.card_move.percent + move.y * 0.1
-    if (BaseCard.card_move.percent > 1) then
+    if (BaseCard.card_move.percent > 20) then
         BaseCard.card_move.flag = true
     end
     BaseCard.card_move.material:SetFloat("_Percent",BaseCard.card_move.percent)
