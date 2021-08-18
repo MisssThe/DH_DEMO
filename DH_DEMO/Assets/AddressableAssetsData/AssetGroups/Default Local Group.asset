@@ -108,6 +108,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+  - m_GUID: 02efb8f7dad30a64abb95d98bd91417e
+    m_Address: Assets/ExternalResources/Overture
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - overture
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:
