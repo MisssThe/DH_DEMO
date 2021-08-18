@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lua Assets_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
   m_Group: {fileID: 11400000, guid: 2d61481266409d24faa77807250906d7, type: 2}
-  m_StaticContent: 0
+  m_StaticContent: 1
