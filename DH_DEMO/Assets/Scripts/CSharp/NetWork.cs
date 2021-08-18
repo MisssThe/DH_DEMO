@@ -24,6 +24,18 @@ public class NetWork
                 client.EndConnect(asyncResult);
                 AsynRecive(client);
             }, null);
+            if (a.IsCompleted == false)
+            {
+                Debug.Log("网络连接失败");
+                //#if UNITY_EDITOR
+                //                UnityEditor.EditorApplication.isPlaying = false;
+                //#else
+                //    Application.Quit();
+                //#endif
+                byte[] data = new byte[1];
+                data[0] = 18;
+                NetWorkManager.MsgAdd(data, 1);
+            }
 
         }
         catch (SocketException e)
@@ -248,6 +260,19 @@ public class NetWork
         byte[] new_data = new byte[data.Length + 1];
         new_data[0] = 7;
         data.CopyTo(new_data,1);
+        AsynSend(client,new_data);
+    }
+
+    public static void SendMyLose(string myName, string hisName)
+    {
+        ToFight temp = new ToFight();
+        temp.MyName = myName;
+        temp.HisName = hisName;
+        byte[] data = Serialize(temp);
+        byte[] new_data = new byte[data.Length + 1];
+        new_data[0] = 8;
+        data.CopyTo(new_data,1);
+
         AsynSend(client,new_data);
     }
 

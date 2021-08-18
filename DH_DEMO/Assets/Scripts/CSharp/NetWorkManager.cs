@@ -153,6 +153,13 @@ public class NetWorkManager : MonoBehaviour
         }
         return;
     }
+
+    public void ReceiveWin(byte[] data)
+    {
+        ToFight temp = new ToFight();
+        string loser_name = temp.HisName;
+        //显示你战胜了 loser_name;
+    }
     private void Receive(message msg)
     {
         int length = msg.length;
@@ -217,6 +224,12 @@ public class NetWorkManager : MonoBehaviour
                 break;
             case 16://更新玩家信息
                 ReceivePlayerAttribute(new_data);
+                break;
+            case 17://获得对局胜利
+                ReceiveWin(new_data);
+                break;
+            case 18://获得对局胜利
+                EventManager.Instance.Send("1 'loginRecive' 'loginpage' 6");
                 break;
             default:
                 break;

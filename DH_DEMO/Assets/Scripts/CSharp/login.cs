@@ -7,7 +7,7 @@ public class login : MonoBehaviour
     void Start()
     {
         NetWork.Init();
-        NetWork.SendLogIn("222","222");
+        NetWork.SendLogIn("Sean","2000619");
         // NetWork.SendToFight("222","Sean");
     }
     private void OnDestroy() {
