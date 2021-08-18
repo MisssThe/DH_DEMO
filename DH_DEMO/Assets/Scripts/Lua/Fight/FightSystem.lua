@@ -82,7 +82,8 @@ end
 
 -- 超时或玩家结束回合时调用
 function FightSystem.EndRound()
-    if FightSystem.is_self == true then
+    print("尝试结束回合")
+    if FightSystem.Round.is_self == true then
         print("结束回合")
         FightSystem.Round.round_num = FightSystem.Round.round_num + 0.5
         -- 把控制权移交给对手
@@ -95,10 +96,10 @@ end
 -- 轮到自己回合,接收到转换请求时回调
 function FightSystem.StartRound()
     print("start round")
-    -- 播放回合切换
-    EventSystem.Send("ChangeRound")
     -- 获取控制权
     FightSystem.Round.is_self = true
+    -- 播放回合切换
+    EventSystem.Send("ChangeRound")
     -- 更新卡牌系统
     FightSystem.card_system:GetCardFromBag()
 end
