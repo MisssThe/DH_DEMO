@@ -12,7 +12,7 @@ local function CreatCard(card_name)
     if t_card ~= nil then
         local i_card = UE.Object.Instantiate(t_card)
         i_card.transform:SetParent(cs_self.transform)
-        i_card.transform.localScale = UE.Vector3(1,1,1)
+        i_card.transform.localScale = UE.Vector3(1.5,2.5,1)
     end
 end
 -- local function DeleteTable(index)
