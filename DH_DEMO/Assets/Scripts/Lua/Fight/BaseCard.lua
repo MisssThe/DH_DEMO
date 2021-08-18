@@ -37,12 +37,11 @@ end
 function Global.OnEndDrag(data)
     if (BaseCard.card_move.flag) and FightSystem.Round.is_self then
         -- 卡牌被使用销毁卡牌
-        UE.Object.Destroy(cs_self.gameObject)
         BaseCard.card_move.flag = EventSystem.Send("SendCard",cs_self.name,true)
-        
-        if BaseCard.card_move.flag ~= true then
-            OnEndDrag(nil)
-        end
+        UE.Object.Destroy(cs_self.gameObject)
+        -- if BaseCard.card_move.flag ~= true then
+        --     OnEndDrag(nil)
+        -- end
     else
         -- 停止拖动时卡牌归为
         cs_self.transform:SetParent(BaseCard.card_move.parent)

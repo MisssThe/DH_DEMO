@@ -331,6 +331,6 @@ public class NetWork
     //}
     public static void close()
     {
-        client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.DontLinger, true);
+        client.Close();
     }
 }
