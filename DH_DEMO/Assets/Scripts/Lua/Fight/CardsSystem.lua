@@ -8,11 +8,13 @@ CardsSystem.__index = CardsSystem
 CardsSystem.attri = {}
 CardsSystem.card_pool = {}
 CardsSystem.flag = true
+CardsSystem.flag2 = true
 --------------------------------------- 卡池 ---------------------------------------
 CardsSystem.card_pool.bag_pool = nil
 CardsSystem.card_pool.bag_pool_index = 0
 CardsSystem.card_pool.hand_pool = nil
 CardsSystem.card_pool.hand_pool_index = 0
+CardsSystem.new_card_set = {}
 
 --------------------------------------- 属性 ---------------------------------------
 CardsSystem.attri.num = nil
@@ -26,6 +28,7 @@ function CardsSystem:New(bag_cards,num)
     temp.card_pool.hand_pool = {}
     temp.card_pool.bag_pool = bag_cards
     temp.attri.num = num
+    temp:GetCardFromBag()
     return temp
 end
 -- 实现取牌功能（回合开始）
@@ -34,7 +37,6 @@ function CardsSystem:GetCardFromBag(card_num)
         card_num = self.attri.num
     end
     print(card_num)
-    local temp_list = {}
     local index = 1
     for i,v in pairs(self.card_pool.bag_pool)
     do
@@ -42,14 +44,12 @@ function CardsSystem:GetCardFromBag(card_num)
             break
         end
         self.card_pool.hand_pool[self.card_pool.hand_pool_index] = v
-        temp_list[index] = v
+        table.insert(self.new_card_set,v)
         self.card_pool.bag_pool[i] = nil
         index = index + 1
         self.card_pool.hand_pool_index = self.card_pool.hand_pool_index + 1
     end
-    print(index)
-    self.flag = true
-    return temp_list
+    self.flag2 = true
 end
 -- 实现用牌功能
 function CardsSystem:UseCardFromHand(card_name)
@@ -81,7 +81,16 @@ function CardsSystem:GetHandCard()
     self.flag = false
     return temp
 end
-
+function CardsSystem:GetNewCard()
+    self.flag2 = false
+    local temp_list = {}
+    for i,v in pairs(self.new_card_set)
+    do
+        temp_list[i] = v
+    end
+    self.new_card_set = {}
+    return temp_list
+end
 -- print("init card system")
 
 -- local card_list = {"普通攻击","普普通通攻击","不普通攻击"}

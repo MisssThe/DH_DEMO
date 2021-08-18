@@ -98,6 +98,16 @@ MonoBehaviour:
     m_Address: AcceptFight
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: a76183c7485ad5d4e838a79b01b6f78e
+    m_Address: Assets/Scripts/Lua/test (2).lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 3e4ee25649fbaa940ab99e1e229ac2d4
+    m_Address: Assets/Scripts/Lua/test (2) 1.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:

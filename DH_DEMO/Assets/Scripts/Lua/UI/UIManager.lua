@@ -2,7 +2,6 @@
 require("Assets/Scripts/Lua/SourceManager")
 require("Assets/Scripts/Lua/EventSystem.lua")
 
-print("load ui manager")
 Global.UIManager = {}
 -----------------------------------------UI管理具体功能实现-----------------------------------------
 -- 实现manager实例化功能
@@ -17,7 +16,6 @@ UIManager.ui_list = nil
 --  List:New()
 
 function Global.UIManager.AddUI(ui)
-    print(UIManager)
     if UIManager.ui_list == nil then
         UIManager.ui_list = List:New()
     end
@@ -41,16 +39,13 @@ end
 
 -- 实现manager打开UI功能
 function UIManager.OpenUI(ui_name)
-    print("Open ui" .. ui_name)
     -- 判断ui是否已加载
     local ui_temp = UIManager.ui_list:Search(ui_name)
     if ui_temp ~= nil then
         ui_temp:Resume()
     else
-        print(ui_name)
         ASS.InstantiateAsync(ui_name)
-        -- UIManager.OpenUI(ui_name)
-        -- print("load ui" .. ui_name)
+        UIManager.OpenUI(ui_name)
     end
 end
 

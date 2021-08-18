@@ -1,46 +1,65 @@
-require("Assets/Scripts/Lua/UI/UIView.lua")
-require("Assets/Scripts/Lua/Fight/CardsControl.lua")
-require("Assets/Scripts/Lua/Fight/FightSystem.lua")
+-- require("Assets/Scripts/Lua/UI/UIView.lua")
+-- require("Assets/Scripts/Lua/Fight/CardsControl.lua")
+-- require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 
 local cardset_view = nil
 function Global.Awake()
     cardset_view = UIView:New(cs_self.gameObject)
 end
-local old_card_set = {}
+local function CreatCard(card_name)
+    local t_card = EventSystem.Send("GetBaseCard",card_name)
+    print(t_card == nil)
+    if t_card ~= nil then
+        local i_card = UE.Object.Instantiate(t_card)
+        i_card.transform:SetParent(cs_self.transform)
+        i_card.transform.localScale = UE.Vector3(1,1,1)
+    end
+end
+-- local function DeleteTable(index)
+--     local temp_name = old_card_name_set[index]
+--     local temp_obj = old_card_set[index]
+--     old_card_temp_set[temp_name] = temp_obj
+--     for i = index,hand_card_num,1 
+--     do
+--         old_card_name_set[i] = old_card_name_set[i + 1]
+--         old_card_set[i] = old_card_set[i + 1]
+--     end
+-- end
 
 function Global.Update()
     -- 监控战斗系统中的卡牌系统
-    print(2)
     if FightSystem.card_system ~= nil then
-        print(3)
-        if FightSystem.card_system.flag then
-            print(4)
+        if FightSystem.card_system.flag2 then
             -- 更新卡牌显示
-            local card_set = FightSystem.card_system:GetHandCard()
-            local new_card_set = {}
-            -- 将新卡牌集与旧卡牌集对比
-            local exit = false
-            for i,v in pairs(card_set)
-            do
-                -- 若卡牌存在，则设置到对应位置
-                -- 若不存在则创建
-                if old_card_set[v] ~= nil then
-                    old_card_set[v]:SetSiblingIndex(i)
-                    new_card_set[v] = old_card_set[v]
-                else
-                    local new_card = CreatCard(v)
-                    old_card_set[v]:SetSiblingIndex(i)
-                    new_card_set[v] = new_card
-                end
+            local card_set = FightSystem.card_system:GetNewCard()
+            for i,v in pairs(card_set) do
+                CreatCard(v)
             end
-            old_card_set = new_card_set
+
+            -- 将新卡牌集与旧卡牌集对比
+            -- local exit = false
+            -- local temp_card_set = {}
+            -- local now_hand_num = hand_card_num
+            -- for i,v in pairs(card_set)
+            -- do
+            --     local temp_i = i
+            --     if i < now_hand_num then
+            --         while old_card_name_set[i] ~= v
+            --         do
+            --             DeleteTable(temp_i)
+            --             temp_i = temp_i + 1
+            --             now_hand_num = now_hand_num - 1
+            --         end
+            --     else
+            --         -- 判断弃牌库有无
+            --         if old_card_temp_set[v] ~= nil then
+            --             old_card_set[i] = old_card_temp_set
+            --             old_card_temp_set[v] = nil
+            --         else
+            --             old_card_set[i] = CreatCard(i,v)
+            --         end
+            --     end
+            -- end
         end
     end
-end
-
-local function CreatCard(card_name)
-    local card = CardsControl:GetCard(card_name)
-    local ins_card = UE.Object.Instantiate(t_card)
-    ins_card.transform:SetParent(cs_self.transform)
-    return ins_card
 end

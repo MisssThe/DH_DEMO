@@ -89,7 +89,7 @@ function StoreSystemView:CreateGrid(card_name)
     if card_name ~= nil then
         local t_card = nil
         local grid = nil
-        t_card = CardsControl:GetCard(card_name)
+        t_card = EventSystem.Send("GetBaseCard",card_name)
         if t_card ~= nil then
             grid = UE.Object.Instantiate(t_card)
             --print(grid)
