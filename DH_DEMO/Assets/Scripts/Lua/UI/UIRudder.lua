@@ -29,6 +29,7 @@ local function EventFunc()
         end
     end
 end
+EventSystem.Add("ChangeRound",false,EventFunc)
 function Global.Awake()
     rr_view = UIView:New(rivial_rudder.gameObject)
     pr_view = UIView:New(player_rudder.gameObject)
