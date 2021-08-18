@@ -87,7 +87,10 @@ public class NetWork
         {
             int length = tcpClient.EndReceive(asyncResult);
             Debug.Log("收到消息长度："+length);
-            NetWorkManager.MsgAdd(data,length);
+            if(length != 0)
+            {
+                NetWorkManager.MsgAdd(data, length);
+            }
 
             //byte[] new_data = new byte[length - 1];
             //Array.Copy(data, 1, new_data, 0, length - 1);
