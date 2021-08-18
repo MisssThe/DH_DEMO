@@ -67,10 +67,12 @@ function BagSystemView:CreateGrid(card_name)
     if card_name ~= nil then
         local t_card = nil
         local grid = nil
-        t_card = CardsControl:GetCard(card_name)
+        t_card = EventSystem.Send("GetBaseCard",card_name)
+        -- CardsControl:GetCard(card_name)
         if t_card ~= nil then
             grid = UE.Object.Instantiate(t_card)
             grid.transform:SetParent(bag_main_panel.transform)
+            grid.transform.localScale = UE.Vector3(1.6,2,1)
             -- 设置监听事件
             grid:GetComponent(typeof(UI.Button)).onClick:AddListener(BagSystemView.EventFunc3)
         end
@@ -98,9 +100,10 @@ function Global.Awake()
     close_view = UIView:New(bag_close_button.gameObject)
     bag_model = UIModel:New()
     -- 获取背包数据
+    print("开始导入数据")
     local bag_card_list = {"Normal1","Normal1","Normal2","Normal3","Normal5","Normal3","Normal2"}
     for i,v in pairs(bag_card_list) do
-        bag_model:Add(v)
+        bag_model:Add(i,v)
     end
     if main_view ~= nil and open_view ~= nil and close_view ~= nil then
         close = bag_close_button.gameObject:GetComponent(typeof(UI.Button))

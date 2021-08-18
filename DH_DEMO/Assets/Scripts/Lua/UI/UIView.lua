@@ -31,16 +31,13 @@ end
 
 -- 从资源中加载UI
 function UIView:Resume()
-    print("try to open ui")
     if self.status == status_enum["HIDE"] then
         self.status = status_enum["OPEN"]
         self.gameObject:SetActive(true)
-        print(self.gameObject.name .. "resume")
     end
 end
 
 function UIView:Hide()
-    print("try to show ui")
     if self.status == status_enum["OPEN"] then
         self.gameObject:SetActive(false)
         self.status = status_enum["HIDE"]
