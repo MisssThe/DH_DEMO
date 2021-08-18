@@ -98,7 +98,7 @@ function FightSystem.StartRound()
     -- 播放回合切换
     EventSystem.Send("ChangeRound")
     -- 获取控制权
-    FightSystem.is_self = true
+    FightSystem.Round.is_self = true
     -- 更新卡牌系统
     FightSystem.card_system:GetCardFromBag()
 end
