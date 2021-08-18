@@ -24,15 +24,7 @@ public class NetWork
                 client.EndConnect(asyncResult);
                 AsynRecive(client);
             }, null);
-            if (a.IsCompleted == false)
-            {
-                Debug.Log("网络连接失败");
-            #if UNITY_EDITOR
-                            UnityEditor.EditorApplication.isPlaying = false;
-            #else
-                Application.Quit();
-            #endif
-            }
+
 
         }
         catch (SocketException e)
@@ -336,7 +328,6 @@ public class NetWork
     //}
     public static void close()
     {
-        client.Shutdown(SocketShutdown.Both);
-        client.Close();
+        client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.DontLinger, true);
     }
 }
