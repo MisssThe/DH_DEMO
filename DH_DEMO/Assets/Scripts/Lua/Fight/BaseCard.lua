@@ -1,5 +1,6 @@
 -- -- require("framework.SharedTools")
 require("Assets/Scripts/Lua/EventSystem.lua")
+require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 
 local BaseCard = {}
 BaseCard.card_move = {}
@@ -34,7 +35,7 @@ function Global.OnDrag(data)
 end
 
 function Global.OnEndDrag(data)
-    if (BaseCard.card_move.flag) then
+    if (BaseCard.card_move.flag) and FightSystem.Round.is_self then
         -- 卡牌被使用销毁卡牌
         UE.Object.Destroy(cs_self.gameObject)
         BaseCard.card_move.flag = EventSystem.Send("SendCard",cs_self.name,true)
