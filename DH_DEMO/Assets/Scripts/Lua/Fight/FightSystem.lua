@@ -48,7 +48,7 @@ function FightSystem.StartFight(
     FightSystem.player_info.rivial_name = rivial_name
     -- 初始化人物属性
     FightSystem.Player_Attri = RoleAttribute:New(p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,self_name)
-    FightSystem.Rivial_Attri = RoleAttribute:New(r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp,role_name)
+    FightSystem.Rivial_Attri = RoleAttribute:New(r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp,rivial_name)
     -- 初始化卡牌系统
     local p_bag_card = EventSystem.Send("GetBagCard")
     FightSystem.card_system = CardsSystem:New(p_bag_card,p_card_num)
