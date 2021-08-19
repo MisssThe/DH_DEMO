@@ -18,6 +18,7 @@ RoleAttribute.buff_index = 0
 RoleAttribute.debuff_list = {}
 RoleAttribute.debuff_index = 0
 RoleAttribute.flag = true
+RoleAttribute.name = nil
 -- Buff效果：
 --     增加造成伤害 IMD
 --     减少受到伤害 RYD
@@ -31,10 +32,11 @@ RoleAttribute.flag = true
 Global.buff_type = {"IMD","RYD","ITE","RMC","IYD","RMD","RTE","IMC"}
 buff_type = CreateEnum(buff_type)
 -------------------------------------- 功能实现 --------------------------------------
-function RoleAttribute:New(hp,mp,sp,one_sp,ned_sp)
+function RoleAttribute:New(hp,mp,sp,one_sp,ned_sp,role_name)
     local temp = {}
     setmetatable(temp,RoleAttribute)
     if (hp ~= nil and mp ~= nil and sp ~= nil and one_sp ~= nil and ned_sp ~= nil) then
+        temp.name = role_name
         temp.health_point.max_hp = hp
         print(temp.health_point.max_hp)
         temp.health_point.now_hp = hp
@@ -68,6 +70,8 @@ end
 -- 受到伤害
 function RoleAttribute:ReduceHP(num,fixed)
     self.flag = true
+    print(self.name .. "的生命值减少了")
+
     if fixed then
         self.health_point.now_hp = self.health_point.now_hp - num
     else
