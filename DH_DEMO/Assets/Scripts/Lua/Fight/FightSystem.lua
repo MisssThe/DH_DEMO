@@ -71,6 +71,7 @@ function FightSystem.StartFight(
     FightSystem.InitFightUI("OpenUI")
     if isFirst then
         FightSystem.StartRound()
+        print("start111111111")
     end
 end
 
@@ -121,6 +122,7 @@ function FightSystem.StartRound()
     -- 播放回合切换
     EventSystem.Send("ChangeRound")
     -- 更新卡牌系统
+    print("getbag1111111")
     FightSystem.card_system:GetCardFromBag()
 end
 function FightSystem.DrawCard(num)
@@ -143,6 +145,7 @@ function FightSystem.RealEndFight()
     FightSystem.Player_Attri = nil
     FightSystem.card_system = nil
     FightSystem.InitFightUI("CloseUI")
+    EventSystem.Send("ClearCardSet")
 end
 
 EventSystem.Add("StartFight",false,FightSystem.StartFight)

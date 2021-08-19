@@ -13,8 +13,10 @@ BaseCard.card_move.material = nil
 BaseCard.card_move.percent = 0
 BaseCard.card_move.flag = false
 function Global.Awake()
-    BaseCard.card_move.parent = cs_self.transform.parent
-    BaseCard.card_move.material = cs_self.gameObject:GetComponent(typeof(UI.Image)).material
+    if cs_self ~= nil then
+        BaseCard.card_move.parent = cs_self.transform.parent
+        BaseCard.card_move.material = cs_self.gameObject:GetComponent(typeof(UI.Image)).material
+    end
 end
 function Global.OnBeginDrag(data)
     -- 开始拖拽时将卡牌移出grid并记录位置和父物体

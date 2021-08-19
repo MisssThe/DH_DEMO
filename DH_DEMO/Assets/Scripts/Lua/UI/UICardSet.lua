@@ -2,7 +2,8 @@
 -- require("Assets/Scripts/Lua/Fight/CardsControl.lua")
 -- require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 
-local cardset_view = nil
+local cardset_view = {}
+local cardset_list = {}
 function Global.Awake()
     cardset_view = UIView:New(cs_self.gameObject)
 end
@@ -11,8 +12,13 @@ local function CreatCard(card_name)
     print(t_card == nil)
     if t_card ~= nil then
         local i_card = UE.Object.Instantiate(t_card)
-        i_card.transform:SetParent(cs_self.transform)
-        i_card.transform.localScale = UE.Vector3(1.5,2.5,1)
+        if i_card ~= nil then
+            i_card.transform:SetParent(cs_self.transform)
+            i_card.transform.localScale = UE.Vector3(1.5,2.5,1)
+            table.insert(cardset_list,i_card)
+        end
+        --cardset_view.cardset_list[cardset_view.list_index] = i_card
+        --cardset_view.list_index = cardset_view.list_index + 1
     end
 end
 -- local function DeleteTable(index)
@@ -63,3 +69,16 @@ function Global.Update()
         end
     end
 end
+
+function cardset_view.Clear()
+    for i,v in pairs(cardset_list)
+    do
+        print(v.name)
+        UE.Object.Destroy(v)
+    end
+    CardsSystem.new_card_set = {}
+    CardsSystem.flag2 = false
+    cardset_list = {}
+end
+
+EventSystem.Add("ClearCardSet",false,cardset_view.Clear)

@@ -41,18 +41,19 @@ function CardsSystem:GetCardFromBag(card_num)
         card_num = self.attri.num
     end
     print(card_num)
-    local index = 1
+    local index2 = 1
     for i,v in pairs(self.card_pool.bag_pool)
     do
-        if index > card_num then
+        if index2 > card_num then
             break
         end
         self.card_pool.hand_pool[self.card_pool.hand_pool_index] = v
         table.insert(self.new_card_set,v)
         self.card_pool.bag_pool[i] = nil
-        index = index + 1
+        index2 = index2 + 1
         self.card_pool.hand_pool_index = self.card_pool.hand_pool_index + 1
     end
+    print("抽了：" .. index2)
     self.flag2 = true
 end
 -- 实现用牌功能
