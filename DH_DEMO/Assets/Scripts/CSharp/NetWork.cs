@@ -340,6 +340,7 @@ public class NetWork
     //}
     public static void close()
     {
+        if(client != null)
         client.Close();
     }
 }

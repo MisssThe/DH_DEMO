@@ -31,8 +31,10 @@ namespace XLua.CSObjectWrap
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 14, 1, 1);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 17, 1, 1);
 			Utils.RegisterFunc(L, Utils.CLS_IDX, "Init", _m_Init_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "SetPlayerName", _m_SetPlayerName_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "GetPlayerName", _m_GetPlayerName_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "Serialize", _m_Serialize_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "Deserialize", _m_Deserialize_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "AsynSend", _m_AsynSend_xlua_st_);
@@ -44,6 +46,7 @@ namespace XLua.CSObjectWrap
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendFight", _m_SendFight_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendTurnEnd", _m_SendTurnEnd_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "SendMyAttribute", _m_SendMyAttribute_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "SendMyLose", _m_SendMyLose_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "close", _m_close_xlua_st_);
             
 			
@@ -101,6 +104,54 @@ namespace XLua.CSObjectWrap
                     
                     
                     return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_SetPlayerName_xlua_st_(RealStatePtr L)
+        {
+		    try {
+            
+            
+            
+                
+                {
+                    string _name = LuaAPI.lua_tostring(L, 1);
+                    
+                    NetWork.SetPlayerName( _name );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_GetPlayerName_xlua_st_(RealStatePtr L)
+        {
+		    try {
+            
+            
+            
+                
+                {
+                    
+                        var gen_ret = NetWork.GetPlayerName(  );
+                        LuaAPI.lua_pushstring(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
                 }
                 
             } catch(System.Exception gen_e) {
@@ -383,6 +434,31 @@ namespace XLua.CSObjectWrap
                     float _rotationy = (float)LuaAPI.lua_tonumber(L, 4);
                     
                     NetWork.SendMyAttribute( _myName, _positionx, _positionz, _rotationy );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_SendMyLose_xlua_st_(RealStatePtr L)
+        {
+		    try {
+            
+            
+            
+                
+                {
+                    string _myName = LuaAPI.lua_tostring(L, 1);
+                    string _hisName = LuaAPI.lua_tostring(L, 2);
+                    
+                    NetWork.SendMyLose( _myName, _hisName );
                     
                     
                     

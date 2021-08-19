@@ -1,6 +1,7 @@
 require("Assets/Scripts/Lua/UI/UIView.lua")
 
 local animator = cs_self.gameObject:GetComponent(typeof(UE.Animator))
+local usernameSave = ""
 
 -- 注册或登录页面
 CS.NetWork.Init()
@@ -35,6 +36,7 @@ ExEES.Add(ExEES.Event:New("Login", function()
         loginwait.text = "登录中"
         CS.NetWork.SendLogIn(un.text, pw.text)
         animator:SetBool("LoginWaiting", true)
+        usernameSave = un.text
     end
 
 end, "loginpage"))
@@ -94,6 +96,7 @@ ExEES.Add(ExEES.Event:New("loginRecive", function(reciveInfo)
             animator:SetBool("LoginWaiting", false)
             animator:SetTrigger('Hidden')
             ExEES.Send('backMain', "OvertureManager")
+            CS.NetWork.SetPlayerName(usernameSave)
         end
     end
 end, "loginpage"))
