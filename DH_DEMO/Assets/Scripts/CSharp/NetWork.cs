@@ -11,6 +11,7 @@ using XLua;
 public class NetWork
 {
     public static Socket client;
+    private static string player_name;
 
     public static void Init()
     {
@@ -47,7 +48,15 @@ public class NetWork
         //new_thread.Start();
     }
 
+    public static void SetPlayerName(string name)
+    {
+        player_name = name;
+    }
 
+    public static string GetPlayerName()
+    {
+        return player_name;
+    }
     //序列化
     public static byte[] Serialize(IMessage message)
     {
