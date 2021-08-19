@@ -78,6 +78,7 @@ function MouseHit()
             if go.tag == "UserShip" then
                 UIManager.OpenUI("StartFight(Clone)")
                 go_name = go.name
+                FightSystem.player_info.rivial_name = go_name
                 print("点击")
                 -- CS.NetWork.SendToFight("222",go_name)
             end
@@ -94,6 +95,7 @@ function Awake()
     transform.position = UE.Vector3(-36,-18.4,120)
     transform.rotation = UE.Quaternion.Euler(UE.Vector3(0,51,0))
     transform.name = CS.NetWork.GetPlayerName()
+    FightSystem.player_info.self_name = transform.name
     camera = transform:Find("Main Camera")
     camera_transform = camera.transform
     --ship = Ship:new("user",0,0,0)

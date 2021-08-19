@@ -5,6 +5,8 @@ local start_view = UIView:New(cs_self.gameObject)
 print("init start fight")
 local function StartFight()
     start_view:Hide()
+    print(FightSystem.player_info.self_name)
+    print(FightSystem.player_info.rivial_name)
     if FightSystem.player_info.rivial_name ~= nil and FightSystem.player_info.self_name ~= nil then
     -- 发起战斗
     print("尝试发起战斗" .. FightSystem.player_info.self_name .. FightSystem.player_info.rivial_name)
