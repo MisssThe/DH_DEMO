@@ -130,9 +130,11 @@ public class NetWorkManager : MonoBehaviour
         Array.Copy(data, 1, new_data, 0, data.Length - 1);
         ToFight temp = new ToFight();
         Deserialize(temp, new_data);
+        string my_name = temp.MyName;
         string his_name = temp.HisName;
+        Debug.Log("收到我的名字："+my_name+",别人名字："+his_name);
         //进入战斗
-        LuaManager.Instance.Env.DoString("FightSystem.StartFight('"+temp.MyName+"','"+his_name+"',"+ IsFirst+ ",100,100,100,10,1,3,100,100,100,10,1)");
+        LuaManager.Instance.Env.DoString("FightSystem.StartFight('"+my_name+"','"+his_name+"',"+ IsFirst+ ",100,100,100,10,1,3,100,100,100,10,1)");
         //传入参数 对手名字，先手后手
 
     }
