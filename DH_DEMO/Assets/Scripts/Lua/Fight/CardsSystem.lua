@@ -24,6 +24,8 @@ CardsSystem.attri.num = nil
 function CardsSystem:New(bag_cards,num)
     local temp = {}
     setmetatable(temp,CardsSystem)
+    temp.card_pool = {}
+    temp.attri = {}
     temp.card_pool.bag_cards = bag_cards
     temp.card_pool.hand_pool = {}
     temp.card_pool.bag_pool = bag_cards
