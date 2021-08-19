@@ -131,6 +131,7 @@ function FightSystem.EndFight(flag)
     CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
     EventSystem.Send("ShowEndFight",flag)
 end
+
 function FightSystem.RealEndFight()
     FightSystem.isFighting = false
     FightSystem.Round.round_num = 0

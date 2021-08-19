@@ -15,12 +15,13 @@ local function EndFight()
     end
 end
 local function OpenEnd()
-    EventSystem.Send("EndFight")
+    EventSystem.Send("EndFight",false)
 end
 
 v_end_obj.gameObject:GetComponent(typeof(UI.Button)).onClick:AddListener(EndFight)
 d_end_obj.gameObject:GetComponent(typeof(UI.Button)).onClick:AddListener(EndFight)
 end_obj.gameObject:GetComponent(typeof(UI.Button)).onClick:AddListener(OpenEnd)
+
 local function ShowEndFight(flag)
     temp_flag = flag
     if flag == true then
