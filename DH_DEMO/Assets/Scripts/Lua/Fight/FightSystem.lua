@@ -74,26 +74,29 @@ end
 
 -- 某一方玩家使用卡牌时调用
 function FightSystem.SendCard(card_name,to_self)
-    if FightSystem.Round.is_self == true then
-        if card_name ~= nil then
-            card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
-            FightSystem.card_system:UseCardFromHand(card_name)
-            if to_self then
+    print("进入sendcard")
+    if card_name ~= nil then
+        card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
+        FightSystem.card_system:UseCardFromHand(card_name)
+        if to_self then
+            if FightSystem.Round.is_self == true then
                 print("我打对面")
                 print(FightSystem.player_info.self_name .. "用了牌")
                 print(FightSystem.player_info.rivial_name .. "挨打了")
                 -- print("使用了卡牌：" .. card_name .. "_Effect")
                 EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
                 CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
-            else
+            end
+        else
+            if FightSystem.Round.is_self ~= true then
                 print("对方打我")
                 EventSystem.Send(card_name .. "_Effect",FightSystem.Rivial_Attri,FightSystem.Player_Attri)
             end
-            EventSystem.Send(card_name .. "_Display")
-            return true
-        else
-            return false
         end
+        EventSystem.Send(card_name .. "_Display")
+        return true
+    else
+        return false
     end
     return false
 end
