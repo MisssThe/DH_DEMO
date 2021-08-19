@@ -28,7 +28,10 @@ Shader "Custom/WalterEffect"
         _HeigthTex ("Heigth Texture",2D) = ""{}
         _MiniOffset ("_MiniOffset",Range(0,1)) = 0
         _FresnelStrenth ("_Fresnel Strenth",Float) = 0
-        _RefractAmount ("Refract Amount",Float) = 0
+        _RefractAmount ("Refract Amount",Float) = 0      
+        _NoiseTex2 ("Noise Texture2",2D) = ""{}
+        _HeightTex ("Height Texture",2D) = ""{}
+        _NoiseSpeed ("Noise Speed",float) = 1
         //描边控制
         _OutlineStrenth ("Outline Strenth",Float) = 0
         _OutlineColor ("Outline Color",Color) = (1,1,1,1)
@@ -56,7 +59,7 @@ Shader "Custom/WalterEffect"
             float3 world_normal:TEXCOORD1;
             float3 world_pos:TEXCOORD2;
             float4 grab_uv:TEXCOORD3;
-            float2 uv:TEXCOORD4;
+            float4 uv:TEXCOORD4;
             half height:TEXCOORD5;
         };
         struct v2f_back
@@ -75,6 +78,9 @@ Shader "Custom/WalterEffect"
         float _NoiseStrenth;
         fixed4 _Color;
         sampler2D _HeigthTex;
+        float4 _HeightTex_ST;
+        sampler2D _NoiseTex2;
+        float4 _NoiseTex2_ST;
         float _MiniOffset;
         half _FresnelStrenth;
         half _LevelMax;
@@ -82,13 +88,13 @@ Shader "Custom/WalterEffect"
         float _LevelStrenth;
         half _RefractAmount;
         half _OutlineStrenth;
+        half _NoiseSpeed;
         
         //function
         v2f vert(a2v i)
         {
             v2f o;
-            float level = ceil(length(_LevelMax * i.vertex.xz / 6)) * _LevelStrenth;
-            float A = (_Height) / level; 
+            float A = (_Height); 
             float C = _Speed * TIME;
             float c1 = i.vertex.x * _Cycle + C * sin(_WindDir);
             float c2 = i.vertex.z * _Cycle + C * cos(_WindDir);
@@ -101,6 +107,8 @@ Shader "Custom/WalterEffect"
             o.world_normal = UnityObjectToWorldNormal(i.normal);
             o.world_pos = mul(unity_ObjectToWorld,i.vertex);
             o.grab_uv  = ComputeGrabScreenPos(o.pos);
+            o.uv.xy = TRANSFORM_TEX(i.texcoord,_HeightTex);
+            o.uv.zw = TRANSFORM_TEX(i.texcoord,_NoiseTex2);
             o.height = height;
             return o;
         }
@@ -182,21 +190,21 @@ Shader "Custom/WalterEffect"
 		{
 			"_GrabTempTex"
         }
-        pass
-        {
-            Cull Front
-            CGPROGRAM
-            #pragma vertex main_v
-            #pragma fragment main_f
-            #pragma hull main_h
-            #pragma domain main_d_back
-            fixed4 _OutlineColor;
-            fixed4 main_f(v2f i):SV_TARGET
-            {
-                return _OutlineColor;
-            }
-            ENDCG
-        }
+        // pass
+        // {
+        //     Cull Front
+        //     CGPROGRAM
+        //     #pragma vertex main_v
+        //     #pragma fragment main_f
+        //     #pragma hull main_h
+        //     #pragma domain main_d_back
+        //     fixed4 _OutlineColor;
+        //     fixed4 main_f(v2f i):SV_TARGET
+        //     {
+        //         return _OutlineColor;
+        //     }
+        //     ENDCG
+        // }
         pass
         {
             Cull Back
@@ -218,9 +226,9 @@ Shader "Custom/WalterEffect"
                 // color = DecodeHDR(color, unity_SpecCube0_HDR)
                 //混合漫反射以及镜面反射
                 fixed3 color = 0;
-                fixed3 height = tex2D(_HeigthTex,i.uv).r;
+                fixed3 height = tex2D(_HeigthTex,i.uv.xy).r;
                 //根据深度值改变漫反射
-                fixed4 grab_color = tex2Dproj(_GrabTempTex,i.grab_uv + float4(tex2D(_NoiseTex,i.uv) * _RefractAmount));
+                fixed4 grab_color = tex2Dproj(_GrabTempTex,i.grab_uv + float4(tex2D(_NoiseTex,i.uv.xy) * _RefractAmount));
                 grab_color.rgb = lerp(_Color,grab_color.rgb,grab_color.a);
                 fixed3 refract_color = lerp(grab_color,_Color,0.9);
                 fixed3 diffuse_color = _LightColor0.rgb * refract_color * saturate(nl * _HalfDiffuse + (1 - _HalfDiffuse));
@@ -228,7 +236,11 @@ Shader "Custom/WalterEffect"
                 fixed3 reflect_color = DecodeHDR(UNITY_SAMPLE_TEXCUBE_LOD(unity_SpecCube0, reflect_dir, 0), unity_SpecCube0_HDR);
                 fixed3 fre = _FresnelStrenth * Fresnel(_Color,nv);
                 color = ((1 - fre) * diffuse_color + reflect_color * fre);
-                //气泡效果
+                fixed4 n1 = (tex2D(_NoiseTex2,i.uv.zw + float2(_Time.y * _NoiseSpeed,0)) * tex2D(_NoiseTex2,i.uv.zw + float2(-_Time.y * 0.8 * _NoiseSpeed,0))) / 3;
+                // fixed4 n1 = saturate(ceil((tex2D(_NoiseTex2,i.uv.zw + float2(_Time.y * _NoiseSpeed,0)) * tex2D(_NoiseTex2,i.uv.zw + float2(-_Time.y * 0.8 * _NoiseSpeed,0))) / 2 - 0.3) -0.1);
+                // (0.5 - nv);
+                // color = (color + tex2D(_NoiseTex2,i.uv.zw));
+                color += n1;
                 return fixed4(color,1);
             }
             ENDCG
