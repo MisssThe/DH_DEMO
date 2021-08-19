@@ -55,11 +55,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: 08e933315515151418158aff86ba14cd
-    m_Address: Assets/ExternalResources/Prefabs/FightSence.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - prefab
   - m_GUID: 8054a5b46efa2624285da58a269d540c
     m_Address: Assets/ExternalResources/Prefabs/FightSystem.prefab
     m_ReadOnly: 0
@@ -227,6 +222,10 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+  - m_GUID: 08e933315515151418158aff86ba14cd
+    m_Address: Assets/ExternalResources/Prefabs/FightSence.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:
