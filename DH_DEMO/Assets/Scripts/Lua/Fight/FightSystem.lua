@@ -58,9 +58,6 @@ function FightSystem.StartFight(
     -- 初始化人物属性
     FightSystem.Player_Attri = RoleAttribute:New(p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,self_name)
     FightSystem.Rivial_Attri = RoleAttribute:New(r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp,rivial_name)
-    print("双方的名字是:" .. FightSystem.Player_Attri.name .. FightSystem.Rivial_Attri.name)
-    FightSystem.Player_Attri:ReduceHP(6,true)
-    print("双方的生命值是:" .. FightSystem.Player_Attri.health_point.now_hp .. FightSystem.Rivial_Attri.health_point.now_hp)
     -- 初始化卡牌系统
     local p_bag_card = EventSystem.Send("GetBagCard")
     FightSystem.card_system = CardsSystem:New(p_bag_card,p_card_num)
@@ -131,7 +128,8 @@ end
 function FightSystem.EndFight(flag)
     -- 发送战斗结束请求
     -- CS.NetWork.SendEndFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
-   EventSystem.Send("ShowEndFight",flag)
+    CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
+    EventSystem.Send("ShowEndFight",flag)
 end
 function FightSystem.RealEndFight()
     FightSystem.isFighting = false
