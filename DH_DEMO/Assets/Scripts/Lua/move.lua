@@ -12,6 +12,7 @@ local boat_y
 local mouse_x
 local mouse_y
 local ship
+local time
 Global.go_name = nil
 
 
@@ -49,8 +50,9 @@ function Move()
     target_angle = transform.rotation.eulerAngles
     target_angle.y = temp_y
 
-    if(boat_x ~= 0 or boat_y ~= 0) then
+    if(time>1) then
         CS.NetWork.SendMyAttribute(transform.name,transform.position.x,transform.position.z,transform.rotation.y)
+        time = 0
     end
     transform.rotation = UE.Quaternion.Euler(target_angle)
     transform:Translate(UE.Vector3.forward * speed_y * UE.Time.deltaTime)
@@ -87,6 +89,7 @@ end
 function Awake()
     speed_y = 0
     max_speed = 5
+    time = 0
     transform = cs_self.transform
     transform.position = UE.Vector3(-325,111,-364)
     transform.rotation = UE.Quaternion.Euler(UE.Vector3(0,51,0))
@@ -98,6 +101,7 @@ end
 
 function Update()
     Move()
+    time = time + UE.Time.deltaTime
     --CameraLook()
     MouseHit()
 end
