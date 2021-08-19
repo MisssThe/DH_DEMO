@@ -65,6 +65,8 @@ function FightSystem.StartFight(
     FightSystem.Round.round_num = 0
     FightSystem.Round.is_self = isFirst
 
+    print(debug.traceback("123"))
+
     -- 初始化UI
     FightSystem.InitFightUI("OpenUI")
     if isFirst then

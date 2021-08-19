@@ -23,13 +23,15 @@ CardsSystem.attri.num = nil
 -- 实例化卡牌系统
 function CardsSystem:New(bag_cards,num)
     local temp = {}
-    setmetatable(temp,CardsSystem)
     temp.card_pool = {}
     temp.attri = {}
     temp.card_pool.bag_cards = bag_cards
     temp.card_pool.hand_pool = {}
     temp.card_pool.bag_pool = bag_cards
+    temp.card_pool.hand_pool_index = 0
+    temp.card_pool.bag_pool_index = 0
     temp.attri.num = num
+    setmetatable(temp,CardsSystem)
     temp:GetCardFromBag()
     return temp
 end
