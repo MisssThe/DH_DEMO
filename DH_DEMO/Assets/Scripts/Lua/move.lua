@@ -85,7 +85,7 @@ function Awake()
     speed_y = 0
     max_speed = 5
     transform = cs_self.transform
-    transform.position = UE.Vector3(-325,111,-364)
+    transform.position = UE.Vector3(-36,-18.4,120)
     camera = transform:Find("Main Camera")
     camera_transform = camera.transform
     --ship = Ship:new("user",0,0,0)

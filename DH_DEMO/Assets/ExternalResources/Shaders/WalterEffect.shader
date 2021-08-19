@@ -237,6 +237,7 @@ Shader "Custom/WalterEffect"
                 fixed3 fre = _FresnelStrenth * Fresnel(_Color,nv);
                 color = ((1 - fre) * diffuse_color + reflect_color * fre);
                 fixed4 n1 = (tex2D(_NoiseTex2,i.uv.zw + float2(_Time.y * _NoiseSpeed,0)) * tex2D(_NoiseTex2,i.uv.zw + float2(-_Time.y * 0.8 * _NoiseSpeed,0))) / 3;
+                // fixed4 n1 = saturate(ceil((tex2D(_NoiseTex2,i.uv.zw + float2(_Time.y * _NoiseSpeed,0)) * tex2D(_NoiseTex2,i.uv.zw + float2(-_Time.y * 0.8 * _NoiseSpeed,0))) / 2 - 0.3) -0.1);
                 // (0.5 - nv);
                 // color = (color + tex2D(_NoiseTex2,i.uv.zw));
                 color += n1;

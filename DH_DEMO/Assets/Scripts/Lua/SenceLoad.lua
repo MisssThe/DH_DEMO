@@ -18,9 +18,12 @@ ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/FightSence.prefab")
 ---------------------------------- 在加载局部物体 ----------------------------------
 print("开始加载局部物体")
 -- 加载场景地图
-ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/MainMap.prefab")
+-- ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/MainMap.prefab")
 -- 加载玩家
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/Ship.prefab")
 -- 加载战斗UI
 ASS.InstantiateAsync("StartFight")
 ASS.InstantiateAsync("AcceptFight")
+
+
+-- //-36 -18.4 120
