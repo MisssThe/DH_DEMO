@@ -4,17 +4,27 @@ Global.UIModel = {}
 UIModel.__index = UIModel
 UIModel.data_list = {}
 UIModel.flag = true
+UIModel.max = 10
+UIModel.num = 0
 
-function UIModel:New()
+function UIModel:New(max)
     local temp = {}
     setmetatable(temp,UIModel)
+    temp.num = 0
+    temp.max = max
     return temp
 end
 
 function UIModel:Add(data_name,data)
     if data_name ~= nil and data ~= nil then
-        self.data_list[data_name] = data
-        self.flag = true
+        if self.num < self.max then
+            self.data_list[data_name] = data
+            self.flag = true
+            self.num = self.num + 1
+            return true
+        else
+            return false
+        end
     end
 end
 

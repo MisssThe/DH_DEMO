@@ -53,7 +53,6 @@ function RoleAttribute:New(hp,mp,sp,one_sp,ned_sp)
 end
 -- 造成伤害
 function RoleAttribute:Attack(num)
-    self.flag = true
     num = self:CaculateBuff(num,buff_type["IMD"],buff_type["RMD"])
     return num
 end
@@ -84,6 +83,7 @@ function RoleAttribute:ReduceHP(num,fixed)
     -- 若生命值小于零则死亡
     if self.health_point.now_hp <= 0 then
         self.is_alive = false
+        EventSystem.Send("EndFight",false)
     end
 end
 -- 回复法力值

@@ -6,6 +6,7 @@ print("开始加载全局物体")
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/UICamera.prefab")
 -- 加载卡牌集
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/CardsControl.prefab")
+ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/CardsEffectControl.prefab")
 -- 加载Canvas
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/Canvas.prefab")
 -- 加载商店系统

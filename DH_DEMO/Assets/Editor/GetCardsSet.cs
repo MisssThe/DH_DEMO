@@ -41,17 +41,17 @@ public class GetCardsSet : MonoBehaviour
                     string card_name = xu[0];
                     string damage_count = xu[1];
                     string damage = xu[2];
-                    string is_fixed = xu[3];
+                    string is_fixed = xu[3].ToLower();
                     string card_code = "local "+card_name+" = {}\n";
                     card_code += "function "+card_name+".Effect(play1,play2)\n";
                     card_code += "  local real_d = play1:Attack("+damage+")\n";
                     card_code += "  for i = 0,"+damage_count+",1 do\n";
-                    card_code += "      play2:ReduceHP(real_d)\n";
+                    card_code += "      play2:ReduceHP(real_d,"+is_fixed+")\n";
                     card_code += "  end\nend\n";
                     card_code += "function "+card_name+".Display()\n";
                     card_code += "end\n";
                     card_code += "EventSystem.Add('"+card_name+"_Effect',false,"+card_name+".Effect)\n";
-                    card_code += "EventSystem.Add('"+card_name+"_Display',false,NormalAttack.Display)\n";
+                    card_code += "EventSystem.Add('"+card_name+"_Display',false,"+card_name+".Display)\n";
                     sw.Write(card_code);
                 }
             }   
@@ -136,7 +136,6 @@ public class GetCardsSet : MonoBehaviour
                     card_code += "end\n";
                     card_code += "EventSystem.Add('"+card_name+"_Effect',false,"+card_name+".Effect)\n";
                     card_code += "EventSystem.Add('"+card_name+"_Display',false,"+card_name+".Display)\n";
-                    Debug.Log(card_code);
                     sw.Write(card_code);
                 }
             }   
