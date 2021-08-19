@@ -15,7 +15,7 @@ local function EndFight()
     end
 end
 local function OpenEnd()
-    EventSystem.Send("EndFight")
+    EventSystem.Send("EndFight",false)
 end
 
 v_end_obj.gameObject:GetComponent(typeof(UI.Button)).onClick:AddListener(EndFight)
