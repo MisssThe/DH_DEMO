@@ -88,7 +88,7 @@ function Awake()
     speed_y = 0
     max_speed = 5
     transform = cs_self.transform
-    transform.position = UE.Vector3(-325,111,-364)
+    transform.position = UE.Vector3(-36,-18.4,120)
     transform.rotation = UE.Quaternion.Euler(UE.Vector3(0,51,0))
     transform.name = CS.NetWork.GetPlayerName()
     camera = transform:Find("Main Camera")
