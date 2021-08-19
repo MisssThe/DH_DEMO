@@ -8,7 +8,7 @@ local open_view = nil
 local close_view = nil
 local store_model = nil
 local StoreSystemView = {}
-local interval_time = 300
+local interval_time = 10
 local wait_time = 400
 local is_open = true
 Global.store_main_panel = nil
@@ -74,6 +74,7 @@ end
 function StoreSystemView:UpdateData()
     --  读取model数据
     if store_model.flag then
+        print("更新商店")
         local card_list = store_model:Get()
         if (card_list ~= nil) then
             StoreSystemView:ClearGrid()
@@ -95,11 +96,11 @@ function StoreSystemView:CreateGrid(card_name)
             --print(grid)
             if store_main_panel.transform ~= nil then
                 --print(store_main_panel.name)
-                -- grid.transform:SetParent(store_main_panel.transform)
-                -- -- !!!!!!!!!!!!!!!!!!!!!!!!!!
-                -- grid.transform.localScale = UE.Vector3(3,6,1)
-                -- --print(grid.transform.localScale)
-                -- -- 设置监听事件
+                grid.transform:SetParent(store_main_panel.transform)
+                -- !!!!!!!!!!!!!!!!!!!!!!!!!!
+                grid.transform.localScale = UE.Vector3(3,6,1)
+                --print(grid.transform.localScale)
+                -- 设置监听事件
                 grid:GetComponent(typeof(UI.Button)).onClick:AddListener(StoreSystemView.EventFunc3)
             end
         end

@@ -17,31 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 1f75a4c9a5144b44e9565f4a69944caa
   m_SerializeEntries:
-  - m_GUID: 89bb96de9a365054c8f551beed31eff7
-    m_Address: Assets/Scripts/Lua/Register.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: 92c983e32ad481c42acbf10a186f9949
-    m_Address: Assets/Scripts/Lua/SourceManager.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: 2c8c70c96389d2c488901f8c36892a42
-    m_Address: Assets/Scripts/Lua/test.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: 5efee21e0d2a8e944a5ddbd2ec63b699
-    m_Address: Assets/Scripts/Lua/UIBase.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: aeb2c0a413526b84eafb2928683a6781
-    m_Address: Assets/Scripts/Lua/UI/UIManager.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
   - m_GUID: e87feaa48873cd04d81971c2189e6541
     m_Address: Assets/Scripts/Lua/Dedicated/Overture/OvertureManager.lua
     m_ReadOnly: 0
@@ -82,23 +57,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: 8e388364cfad6d34e95793e707a1bd12
-    m_Address: Assets/Scripts/Lua/UI/UIButton.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: e4b067f773cbd244198caa85ee6d4211
-    m_Address: Assets/Scripts/Lua/UI/UIView.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
   - m_GUID: fd90f6519d0b1654e87249b8822f1f04
     m_Address: Assets/Scripts/Lua/Fight/BagSystem.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: 28b5dbd419dcf494589a305f5baf9c0f
-    m_Address: Assets/Scripts/Lua/UI/UIModel.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
@@ -127,38 +87,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: 1e979871dba41b942b1a6e649c509a59
-    m_Address: Assets/Scripts/Lua/UI/UIAttribute.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
   - m_GUID: d009dc0daf99cd748aaacacecb61fa02
     m_Address: Assets/Scripts/Lua/Fight/BaseCard.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: ba745e14ac49a42498392ef1943ba4b2
-    m_Address: Assets/Scripts/Lua/UI/UIRudder.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: 10d0a0dceb4a2c6418b398a5fe8a1c88
-    m_Address: Assets/Scripts/Lua/UI/UICardSet.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
   - m_GUID: d44d459140dc0734395ea8bdaf1f865a
     m_Address: Assets/Scripts/Lua/Fight/CardsSystem.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: f0566627eefce6d4fbf9387ebc9c5710
-    m_Address: Assets/Scripts/Lua/UI/ChatUI.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
-  - m_GUID: 2043c9fed0862824180ff9e9f79760ea
-    m_Address: Assets/Scripts/Lua/move.lua
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua

@@ -37,7 +37,7 @@ end
 function Global.OnEndDrag(data)
     if (BaseCard.card_move.flag) and FightSystem.Round.is_self then
         -- 卡牌被使用销毁卡牌
-        BaseCard.card_move.flag = EventSystem.Send("SendCard",cs_self.name,true)
+        BaseCard.card_move.flag = EventSystem.Send("SendCard",cs_self.gameObject.name,true)
         UE.Object.Destroy(cs_self.gameObject)
         -- if BaseCard.card_move.flag ~= true then
         --     OnEndDrag(nil)

@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Overture/Overture.unity
     guid: bb60bd9e05a104c438880db24740c09a
   m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: a96a8262b66d1a64ea4ff14580bdc478,
+    com.unity.addressableassets: {fileID: 11400000, guid: 9aa9001b280ffc74c82b10c08a632b41,
       type: 2}
