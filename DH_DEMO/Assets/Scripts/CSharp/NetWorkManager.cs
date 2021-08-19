@@ -119,7 +119,7 @@ public class NetWorkManager : MonoBehaviour
         string his_name = temp.MyName;
         string car_Name = temp.CarName;//////////////////////////////////////////
                 Debug.Log(his_name + "使用了" + car_Name + "号牌22222222");
-        LuaManager.Instance.Env.DoString("EventSystem.Send('" + car_Name + "',false)");
+        LuaManager.Instance.Env.DoString("EventSystem.Send('SendCard','" + car_Name + "',false)");
         Debug.Log(his_name + "使用了" + car_Name + "号牌");
     }
 
