@@ -163,7 +163,7 @@ public class NetWorkManager : MonoBehaviour
     {
         ToFight temp = new ToFight();
         string loser_name = temp.HisName;
-        LuaManager.Instance.Env.DoString("EventSystem.Send('RealEndFight',true)");
+        LuaManager.Instance.Env.DoString("EventSystem.Send('EndFight',true)");
         //显示你战胜了 loser_name;
     }
     private void Receive(message msg)
