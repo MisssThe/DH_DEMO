@@ -16,6 +16,7 @@ FightSystem.Round.is_self = true
 FightSystem.player_info = {}
 FightSystem.player_info.self_name = nil
 FightSystem.player_info.rivial_name = nil
+FightSystem.isFighting = false
 
 ------------------------------------ 功能实现 ------------------------------------
 function FightSystem.InitFightUI(command)
@@ -49,6 +50,8 @@ function FightSystem.StartFight(
     p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,p_card_num,
     r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp
 )
+    -- 置为战斗中状态
+    FightSystem.isFighting = true
     -- 初始化玩家基本信息
     FightSystem.player_info.self_name = self_name
     FightSystem.player_info.rivial_name = rivial_name
@@ -130,6 +133,7 @@ function FightSystem.EndFight(flag)
    EventSystem.Send("ShowEndFight",flag)
 end
 function FightSystem.RealEndFight()
+    FightSystem.isFighting = false
     FightSystem.Round.round_num = 0
     FightSystem.Rivial_Attri = nil
     FightSystem.Player_Attri = nil

@@ -1,5 +1,6 @@
 --require "ship.lua"
 --require ("Assets/Scripts/Lua/UIManager.lua")
+require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 local UE = CS.UnityEngine
 local speed_x 
 local speed_y 
@@ -102,8 +103,11 @@ function Awake()
 end
 
 function Update()
-    Move()
-    time = time + UE.Time.deltaTime
-    --CameraLook()
-    MouseHit()
+    if FightSystem.isFighting ~= true then
+        Move()
+        time = time + UE.Time.deltaTime
+        --CameraLook()
+        MouseHit()
+    end
+    
 end
