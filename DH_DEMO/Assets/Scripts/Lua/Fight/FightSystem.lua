@@ -72,7 +72,7 @@ function FightSystem.SendCard(card_name,to_self)
             if to_self then
                 print("使用了卡牌：" .. card_name .. "_Effect")
                 EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
-                -- CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
+                CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
             else
                 EventSystem.Send(card_name .. "_Effect",FightSystem.Rivial_Attri,FightSystem.Player_Attri)
             end
