@@ -28,7 +28,8 @@ function FightSystem.InitFightUI(command)
     EventSystem.Send(command,"RMP")
     EventSystem.Send(command,"RSP")
     EventSystem.Send(command,"CardSet")
-    EventSystem.Send(command,"Image")
+    EventSystem.Send(command,"ChatImage")
+    EventSystem.Send(command,"ChatButton")
     EventSystem.Send(command,"Scrollbar")
     EventSystem.Send(command,"InputField")
     EventSystem.Send(command,"talk1")
@@ -65,17 +66,21 @@ end
 -- 某一方玩家使用卡牌时调用
 function FightSystem.SendCard(card_name,to_self)
     if FightSystem.Round.is_self == true then
-        card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
-        FightSystem.card_system:UseCardFromHand(card_name)
-        if to_self then
-            print("使用了卡牌：" .. card_name .. "_Effect")
-            EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
-            -- CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
+        if card_name ~= nil then
+            card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
+            FightSystem.card_system:UseCardFromHand(card_name)
+            if to_self then
+                print("使用了卡牌：" .. card_name .. "_Effect")
+                EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
+                -- CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
+            else
+                EventSystem.Send(card_name .. "_Effect",FightSystem.Rivial_Attri,FightSystem.Player_Attri)
+            end
+            EventSystem.Send(card_name .. "_Display")
+            return true
         else
-            EventSystem.Send(card_name .. "_Effect",FightSystem.Rivial_Attri,FightSystem.Player_Attri)
+            return false
         end
-        EventSystem.Send(card_name .. "_Display")
-        return true
     end
     return false
 end
@@ -89,7 +94,7 @@ function FightSystem.EndRound()
         -- 把控制权移交给对手
         FightSystem.Round.is_self = false
         -- 发送控制切换请求
-        CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
+        -- CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     end
 end
 
