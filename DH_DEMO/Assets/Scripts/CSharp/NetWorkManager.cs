@@ -243,4 +243,9 @@ public class NetWorkManager : MonoBehaviour
             Receive(temp);
         }
     }
+
+    private void OnDestroy()
+    {
+        NetWork.close();
+    }
 }
