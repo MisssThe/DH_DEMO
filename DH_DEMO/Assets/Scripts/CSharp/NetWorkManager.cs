@@ -32,6 +32,7 @@ public class NetWorkManager : MonoBehaviour
 
     private void Start()
     {
+        NetWork.Init();
         message_queue = new Queue<message>();
         other_player = new Dictionary<string, GameObject>();
         client = NetWork.client;
