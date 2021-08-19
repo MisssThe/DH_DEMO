@@ -70,7 +70,7 @@ end
 -- 受到伤害
 function RoleAttribute:ReduceHP(num,fixed)
     self.flag = true
-    print(self.name .. "的生命值减少了")
+    print(self.name .. "的生命值减少了" .. num)
 
     if fixed then
         self.health_point.now_hp = self.health_point.now_hp - num
