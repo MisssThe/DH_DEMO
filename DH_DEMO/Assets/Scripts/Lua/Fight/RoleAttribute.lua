@@ -91,7 +91,6 @@ function RoleAttribute:ReduceHP(num,fixed)
     if self.health_point.now_hp <= 0 then
         self.is_alive = false
         EventSystem.Send("EndFight",false)
-        CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
     end
 end
 -- 回复法力值

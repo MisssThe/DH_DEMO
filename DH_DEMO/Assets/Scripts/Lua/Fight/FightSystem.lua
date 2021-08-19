@@ -128,7 +128,8 @@ end
 function FightSystem.EndFight(flag)
     -- 发送战斗结束请求
     -- CS.NetWork.SendEndFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
-   EventSystem.Send("ShowEndFight",flag)
+    CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
+    EventSystem.Send("ShowEndFight",flag)
 end
 function FightSystem.RealEndFight()
     FightSystem.isFighting = false
