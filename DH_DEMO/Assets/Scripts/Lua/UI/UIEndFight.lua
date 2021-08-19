@@ -31,6 +31,4 @@ local function ShowEndFight(flag)
     end
 end
 
-
-
 EventSystem.Add("ShowEndFight",flag,ShowEndFight)
