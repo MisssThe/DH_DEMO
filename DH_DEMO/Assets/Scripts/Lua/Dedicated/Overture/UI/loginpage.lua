@@ -111,6 +111,5 @@ ExEES.Add(ExEES.Event:New("showInfo", function(info, col)
 end, "loginpage"))
 
 function OnDestroy()
-    CS.NetWork.close()
     ExEES.DeleteInst("loginpage")
 end

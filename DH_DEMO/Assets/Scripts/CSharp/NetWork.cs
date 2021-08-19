@@ -340,6 +340,7 @@ public class NetWork
     //}
     public static void close()
     {
+        Debug.Log("关闭套接字");
         if(client != null)
         client.Close();
     }
