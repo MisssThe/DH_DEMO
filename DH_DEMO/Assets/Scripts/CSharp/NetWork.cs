@@ -99,7 +99,10 @@ public class NetWork
             if(length != 0)
             {
                 NetWorkManager.MsgAdd(data, length);
-            }
+            }//else
+            //{
+            //    client.Close();
+            //}
 
             //byte[] new_data = new byte[length - 1];
             //Array.Copy(data, 1, new_data, 0, length - 1);

@@ -32,6 +32,7 @@ public class NetWorkManager : MonoBehaviour
 
     private void Start()
     {
+        NetWork.Init();
         message_queue = new Queue<message>();
         other_player = new Dictionary<string, GameObject>();
         client = NetWork.client;
@@ -228,8 +229,8 @@ public class NetWorkManager : MonoBehaviour
             case 17://获得对局胜利
                 ReceiveWin(new_data);
                 break;
-            case 18://获得对局胜利
-                EventManager.Instance.Send("1 'loginRecive' 'loginpage' 6");
+            case 18://
+                //EventManager.Instance.Send("1 'loginRecive' 'loginpage' 6");
                 break;
             default:
                 break;

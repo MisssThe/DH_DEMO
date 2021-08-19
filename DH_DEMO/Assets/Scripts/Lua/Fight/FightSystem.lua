@@ -94,7 +94,7 @@ function FightSystem.EndRound()
         -- 把控制权移交给对手
         FightSystem.Round.is_self = false
         -- 发送控制切换请求
-        -- CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
+        CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     end
 end
 
