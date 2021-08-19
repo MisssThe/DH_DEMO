@@ -47,7 +47,7 @@ function Global.Update()
             FightSystem.Player_Attri.flag = false
         end
         if FightSystem.Rivial_Attri.flag == true then
-            print("敌方现在的生命值为" 。。 FightSystem.Rivial_Attri:GetPercentHP())
+            print("敌方现在的生命值为" .. FightSystem.Rivial_Attri:GetPercentHP())
             r_hp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentHP())
             r_mp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentMP())
             r_sp_material:SetFloat("_Percent",FightSystem.Rivial_Attri:GetPercentSP())
