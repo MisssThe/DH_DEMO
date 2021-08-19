@@ -35,6 +35,12 @@ function FightSystem.InitFightUI(command)
     EventSystem.Send(command,"talk1")
     EventSystem.Send(command,"talk2")
     EventSystem.Send(command,"ExitButton")
+    local fight_sence = UE.GameObject.FindGameObjectsWithTag("FightSence")[0]
+    local sence_rect = fight_sence:GetComponent(typeof(UE.RectTransform))
+    sence_rect:SetInsetAndSizeFromParentEdge(UE.RectTransform.Edge.Left, 0, 0)
+    sence_rect:SetInsetAndSizeFromParentEdge(UE.RectTransform.Edge.Top, 0, 0)
+    sence_rect.anchorMin = UE.Vector2(0,0)
+    sence_rect.anchorMax = UE.Vector2(1,1)
 end
 -- 双方约定战斗后调用
 function FightSystem.StartFight(
@@ -98,6 +104,8 @@ function FightSystem.EndRound()
         -- 把控制权移交给对手
         FightSystem.Round.is_self = false
         -- 发送控制切换请求
+        print(FightSystem.player_info.self_name)
+        print("name2" .. FightSystem.player_info.rivial_name)
         CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     end
 end
