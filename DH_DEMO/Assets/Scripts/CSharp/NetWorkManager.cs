@@ -228,8 +228,8 @@ public class NetWorkManager : MonoBehaviour
             case 17://获得对局胜利
                 ReceiveWin(new_data);
                 break;
-            case 18://获得对局胜利
-                EventManager.Instance.Send("1 'loginRecive' 'loginpage' 6");
+            case 18://
+                //EventManager.Instance.Send("1 'loginRecive' 'loginpage' 6");
                 break;
             default:
                 break;
