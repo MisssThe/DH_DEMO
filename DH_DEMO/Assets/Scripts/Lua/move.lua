@@ -49,9 +49,9 @@ function Move()
     target_angle = transform.rotation.eulerAngles
     target_angle.y = temp_y
 
-    if(boat_x ~= 0 or boat_y ~= 0) then
-        CS.NetWork.SendMyAttribute(transform.name,transform.position.x,transform.position.z,transform.rotation.y)
-    end
+    -- if(boat_x ~= 0 or boat_y ~= 0) then
+    --     CS.NetWork.SendMyAttribute(transform.name,transform.position.x,transform.position.z,transform.rotation.y)
+    -- end
     transform.rotation = UE.Quaternion.Euler(target_angle)
     transform:Translate(UE.Vector3.forward * speed_y * UE.Time.deltaTime)
 end
@@ -76,6 +76,7 @@ function MouseHit()
             if go.tag == "UserShip" then
                 UIManager.OpenUI("StartFight(Clone)")
                 go_name = go.name
+                FightSystem.player_info.rivial_name = go.name
                 print("点击")
                 -- CS.NetWork.SendToFight("222",go_name)
             end
@@ -91,6 +92,7 @@ function Awake()
     transform.position = UE.Vector3(-36,-18.4,120)
     transform.rotation = UE.Quaternion.Euler(UE.Vector3(0,51,0))
     transform.name = CS.NetWork.GetPlayerName()
+    FightSystem.player_info.self_name = transform.name
     camera = transform:Find("Main Camera")
     camera_transform = camera.transform
     --ship = Ship:new("user",0,0,0)

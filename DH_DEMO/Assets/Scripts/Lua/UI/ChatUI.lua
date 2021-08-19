@@ -55,12 +55,14 @@ local chat_width = 450
 local function EventFunc1()
     -- 发送消息
     -- 获取input下text并添加到model中
-    local msg = chat_input_text.text
-    -- ChatModel.SendMsg(msg,FightSystem.player_info.self_name)
-    ChatModel.SendMsg(msg,"MisThe")
-    chat_input_text.text = ""
-    -- CS.NetWork.SendTalk(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,msg)
-        CS.NetWork.SendTalk("Sean","222",msg)
+    if FightSystem.player_info.self_name ~= nil then
+        local msg = chat_input_text.text
+        -- ChatModel.SendMsg(msg,FightSystem.player_info.self_name)
+        ChatModel.SendMsg(msg,FightSystem.player_info.self_name)
+        chat_input_text.text = ""
+        CS.NetWork.SendTalk(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,msg)
+        -- CS.NetWork.SendTalk("Sean","222",msg)
+    end
 end
 
 function Global.Awake()
