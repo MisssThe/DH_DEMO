@@ -58,6 +58,9 @@ function FightSystem.StartFight(
     -- 初始化人物属性
     FightSystem.Player_Attri = RoleAttribute:New(p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,self_name)
     FightSystem.Rivial_Attri = RoleAttribute:New(r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp,rivial_name)
+    print("双方的名字是:" .. FightSystem.Player_Attri.name .. FightSystem.Rivial_Attri.name)
+    FightSystem.Player_Attri:ReduceHP(6,true)
+    print("双方的生命值是:" .. FightSystem.Player_Attri.health_point.now_hp .. FightSystem.Rivial_Attri.health_point.now_hp)
     -- 初始化卡牌系统
     local p_bag_card = EventSystem.Send("GetBagCard")
     FightSystem.card_system = CardsSystem:New(p_bag_card,p_card_num)
@@ -80,16 +83,11 @@ function FightSystem.SendCard(card_name,to_self)
         if to_self then
             if FightSystem.Round.is_self == true then
                 card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
-                print("我打对面")
-                print(FightSystem.player_info.self_name .. "用了牌")
-                print(FightSystem.player_info.rivial_name .. "挨打了")
-                -- print("使用了卡牌：" .. card_name .. "_Effect")
                 EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
                 CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
             end
         else
             if FightSystem.Round.is_self ~= true then
-                print("对方打我")
                 EventSystem.Send(card_name .. "_Effect",FightSystem.Rivial_Attri,FightSystem.Player_Attri)
             end
         end

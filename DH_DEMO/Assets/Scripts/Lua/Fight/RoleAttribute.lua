@@ -37,6 +37,9 @@ function RoleAttribute:New(hp,mp,sp,one_sp,ned_sp,role_name)
     setmetatable(temp,RoleAttribute)
     if (hp ~= nil and mp ~= nil and sp ~= nil and one_sp ~= nil and ned_sp ~= nil) then
         temp.name = role_name
+        temp.health_point = {}
+        temp.magic_point = {}
+        temp.shield_point = {}
         temp.health_point.max_hp = hp
         print(temp.health_point.max_hp)
         temp.health_point.now_hp = hp
@@ -70,7 +73,7 @@ end
 -- 受到伤害
 function RoleAttribute:ReduceHP(num,fixed)
     self.flag = true
-    print(self.name .. "的生命值减少了")
+    print(self.name .. "的生命值减少了" .. num)
 
     if fixed then
         self.health_point.now_hp = self.health_point.now_hp - num
@@ -88,6 +91,7 @@ function RoleAttribute:ReduceHP(num,fixed)
     if self.health_point.now_hp <= 0 then
         self.is_alive = false
         EventSystem.Send("EndFight",false)
+        CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
     end
 end
 -- 回复法力值
