@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3610508390648304579}
   m_Layer: 5
   m_Name: RMP
-  m_TagString: Untagged
+  m_TagString: RoleAttribute
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3610508390907910871}
   m_Layer: 5
   m_Name: PHP
-  m_TagString: Untagged
+  m_TagString: RoleAttribute
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 3610508391063928808}
   m_Layer: 5
   m_Name: PSP
-  m_TagString: Untagged
+  m_TagString: RoleAttribute
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -846,7 +846,7 @@ GameObject:
   - component: {fileID: 3610508391112080261}
   m_Layer: 5
   m_Name: PMP
-  m_TagString: Untagged
+  m_TagString: RoleAttribute
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1471,7 +1471,7 @@ GameObject:
   - component: {fileID: 3610508391548905773}
   m_Layer: 5
   m_Name: RSP
-  m_TagString: Untagged
+  m_TagString: RoleAttribute
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1546,7 +1546,7 @@ GameObject:
   - component: {fileID: 3610508391837070960}
   m_Layer: 5
   m_Name: RHP
-  m_TagString: Untagged
+  m_TagString: RoleAttribute
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
