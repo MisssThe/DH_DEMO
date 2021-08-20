@@ -10,6 +10,7 @@ TagManager:
   - UserShip
   - UICamera
   - FightSence
+  - RoleAttribute
   layers:
   - Default
   - TransparentFX

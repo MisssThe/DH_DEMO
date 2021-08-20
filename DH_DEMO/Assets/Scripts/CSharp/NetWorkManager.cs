@@ -155,7 +155,7 @@ public class NetWorkManager : MonoBehaviour
         }
         else
         {
-            GameObject other = Instantiate(player_ship_prefab,new Vector3(temp.Positionx,0.4f,temp.Positionz), Quaternion.Euler(new Vector3(0, temp.Rotationy, 0)));
+            GameObject other = Instantiate(player_ship_prefab,new Vector3(temp.Positionx,-15,temp.Positionz), Quaternion.Euler(new Vector3(0, temp.Rotationy, 0)));
             other.name = his_name;
             other_player.Add(his_name, other);
         }
