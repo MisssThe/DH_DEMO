@@ -21,6 +21,7 @@ public class VoiceLoad : MonoBehaviour
         {
             inst = this;
             Debug.Log("加载voices");
+            voices_dic = new Dictionary<string,AudioClip>();
             foreach (var item in voices)
             {
                 voices_dic.Add(item.name,item);
@@ -29,6 +30,8 @@ public class VoiceLoad : MonoBehaviour
         }
         else
             Destroy(gameObject);
+        
+        Debug.Log("voice 加载完");
     }
 
     public AudioClip GetClip(string key)
