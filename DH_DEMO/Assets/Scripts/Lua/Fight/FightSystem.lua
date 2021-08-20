@@ -50,6 +50,7 @@ function FightSystem.StartFight(
     p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,p_card_num,
     r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp
 )
+    EventSystem.Send("PlayFightStart")
     -- 置为战斗中状态
     FightSystem.isFighting = true
     -- 初始化玩家基本信息
@@ -82,6 +83,7 @@ function FightSystem.SendCard(card_name,to_self)
         FightSystem.card_system:UseCardFromHand(card_name)
         if to_self then
             if FightSystem.Round.is_self == true then
+                EventSystem.Send("PlaySendCard")
                 card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
                 EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
                 CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
@@ -104,12 +106,11 @@ function FightSystem.EndRound()
     print("尝试结束回合")
     if FightSystem.Round.is_self == true then
         print("结束回合")
+        EventSystem.Send("PlayFightTurnRound")
         FightSystem.Round.round_num = FightSystem.Round.round_num + 0.5
         -- 把控制权移交给对手
         FightSystem.Round.is_self = false
         -- 发送控制切换请求
-        print(FightSystem.player_info.self_name)
-        print("name2" .. FightSystem.player_info.rivial_name)
         CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     end
 end
@@ -133,7 +134,7 @@ function FightSystem.EndFight(flag)
     -- 发送战斗结束请求
     -- CS.NetWork.SendEndFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     if flag == false then
-        -- CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
+        CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
     end
     EventSystem.Send("ShowEndFight",flag)
 end

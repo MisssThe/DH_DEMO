@@ -101,22 +101,24 @@ function Awake()
     FightSystem.player_info.self_name = transform.name
     camera = transform:Find("Main Camera")
     camera_transform = camera.transform
-    ship_voice.source = cs_self.gameObject
+    ship_voice.source = cs_self.gameObject:GetComponent(typeof(UE.AudioSource))
     --ship = Ship:new("user",0,0,0)
 end
 local voice_flag = true
 function Update()
     if FightSystem.isFighting ~= true then
         Move()
-        if speed_y > 1 then
+        if math.abs(speed_y) > 1 then
             if voice_flag then
                 -- 播放风声
-                ship_voice.source.Play()
+                ship_voice.source:Play()
+                voice_flag = false
             end
         else
             if not voice_flag then
                 -- 停止播放
-                ship_voice.source.Stop()
+                ship_voice.source:Stop()
+                voice_flag = true
             end
         end
         time = time + UE.Time.deltaTime

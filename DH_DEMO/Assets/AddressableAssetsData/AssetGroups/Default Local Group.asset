@@ -108,11 +108,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: 02efb8f7dad30a64abb95d98bd91417e
-    m_Address: Assets/ExternalResources/Overture
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - overture
   - m_GUID: 87b85bdabc897e64c9c9c903c0660994
     m_Address: Assets/Scripts/Lua/LogIn.lua
     m_ReadOnly: 0
@@ -235,6 +230,10 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: aed4fee81ca1bb4459fc87f87c16a8fe
     m_Address: "Assets/ExternalResources/Voice/\u6D77\u98CE_\u7231\u7ED9\u7F51_aigei_com.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c2064b192d5202b4093adc8743061c77
+    m_Address: Assets/ExternalResources/Prefabs/VoiceSource.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
