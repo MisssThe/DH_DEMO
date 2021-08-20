@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: fog
+  m_Name: Fog
   m_Shader: {fileID: 4800000, guid: b7fae59426bee34489cb3583d1483955, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

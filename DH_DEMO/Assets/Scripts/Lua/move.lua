@@ -93,7 +93,7 @@ function Awake()
     max_speed = 5
     time = 0
     transform = cs_self.transform
-    transform.position = UE.Vector3(-36,-18.4,120)
+    transform.position = UE.Vector3(-36,-15,120)
     transform.rotation = UE.Quaternion.Euler(UE.Vector3(0,51,0))
     transform.name = CS.NetWork.GetPlayerName()
     FightSystem.player_info.self_name = transform.name
