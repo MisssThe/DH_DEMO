@@ -5,7 +5,7 @@ local _g = _G
 -- 存放CS代码中的数据
 cs_self = {}
 -- 存放音频资源
-AudioLoad = CS.GetVoices()
+-- AudioLoad = CS.VoiceLoadStatic.GetVoices()
 -- 实现创建枚举功能
 function CreateEnum(t)
     local enum_table = {}
