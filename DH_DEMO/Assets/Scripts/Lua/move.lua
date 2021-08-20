@@ -87,7 +87,9 @@ function MouseHit()
         end
     end
 end
-
+local ship_voice = {}
+ship_voice.voice_flag = true
+ship_voice.source = nil
 function Awake()
     speed_y = 0
     max_speed = 5
@@ -99,12 +101,24 @@ function Awake()
     FightSystem.player_info.self_name = transform.name
     camera = transform:Find("Main Camera")
     camera_transform = camera.transform
+    ship_voice.source = cs_self.gameObject
     --ship = Ship:new("user",0,0,0)
 end
-
+local voice_flag = true
 function Update()
     if FightSystem.isFighting ~= true then
         Move()
+        if speed_y > 1 then
+            if voice_flag then
+                -- 播放风声
+                ship_voice.source.Play()
+            end
+        else
+            if not voice_flag then
+                -- 停止播放
+                ship_voice.source.Stop()
+            end
+        end
         time = time + UE.Time.deltaTime
         --CameraLook()
         MouseHit()

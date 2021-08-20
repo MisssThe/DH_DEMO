@@ -216,6 +216,22 @@ MonoBehaviour:
     m_Address: Assets/ExternalResources/Prefabs/FightSence.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5b8f10f51c3e7fa4b8ef58d72a47c744
+    m_Address: "Assets/ExternalResources/Voice/\u6E05\u65B0\u6D77\u98CE\u6D77\u6D6A\u58F0-\u5927\u6D77\u6D77\u6D0B\u6D77\u8FB9-\u81EA\u7136\u73AF\u5883_\u7231\u7ED9\u7F51_aigei_com.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a2a1378fb76866a48a2068aa566aa4b1
+    m_Address: "Assets/ExternalResources/Voice/\u5B64\u5355\u62A2\u624B2\u97F3\u6548-\u8D2D\u4E70(buy)_\u7231\u7ED9\u7F51_aigei_com.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 76346140f2e267247a0af97513adae13
+    m_Address: "Assets/ExternalResources/Voice/\u7EFC\u5408\u73AF\u5883\u97F3\u6548\u5305-\u6E05\u6668\u5C71\u6797\u9E1F\u53EB-\u81EA\u7136\u73AF\u5883_\u7231\u7ED9\u7F51_aigei_com.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: aed4fee81ca1bb4459fc87f87c16a8fe
+    m_Address: "Assets/ExternalResources/Voice/\u6D77\u98CE_\u7231\u7ED9\u7F51_aigei_com.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:
