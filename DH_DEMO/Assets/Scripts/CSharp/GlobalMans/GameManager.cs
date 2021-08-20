@@ -31,11 +31,25 @@ public class GameManager : MonoBehaviour
         var catalogsOpt = Addressables.CheckForCatalogUpdates();
         await catalogsOpt.Task;
 
+#if UNITY_EDITOR
+        string result = "";
+        if (catalogsOpt.Status == AsyncOperationStatus.Succeeded) 
+            result += "检查 Addressable 更新日志成功!\n" + $"要更新的 Catalogs 数量: {catalogsOpt.Result.Count}";
+        foreach (var catalog in catalogsOpt.Result)
+            result += "\n" + catalog;
+
+        Debug.Log("检查结果: " + result);
+#endif
+
         if (catalogsOpt.Status == AsyncOperationStatus.Succeeded)
         {
             var catalogs = catalogsOpt.Result;
             if (catalogs != null && catalogs.Count > 0)
             {
+#if UNITY_EDITOR
+                string result2 = "--开始下载数据------------------------------------------";
+                int idx = 0;
+#endif
                 var catalogOpt = Addressables.UpdateCatalogs(catalogs, false);
                 await catalogOpt.Task;
                 foreach (var item in catalogOpt.Result)
@@ -44,10 +58,17 @@ public class GameManager : MonoBehaviour
                     {
                         if (key != null && (string)key != "" && await Addressables.GetDownloadSizeAsync(key).Task != 0)
                         {
+#if UNITY_EDITOR
+                            result2 += $"\n要下载的key{idx}: " + (key.GetType() == typeof(string) ? key : key.ToString());
+                            idx++;
+#endif
                             await Addressables.DownloadDependenciesAsync(key).Task;
                         }
                     }
                 }
+#if UNITY_EDITOR
+                Debug.Log(result2);
+#endif
             }
         }
     }
