@@ -25,6 +25,7 @@ function CardsSystem:New(bag_cards,num)
     local temp = {}
     temp.card_pool = {}
     temp.attri = {}
+    temp.new_card_set = {}
     temp.card_pool.bag_cards = bag_cards
     temp.card_pool.hand_pool = {}
     temp.card_pool.bag_pool = bag_cards
@@ -40,7 +41,6 @@ function CardsSystem:GetCardFromBag(card_num)
     if card_num == nil then
         card_num = self.attri.num
     end
-    print(card_num)
     local index2 = 1
     for i,v in pairs(self.card_pool.bag_pool)
     do
@@ -53,7 +53,6 @@ function CardsSystem:GetCardFromBag(card_num)
         index2 = index2 + 1
         self.card_pool.hand_pool_index = self.card_pool.hand_pool_index + 1
     end
-    print("抽了：" .. index2)
     self.flag2 = true
 end
 -- 实现用牌功能
@@ -96,15 +95,3 @@ function CardsSystem:GetNewCard()
     self.new_card_set = {}
     return temp_list
 end
--- print("init card system")
-
--- local card_list = {"普通攻击","普普通通攻击","不普通攻击"}
-
--- local card_systme = CardsSystem:New(card_list,1)
-
--- local b_l = card_systme:GetCardFromBag()
-
--- -- local List = card_systme:GetHandCard()
--- for i,v in pairs(card_systme.card_pool.hand_pool) do
---     print(v)
--- end
