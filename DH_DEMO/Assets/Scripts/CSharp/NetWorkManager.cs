@@ -150,7 +150,7 @@ public class NetWorkManager : MonoBehaviour
         {
             GameObject other = other_player[his_name];
             other.transform.rotation = Quaternion.Euler(new Vector3(0,temp.Rotationy,0));
-            other.transform.position = new Vector3(temp.Positionx,0.4f,temp.Positionz);
+            other.transform.position = new Vector3(temp.Positionx,-15,temp.Positionz);
             
         }
         else
