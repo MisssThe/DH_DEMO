@@ -100,7 +100,6 @@ function Global.Awake()
     close_view = UIView:New(bag_close_button.gameObject)
     bag_model = UIModel:New()
     -- 获取背包数据
-    print("开始导入数据")
     local bag_card_list = {"Normal1","Normal1","Normal2","Normal3","Normal5","Normal3","Normal2","Normal2","Normal3","Normal5","Normal3","Normal2","Normal2","Normal3","Normal5","Normal3","Normal2"}
     for i,v in pairs(bag_card_list) do
         bag_model:Add(i,v)

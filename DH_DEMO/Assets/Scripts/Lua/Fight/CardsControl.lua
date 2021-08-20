@@ -21,15 +21,9 @@ CardsControl.InitControl()
 
 -- 获取卡牌
 function CardsControl.GetCard(card_name)
-    print("获取卡牌")
-    
     local card = CardsControl.cards_list[card_name]
-    print(card == nil)
     return card
 end
 
 
 EventSystem.Add("GetBaseCard",false,CardsControl.GetCard)
-
-print("load card control success")
--- return CardsControl

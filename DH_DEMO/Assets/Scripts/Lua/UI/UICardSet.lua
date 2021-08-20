@@ -71,14 +71,12 @@ function Global.Update()
 end
 
 function cardset_view.Clear()
-    for i,v in pairs(cardset_list)
-    do
-        print(v.name)
-        UE.Object.Destroy(v)
+    local child_cards = cs_self.gameObject:GetComponentsInChildren(typeof(UE.Transform))
+    local child_length = child_cards.Length - 1
+    for i = 1,child_length,1 do
+        UE.GameObject.Destroy(child_cards[i].gameObject)
+        print(child_cards[i].name)
     end
-    CardsSystem.new_card_set = {}
-    CardsSystem.flag2 = false
-    cardset_list = {}
 end
 
 EventSystem.Add("ClearCardSet",false,cardset_view.Clear)
