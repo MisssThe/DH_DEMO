@@ -344,6 +344,11 @@ public sealed class LuaManager : MonoBehaviour
         _isLoading = true;
         _percentProcess = 0.0f;
 
+        while (!GameManager.Instance.HadInit)
+        {
+            await Task.Delay(DelayTime);
+        }
+
 #if UNITY_EDITOR
         if (luaLabels.Count == 0)
         {
