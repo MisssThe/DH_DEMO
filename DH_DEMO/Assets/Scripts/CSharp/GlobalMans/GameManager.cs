@@ -83,6 +83,13 @@ public class GameManager : MonoBehaviour
 
         // 初始化
         await UpdateCheck();
+        if (objToInstance != null && objToInstance.Count > 0)
+        {
+            foreach (var obj in objToInstance)
+            {
+                await obj.InstantiateAsync().Task;
+            }
+        }
 
         HadInit = true;
     }
@@ -100,12 +107,6 @@ public class GameManager : MonoBehaviour
     }
 
     void Start() {
-        if (objToInstance != null && objToInstance.Count > 0)
-        {
-            foreach (var obj in objToInstance)
-            {
-                obj.InstantiateAsync();
-            }
-        }
+
     }
 }
