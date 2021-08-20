@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    public bool HadInit { private set; get; } = false; 
+    public bool HadInit { private set; get; } = false;
+    public List<AssetReference> objToInstance = null;
 
     static private GameManager inst = null;
     /// <summary>
@@ -96,5 +97,15 @@ public class GameManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+    }
+
+    void Start() {
+        if (objToInstance != null && objToInstance.Count > 0)
+        {
+            foreach (var obj in objToInstance)
+            {
+                obj.InstantiateAsync();
+            }
+        }
     }
 }

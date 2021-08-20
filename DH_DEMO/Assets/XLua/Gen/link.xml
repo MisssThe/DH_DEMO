@@ -7,6 +7,7 @@
 		<type fullname="ExitGame" preserve="all"/>
 		<type fullname="DefaultLuaBehaviour" preserve="all"/>
 		<type fullname="NetWork" preserve="all"/>
+		<type fullname="VoiceLoadStatic" preserve="all"/>
 		
 	</assembly>
 

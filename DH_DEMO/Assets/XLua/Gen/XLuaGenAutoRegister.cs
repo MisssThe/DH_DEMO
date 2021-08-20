@@ -34,6 +34,9 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(NetWork), NetWorkWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(VoiceLoadStatic), VoiceLoadStaticWrap.__Register);
+        
+        
         
         }
         
