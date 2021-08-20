@@ -425,7 +425,9 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  gameObjectsToLua: []
+  gameObjectsToLua:
+  - data: {fileID: 0}
+    key: aaa
 --- !u!4 &1090253545
 Transform:
   m_ObjectHideFlags: 0
