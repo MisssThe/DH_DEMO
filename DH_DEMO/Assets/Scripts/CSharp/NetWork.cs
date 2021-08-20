@@ -2,6 +2,7 @@
 using Network;
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
@@ -82,10 +83,15 @@ public class NetWork
     //异步发送
     public static void AsynSend(Socket tcpClient, byte[] data)
     {
-        tcpClient.BeginSend(data, 0, data.Length, SocketFlags.None, asyncResult =>
+        int length = data.Length;
+        byte[] new_data = new byte[length + 2];
+        new_data[0] = 250;
+        new_data[1] = (byte)length;
+        data.CopyTo(new_data,2);
+        tcpClient.BeginSend(new_data, 0, new_data.Length, SocketFlags.None, asyncResult =>
         {
             //完成发送消息
-            int length = tcpClient.EndSend(asyncResult);
+            int length1 = tcpClient.EndSend(asyncResult);
         }, null);
     }
     //异步接收
@@ -96,13 +102,36 @@ public class NetWork
         {
             int length = tcpClient.EndReceive(asyncResult);
             Debug.Log("收到消息长度："+length);
-            if(length != 0)
+            for (int i = 0; i < length;)
             {
-                NetWorkManager.MsgAdd(data, length);
-            }//else
+                if (data[i] == 250)
+                {
+                    int length1 = data[i + 1];
+                    if (length1 != 0)
+                    {
+                        byte[] temp_data = data.Skip(i + 2).Take(length1).ToArray();
+                        NetWorkManager.MsgAdd(temp_data, length1);
+                        i = i + 2 + length1;
+                    }
+                    else
+                    {
+                        i = i + 2;
+                    }
+
+                }
+                else
+                {
+                    Debug.Log("收到消息出错");
+                    break;
+                }
+            }
+            //if (length != 0)
             //{
-            //    client.Close();
-            //}
+                
+            //}//else
+            ////{
+            ////    client.Close();
+            ////}
 
             //byte[] new_data = new byte[length - 1];
             //Array.Copy(data, 1, new_data, 0, length - 1);

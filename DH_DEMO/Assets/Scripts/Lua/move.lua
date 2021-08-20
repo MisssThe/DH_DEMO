@@ -51,10 +51,10 @@ function Move()
     target_angle = transform.rotation.eulerAngles
     target_angle.y = temp_y
 
-    --if(time>1) then
-        --CS.NetWork.SendMyAttribute(transform.name,transform.position.x,transform.position.z,transform.rotation.y)
+    if(boat_x ~= 0 or boat_y ~= 0) then
+        CS.NetWork.SendMyAttribute(transform.name,transform.position.x,transform.position.z,transform.rotation.y)
         --time = 0
-    --end
+    end
     transform.rotation = UE.Quaternion.Euler(target_angle)
     transform:Translate(UE.Vector3.forward * speed_y * UE.Time.deltaTime)
 end
