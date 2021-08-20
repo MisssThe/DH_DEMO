@@ -167,7 +167,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8920680837521605205}
-  - component: {fileID: 8920680837521605210}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -192,26 +191,6 @@ Transform:
   m_Father: {fileID: 8920680838249902350}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 83.582, z: 0}
---- !u!114 &8920680837521605210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8920680837521605204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57d03044de3a1f04c99f8030db787a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  luaAsset:
-    m_AssetGUID: 2043c9fed0862824180ff9e9f79760ea
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  gameObjectsToLua:
-  - data: {fileID: 8920680837521605204}
-    key: cs_self
 --- !u!1 &8920680837887313748
 GameObject:
   m_ObjectHideFlags: 0

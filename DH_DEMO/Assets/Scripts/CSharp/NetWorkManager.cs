@@ -145,6 +145,7 @@ public class NetWorkManager : MonoBehaviour
         PlayerAttribute temp = new PlayerAttribute();
         Deserialize(temp, data);
         string his_name = temp.MyName;
+        Debug.Log(his_name);
         if(other_player.ContainsKey(his_name))
         {
             GameObject other = other_player[his_name];
