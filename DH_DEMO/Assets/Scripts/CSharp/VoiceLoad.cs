@@ -36,7 +36,11 @@ public class VoiceLoad : MonoBehaviour
 
     public AudioClip GetClip(string key)
     {
-        return voices_dic[key];
+        if (voices_dic.ContainsKey(key))
+        {
+            return voices_dic[key];
+        }
+        return null;
     }
 
 }

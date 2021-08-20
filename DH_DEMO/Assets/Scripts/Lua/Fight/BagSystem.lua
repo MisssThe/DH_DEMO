@@ -114,8 +114,8 @@ function Global.Awake()
     if BuyVoice.source ~= nil then
         BuyVoice.source.loop = false
         BuyVoice.source.playOnAwake = false
-        BuyVoice.success = AudioLoad.GetClip("孤单抢手2音效-购买(buy)_爱给网_aigei_com.mp3")
-        BuyVoice.failed = AudioLoad.GetClip("孤单抢手2音效-购买(buy)_爱给网_aigei_com.mp3")
+        BuyVoice.success = AudioLoad:GetClip("BuySuccess")
+        BuyVoice.failed = AudioLoad:GetClip("BuySuccess")
     end
     main_view = UIView:New(bag_main_panel.gameObject)
     open_view = UIView:New(bag_open_button.gameObject)
