@@ -198,11 +198,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
-  - m_GUID: 4434d09f41310f545a22891646d7a9bb
-    m_Address: Assets/Scripts/Lua/Fight/Card.lua
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - lua
   - m_GUID: 2512f224983525347bc4bd6328a6f88a
     m_Address: Assets/Scripts/Lua/Fight/CardEffectAndDisplay.lua
     m_ReadOnly: 0
