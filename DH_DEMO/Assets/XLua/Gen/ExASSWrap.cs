@@ -31,8 +31,9 @@ namespace XLua.CSObjectWrap
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 3, 0, 0);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 4, 0, 0);
 			Utils.RegisterFunc(L, Utils.CLS_IDX, "LoadMaterialSync", _m_LoadMaterialSync_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "LoadAudioSync", _m_LoadAudioSync_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "LoadSceneAsync", _m_LoadSceneAsync_xlua_st_);
             
 			
@@ -70,6 +71,33 @@ namespace XLua.CSObjectWrap
                     string _PrimaryKey = LuaAPI.lua_tostring(L, 1);
                     
                         var gen_ret = ExASS.LoadMaterialSync( _PrimaryKey );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_LoadAudioSync_xlua_st_(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+            
+                
+                {
+                    string _primaryKey = LuaAPI.lua_tostring(L, 1);
+                    
+                        var gen_ret = ExASS.LoadAudioSync( _primaryKey );
                         translator.Push(L, gen_ret);
                     
                     
