@@ -4850,6 +4850,12 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u52A0\u8F7D\u4E2D"
       objectReference: {fileID: 0}
+    - target: {fileID: 5903451101663257014, guid: 11526788d83dcf640afe1006ae56fba5,
+        type: 3}
+      propertyPath: player_ship_prefab
+      value: 
+      objectReference: {fileID: 4974364884068944662, guid: 68bfaa50c289d3f49af1cb3cde6a0dce,
+        type: 3}
     - target: {fileID: 8634155711157406294, guid: 11526788d83dcf640afe1006ae56fba5,
         type: 3}
       propertyPath: m_RootOrder
