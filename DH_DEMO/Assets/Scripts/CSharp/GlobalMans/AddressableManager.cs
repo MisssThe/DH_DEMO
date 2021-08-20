@@ -18,6 +18,14 @@ public static class ExASS
     }
 
     [LuaCallCSharp]
+    public static AudioClip LoadAudioSync(string primaryKey)
+    {
+        var audioOpt = Addressables.LoadAssetAsync<AudioClip>(primaryKey);
+        audioOpt.WaitForCompletion();
+        return audioOpt.Result;
+    }
+
+    [LuaCallCSharp]
     public static void LoadSceneAsync(string sceneKey)
     {
         var sceneOpt = Addressables.LoadSceneAsync(sceneKey);

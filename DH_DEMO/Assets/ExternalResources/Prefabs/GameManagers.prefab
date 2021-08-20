@@ -534,7 +534,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   luaLabels:
   - m_LabelString: lua
-  globalLuas: []
+  globalLuas:
+  - asset:
+      m_AssetGUID: 42af5a3aeab2ddb4db3b63de4316ed44
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    luaNamespace: ExEES
+  - asset:
+      m_AssetGUID: b8031aa170ef1aa4ca867d561adbfdc1
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    luaNamespace: EventSystem
+  - asset:
+      m_AssetGUID: aeb2c0a413526b84eafb2928683a6781
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    luaNamespace: UIManager
   LoadLuaAtOnce: 1
 --- !u!114 &8634155711157406293
 MonoBehaviour:
@@ -561,7 +579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9afccc616260d24f96c3f964e916307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_ship_prefab: {fileID: 0}
+  player_ship_prefab: {fileID: 8920680838249902345, guid: ee12dd8708b42d648bdb1ebaa2b6fdc5,
+    type: 3}
 --- !u!81 &7237666233176204084
 AudioListener:
   m_ObjectHideFlags: 0
