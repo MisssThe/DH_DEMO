@@ -52,7 +52,7 @@ function Move()
     target_angle.y = temp_y
 
     if(boat_x ~= 0 or boat_y ~= 0) then
-        CS.NetWork.SendMyAttribute(transform.name,transform.position.x,transform.position.z,transform.rotation.y)
+        -- CS.NetWork.SendMyAttribute(transform.name,transform.position.x,transform.position.z,transform.rotation.y)
         --time = 0
     end
     transform.rotation = UE.Quaternion.Euler(target_angle)
@@ -80,8 +80,6 @@ function MouseHit()
                 UIManager.OpenUI("StartFight(Clone)")
                 go_name = go.name
                 FightSystem.player_info.rivial_name = go_name
-                print("点击")
-                -- CS.NetWork.SendToFight("222",go_name)
             end
             
         end
@@ -90,6 +88,8 @@ end
 local ship_voice = {}
 ship_voice.voice_flag = true
 ship_voice.source = nil
+
+local ratial_material = nil
 function Awake()
     speed_y = 0
     max_speed = 5
@@ -97,17 +97,21 @@ function Awake()
     transform = cs_self.transform
     transform.position = UE.Vector3(-36,-15,120)
     transform.rotation = UE.Quaternion.Euler(UE.Vector3(0,51,0))
-    transform.name = CS.NetWork.GetPlayerName()
+    -- transform.name = CS.NetWork.GetPlayerName()
     FightSystem.player_info.self_name = transform.name
     camera = transform:Find("Main Camera")
+
     camera_transform = camera.transform
     ship_voice.source = cs_self.gameObject:GetComponent(typeof(UE.AudioSource))
+    -- 获取径向模糊数据
+    ratial_material = camera:GetComponent(typeof(CS.AfterScreen)).mat[0]
     --ship = Ship:new("user",0,0,0)
 end
 local voice_flag = true
 function Update()
     if FightSystem.isFighting ~= true then
         Move()
+        ratial_material:SetFloat("_RadialBlurAmount",(speed_y - 3.5) * 0.0015)
         if math.abs(speed_y) > 1 then
             if voice_flag then
                 -- 播放风声

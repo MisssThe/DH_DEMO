@@ -12,6 +12,11 @@ TagManager:
   - FightSence
   - RoleAttribute
   - GameManager
+  - Skill
+  - BaseSkill
+  - RivialBaseSkill
+  - BuffSkill
+  - ShieldTag
   layers:
   - Default
   - TransparentFX

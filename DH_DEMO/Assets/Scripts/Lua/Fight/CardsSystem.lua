@@ -9,6 +9,7 @@ CardsSystem.attri = {}
 CardsSystem.card_pool = {}
 CardsSystem.flag = true
 CardsSystem.flag2 = true
+CardsSystem.flag3 = false
 --------------------------------------- 卡池 ---------------------------------------
 CardsSystem.card_pool.bag_pool = nil
 CardsSystem.card_pool.bag_pool_index = 0
@@ -52,6 +53,10 @@ function CardsSystem:GetCardFromBag(card_num)
         self.card_pool.bag_pool[i] = nil
         index2 = index2 + 1
         self.card_pool.hand_pool_index = self.card_pool.hand_pool_index + 1
+    end
+    -- 判断牌库是否为空
+    if index2 == 0 then
+        self.flag3 = true
     end
     self.flag2 = true
 end

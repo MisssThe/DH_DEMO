@@ -29,9 +29,7 @@ public class AfterScreen : MonoBehaviour
             //     Graphics.Blit(src,dest,item);
             //     Debug.Log("blit");
             // }
-            Graphics.Blit(src,temp1,mat[0],0);
-            mat[0].SetTexture("_TempTex",src);
-            Graphics.Blit(temp1,dest,mat[0],1);
+            Graphics.Blit(src,dest,mat[0]);
         }
         else
         {
