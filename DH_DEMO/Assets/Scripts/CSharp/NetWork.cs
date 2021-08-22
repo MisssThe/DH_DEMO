@@ -13,7 +13,8 @@ public class NetWork
 {
     public static Socket client;
     private static string player_name;
-
+    static byte[] kk;
+    static int kk_length = 0;
     public static void Init()
     {
         client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -101,17 +102,37 @@ public class NetWork
         tcpClient.BeginReceive(data, 0, data.Length, SocketFlags.None, asyncResult =>
         {
             int length = tcpClient.EndReceive(asyncResult);
-            Debug.Log("收到消息长度："+length);
+            Debug.Log("收到消息长度：" + length);
             for (int i = 0; i < length;)
             {
+                if (kk_length != 0)
+                {
+                    byte[] l = new byte[kk.Length + kk_length];
+                    byte[] p = data.Take(kk_length).ToArray();
+                    kk.CopyTo(l, 0);
+                    p.CopyTo(l, kk.Length);
+                    kk = null;
+                    i = i + kk_length;
+                    NetWorkManager.MsgAdd(l, kk.Length + kk_length);
+                    kk_length = 0;
+                }
                 if (data[i] == 250)
                 {
                     int length1 = data[i + 1];
                     if (length1 != 0)
                     {
-                        byte[] temp_data = data.Skip(i + 2).Take(length1).ToArray();
-                        NetWorkManager.MsgAdd(temp_data, length1);
-                        i = i + 2 + length1;
+                        if (length - i >= length1 + 2)
+                        {
+                            byte[] temp_data = data.Skip(i + 2).Take(length1).ToArray();
+                            NetWorkManager.MsgAdd(temp_data, length1);
+                            i = i + 2 + length1;
+                        }
+                        else
+                        {
+                            kk = data.Skip(i + 2).Take(length - i).ToArray();
+                            kk_length = length1 - length + i;
+                        }
+
                     }
                     else
                     {
