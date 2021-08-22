@@ -52,7 +52,7 @@ function Move()
     target_angle.y = temp_y
 
     if(boat_x ~= 0 or boat_y ~= 0) then
-        -- CS.NetWork.SendMyAttribute(transform.name,transform.position.x,transform.position.z,transform.rotation.y)
+        CS.NetWork.SendMyAttribute(transform.name,transform.position.x,transform.position.z,transform.rotation.y)
         --time = 0
     end
     transform.rotation = UE.Quaternion.Euler(target_angle)
@@ -97,7 +97,7 @@ function Awake()
     transform = cs_self.transform
     transform.position = UE.Vector3(-36,-15,120)
     transform.rotation = UE.Quaternion.Euler(UE.Vector3(0,51,0))
-    -- transform.name = CS.NetWork.GetPlayerName()
+    transform.name = CS.NetWork.GetPlayerName()
     FightSystem.player_info.self_name = transform.name
     camera = transform:Find("Main Camera")
 
@@ -105,7 +105,6 @@ function Awake()
     ship_voice.source = cs_self.gameObject:GetComponent(typeof(UE.AudioSource))
     -- 获取径向模糊数据
     ratial_material = camera:GetComponent(typeof(CS.AfterScreen)).mat[0]
-    --ship = Ship:new("user",0,0,0)
 end
 local voice_flag = true
 function Update()

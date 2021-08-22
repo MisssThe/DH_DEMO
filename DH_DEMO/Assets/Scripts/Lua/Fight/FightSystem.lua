@@ -91,7 +91,7 @@ function FightSystem.SendCard(card_name,to_self)
                 -- EventSystem.Send("PlaySendCard")
                 card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
                 EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
-                -- CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
+                CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
             end
         else
             if FightSystem.Round.is_self ~= true then
@@ -144,7 +144,7 @@ function FightSystem.EndFight(flag)
     -- 发送战斗结束请求
     -- CS.NetWork.SendEndFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     if flag == false then
-        -- CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
+        CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
         EventSystem.Send("PlayFightEndFailed")
     else
         EventSystem.Send("PlayFightEndSuccess")
