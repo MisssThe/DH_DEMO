@@ -68,10 +68,15 @@ public class NetWorkManager : MonoBehaviour
 
     public  void AsynSend(Socket tcpClient, byte[] data)
     {
-        tcpClient.BeginSend(data, 0, data.Length, SocketFlags.None, asyncResult =>
+        int length = data.Length;
+        byte[] new_data = new byte[length + 2];
+        new_data[0] = 250;
+        new_data[1] = (byte)length;
+        data.CopyTo(new_data, 2);
+        tcpClient.BeginSend(new_data, 0, new_data.Length, SocketFlags.None, asyncResult =>
         {
             //完成发送消息
-            int length = tcpClient.EndSend(asyncResult);
+            int length1 = tcpClient.EndSend(asyncResult);
         }, null);
     }
     public static void ReceiveTalk(byte[] data)
