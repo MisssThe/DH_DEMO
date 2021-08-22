@@ -1,59 +1,86 @@
+print("开始加载音频")
 -- 播放特殊的声音
 Global.EffectVoice = {}
 EffectVoice.source = cs_self.gameObject:GetComponent(typeof(UE.AudioSource))
 EffectVoice.source.loop = false
 -- 播放战斗开始声音
-EffectVoice.FightStartClip = AudioLoad.GetClip("FightStart")
+EffectVoice.FightStartClip = AudioLoad:GetClip("FightStart")
 function EffectVoice.PlayFightStart()
     if EffectVoice.source ~= nil then
         EffectVoice.source.clip = EffectVoice.FightStartClip
-        EffectVoice.source.Play()
+        EffectVoice.source:Play()
     end
 end
-EventSystem.Add("PlayFightStart",EffectVoice.PlayFightStart)
+EventSystem.Add("PlayFightStart",false,EffectVoice.PlayFightStart)
 -- 播放战斗结束胜利声音
-EffectVoice.FightEndSuccessClip = AudioLoad.GetClip("FightEndSuccess")
+EffectVoice.FightEndSuccessClip = AudioLoad:GetClip("FightEndSuccess")
 function EffectVoice.PlayFightEndSuccess()
     if EffectVoice.source ~= nil then
         EffectVoice.source.clip = EffectVoice.FightEndSuccessClip
-        EffectVoice.source.Play()
+        EffectVoice.source:Play()
     end
 end
-EventSystem.Add("PlayFightEndSuccess",EffectVoice.PlayFightEndSuccess)
+EventSystem.Add("PlayFightEndSuccess",false,EffectVoice.PlayFightEndSuccess)
 -- 播放战斗结束失败声音
-EffectVoice.FightEndFailedClip = AudioLoad.GetClip("FightEndFailed")
+EffectVoice.FightEndFailedClip = AudioLoad:GetClip("FightEndFailed")
 function EffectVoice.PlayFightEndFailed()
     if EffectVoice.source ~= nil then
         EffectVoice.source.clip = EffectVoice.FightEndFailedClip
-        EffectVoice.source.Play()
+        print("切换音乐")
+        EffectVoice.source:Play()
     end
 end
-EventSystem.Add("PlayFightEndFailed",EffectVoice.PlayFightEndFailed)
+EventSystem.Add("PlayFightEndFailed",false,EffectVoice.PlayFightEndFailed)
 -- 播放回合切换声音
-EffectVoice.FightTurnRoundClip = AudioLoad.GetClip("FightTurnRound")
+EffectVoice.FightTurnRoundClip = AudioLoad:GetClip("FightTurnRound")
 function EffectVoice.PlayFightTurnRound()
     if EffectVoice.source ~= nil then
         EffectVoice.source.clip = EffectVoice.FightTurnRoundClip
-        EffectVoice.source.Play()
+        EffectVoice.source:Play()
     end
 end
-EventSystem.Add("PlayFightTurnRound",EffectVoice.PlayFightTurnRound)
+EventSystem.Add("PlayFightTurnRound",false,EffectVoice.PlayFightTurnRound)
 
 -- 播放出牌声音
-EffectVoice.SendCardClip = AudioLoad.GetClip("SendCard")
+EffectVoice.SendCardClip = AudioLoad:GetClip("SendCard")
 function EffectVoice.PlaySendCard()
     if EffectVoice.source ~= nil then
         EffectVoice.source.clip = EffectVoice.SendCardClip
-        EffectVoice.source.Play()
+        EffectVoice.source:Play()
     end
 end
-EventSystem.Add("PlaySendCard",EffectVoice.PlaySendCard)
--- 播放卡牌特殊声音
-EffectVoice.CardClip = AudioLoad.GetClip("CardClip")
-function EffectVoice.PlayFightStart()
+EventSystem.Add("PlaySendCard",false,EffectVoice.PlaySendCard)
+
+-- 播放购买失败音效
+EffectVoice.BuyFailedClip = AudioLoad:GetClip("BuyFailed")
+function EffectVoice.PlayBuyFailed()
     if EffectVoice.source ~= nil then
-        EffectVoice.source.clip = EffectVoice.FightStartClip
-        EffectVoice.source.Play()
+        EffectVoice.source.clip = EffectVoice.BuyFailedClip
+        EffectVoice.source:Play()
     end
 end
-EventSystem.Add("PlayFightStart",EffectVoice.PlayFightStart)
+EventSystem.Add("PlayBuyFailed",false,EffectVoice.PlayBuyFailed)
+
+-- 播放购买成功音效
+EffectVoice.BuySuccessClip = AudioLoad:GetClip("BuySuccess")
+function EffectVoice.PlaBuySuccess()
+    if EffectVoice.source ~= nil then
+        EffectVoice.source.clip = EffectVoice.BuySuccessClip
+        EffectVoice.source:Play()
+    end
+end
+EventSystem.Add("PlayBuySuccess",false,EffectVoice.PlayBuySuccess)
+
+-- -- 播放卡牌特殊声音
+-- EffectVoice.CardClip = AudioLoad:GetClip("CardClip")
+-- function EffectVoice.PlayFightStart()
+--     if EffectVoice.source ~= nil then
+--         EffectVoice.source.clip = EffectVoice.FightStartClip
+--         EffectVoice.source:Play()
+--     end
+-- end
+-- EventSystem.Add("PlayFightStart",false,EffectVoice.PlayFightStart)
+
+
+print("音频更新完成")
+print(EventSystem.IsExit())

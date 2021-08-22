@@ -3,6 +3,7 @@
 -- 接收双方玩家操作并通过网络交互
 require("Assets/Scripts/Lua/Fight/RoleAttribute.lua")
 require("Assets/Scripts/Lua/Fight/CardsSystem.lua")
+require("Assets/Scripts/Lua/Fight/SkillEffect.lua")
 
 Global.FightSystem = {}
 
@@ -17,6 +18,9 @@ FightSystem.player_info = {}
 FightSystem.player_info.self_name = nil
 FightSystem.player_info.rivial_name = nil
 FightSystem.isFighting = false
+FightSystem.Effect = {}
+FightSystem.Effect.player_effect = nil
+FightSystem.Effect.rivial_effect = nil
 
 ------------------------------------ 功能实现 ------------------------------------
 function FightSystem.InitFightUI(command)
@@ -50,7 +54,6 @@ function FightSystem.StartFight(
     p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,p_card_num,
     r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp
 )
-    EventSystem.Send("PlayFightStart")
     -- 置为战斗中状态
     FightSystem.isFighting = true
     -- 初始化玩家基本信息
@@ -66,14 +69,17 @@ function FightSystem.StartFight(
     FightSystem.Round.round_num = 0
     FightSystem.Round.is_self = isFirst
 
-    print(debug.traceback("123"))
-
+    if FightSystem.Effect.player_effect == nil then
+        print("self name" .. self_name)
+        FightSystem.Effect.player_effect = SkillEffect:New(self_name)
+    end
+    FightSystem.Effect.rivial_effect = SkillEffect:New(rivial_name)
     -- 初始化UI
     FightSystem.InitFightUI("OpenUI")
     if isFirst then
         FightSystem.StartRound()
-        print("start111111111")
     end
+    EventSystem.Send("PlayFightStart")
 end
 
 -- 某一方玩家使用卡牌时调用
@@ -106,6 +112,7 @@ function FightSystem.EndRound()
     print("尝试结束回合")
     if FightSystem.Round.is_self == true then
         print("结束回合")
+        -- 播放结束音乐
         EventSystem.Send("PlayFightTurnRound")
         FightSystem.Round.round_num = FightSystem.Round.round_num + 0.5
         -- 把控制权移交给对手
@@ -118,13 +125,17 @@ end
 -- 轮到自己回合,接收到转换请求时回调
 function FightSystem.StartRound()
     print("start round")
+    EventSystem.Send("PlayFightTurnRound")
     -- 获取控制权
     FightSystem.Round.is_self = true
     -- 播放回合切换
     EventSystem.Send("ChangeRound")
     -- 更新卡牌系统
-    print("getbag1111111")
     FightSystem.card_system:GetCardFromBag()
+    -- 判断是否进入疲劳状态
+    if FightSystem.card_system.flag3 == true then
+        FightSystem.Player_Attri:ReduceHP(round_num + 3,true)
+    end
 end
 function FightSystem.DrawCard(num)
     FightSystem.card_system:GetCardFromBag(num)
@@ -134,7 +145,10 @@ function FightSystem.EndFight(flag)
     -- 发送战斗结束请求
     -- CS.NetWork.SendEndFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     if flag == false then
-        CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
+        -- CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
+        EventSystem.Send("PlayFightEndFailed")
+    else
+        EventSystem.Send("PlayFightEndSuccess")
     end
     EventSystem.Send("ShowEndFight",flag)
 end

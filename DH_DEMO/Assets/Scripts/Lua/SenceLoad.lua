@@ -2,7 +2,7 @@ require("Assets/Scripts/Lua/SourceManager")
 
 print("开始加载场景物体")
 ---------------------------------- 关闭之前场景物体---------------------------------
-UE.GameObject.FindGameObjectsWithTag("GameManager")[0]:GetComponent("AudioListener").enabled = false
+-- UE.GameObject.FindGameObjectsWithTag("GameManager")[0]:GetComponent("AudioListener").enabled = false
 ---------------------------------- 先加载全局物体 ----------------------------------
 print("开始加载全局物体")
 ASS.InstantiateAsync("Assets/ExternalResources/Prefabs/UICamera.prefab")

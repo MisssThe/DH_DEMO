@@ -13,6 +13,7 @@ local old_time = 0
 local function EventFunc2()
     local t = UE.Time.time
     if t - old_time > 2 then
+        EventSystem.Send("PlayFightTurnRound")
         old_time = t
         -- 播放一次动画
         if flag then

@@ -176,8 +176,6 @@ MonoBehaviour:
     key: store_open_button
   - data: {fileID: 4248401907646846819}
     key: store_close_button
-  - data: {fileID: 0}
-    key: BASE_CANVAS
 --- !u!1 &4248401908089763887
 GameObject:
   m_ObjectHideFlags: 0

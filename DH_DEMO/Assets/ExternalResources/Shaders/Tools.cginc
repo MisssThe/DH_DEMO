@@ -105,7 +105,7 @@ inline half3 RadialBlur(int sample_count,fixed2 coord)
     for (int i = 0; i < sample_count; i++)
     {
         //计算采样uv值：正常uv值+从中间向边缘逐渐增加的采样距离
-        coord = coord + dir * i * _RadialBlurAmount;
+        coord = coord + dir * i * saturate(_RadialBlurAmount);
         color += tex2D(_MainTex, coord);
     }
     return color / sample_count;

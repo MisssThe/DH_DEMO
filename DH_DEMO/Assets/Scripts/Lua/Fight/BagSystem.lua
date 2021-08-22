@@ -11,7 +11,6 @@ Global.bag_main_panel = nil
 Global.bag_open_button = nil
 Global.bag_close_button = nil
 local BuyVoice = {}
-BuyVoice.source = nil
 BuyVoice.success = nil
 BuyVoice.failed = nil
 BuyVoice.voice_flag = true
@@ -47,12 +46,10 @@ function BagSystemView.EventFunc4(card_name)
     -- 购买卡牌并减少金币
     if bag_model:Add(card_index,card_name) then
         -- 播放购买成功音效
-        BuyVoice.source.clip = BuyVoice.success
-        source.Play()
+        EventSystem.Send("PlayBuySuccess")
     else
         -- 播放购买失败音效
-        BuyVoice.source.clip = BuyVoice.failed
-        source.Play()
+        EventSystem.Send("PlayBuyFailed")
     end
     card_index = card_index + 1
 end
@@ -109,14 +106,6 @@ cs_self.transform.localPosition = UE.Vector3(0,0,0)
 cs_self.transform.localScale = UE.Vector3(1,1,1)
 
 function Global.Awake()
-    -- 填充音效
-    BuyVoice.source = cs_self.gameObject:GetComponent(typeof(UE.AudioSource))
-    if BuyVoice.source ~= nil then
-        BuyVoice.source.loop = false
-        BuyVoice.source.playOnAwake = false
-        BuyVoice.success = AudioLoad:GetClip("BuySuccess")
-        BuyVoice.failed = AudioLoad:GetClip("BuySuccess")
-    end
     main_view = UIView:New(bag_main_panel.gameObject)
     open_view = UIView:New(bag_open_button.gameObject)
     close_view = UIView:New(bag_close_button.gameObject)

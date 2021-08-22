@@ -225,7 +225,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 76346140f2e267247a0af97513adae13
-    m_Address: "Assets/ExternalResources/Voice/\u7EFC\u5408\u73AF\u5883\u97F3\u6548\u5305-\u6E05\u6668\u5C71\u6797\u9E1F\u53EB-\u81EA\u7136\u73AF\u5883_\u7231\u7ED9\u7F51_aigei_com.mp3"
+    m_Address: Assets/ExternalResources/Voice/backmusic.mp3
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: aed4fee81ca1bb4459fc87f87c16a8fe
@@ -236,6 +236,16 @@ MonoBehaviour:
     m_Address: Assets/ExternalResources/Prefabs/VoiceSource.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: e4f650a32531734419ae07fa1e458cfa
+    m_Address: Assets/Scripts/Lua/EffectVoice.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
+  - m_GUID: 5891b34064af6a4498466f3b51dad7c4
+    m_Address: Assets/Scripts/Lua/Fight/SkillEffect.lua
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - lua
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:

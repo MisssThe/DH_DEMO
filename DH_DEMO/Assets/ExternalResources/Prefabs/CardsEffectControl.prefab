@@ -48,8 +48,4 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  gameObjectsToLua:
-  - data: {fileID: 0}
-    key: 
-  - data: {fileID: 0}
-    key: 
+  gameObjectsToLua: []
