@@ -17,6 +17,7 @@ TagManager:
   - RivialBaseSkill
   - BuffSkill
   - ShieldSkill
+  - AttackSkill
   layers:
   - Default
   - TransparentFX

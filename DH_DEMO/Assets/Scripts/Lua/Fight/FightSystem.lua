@@ -46,6 +46,30 @@ function FightSystem.InitFightUI(command)
     sence_rect:SetInsetAndSizeFromParentEdge(UE.RectTransform.Edge.Top, 0, 0)
     sence_rect.anchorMin = UE.Vector2(0,0)
     sence_rect.anchorMax = UE.Vector2(1,1)
+    if command == "OpenUI" then
+        command = "CloseUI"
+        EventSystem.Send(command,"BagBase")
+        EventSystem.Send(command,"BagClose")
+        EventSystem.Send(command,"BagOpen")
+        EventSystem.Send(command,"StoreBase")
+        EventSystem.Send(command,"StoreClose")
+        EventSystem.Send(command,"StoreOpen")
+    else
+        command = "OpenUI"
+        EventSystem.Send(command,"BagOpen")
+        EventSystem.Send(command,"StoreOpen")
+    end
+end
+function FightSystem.InitSkill(flag)
+    -- FightSystem.Effect.player_effect.buff.buff_obj.gameObject:SetActive(flag)
+    FightSystem.Effect.player_effect.attack_obj.gameObject:SetActive(flag)
+    FightSystem.Effect.player_effect.shield_obj.gameObject:SetActive(flag)
+    -- FightSystem.Effect.player_effect.buff.buff_particel.gameObject:SetActive(flag)
+
+    FightSystem.Effect.rivial_effect.attack_obj.gameObject:SetActive(flag)
+    FightSystem.Effect.rivial_effect.shield_obj.gameObject:SetActive(flag)
+    -- FightSystem.Effect.rivial_effect.buff.buff_obj.gameObject:SetActive(flag)
+    -- FightSystem.Effect.rivial_effect.buff.buff_particel.gameObject:SetActive(flag)
 end
 -- 双方约定战斗后调用
 function FightSystem.StartFight(
@@ -76,6 +100,8 @@ function FightSystem.StartFight(
     FightSystem.Effect.rivial_effect = SkillEffect:New(rivial_name)
     -- 初始化UI
     FightSystem.InitFightUI("OpenUI")
+    -- 初始化技能
+    FightSystem.InitSkill(true)
     if isFirst then
         FightSystem.StartRound()
     end
@@ -91,7 +117,7 @@ function FightSystem.SendCard(card_name,to_self)
                 -- EventSystem.Send("PlaySendCard")
                 card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
                 EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
-                CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
+                -- CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
             end
         else
             if FightSystem.Round.is_self ~= true then
@@ -117,7 +143,7 @@ function FightSystem.EndRound()
         -- 把控制权移交给对手
         FightSystem.Round.is_self = false
         -- 发送控制切换请求
-        CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
+        -- CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     end
 end
 
@@ -142,9 +168,8 @@ end
 -- 因某种事件结束战斗时调用
 function FightSystem.EndFight(flag)
     -- 发送战斗结束请求
-    -- CS.NetWork.SendEndFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
     if flag == false then
-        CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
+        -- CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
         EventSystem.Send("PlayFightEndFailed")
     else
         EventSystem.Send("PlayFightEndSuccess")
@@ -159,6 +184,7 @@ function FightSystem.RealEndFight()
     FightSystem.Player_Attri = nil
     FightSystem.card_system = nil
     FightSystem.InitFightUI("CloseUI")
+    FightSystem.InitSkill(false)
     EventSystem.Send("ClearCardSet")
 end
 

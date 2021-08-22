@@ -16,19 +16,16 @@ Global.store_open_button = nil
 Global.store_close_button = nil
 ------------------------------------- 功能函数 -------------------------------------
 local canvas = UE.GameObject.FindGameObjectsWithTag("Canvas")[0]
-cs_self.gameObject.transform:SetParent(canvas.transform)
+cs_self.gameObject.transform:SetParent(canvas.transform,false)
 cs_self.transform.localPosition = UE.Vector3(0,0,0)
 cs_self.transform.localScale = UE.Vector3(1,1,1)
 
 function StoreSystemView.EventFunc1()
-    -- 退出当前背包
     EventSystem.Send("CloseUI","StoreClose")
     EventSystem.Send("CloseUI","StoreBase")
     is_open = false
 end
 function StoreSystemView.EventFunc2()
-    -- 打开当前背包
-    print("打开背包")
     print(EventSystem.IsExit("OpenUI"))
     EventSystem.Send("OpenUI","StoreBase")
     EventSystem.Send("OpenUI","StoreClose")
