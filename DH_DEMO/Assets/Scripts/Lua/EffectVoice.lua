@@ -71,16 +71,33 @@ function EffectVoice.PlaBuySuccess()
 end
 EventSystem.Add("PlayBuySuccess",false,EffectVoice.PlayBuySuccess)
 
--- -- 播放卡牌特殊声音
--- EffectVoice.CardClip = AudioLoad:GetClip("CardClip")
--- function EffectVoice.PlayFightStart()
---     if EffectVoice.source ~= nil then
---         EffectVoice.source.clip = EffectVoice.FightStartClip
---         EffectVoice.source:Play()
---     end
--- end
--- EventSystem.Add("PlayFightStart",false,EffectVoice.PlayFightStart)
-
+-- 播放攻击卡牌声音
+EffectVoice.AttackCardClip = AudioLoad:GetClip("AttackCard")
+function EffectVoice.PlayAttackCard()
+    if EffectVoice.source ~= nil then
+        EffectVoice.source.clip = EffectVoice.AttackCardClip
+        EffectVoice.source:Play()
+    end
+end
+EventSystem.Add("PlayAttackCard",false,EffectVoice.PlayAttackCard)
+-- 播放辅助卡牌声音
+EffectVoice.AssitCardClip = AudioLoad:GetClip("AssitCard")
+function EffectVoice.PlayAssitCard()
+    if EffectVoice.source ~= nil then
+        EffectVoice.source.clip = EffectVoice.AssitCardClip
+        EffectVoice.source:Play()
+    end
+end
+EventSystem.Add("PlayAssitCard",false,EffectVoice.PlayAssitCard)
+-- 播放咒术卡牌声音
+EffectVoice.ConjurCardClip = AudioLoad:GetClip("ConjurCard")
+function EffectVoice.PlayConjurCard()
+    if EffectVoice.source ~= nil then
+        EffectVoice.source.clip = EffectVoice.ConjurCardClip
+        EffectVoice.source:Play()
+    end
+end
+EventSystem.Add("PlayConjurCard",false,EffectVoice.PlayConjurCard)
 
 print("音频更新完成")
 print(EventSystem.IsExit())

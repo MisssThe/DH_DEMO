@@ -4,7 +4,7 @@ Global.UIModel = {}
 UIModel.__index = UIModel
 UIModel.data_list = {}
 UIModel.flag = true
-UIModel.max = 10
+UIModel.max = 30
 UIModel.num = 0
 
 function UIModel:New(max)

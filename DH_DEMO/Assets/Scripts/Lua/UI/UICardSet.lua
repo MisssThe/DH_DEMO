@@ -37,9 +37,11 @@ function Global.Update()
     if FightSystem.card_system ~= nil then
         if FightSystem.card_system.flag2 then
             -- 更新卡牌显示
+            print("更新卡牌显示")
             local card_set = FightSystem.card_system:GetNewCard()
             for i,v in pairs(card_set) do
                 CreatCard(v)
+                print("创建卡牌")
             end
 
             -- 将新卡牌集与旧卡牌集对比

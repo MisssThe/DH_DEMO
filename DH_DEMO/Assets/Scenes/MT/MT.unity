@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   luaAsset:
-    m_AssetGUID: a76183c7485ad5d4e838a79b01b6f78e
+    m_AssetGUID: 3e4ee25649fbaa940ab99e1e229ac2d4
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

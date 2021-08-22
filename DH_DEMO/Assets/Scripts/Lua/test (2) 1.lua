@@ -1,2 +1,2 @@
-print("start fight")
-EventSystem.Send("StartRound")
+-- print("start fight")
+EventSystem.Send("SendCard","Weakness(Clone)",true)

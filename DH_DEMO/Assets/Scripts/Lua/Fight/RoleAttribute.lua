@@ -58,7 +58,9 @@ function RoleAttribute:New(hp,mp,sp,one_sp,ned_sp,role_name)
 end
 -- 造成伤害
 function RoleAttribute:Attack(num)
+    print("本来的伤害为：" .. num)
     num = self:CaculateBuff(num,buff_type["IMD"],buff_type["RMD"])
+    print("增益后的伤害为:" .. num)
     return num
 end
 -- 治疗效果
@@ -74,11 +76,11 @@ end
 function RoleAttribute:ReduceHP(num,fixed)
     self.flag = true
     print(self.name .. "的生命值减少了" .. num)
-
+    num  = self:CaculateBuff(num,buff_type["RYD"],buff_type["IYD"])
+    print("即将受到的伤害为：" .. num)
     if fixed then
         self.health_point.now_hp = self.health_point.now_hp - num
     else
-        num  = self:CaculateBuff(num,buff_type["RYD"],buff_type["IYD"])
         -- 先计算护甲
         local one_def = self.shield_point.now_sp // self.shield_point.ned_sp * self.shield_point
         self.shield_point.now_sp = self.shield_point.now_sp - num / one_def
@@ -126,22 +128,30 @@ end
 Global.Buff = {}
 Buff.type = nil
 Buff.value = nil
+Buff.time = nil
 
 Buff.__index = Buff
-function Buff:New(bt,value)
+function Buff:New(time,bt,value)
     local temp = {}
     setmetatable(temp,Buff)
-    temp.type = bt
+    temp.type = buff_type[bt]
     temp.value = value
+    temp.time = time
     return temp
 end
 
 -- 添加一个buff（增加造成伤害，减少受到伤害，持续时间）
-function RoleAttribute:AddBuff(time,bt,value)
-    local buff = Buff:New(bt,value)
+function RoleAttribute:AddBuff(time,value,bt)
+    print("增加一个buff")
+    print(time .. "," .. bt .. "," .. value)
+    local buff = Buff:New(time,bt,value)
     self.buff_list[self.buff_index] = buff
+    print(self.buff_list[self.buff_index].value)
     self.buff_index = self.buff_index + 1
     self.flag = true
+end
+function RoleAttribute:UpdateBuff()
+    -- 判断是否有buff到期
 end
 -- 删除n个buff
 function RoleAttribute:DeleteBuff(n)
@@ -157,8 +167,8 @@ function RoleAttribute:DeleteBuff(n)
     end
 end
 -- 添加一个debuff（增加受到伤害，减少造成伤害，持续时间）
-function RoleAttribute:AddDebuff(time,bt,value)
-    local buff = Buff:New(bt,value)
+function RoleAttribute:AddDebuff(time,value,bt)
+    local buff = Buff:New(time,bt,value)
     self.flag = true
     self.debuff_list[self.debuff_index] = buff
     self.debuff_index = self.debuff_index + 1
@@ -181,6 +191,7 @@ end
 function RoleAttribute:CaculateBuff(value,type1,type2)
     for i,v in pairs(self.buff_list)
     do
+        -- print(v)
         if v.type == type1 then
             value = value + v.value
         end
