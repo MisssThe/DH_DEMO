@@ -140,7 +140,6 @@ GameObject:
   - component: {fileID: 3005814271097187133}
   - component: {fileID: 5995884322949030742}
   - component: {fileID: 8326059261798738460}
-  - component: {fileID: 4264717473545507528}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Skill
@@ -209,19 +208,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &4264717473545507528
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765176626139885001}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2480242280014425874
 GameObject:
   m_ObjectHideFlags: 0
@@ -5065,7 +5051,6 @@ GameObject:
   - component: {fileID: 4964309200211756127}
   - component: {fileID: 6439612061274495782}
   - component: {fileID: 4235301819248079473}
-  - component: {fileID: 5662957862065048553}
   m_Layer: 0
   m_Name: Buff
   m_TagString: BuffSkill
@@ -5136,19 +5121,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5662957862065048553
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3821816501509016080}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4590370628524496477
 GameObject:
   m_ObjectHideFlags: 0
@@ -5442,10 +5414,9 @@ GameObject:
   - component: {fileID: 4590370629242969745}
   - component: {fileID: 4590370629242969746}
   - component: {fileID: 4590370629242969747}
-  - component: {fileID: 4590370629242969740}
   - component: {fileID: 4590370629242969741}
   m_Layer: 0
-  m_Name: BBBBaseMagic
+  m_Name: BaseMagic
   m_TagString: BaseSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5516,20 +5487,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4590370629242969740
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4590370629242969742}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!95 &4590370629242969741
 Animator:
   serializedVersion: 3
@@ -5733,7 +5690,6 @@ GameObject:
   - component: {fileID: 5608471912936578240}
   - component: {fileID: 2175352192683491525}
   - component: {fileID: 1647390477280240564}
-  - component: {fileID: 8232735072781254737}
   m_Layer: 0
   m_Name: Shield
   m_TagString: ShieldSkill
@@ -5802,16 +5758,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &8232735072781254737
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5318324961726090727}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

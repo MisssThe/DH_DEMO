@@ -70,13 +70,16 @@ end
 function MouseHit()
     mouse_left = UE.Input.GetMouseButtonDown(0)
     if mouse_left then
+        print("鼠标点击")
         ray = UE.Camera.main:ScreenPointToRay(UE.Input.mousePosition)
         go = CS.Tools.MouseRaycast()--获得点击的物体Gameobject
         if go ~= nil then
 
-
+            print("获得物体")
             --弹出对战邀请框？
+            print(go.tag)
             if go.tag == "UserShip" then
+                print("45555555555")
                 UIManager.OpenUI("StartFight(Clone)")
                 go_name = go.name
                 FightSystem.player_info.rivial_name = go_name
