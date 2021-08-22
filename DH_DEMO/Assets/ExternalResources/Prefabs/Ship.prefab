@@ -664,7 +664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1843233845248806265
 Transform:
   m_ObjectHideFlags: 0
@@ -5509,7 +5509,7 @@ GameObject:
   - component: {fileID: 8820743497583389501}
   m_Layer: 0
   m_Name: Shield
-  m_TagString: ShieldTag
+  m_TagString: ShieldSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5824,6 +5824,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BaseMagic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039724502641358406, guid: 8289a41edd3456b419dd73be414ed16c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6039724502641358425, guid: 8289a41edd3456b419dd73be414ed16c,
         type: 3}

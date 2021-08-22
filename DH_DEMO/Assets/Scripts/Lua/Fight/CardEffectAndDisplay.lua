@@ -60,22 +60,36 @@ local magic_flag = false
 local max_time = 3
 local now_time = 0
 local now_buff = nil
+local magic_obj = nil
+local magic_obj1 = nil
 local function UseMagic(color,flag)
   print("播放成功")
   local magic_animation = nil
   local magic_material = nil
   if flag then
-    magic_material = base_magic_material
-    magic_animation = base_magic_animation
+    magic_material = FightSystem.Effect.player_effect.buff.buff_material
+    magic_animation = FightSystem.Effect.player_effect.buff.buff_animation
+    magic_obj = FightSystem.Effect.player_effect.buff.buff_obj
+    magic_obj1 = FightSystem.Effect.player_effect.buff.buff_particel
+    print(magic_material == nil)
+    print(magic_animation.name)
+    print(FightSystem.Effect.rivial_effect.buff.buff_animation.name)
+    print(magic_obj == nil)
     -- now_buff = 
   else
-    magic_material = FightSystem.Effect.rivial.Buff.base_magic_material
-    magic_animation = FightSystem.Effect.rivial.Buff.base_magic_animation
+    magic_material = FightSystem.Effect.rivial_effect.buff.buff_material
+    magic_animation = FightSystem.Effect.rivial_effect.buff.buff_animation
+    magic_obj = FightSystem.Effect.rivial_effect.buff.buff_obj
+    magic_obj1 = FightSystem.Effect.rivial_effect.buff.buff_particel
   end
+  magic_obj.gameObject:SetActive(true)
+  magic_obj1.gameObject:SetActive(true)
   magic_animation:Play("Magic")
   for i = 0,4,1 do
-    magic_material[i].material.Color = color
+    magic_material[i].material.color = color
   end
+  magic_obj1:GetComponent(typeof(UE.ParticleSystem)).main.startColor = UE.ParticleSystem.MinMaxGradient(color)
+  magic_flag = true
   now_time = 0
 end
 
@@ -113,10 +127,15 @@ EventSystem.Add('Weakness_Display',false,Weakness.Display)
 
 function Global.Update()
   -- buff场最多存在3s
-  if flag == true then
+  print("qqqqqqqqq")
+  if magic_flag == true then
+    print("llllllllllllll")
     if now_time > max_time then
       now_time = 0
-
+      print(magic_obj.gameObject)
+      magic_obj.gameObject:SetActive(false)
+      magic_obj1.gameObject:SetActive(false)
+      magic_flag = false
     else
       now_time = now_time + UE.Time.deltaTime
     end

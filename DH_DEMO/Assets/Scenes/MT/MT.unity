@@ -72022,7 +72022,7 @@ GameObject:
   - component: {fileID: 1628451362687967891}
   m_Layer: 0
   m_Name: Shield
-  m_TagString: ShieldTag
+  m_TagString: ShieldSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76804,7 +76804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &6482168694269684636
 Camera:
   m_ObjectHideFlags: 0
@@ -77081,12 +77081,12 @@ GameObject:
   - component: {fileID: 6588100813538425934}
   - component: {fileID: 6588100813538425935}
   m_Layer: 0
-  m_Name: BaseMagic
+  m_Name: BBBBaseMagic
   m_TagString: BaseSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &6588100813538425934
 MeshCollider:
   m_ObjectHideFlags: 0

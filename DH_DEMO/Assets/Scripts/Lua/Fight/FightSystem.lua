@@ -70,6 +70,7 @@ function FightSystem.StartFight(
     FightSystem.Round.is_self = isFirst
 
     if FightSystem.Effect.player_effect == nil then
+        print("self name" .. self_name)
         FightSystem.Effect.player_effect = SkillEffect:New(self_name)
     end
     FightSystem.Effect.rivial_effect = SkillEffect:New(rivial_name)

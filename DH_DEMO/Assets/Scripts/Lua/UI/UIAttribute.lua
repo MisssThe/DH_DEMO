@@ -44,8 +44,8 @@ function Global.Update()
             local sp = FightSystem.Player_Attri:GetPercentSP()
             p_sp_material:SetFloat("_Percent",sp)
             local color = FightSystem.Effect.player_effect.shield.color
-            FightSystem.Effect.player_effect.color = UE.Color(color.r,color.g,color.b,sp)
-
+            FightSystem.Effect.player_effect.shield.color = UE.Color(color.r,color.g,color.b,sp)
+            print("防御为" .. sp)
             FightSystem.Player_Attri.flag = false
         end
         if FightSystem.Rivial_Attri.flag == true then
@@ -55,7 +55,7 @@ function Global.Update()
             local sp = FightSystem.Rivial_Attri:GetPercentSP()
             r_sp_material:SetFloat("_Percent",sp)
             local color = FightSystem.Effect.rivial_effect.shield.color
-            FightSystem.Effect.rivial_effect.color = UE.Color(color.r,color.g,color.b,sp)
+            FightSystem.Effect.rivial_effect.shield.color = UE.Color(color.r,color.g,color.b,sp)
             FightSystem.Rivial_Attri.flag = false
         end
     end

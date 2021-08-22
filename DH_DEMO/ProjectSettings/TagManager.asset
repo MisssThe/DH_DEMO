@@ -16,7 +16,7 @@ TagManager:
   - BaseSkill
   - RivialBaseSkill
   - BuffSkill
-  - ShieldTag
+  - ShieldSkill
   layers:
   - Default
   - TransparentFX
