@@ -82,7 +82,7 @@ function RoleAttribute:ReduceHP(num,fixed)
         self.health_point.now_hp = self.health_point.now_hp - num
     else
         -- 先计算护甲
-        local one_def = self.shield_point.now_sp // self.shield_point.ned_sp * self.shield_point
+        local one_def = self.shield_point.now_sp // self.shield_point.ned_sp * self.shield_point.one_sp
         self.shield_point.now_sp = self.shield_point.now_sp - num / one_def
         if (self.shield_point.now_sp < 0) then
             self.health_point.now_hp = self.health_point.now_hp - self.shield_point.now_sp * one_def
