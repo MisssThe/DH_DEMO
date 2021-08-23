@@ -19,9 +19,6 @@ function CardsControl.InitControl()
 end
 CardsControl.InitControl()
 
--- for i,v in pairs(CardsControl.cards_list) do
---     print("key:" .. i)
--- end
 -- 获取卡牌
 function CardsControl.GetCard(card_name)
     local card = CardsControl.cards_list[card_name]

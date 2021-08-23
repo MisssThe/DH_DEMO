@@ -1,6 +1,6 @@
 -- require("Assets/Scripts/Lua/UI/UIView.lua")
 -- require("Assets/Scripts/Lua/Fight/CardsControl.lua")
--- require("Assets/Scripts/Lua/Fight/FightSystem.lua")
+require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 
 local cardset_view = {}
 local cardset_list = {}
@@ -9,7 +9,6 @@ function Global.Awake()
 end
 local function CreatCard(card_name)
     local t_card = EventSystem.Send("GetBaseCard",card_name)
-    print(t_card == nil)
     if t_card ~= nil then
         local i_card = UE.Object.Instantiate(t_card)
         if i_card ~= nil then
@@ -37,11 +36,9 @@ function Global.Update()
     if FightSystem.card_system ~= nil then
         if FightSystem.card_system.flag2 then
             -- 更新卡牌显示
-            print("更新卡牌显示")
             local card_set = FightSystem.card_system:GetNewCard()
             for i,v in pairs(card_set) do
                 CreatCard(v)
-                print("创建卡牌")
             end
 
             -- 将新卡牌集与旧卡牌集对比
@@ -77,7 +74,6 @@ function cardset_view.Clear()
     local child_length = child_cards.Length - 1
     for i = 1,child_length,1 do
         UE.GameObject.Destroy(child_cards[i].gameObject)
-        print(child_cards[i].name)
     end
 end
 

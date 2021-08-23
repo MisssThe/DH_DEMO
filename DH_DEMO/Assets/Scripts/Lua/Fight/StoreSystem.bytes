@@ -1,7 +1,7 @@
 -- 用于商店系统的显示
 -- 打开商店时随机获取几张牌
 require("Assets/Scripts/Lua/UI/UIView.lua")
-require("Assets/Scripts/Lua/UI/UIModel")
+require("Assets/Scripts/Lua/UI/UIModel.lua")
 require("Assets/Scripts/Lua/Fight/CardsControl.lua")
 local main_view = nil
 local open_view = nil
@@ -26,7 +26,6 @@ function StoreSystemView.EventFunc1()
     is_open = false
 end
 function StoreSystemView.EventFunc2()
-    print(EventSystem.IsExit("OpenUI"))
     EventSystem.Send("OpenUI","StoreBase")
     EventSystem.Send("OpenUI","StoreClose")
     -- main_view:MoveTop(store_main_panel.transform.parent.gameObject)
@@ -55,11 +54,8 @@ function StoreSystemView:AddData()
     if (wait_time > interval_time) then
         if is_open == true then
             store_model:Clear()
-            -- local card_temp_name = CardsControl.GetRandomCardName()
-            -- print("name" .. ctemn)
             for i = 0,2,1 do
                 local temp_card_name = CardsControl.GetRandomCardName()
-                print("name" .. temp_card_name)
                 store_model:Add(i,temp_card_name)
             end
             wait_time = 0
@@ -72,13 +68,11 @@ end
 function StoreSystemView:UpdateData()
     --  读取model数据
     if store_model.flag then
-        print("更新商店")
         local card_list = store_model:Get()
         if (card_list ~= nil) then
             StoreSystemView:ClearGrid()
             for i,v in pairs(card_list)
             do
-                print("道具名" .. v)
                 StoreSystemView:CreateGrid(v)
             end
         end    
@@ -92,10 +86,7 @@ function StoreSystemView:CreateGrid(card_name)
         t_card = EventSystem.Send("GetBaseCard",card_name)
         if t_card ~= nil then
             grid = UE.Object.Instantiate(t_card)
-            print(grid)
-            --print(grid)
             if store_main_panel.transform ~= nil then
-                --print(store_main_panel.name)
                 grid.transform:SetParent(store_main_panel.transform)
                 -- !!!!!!!!!!!!!!!!!!!!!!!!!!
                 grid.transform.localScale = UE.Vector3(3,4.5,1)

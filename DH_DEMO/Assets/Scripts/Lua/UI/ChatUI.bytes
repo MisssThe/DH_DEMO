@@ -23,7 +23,6 @@ function ChatModel.SendMsg(msg,sender_name)
         ChatModel.new_msg = ChatModel.new_msg .. sender_name .. ":" .. msg .. "\n"
         ChatModel.msg_index = ChatModel.msg_index + 1
         ChatModel.flag = true
-        print("send msg success")
     end
 end
 EventSystem.Add("SendChatMsg",false,ChatModel.SendMsg)

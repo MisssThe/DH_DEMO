@@ -7,8 +7,6 @@ local socket
 function Click()
     user_name = transform:Find("UserName_Input"):Find("Text"):GetComponent("Text").text
     password = transform:Find("PassWord_Input"):Find("Text"):GetComponent("Text").text
-    print(user_name)
-    print(password)
     CS.NetWork.Init()
     EventSystem.Add("register",false,CS.NetWork.SendRegister)
     EventSystem.Send("register",user_name,password)

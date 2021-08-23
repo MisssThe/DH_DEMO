@@ -6,7 +6,6 @@ Global.UIManager = {}
 -----------------------------------------UI管理具体功能实现-----------------------------------------
 -- 实现manager实例化功能
 -- function Global.UIManager.New()
---     print("get ui manager!")
 --     return UIManager
 -- end
 

@@ -26,18 +26,14 @@ function SkillEffect:New(name)
         local base_shield = nil
         local base_attack = nil
         for i = 1,length,1 do
-            print(obj[i].tag)
             if obj[i].tag == "BuffSkill" then
                 base_magic = obj[i]
-                print("找到buff")
             end
             if obj[i].tag == "ShieldSkill" then
                 base_shield = obj[i]
-                print("找到shield")
             end
             if obj[i].tag == "AttackSkill" then
                 base_attack = obj[i]
-                print("找到attack" .. name)
             end
         end
         local temp = {}

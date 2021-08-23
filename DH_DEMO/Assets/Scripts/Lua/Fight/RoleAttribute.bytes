@@ -1,6 +1,8 @@
 Global.RoleAttribute = {}
 RoleAttribute.__index = RoleAttribute
 RoleAttribute.is_alive = true
+RoleAttribute.is_record = false
+RoleAttribute.record_num = 0
 RoleAttribute.health_point = {}
 RoleAttribute.health_point.max_hp = 0
 RoleAttribute.health_point.now_hp = 0
@@ -56,11 +58,19 @@ function RoleAttribute:New(hp,mp,sp,one_sp,ned_sp,role_name)
     end
     return temp
 end
+-- 增加属性
+function RoleAttribute:AddMaxHP(num)
+    self.max_hp = self.max_hp + num
+end
+function RoleAttribute:AddMaxMP(num)
+    self.max_mp = self.max_mp + num
+end
+function RoleAttribute:AddOneSP(num)
+    self.one_sp = self.one_sp + num
+end
 -- 造成伤害
 function RoleAttribute:Attack(num)
-    print("本来的伤害为：" .. num)
     num = self:CaculateBuff(num,buff_type["IMD"],buff_type["RMD"])
-    print("增益后的伤害为:" .. num)
     return num
 end
 -- 治疗效果
@@ -69,33 +79,43 @@ function RoleAttribute:IncreaseHP(num)
     num  = self:CaculateBuff(num,buff_type["ITE"],buff_type["RTE"])
     self.health_point.now_hp = self.health_point.now_hp + num
     if self.health_point.now_hp > self.health_point.max_mp then
+        local temp_hp = health_point.now_hp - self.health_point.max_hp
         self.health_point.now_hp = self.health_point.max_mp
+        return temp_hp
     end
 end
 -- 受到伤害
+
 function RoleAttribute:ReduceHP(num,fixed)
     self.flag = true
-    print(self.name .. "的生命值减少了" .. num)
     num  = self:CaculateBuff(num,buff_type["RYD"],buff_type["IYD"])
-    print("即将受到的伤害为：" .. num)
-    if fixed then
+    if self.is_record then
+        self.record_num = self.record_num + num
+    end
+    local temp_num = num
+    if fixed or self.shield_point.now_sp < 0.1 then
         self.health_point.now_hp = self.health_point.now_hp - num
     else
         -- 先计算护甲
-        local one_def = self.shield_point.now_sp // self.shield_point.ned_sp * self.shield_point.one_sp
-        print("之前的防御力为" .. self.shield_point.now_sp .. "," .. one_def)
-        self.shield_point.now_sp = self.shield_point.now_sp - num / one_def
-        print("现在的防御力为" .. self.shield_point.now_sp)
-        if (self.shield_point.now_sp < 0) then
-            self.health_point.now_hp = self.health_point.now_hp - self.shield_point.now_sp * one_def
+        print("本来的伤害为" .. num)
+        local one_def = self.shield_point.now_sp // self.shield_point.ned_sp * self.shield_point.one_sp + 1
+        print("没点护甲抵抗" .. one_def)
+        num = num / one_def
+        self.shield_point.now_sp = self.shield_point.now_sp - num
+        print("剩余护甲" .. self.shield_point.now_sp)
+        if self.shield_point.now_sp < 0 then
+            self.shield_point.now_sp = 0
+            self.health_point.now_hp = self.health_point.now_hp + self.shield_point.now_sp * one_def
             self.shield_point.now_sp = 0
         end
     end
+    print("剩余生命值" .. self.health_point.now_hp)
     -- 若生命值小于零则死亡
     if self.health_point.now_hp <= 0 then
         self.is_alive = false
         EventSystem.Send("EndFight",false)
     end
+    return temp_num
 end
 -- 回复法力值
 function RoleAttribute:IncreaseMP(num)

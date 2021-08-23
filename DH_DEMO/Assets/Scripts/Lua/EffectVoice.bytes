@@ -1,4 +1,3 @@
-print("开始加载音频")
 -- 播放特殊的声音
 Global.EffectVoice = {}
 EffectVoice.source = cs_self.gameObject:GetComponent(typeof(UE.AudioSource))
@@ -26,7 +25,6 @@ EffectVoice.FightEndFailedClip = AudioLoad:GetClip("FightEndFailed")
 function EffectVoice.PlayFightEndFailed()
     if EffectVoice.source ~= nil then
         EffectVoice.source.clip = EffectVoice.FightEndFailedClip
-        print("切换音乐")
         EffectVoice.source:Play()
     end
 end
@@ -64,7 +62,6 @@ EventSystem.Add("PlayBuyFailed",false,EffectVoice.PlayBuyFailed)
 -- 播放购买成功音效
 EffectVoice.BuySuccessClip = AudioLoad:GetClip("BuySuccess")
 function EffectVoice.PlayBuySuccess()
-    print("播放成功的音乐")
     if EffectVoice.source ~= nil then
         EffectVoice.source.clip = EffectVoice.BuySuccessClip
         EffectVoice.source:Play()
@@ -100,4 +97,3 @@ function EffectVoice.PlayConjurCard()
 end
 EventSystem.Add("PlayConjurCard",false,EffectVoice.PlayConjurCard)
 
-print("音频更新完成")

@@ -21,6 +21,8 @@ FightSystem.isFighting = false
 FightSystem.Effect = {}
 FightSystem.Effect.player_effect = nil
 FightSystem.Effect.rivial_effect = nil
+FightSystem.failed_num = 0
+FightSystem.max_failed_num = 1
 
 ------------------------------------ 功能实现 ------------------------------------
 function FightSystem.InitFightUI(command)
@@ -63,8 +65,6 @@ end
 local function InitAttriPos()
     local pos = FightSystem.Effect.rivial_effect.ship_obj.gameObject.transform.position
     local camera = UE.GameObject.FindGameObjectsWithTag("MainCamera")[0]:GetComponent(typeof(UE.Camera))
-    print(camera.name)
-    print(camera.worldToCameraMatrix)
     local view_pos = camera.nonJitteredProjectionMatrix * camera.worldToCameraMatrix * UE.Vector4(pos.x,pos.y,pos.z,1)
     local r_attri = UE.GameObject.FindGameObjectsWithTag("UIAttribute")[0]
     local rect = r_attri:GetComponent(typeof(UE.RectTransform))
@@ -99,17 +99,19 @@ function FightSystem.StartFight(
     FightSystem.player_info.self_name = self_name
     FightSystem.player_info.rivial_name = rivial_name
     -- 初始化人物属性
-    FightSystem.Player_Attri = RoleAttribute:New(p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,self_name)
+    if (FightSystem.Player_Attri == nil) then
+        FightSystem.Player_Attri = RoleAttribute:New(p_max_hp,p_max_mp,p_max_sp,p_one_sp,p_ned_sp,self_name)
+    end
     FightSystem.Rivial_Attri = RoleAttribute:New(r_max_hp,r_max_mp,r_max_sp,r_one_sp,r_ned_sp,rivial_name)
     -- 初始化卡牌系统
     local p_bag_card = EventSystem.Send("GetBagCard")
+
     FightSystem.card_system = CardsSystem:New(p_bag_card,p_card_num)
     -- 初始化round
     FightSystem.Round.round_num = 0
     FightSystem.Round.is_self = isFirst
 
     if FightSystem.Effect.player_effect == nil then
-        print("self name" .. self_name)
         FightSystem.Effect.player_effect = SkillEffect:New(self_name)
     end
     FightSystem.Effect.rivial_effect = SkillEffect:New(rivial_name)
@@ -150,9 +152,7 @@ end
 
 -- 超时或玩家结束回合时调用
 function FightSystem.EndRound()
-    print("尝试结束回合")
     if FightSystem.Round.is_self == true then
-        print("结束回合")
         -- 播放结束音乐
         EventSystem.Send("PlayFightTurnRound")
         FightSystem.Round.round_num = FightSystem.Round.round_num + 0.5
@@ -165,7 +165,6 @@ end
 
 -- 轮到自己回合,接收到转换请求时回调
 function FightSystem.StartRound()
-    print("start round")
     EventSystem.Send("PlayFightTurnRound")
     -- 获取控制权
     FightSystem.Round.is_self = true
@@ -187,8 +186,20 @@ function FightSystem.EndFight(flag)
     if flag == false then
         -- CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
         EventSystem.Send("PlayFightEndFailed")
+        -- 删除一半卡牌，回复全部属性
+        FightSystem.Player_Attri = nil
+        EventSystem.Send("DeleteRandomCards",5)
+        FightSystem.failed_num = FightSystem.failed_num + 1
     else
         EventSystem.Send("PlayFightEndSuccess")
+        -- 恢复并加强部分属性
+        FightSystem.Player_Attri:AddMaxHP(10)
+        FightSystem.Player_Attri:AddMaxMP(10)
+        FightSystem.Player_Attri:AddOneSP(1)
+        FightSystem.Player_Attri:IncreaseHP(20)
+        FightSystem.Player_Attri:IncreaseSP(10)
+        FightSystem.Player_Attri:IncreaseMP(30)
+        FightSystem.failed_num = FightSystem.failed_num - 1
     end
     EventSystem.Send("ShowEndFight",flag)
 end
@@ -197,11 +208,13 @@ function FightSystem.RealEndFight()
     FightSystem.isFighting = false
     FightSystem.Round.round_num = 0
     FightSystem.Rivial_Attri = nil
-    FightSystem.Player_Attri = nil
     FightSystem.card_system = nil
     FightSystem.InitFightUI("CloseUI")
     FightSystem.InitSkill(false)
     EventSystem.Send("ClearCardSet")
+    if FightSystem.failed_num > FightSystem.max_failed_num then
+        ExEES.Send('SceneLoad', 'SceneTran', 'Assets/Scenes/Overture/Overture.unity')
+    end
 end
 
 EventSystem.Add("StartFight",false,FightSystem.StartFight)

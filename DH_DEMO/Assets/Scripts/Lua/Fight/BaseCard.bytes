@@ -1,6 +1,5 @@
 -- -- require("framework.SharedTools")
 require("Assets/Scripts/Lua/EventSystem.lua")
-require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 
 local  card_move = {}
 card_move.old_pos = nil
@@ -35,12 +34,10 @@ function Global.OnDrag(data)
     if (card_move.percent > 1) then
         card_move.flag = true
     end
-    print(card_move.percent)
     card_move.material:SetFloat("_Percent",card_move.percent)
 end
 
 function Global.OnEndDrag(data)
-    print(card_move.percent .. ",")
     if (card_move.flag) and FightSystem.Round.is_self then
         -- 卡牌被使用销毁卡牌
         card_move.flag = EventSystem.Send("SendCard",cs_self.gameObject.name,true)
