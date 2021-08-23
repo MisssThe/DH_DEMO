@@ -17,8 +17,9 @@ public class DecodeLua : MonoBehaviour
             new_str = item.FullName.Substring(length,4);
             if (!new_str.Equals("meta"))
             {
-                item.MoveTo(new_str + "bytes");
-                Debug.Log(item.FullName);
+                new_str = item.FullName.Substring(0,length + 1);
+                // item.MoveTo(new_str + "bytes");
+                Debug.Log(new_str + "bytes");
             }
         }
     }
