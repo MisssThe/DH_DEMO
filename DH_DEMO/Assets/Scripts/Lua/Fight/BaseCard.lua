@@ -24,7 +24,6 @@ function Global.OnBeginDrag(data)
     card_move.init_pos = cs_self.transform.position
     cs_self.transform:SetParent(UE.GameObject.FindGameObjectsWithTag("Canvas")[0].transform)
     -- 装上特定material
-    cs_self.gameObject:GetComponent(typeof(UI.Image)).material = 
     -- local height = UE.Screen.height
     -- card_move.move_speed = card_move.max_speed * height
 end
