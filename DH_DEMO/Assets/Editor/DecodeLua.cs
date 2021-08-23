@@ -24,15 +24,29 @@ public class DecodeLua : MonoBehaviour
 
 
         string new_str = null;
+        int length = 0;
         foreach (var item in fi)
         {
-            int length = item.FullName.Length - 4;
-            new_str = item.FullName.Substring(length,4);
-            if (!new_str.Equals("meta"))
+            if (item.Extension.Equals(".meta"))
             {
-                new_str = item.FullName.Substring(0,length + 1);
-                item.MoveTo(new_str + "bytes");
+                if(item.FullName.Substring(item.FullName.Length - 9,4).Equals(".lua"))
+                {
+                    // Debug.Log("meta:" + item.FullName);
+                    Debug.Log(item.FullName.Substring(0,item.FullName.Length - 8) + "bytes.meta");
+                }
             }
+            if (item.Extension.Equals(".lua"))
+            {
+                // item.MoveTo
+                Debug.Log(item.FullName.Substring(0,item.FullName.Length - 3) + "bytes");
+                // Debug.Log("lua" + item.FullName);
+            }
+            // else
+            // {
+            //     new_str = item.FullName.Substring(0,length - 5);
+            //     Debug.Log(new_str);
+            //     //  + "bytes.meta");
+            // }
         }
 
         StreamWriter sw = new StreamWriter(@"Assets\AddressableAssetsData\AssetGroups\Lua Assets.asset",false);
