@@ -18,6 +18,7 @@ TagManager:
   - BuffSkill
   - ShieldSkill
   - AttackSkill
+  - UIAttribute
   layers:
   - Default
   - TransparentFX

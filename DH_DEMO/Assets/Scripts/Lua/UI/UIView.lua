@@ -60,4 +60,9 @@ end
 function UIView:MoveTopSelf()
     self.gameObject.transform.parent:SetSiblingIndex(self.gameObject.transform.parent.parent.childCount)
 end
+
+-- 移动ui
+-- function UIView:Move(pos)
+--     self.gameObject.transform.localPosition = 
+-- end
 setmetatable(UIView,__metatable)

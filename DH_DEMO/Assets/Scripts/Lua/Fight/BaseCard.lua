@@ -4,7 +4,8 @@ require("Assets/Scripts/Lua/Fight/FightSystem.lua")
 
 local  card_move = {}
 card_move.old_pos = nil
-card_move.move_speed = 0.6
+card_move.max_speed = 1
+card_move.move_speed = 0.15
 card_move.index = nil
 card_move.init_pos = nil
 card_move.material = cs_self.gameObject:GetComponent(typeof(UI.Image)).material
@@ -22,19 +23,25 @@ function Global.OnBeginDrag(data)
     card_move.index = cs_self.transform:GetSiblingIndex()
     card_move.init_pos = cs_self.transform.position
     cs_self.transform:SetParent(UE.GameObject.FindGameObjectsWithTag("Canvas")[0].transform)
+    -- 装上特定material
+    cs_self.gameObject:GetComponent(typeof(UI.Image)).material = 
+    -- local height = UE.Screen.height
+    -- card_move.move_speed = card_move.max_speed * height
 end
 function Global.OnDrag(data)
     local move = (data.position - card_move.old_pos) * card_move.move_speed
     cs_self.transform.position = cs_self.transform.position + UE.Vector3(0,move.y,0)
     card_move.old_pos = data.position
     card_move.percent = card_move.percent + move.y * 0.1
-    if (card_move.percent > 20) then
+    if (card_move.percent > 1) then
         card_move.flag = true
     end
+    print(card_move.percent)
     card_move.material:SetFloat("_Percent",card_move.percent)
 end
 
 function Global.OnEndDrag(data)
+    print(card_move.percent .. ",")
     if (card_move.flag) and FightSystem.Round.is_self then
         -- 卡牌被使用销毁卡牌
         card_move.flag = EventSystem.Send("SendCard",cs_self.gameObject.name,true)

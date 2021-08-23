@@ -1,5 +1,6 @@
 Global.SkillEffect = {}
 
+SkillEffect.ship_obj = nil
 SkillEffect.shield = nil
 SkillEffect.shield_obj = nil
 SkillEffect.buff = {}
@@ -9,14 +10,13 @@ function SkillEffect:New(name)
     local obj = UE.GameObject.FindGameObjectsWithTag("UserShip")
     local length = obj.Length - 1
     local ship = nil
-    print("name")
     for i = 0,length,1 do
-        print(obj[i].name)
         if obj[i].name == name then
             ship = obj[i]
         end
     end
     if ship ~= nil then
+        self.ship_obj = ship
         obj = ship:GetComponentsInChildren(typeof(UE.Transform),true)
         length = obj.Length - 1
         if length == 0 then
@@ -46,9 +46,6 @@ function SkillEffect:New(name)
         temp.shield = base_shield:GetComponent(typeof(UE.MeshRenderer)).material
         temp.buff = {}
         temp.attack = base_attack:GetComponent(typeof(UE.Animator))
-        if temp.attack == nil then
-            print("qqqqqqqqqqqqqqqqqqqq")
-        end
         temp.attack_obj = base_attack
         temp.buff.buff_obj = base_magic:GetChild(1)
         temp.buff.buff_particel = base_magic:GetChild(0)

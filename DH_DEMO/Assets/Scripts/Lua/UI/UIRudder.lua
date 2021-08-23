@@ -29,6 +29,8 @@ local function EventFunc2()
 end
 
 local function EventFunc()
+    print("点击成功")
+
     if FightSystem.Round.is_self then
         EventFunc2()
         EventSystem.Send("EndRound")

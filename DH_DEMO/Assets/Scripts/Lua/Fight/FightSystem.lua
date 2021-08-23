@@ -35,7 +35,6 @@ function FightSystem.InitFightUI(command)
     EventSystem.Send(command,"CardSet")
     EventSystem.Send(command,"ChatImage")
     EventSystem.Send(command,"ChatButton")
-    EventSystem.Send(command,"Scrollbar")
     EventSystem.Send(command,"InputField")
     EventSystem.Send(command,"talk1")
     EventSystem.Send(command,"talk2")
@@ -60,6 +59,22 @@ function FightSystem.InitFightUI(command)
         EventSystem.Send(command,"StoreOpen")
     end
 end
+
+local function InitAttriPos()
+    local pos = FightSystem.Effect.rivial_effect.ship_obj.gameObject.transform.position
+    local camera = UE.GameObject.FindGameObjectsWithTag("MainCamera")[0]:GetComponent(typeof(UE.Camera))
+    print(camera.name)
+    print(camera.worldToCameraMatrix)
+    local view_pos = camera.nonJitteredProjectionMatrix * camera.worldToCameraMatrix * UE.Vector4(pos.x,pos.y,pos.z,1)
+    local r_attri = UE.GameObject.FindGameObjectsWithTag("UIAttribute")[0]
+    local rect = r_attri:GetComponent(typeof(UE.RectTransform))
+    rect.localScale = rect.localScale / view_pos.w * 20
+    view_pos = UE.Vector2(view_pos.x / view_pos.w,(view_pos.y + 10)/ view_pos.w)
+    rect.anchorMin = ((view_pos - UE.Vector2(0.1,0.1)) * 0.5 + UE.Vector2(0.5,0.5))
+    rect.anchorMax = ((view_pos + UE.Vector2(0.1,0.1)) * 0.5 + UE.Vector2(0.5,0.5))
+end
+
+
 function FightSystem.InitSkill(flag)
     -- FightSystem.Effect.player_effect.buff.buff_obj.gameObject:SetActive(flag)
     FightSystem.Effect.player_effect.attack_obj.gameObject:SetActive(flag)
@@ -105,6 +120,7 @@ function FightSystem.StartFight(
     if isFirst then
         FightSystem.StartRound()
     end
+    InitAttriPos()
     EventSystem.Send("PlayFightStart")
 end
 

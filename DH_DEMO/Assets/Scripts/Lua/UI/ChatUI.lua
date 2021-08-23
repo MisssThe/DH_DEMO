@@ -37,7 +37,6 @@ end
 ----------------------------------显示层----------------------------------
 Global.chat_input_obj = nil
 Global.chat_panel_obj = nil
-Global.chat_scroll_obj = nil
 Global.chat_button_obj = nil
 Global.chat_talk1_obj = nil
 Global.chat_talk2_obj = nil
@@ -48,7 +47,6 @@ local button_view = nil
 local talk1_view = nil
 local talk2_view = nil
 local chat_input_text = nil
-local chat_scroll = nil
 local chat_talk = {}
 local chat_width = 450
 
@@ -67,7 +65,6 @@ end
 
 function Global.Awake()
     input_view  =UIView:New(chat_input_obj)
-    scroll_view= UIView:New(chat_scroll_obj)
     panel_view = UIView:New(chat_panel_obj)
     button_view = UIView:New(chat_button_obj)
     talk1_view = UIView:New(chat_talk1_obj)
@@ -79,7 +76,6 @@ function Global.Awake()
     -- chat_display_text = chat_panel_obj.gameObject:GetComponent(typeof(UI.Text))
     chat_input_text = chat_input_obj.gameObject:GetComponent(typeof(UI.InputField))
     chat_button_obj.gameObject:GetComponent(typeof(UI.Button)).onClick:AddListener(EventFunc1)
-    chat_scroll = chat_scroll_obj.gameObject:GetComponent(typeof(UI.Scrollbar))
 end
 local talk_flag = 0
 local function CacuPos(x)
@@ -94,25 +90,20 @@ local function CacuPos(x)
 end
 
 function Global.Update()
-    if ChatModel.flag == true then
-        local msg = ChatModel.GetNewMsg()
-        -- 更新聊天内容
-        local local_pos = chat_talk1_obj.gameObject.transform.localPosition
-        chat_talk1_obj.gameObject.transform.localPosition = UE.Vector3(local_pos.x,CacuPos(local_pos.y),local_pos.z)
-        local_pos = chat_talk2_obj.gameObject.transform.localPosition
-        chat_talk2_obj.gameObject.transform.localPosition = UE.Vector3(local_pos.x,CacuPos(local_pos.y),local_pos.z)
-        chat_talk[talk_flag].text = chat_talk[talk_flag].text .. msg
-        -- if ChatModel.msg_num < ChatModel.max_msg then
-        --     chat_talk1.text = chat_talk1.text .. msg
-        -- else
-        --     chat_talk2.text = chat_talk2.text .. msg
-        --     chat_talk1_obj.gameObject.transform.localPosition = chat_talk1_obj.gameObject.transform.localPosition + UE.Vector3(0,30,0)
-        --     chat_talk2_obj.gameObject.transform.localPosition = chat_talk2_obj.gameObject.transform.localPosition + UE.Vector3(0,30,0)     
-        -- end
-        -- 根据聊天内容改变滑块大小
-        local size = 1 / ChatModel.msg_num
-        chat_scroll.size = size
-        print("size" .. size)
-        -- 滑动滑块改变内容
-    end
+    -- if ChatModel.flag == true then
+    --     local msg = ChatModel.GetNewMsg()
+    --     -- 更新聊天内容
+    --     local local_pos = chat_talk1_obj.gameObject.transform.localPosition
+    --     chat_talk1_obj.gameObject.transform.localPosition = UE.Vector3(local_pos.x,CacuPos(local_pos.y),local_pos.z)
+    --     local_pos = chat_talk2_obj.gameObject.transform.localPosition
+    --     chat_talk2_obj.gameObject.transform.localPosition = UE.Vector3(local_pos.x,CacuPos(local_pos.y),local_pos.z)
+    --     chat_talk[talk_flag].text = chat_talk[talk_flag].text .. msg
+    --     -- if ChatModel.msg_num < ChatModel.max_msg then
+    --     --     chat_talk1.text = chat_talk1.text .. msg
+    --     -- else
+    --     --     chat_talk2.text = chat_talk2.text .. msg
+    --     --     chat_talk1_obj.gameObject.transform.localPosition = chat_talk1_obj.gameObject.transform.localPosition + UE.Vector3(0,30,0)
+    --     --     chat_talk2_obj.gameObject.transform.localPosition = chat_talk2_obj.gameObject.transform.localPosition + UE.Vector3(0,30,0)     
+    --     -- end
+    -- end
 end
