@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Overture_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
   m_Group: {fileID: 11400000, guid: ddb60ec407d4118438e20638fbd013c8, type: 2}
-  m_StaticContent: 1
+  m_StaticContent: 0
