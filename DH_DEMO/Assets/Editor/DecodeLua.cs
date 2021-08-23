@@ -32,13 +32,14 @@ public class DecodeLua : MonoBehaviour
                 if(item.FullName.Substring(item.FullName.Length - 9,4).Equals(".lua"))
                 {
                     // Debug.Log("meta:" + item.FullName);
-                    Debug.Log(item.FullName.Substring(0,item.FullName.Length - 8) + "bytes.meta");
+                    // f0566627eefce6d4fbf9387ebc9c5710
+                    item.MoveTo(item.FullName.Substring(0,item.FullName.Length - 8) + "bytes.meta");
                 }
             }
             if (item.Extension.Equals(".lua"))
             {
                 // item.MoveTo
-                Debug.Log(item.FullName.Substring(0,item.FullName.Length - 3) + "bytes");
+                item.MoveTo(item.FullName.Substring(0,item.FullName.Length - 3) + "bytes");
                 // Debug.Log("lua" + item.FullName);
             }
             // else
