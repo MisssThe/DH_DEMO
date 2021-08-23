@@ -330,6 +330,46 @@ public class NetWork
         AsynSend(client,new_data);
     }
 
+    public static void SendChangeCardAttribute(string player_name,int index,int value)
+    {
+        PlayerAttribute temp = new PlayerAttribute();
+        temp.MyName = player_name;
+        temp.Positionx = index;
+        temp.Positionz = value;
+        temp.Rotationy = 0;
+
+        byte[] data = Serialize(temp);
+        byte[] new_data = new byte[data.Length + 1];
+        new_data[0] = 9;
+        data.CopyTo(new_data,1);
+
+        AsynSend(client,new_data);
+    }
+    public static void SendAddCard(string player_name,string card_name)
+    {
+        ToFight temp = new ToFight();
+        temp.MyName = player_name;
+        temp.HisName = card_name;
+
+        byte[] data = Serialize(temp);
+        byte[] new_data = new byte[data.Length + 1];
+        new_data[0] = 10;
+        data.CopyTo(new_data,1);
+
+        AsynSend(client,new_data);
+    }
+    public static void RequestCardAttribute(string player_name)
+    {
+        ToFight temp = new ToFight();
+        temp.MyName = player_name;
+
+        byte[] data = Serialize(temp);
+        byte[] new_data = new byte[data.Length + 1];
+        new_data[0] = 11;
+        data.CopyTo(new_data,1);
+
+        AsynSend(client,new_data);
+    }
     //public static void ReceiveTalk(byte[] data)
     //{
     //    Talk temp = new Talk();
@@ -389,7 +429,7 @@ public class NetWork
     //    //进入战斗
     //    LuaManager.Instance.Env.DoString("FightSystem.StartFight("+IsFirst+ ",100,100,100,10,1,3,100,100,100,10,1)");
     //    //传入参数 对手名字，先手后手
-        
+
     //}
     public static void close()
     {
