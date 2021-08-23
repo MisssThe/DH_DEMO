@@ -10,25 +10,22 @@ local store_model = nil
 local StoreSystemView = {}
 local interval_time = 10
 local wait_time = 400
-local is_open = true
+local is_open = false
 Global.store_main_panel = nil
 Global.store_open_button = nil
 Global.store_close_button = nil
 ------------------------------------- 功能函数 -------------------------------------
 local canvas = UE.GameObject.FindGameObjectsWithTag("Canvas")[0]
-cs_self.gameObject.transform:SetParent(canvas.transform)
+cs_self.gameObject.transform:SetParent(canvas.transform,false)
 cs_self.transform.localPosition = UE.Vector3(0,0,0)
 cs_self.transform.localScale = UE.Vector3(1,1,1)
 
 function StoreSystemView.EventFunc1()
-    -- 退出当前背包
     EventSystem.Send("CloseUI","StoreClose")
     EventSystem.Send("CloseUI","StoreBase")
     is_open = false
 end
 function StoreSystemView.EventFunc2()
-    -- 打开当前背包
-    print("打开背包")
     print(EventSystem.IsExit("OpenUI"))
     EventSystem.Send("OpenUI","StoreBase")
     EventSystem.Send("OpenUI","StoreClose")
@@ -57,12 +54,13 @@ function StoreSystemView:AddData()
     -- 打开后从卡池中随机获取三（暂定）张牌
     if (wait_time > interval_time) then
         if is_open == true then
-            math.randomseed(os.time())
             store_model:Clear()
-            local random_name = nil
+            -- local card_temp_name = CardsControl.GetRandomCardName()
+            -- print("name" .. ctemn)
             for i = 0,2,1 do
-                random_name = "card_" .. math.random(0,6)
-                store_model:Add(i,random_name)
+                local temp_card_name = CardsControl.GetRandomCardName()
+                print("name" .. temp_card_name)
+                store_model:Add(i,temp_card_name)
             end
             wait_time = 0
         end
@@ -80,6 +78,7 @@ function StoreSystemView:UpdateData()
             StoreSystemView:ClearGrid()
             for i,v in pairs(card_list)
             do
+                print("道具名" .. v)
                 StoreSystemView:CreateGrid(v)
             end
         end    
@@ -93,13 +92,13 @@ function StoreSystemView:CreateGrid(card_name)
         t_card = EventSystem.Send("GetBaseCard",card_name)
         if t_card ~= nil then
             grid = UE.Object.Instantiate(t_card)
+            print(grid)
             --print(grid)
             if store_main_panel.transform ~= nil then
                 --print(store_main_panel.name)
                 grid.transform:SetParent(store_main_panel.transform)
                 -- !!!!!!!!!!!!!!!!!!!!!!!!!!
-                grid.transform.localScale = UE.Vector3(3,6,1)
-                --print(grid.transform.localScale)
+                grid.transform.localScale = UE.Vector3(3,4.5,1)
                 -- 设置监听事件
                 grid:GetComponent(typeof(UI.Button)).onClick:AddListener(StoreSystemView.EventFunc3)
             end
@@ -107,7 +106,7 @@ function StoreSystemView:CreateGrid(card_name)
     end
 end
 
-function StoreSystemView:ClearGrid()
+function StoreSystemView:ClearGrid() 
     local obj_list = store_main_panel:GetComponentsInChildren(typeof(UE.Transform))
     local length = obj_list.Length - 1
     for i = 1,length,1 
@@ -121,6 +120,7 @@ function Global.Awake()
     open_view = UIView:New(store_open_button.gameObject)
     close_view = UIView:New(store_close_button.gameObject)
     store_model = UIModel:New()
+    store_model.flag = false
     if main_view ~= nil and open_view ~= nil and close_view ~= nil then
         close = store_close_button.gameObject:GetComponent(typeof(UI.Button))
         if (close ~= nil) then

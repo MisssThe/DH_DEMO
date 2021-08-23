@@ -44,6 +44,17 @@ public class GetCardsSet : MonoBehaviour
                 "   magic_flag = true\n"+
                 "   now_time = 0\n"+
                 "end\n"+
+                "local function UseAttack(flag)\n"+
+                "local attack_animation = nil\n"+
+                "   if flag then\n"+
+                "       -- 对方挨打\n"+
+                "       attack_animation = FightSystem.Effect.rivial_effect.attack_animation\n"+
+                "   else\n"+
+                "       -- 自己挨打\n"+
+                "       attack_animation = FightSystem.Effect.player_effect.attack_animation\n"+
+                "   end\n"+
+                "   attack_animation:Play('Attack')\n"+
+                "end\n"+
                 "function Global.Update()\n"+
                 "   if magic_flag == true then\n"+
                 "       if now_time > max_time then\n"+
@@ -97,6 +108,7 @@ public class GetCardsSet : MonoBehaviour
                     card_code += "  end\nend\n";
                     card_code += "function "+card_name+".Display(flag)\n";
                     card_code += "  EventSystem.Send('PlayAttackCard')\n";
+                    card_code += "  UseAttack(flag)\n";
                     card_code += "end\n";
                     card_code += "EventSystem.Add('"+card_name+"_Effect',false,"+card_name+".Effect)\n";
                     card_code += "EventSystem.Add('"+card_name+"_Display',false,"+card_name+".Display)\n";

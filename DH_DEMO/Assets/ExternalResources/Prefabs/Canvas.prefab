@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2727526143431598189}
   - component: {fileID: 2596186677237458924}
   - component: {fileID: 7929867608087781047}
+  - component: {fileID: -2031086793441365538}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvas
@@ -75,7 +76,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -98,3 +99,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-2031086793441365538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2435743805049773962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d03044de3a1f04c99f8030db787a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luaAsset:
+    m_AssetGUID: b514acf8c740e8e428ea7f0abe2d1239
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  gameObjectsToLua: []

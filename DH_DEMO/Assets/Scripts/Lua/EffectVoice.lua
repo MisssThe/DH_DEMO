@@ -63,7 +63,8 @@ EventSystem.Add("PlayBuyFailed",false,EffectVoice.PlayBuyFailed)
 
 -- 播放购买成功音效
 EffectVoice.BuySuccessClip = AudioLoad:GetClip("BuySuccess")
-function EffectVoice.PlaBuySuccess()
+function EffectVoice.PlayBuySuccess()
+    print("播放成功的音乐")
     if EffectVoice.source ~= nil then
         EffectVoice.source.clip = EffectVoice.BuySuccessClip
         EffectVoice.source:Play()
@@ -100,4 +101,3 @@ end
 EventSystem.Add("PlayConjurCard",false,EffectVoice.PlayConjurCard)
 
 print("音频更新完成")
-print(EventSystem.IsExit())

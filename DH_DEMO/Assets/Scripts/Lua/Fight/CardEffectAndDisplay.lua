@@ -28,6 +28,17 @@ local function UseMagic(color,flag)
    magic_flag = true
    now_time = 0
 end
+local function UseAttack(flag)
+  local attack_animation = nil
+   if flag then
+       -- 对方挨打
+       attack_animation = FightSystem.Effect.rivial_effect.attack
+   else
+       -- 自己挨打
+       attack_animation = FightSystem.Effect.player_effect.attack
+   end
+   attack_animation:Play('Attack')
+end
 function Global.Update()
    if magic_flag == true then
        if now_time > max_time then
@@ -54,6 +65,7 @@ function NormalAttack.Effect(play1,play2)
 end
 function NormalAttack.Display(flag)
   EventSystem.Send('PlayAttackCard')
+  UseAttack(flag)
 end
 EventSystem.Add('NormalAttack_Effect',false,NormalAttack.Effect)
 EventSystem.Add('NormalAttack_Display',false,NormalAttack.Display)
@@ -67,6 +79,7 @@ function ToBlow.Effect(play1,play2)
 end
 function ToBlow.Display(flag)
   EventSystem.Send('PlayAttackCard')
+  UseAttack(flag)
 end
 EventSystem.Add('ToBlow_Effect',false,ToBlow.Effect)
 EventSystem.Add('ToBlow_Display',false,ToBlow.Display)
@@ -80,6 +93,7 @@ function OneTwoPunch.Effect(play1,play2)
 end
 function OneTwoPunch.Display(flag)
   EventSystem.Send('PlayAttackCard')
+  UseAttack(flag)
 end
 EventSystem.Add('OneTwoPunch_Effect',false,OneTwoPunch.Effect)
 EventSystem.Add('OneTwoPunch_Display',false,OneTwoPunch.Display)
@@ -93,6 +107,7 @@ function ShieldBash.Effect(play1,play2)
 end
 function ShieldBash.Display(flag)
   EventSystem.Send('PlayAttackCard')
+  UseAttack(flag)
 end
 EventSystem.Add('ShieldBash_Effect',false,ShieldBash.Effect)
 EventSystem.Add('ShieldBash_Display',false,ShieldBash.Display)
@@ -106,6 +121,7 @@ function PunctureSpear.Effect(play1,play2)
 end
 function PunctureSpear.Display(flag)
   EventSystem.Send('PlayAttackCard')
+  UseAttack(flag)
 end
 EventSystem.Add('PunctureSpear_Effect',false,PunctureSpear.Effect)
 EventSystem.Add('PunctureSpear_Display',false,PunctureSpear.Display)

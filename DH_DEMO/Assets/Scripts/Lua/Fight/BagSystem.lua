@@ -14,9 +14,10 @@ local BuyVoice = {}
 BuyVoice.success = nil
 BuyVoice.failed = nil
 BuyVoice.voice_flag = true
+local is_open = false
 ------------------------------------- 功能函数 -------------------------------------
 local canvas = UE.GameObject.FindGameObjectsWithTag("Canvas")[0]
-cs_self.gameObject.transform:SetParent(canvas.transform)
+cs_self.gameObject.transform:SetParent(canvas.transform,false)
 cs_self.transform.localPosition = UE.Vector3(0,0,0)
 cs_self.transform.localScale = UE.Vector3(1,1,1)
 
@@ -24,12 +25,14 @@ function BagSystemView.EventFunc1()
     -- 退出当前背包
     EventSystem.Send("CloseUI","BagClose")
     EventSystem.Send("CloseUI","BagBase")
+    is_open = false
 end
 function BagSystemView.EventFunc2()
     -- 打开当前背包
     EventSystem.Send("OpenUI","BagBase")
     EventSystem.Send("OpenUI","BagClose")
     main_view:MoveTopSelf()
+    is_open = true
 end
 
 local grid_list = List:New()
@@ -38,7 +41,8 @@ function BagSystemView.EventFunc3()
     -- 删除卡牌并增加金币
     local t_card = GetSelectObj()
     local card_name = t_card.name
-    bag_model.Delete(card_name)
+    card_name = string.sub(card_name,1,string.find(card_name,"(Clone)",1,true) - 1)
+    bag_model:Delete(card_name)
 end
 local card_index = 0
 
@@ -49,6 +53,7 @@ function BagSystemView.EventFunc4(card_name)
         EventSystem.Send("PlayBuySuccess")
     else
         -- 播放购买失败音效
+        print("播放失败")
         EventSystem.Send("PlayBuyFailed")
     end
     card_index = card_index + 1
@@ -109,11 +114,12 @@ function Global.Awake()
     main_view = UIView:New(bag_main_panel.gameObject)
     open_view = UIView:New(bag_open_button.gameObject)
     close_view = UIView:New(bag_close_button.gameObject)
-    bag_model = UIModel:New(30)
+    bag_model = UIModel:New(40)
     -- 获取背包数据
     -- 初始化背包卡牌
-    local bag_card_list = {"NormalAttack","NormalAttack","NormalAttack","ToBlow","BlessingOfStrenth","OnwTwoPunch","Weakness","Weakness","OnwTwoPunch","ToBlow","BlessingOfStrenth","OnwTwoPunch","Weakness"};
+    local bag_card_list = {"NormalAttack","NormalAttack","NormalAttack","ToBlow","BlessingOfStrenth","OneTwoPunch","Weakness","Weakness","OneTwoPunch","ToBlow","BlessingOfStrenth","OneTwoPunch","Weakness","NormalAttack","NormalAttack","ToBlow","BlessingOfStrenth","OneTwoPunch","Weakness","Weakness","OneTwoPunch","ToBlow"};
     for i,v in pairs(bag_card_list) do
+        print("初始牌名字：" .. v)
         bag_model:Add(i,v)
     end
     if main_view ~= nil and open_view ~= nil and close_view ~= nil then
@@ -131,6 +137,51 @@ function Global.Awake()
     BagSystemView:UpdateView()
 end
 
+local scroll_max = 0.6
+local scroll_value = 0
+local scroll_speed = 1
+local scroll_stack = Stack:New()
+
+local function Scroll(flag)
+    -- 实现滚动功能
+    if flag then
+        -- 隐藏第一排物体
+        local grids = bag_main_panel:GetComponentsInChildren(typeof(UE.Transform))
+        local length = grids.Length
+        if length > 10 then
+            for i = 1,5,1 do
+                if grids[i] ~= nil then
+                    grids[i].gameObject:SetActive(false)
+                    scroll_stack:Push(grids[i])
+                end
+            end
+        end
+    else
+        -- 显示上一排物体
+        local grid = nil
+        for i = 1,5,1 do
+            grid = scroll_stack:Pop()
+            if grid ~= nil then
+                grid.gameObject:SetActive(true)
+            end
+        end
+    end
+end
+
 function Global.Update()
+    -- 实现滑动显示功能
+    if is_open then
+        scroll_value = scroll_value + UE.Input.GetAxis("Mouse ScrollWheel") * scroll_speed
+        print("lll"..scroll_value)
+        if scroll_value < -scroll_max then
+            Scroll(true)
+            scroll_value = 0
+        elseif scroll_value > scroll_max then
+            Scroll(false)
+            scroll_value = 0
+        end
+    else
+        scroll_value = 0
+    end
     BagSystemView:UpdateView()     
 end
