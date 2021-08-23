@@ -174,6 +174,17 @@ public class NetWorkManager : MonoBehaviour
         LuaManager.Instance.Env.DoString("EventSystem.Send('EndFight',true)");
         //显示你战胜了 loser_name;
     }
+
+    public void GetCardAttribute(byte[] data)
+    {
+        CardAttribute temp = new CardAttribute();
+        int hp = temp.MaxHp;
+        int mp = temp.MaxMp;
+        int dp = temp.MaxDp;
+        int one_sp = temp.OneSp;
+        int need_sp = temp.NeedSp;
+        int card_num = temp.CardNum;
+    }
     private void Receive(message msg)
     {
         int length = msg.length;
@@ -244,6 +255,9 @@ public class NetWorkManager : MonoBehaviour
                 break;
             case 18://
                 //EventManager.Instance.Send("1 'loginRecive' 'loginpage' 6");
+                break;
+            case 19:
+                GetCardAttribute(new_data);
                 break;
             default:
                 break;
