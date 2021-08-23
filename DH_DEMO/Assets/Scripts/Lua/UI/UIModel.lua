@@ -23,21 +23,20 @@ function UIModel:Add(data_name,data)
             self.num = self.num + 1
             return true
         else
+            print("添加失败qqqqqqqqqqqqqqqq")
             return false
         end
     end
 end
 
-function UIModel:Delete(key)
-    self:DeleteByKey(key)
-end
 function UIModel:DeleteByKey(key)
     if key ~= nil then
+        print("删除物体")
         self.data_list[key] = nil
         self.flag = true
     end
+    self.num = self.num - 1
 end
-
 function UIModel:DeleteByValue(value)
     self.flag = true
     if value ~= nil then
@@ -51,6 +50,10 @@ function UIModel:DeleteByValue(value)
             end
         end
     end
+end
+function UIModel:Delete(key)
+    print("想删除的物体是：" .. key)
+    self:DeleteByValue(key)
 end
 
 function UIModel:Get()

@@ -31,16 +31,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - prefab
-  - m_GUID: 6a2a87a298601ce4b90a9ab7d6370d5b
-    m_Address: Assets/ExternalResources/Prefabs/BagSystem.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - prefab
-  - m_GUID: 3f9a884d1d9ff554eb3aea22ec4c9bfb
-    m_Address: Assets/ExternalResources/Prefabs/StoreSystem.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - prefab
   - m_GUID: faf6ba8c60713a14a917b728e1f3b7d9
     m_Address: Assets/ExternalResources/Prefabs/Canvas.prefab
     m_ReadOnly: 0
@@ -246,6 +236,22 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - lua
+  - m_GUID: 6a2a87a298601ce4b90a9ab7d6370d5b
+    m_Address: Assets/ExternalResources/Prefabs/BagSystem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3f9a884d1d9ff554eb3aea22ec4c9bfb
+    m_Address: Assets/ExternalResources/Prefabs/StoreSystem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6fe5afa3daedd8c43b22ccaa5fef0276
+    m_Address: Assets/ExternalResources/Prefabs/RivialShip.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3bbd657fe4bffa74aaf45c271145c072
+    m_Address: Assets/ExternalResources/Prefabs/RealMap.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c976ae5b7ddd3e74c86a7b591bcfcc13, type: 2}
   m_SchemaSet:

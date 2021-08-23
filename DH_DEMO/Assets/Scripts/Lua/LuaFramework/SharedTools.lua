@@ -169,6 +169,35 @@ function StaticNum()
     end
 end
 
+-- Stack
+Stack = {}
+Stack.__index = Stack
+Stack.offest = 0
+Stack.list = {}
+function Stack:New()
+    local temp = {}
+    setmetatable(temp,Stack)
+    temp.offest = 0
+    temp.list = {}
+    return temp
+end
+function Stack:Push(data)
+    self.offest = self.offest + 1
+    self.list[self.offest] = data
+end
+function Stack:Pop()
+    if self.offest > 0 then
+        local num = self.list[self.offest]
+        self.list[self.offest] = nil
+        self.offest = self.offest - 1
+        return num
+    end
+    return nil
+end
+function Stack:Clear()
+    self.offest = 0
+    self.list = {}
+end
 
 -- 与选择对象相关的操作
 Select = {}
