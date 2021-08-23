@@ -34,10 +34,10 @@ MonoBehaviour:
   m_RedirectLimit: -1
   m_RetryCount: 0
   m_BuildPath:
-    m_Id: a251e3efef257c74d8d50781d2b4d5c0
+    m_Id: f88f48a71a65643438ca8961dd16c697
   m_LoadPath:
-    m_Id: 2e3a785bbb42ca747b1f30983d16f439
-  m_BundleMode: 0
+    m_Id: 797ca3d4033e90b4181afed81016acfb
+  m_BundleMode: 1
   m_DataStreamProcessorType:
     m_AssemblyName: 
     m_ClassName: 
