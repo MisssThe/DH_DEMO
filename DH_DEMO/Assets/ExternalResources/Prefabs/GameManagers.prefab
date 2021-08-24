@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9afccc616260d24f96c3f964e916307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_ship_prefab: {fileID: 8920680838249902345, guid: ee12dd8708b42d648bdb1ebaa2b6fdc5,
+  player_ship_prefab: {fileID: 1705716251191000264, guid: 6fe5afa3daedd8c43b22ccaa5fef0276,
     type: 3}
 --- !u!81 &7237666233176204084
 AudioListener:

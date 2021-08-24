@@ -141,7 +141,7 @@ function FightSystem.SendCard(card_name,to_self)
                     offest_location = offest_location - 1
                     card_name = string.sub(card_name,1,offest_location)
                     EventSystem.Send(card_name .. "_Effect",FightSystem.Player_Attri,FightSystem.Rivial_Attri)
-                    -- CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
+                    CS.NetWork.SendFight(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name,card_name)
                 end
             end
         else
@@ -166,7 +166,7 @@ function FightSystem.EndRound()
         -- 把控制权移交给对手
         FightSystem.Round.is_self = false
         -- 发送控制切换请求
-        -- CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
+        CS.NetWork.SendTurnEnd(FightSystem.player_info.self_name,FightSystem.player_info.rivial_name)
             FightSystem.RoundEffect()
     end
 end
@@ -214,7 +214,7 @@ end
 function FightSystem.EndFight(flag)
     -- 发送战斗结束请求
     if flag == false then
-        -- CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
+        CS.NetWork.SendMyLose(FightSystem.player_info.self_name, FightSystem.player_info.rivial_name)
         EventSystem.Send("PlayFightEndFailed")
         -- 删除一半卡牌，回复全部属性
         FightSystem.Player_Attri = nil

@@ -19,6 +19,7 @@ TagManager:
   - ShieldSkill
   - AttackSkill
   - UIAttribute
+  - ConjurSkill
   layers:
   - Default
   - TransparentFX

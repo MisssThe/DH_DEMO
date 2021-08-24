@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AttackMaterial
+  m_Name: SheepMaterial
   m_Shader: {fileID: 4800000, guid: b052d45baf5457a45b1cac5690c9064d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b98287d5f83ae3e4fa7b5d7088ff873c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7955ce1a0fb648641b5a8e53854e946a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
