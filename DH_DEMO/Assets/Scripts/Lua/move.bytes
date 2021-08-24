@@ -108,7 +108,7 @@ local voice_flag = true
 function Update()
     if FightSystem.isFighting ~= true then
         Move()
-        ratial_material:SetFloat("_RadialBlurAmount",(speed_y - 3.5) * 0.0008)
+        ratial_material:SetFloat("_RadialBlurAmount",(speed_y - 3.5) * 0.0005)
         if math.abs(speed_y) > 1 then
             if voice_flag then
                 -- 播放风声
