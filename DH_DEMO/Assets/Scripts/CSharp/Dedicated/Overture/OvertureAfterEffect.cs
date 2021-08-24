@@ -9,11 +9,13 @@ public class OvertureAfterEffect : MonoBehaviour
     public List<AssetReference> materials;
     public AssetReference blendMaterial;
     public AssetReference HSB;
-    public AssetReference blendRendertexture;
     [Range(0, 1)] public float blendAlpha;
     [Range(0, 10)] public float S;
     [Range(0, 10)] public float H;
     [Range(0, 2)] public float B;
+
+    public CardFalling cardfalling;
+    private bool hadSetCardFalling;
 
     private List<Material> mats = new List<Material>();
     private Material HSBMat;
@@ -24,12 +26,6 @@ public class OvertureAfterEffect : MonoBehaviour
 
     void Awake()
     {
-        if (blendRendertexture != null)
-        {
-            var blendrtOpt = blendRendertexture.LoadAssetAsync<RenderTexture>();
-            blendrtOpt.WaitForCompletion();
-            blendRt = blendrtOpt.Result;
-        }
         if (HSB != null)
         {
             var HSBOpt = HSB.LoadAssetAsync<Material>();
@@ -55,7 +51,21 @@ public class OvertureAfterEffect : MonoBehaviour
         temp1 = new RenderTexture(Screen.width, Screen.height, 24);
         temp2 = new RenderTexture(Screen.width, Screen.height, 24);
     }
-    
+
+    private void Update()
+    {
+        if(cardfalling.isActiveAndEnabled && !hadSetCardFalling)
+        {
+            hadSetCardFalling = true;
+            blendRt = cardfalling.tex;
+        }
+        else if( !cardfalling.isActiveAndEnabled && hadSetCardFalling)
+        {
+            blendRt = null;
+            hadSetCardFalling = false;
+        }
+    }
+
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
         bool temp1ToDest = false;
@@ -95,7 +105,7 @@ public class OvertureAfterEffect : MonoBehaviour
 
             if (mats.Count > 1)
             {
-                foreach(var mat in mats)
+                foreach (var mat in mats)
                 {
                     Graphics.Blit(temp1, temp2, mat);
                     var tempSwitch = temp1;
