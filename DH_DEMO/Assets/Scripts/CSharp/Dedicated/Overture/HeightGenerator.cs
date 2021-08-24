@@ -9,7 +9,6 @@ public class HeightGenerator : MonoBehaviour
 	public int _resolution = 512;
 	public float _MaxTerrainHeight = 300f;
 	public Material mat;
-	public Camera mainCamera;
 
 	public static RenderTexture heightMap;
 	Camera heightSamplingCam;
@@ -44,7 +43,7 @@ public class HeightGenerator : MonoBehaviour
 		if (heightSamplingCam == null)
 		{
 			heightSamplingCam = new GameObject("HeightMapCam").AddComponent<Camera>();
-			heightSamplingCam.transform.position = mainCamera.transform.position + Vector3.up * _MaxTerrainHeight;
+			heightSamplingCam.transform.position = new Vector3(0, 0, 0) + Vector3.up * _MaxTerrainHeight;
 			heightSamplingCam.transform.parent = transform;
 			heightSamplingCam.transform.eulerAngles = new Vector3(90,0,0);
 			heightSamplingCam.orthographic = true;
