@@ -95,6 +95,7 @@ function BagSystemView:CreateGrid(card_name)
             grid = UE.Object.Instantiate(t_card)
             grid.transform:SetParent(bag_main_panel.transform)
             grid.transform.localScale = UE.Vector3(1.6,2,1)
+            grid.transform.localPosition = UE.Vector3(0,0,0)
             -- 设置监听事件
             grid:GetComponent(typeof(UI.Button)).onClick:AddListener(BagSystemView.EventFunc3)
         end
@@ -123,7 +124,7 @@ function Global.Awake()
     bag_model = UIModel:New(30)
     -- 获取背包数据
     -- 初始化背包卡牌
-    local bag_card_list = {"NormalAttack","NormalAttack","NormalAttack","ToBlow","BlessingOfStrenth","OneTwoPunch","Weakness","Weakness","OneTwoPunch","ToBlow","BlessingOfStrenth","OneTwoPunch","Weakness","NormalAttack","NormalAttack","ToBlow","BlessingOfStrenth","OneTwoPunch","Weakness","Weakness","OneTwoPunch","ToBlow"};
+    local bag_card_list = {"ManaStorm","Sleep","NormalAttack","NormalAttack","ToBlow","BlessingOfStrenth","OneTwoPunch","Weakness","Weakness","OneTwoPunch","ToBlow","BlessingOfStrenth","OneTwoPunch","Weakness","NormalAttack","NormalAttack","ToBlow","BlessingOfStrenth","OneTwoPunch","Weakness","Weakness","OneTwoPunch","ToBlow"};
     for i,v in pairs(bag_card_list) do
         bag_model:Add(i,v)
     end

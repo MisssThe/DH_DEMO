@@ -65,9 +65,10 @@ Shader "Custom/AttackShader"
             }
             fixed4 main_f(v2f i):SV_TARGET
             {
-                fixed3 color = tex2D(_MainTex,i.uv).rgb;
+                fixed4 color = tex2D(_MainTex,i.uv);
                 clip(0.5 - color.g);
-                return fixed4(color,_Alpha);
+                clip(color.a - 0.1);
+                return fixed4(color.rgb,_Alpha);
             }
             ENDCG
         }

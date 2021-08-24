@@ -5,6 +5,7 @@ SkillEffect.shield = nil
 SkillEffect.shield_obj = nil
 SkillEffect.buff = {}
 SkillEffect.attack = nil
+SkillEffect.conjure = nil
 SkillEffect.__index = SkillEffect
 function SkillEffect:New(name)
     local obj = UE.GameObject.FindGameObjectsWithTag("UserShip")
@@ -25,6 +26,7 @@ function SkillEffect:New(name)
         local base_magic = nil
         local base_shield = nil
         local base_attack = nil
+        local base_conjure = nil
         for i = 1,length,1 do
             if obj[i].tag == "BuffSkill" then
                 base_magic = obj[i]
@@ -35,9 +37,18 @@ function SkillEffect:New(name)
             if obj[i].tag == "AttackSkill" then
                 base_attack = obj[i]
             end
+            if obj[i].tag == "ConjurSkill" then
+                base_conjure = obj[i]
+            end
         end
         local temp = {}
         setmetatable(temp,SkillEffect)
+        if base_conjure ~= nil then
+            temp.conjure = {}
+            temp.conjure.sleep = base_conjure
+        else
+            print("没有找到睡觉" .. name)
+        end
         temp.shield_obj = base_shield
         temp.shield = base_shield:GetComponent(typeof(UE.MeshRenderer)).material
         temp.buff = {}

@@ -9,6 +9,7 @@ RoleAttribute.health_point.now_hp = 0
 RoleAttribute.magic_point = {}
 RoleAttribute.magic_point.max_mp = 0
 RoleAttribute.magic_point.now_mp = 0
+RoleAttribute.magic_point.is_mp = true
 RoleAttribute.shield_point = {}
 RoleAttribute.shield_point.max_sp = 0
 RoleAttribute.shield_point.now_sp = 0
@@ -43,13 +44,9 @@ function RoleAttribute:New(hp,mp,sp,one_sp,ned_sp,role_name)
         temp.magic_point = {}
         temp.shield_point = {}
         temp.health_point.max_hp = hp
-        print(temp.health_point.max_hp)
         temp.health_point.now_hp = hp
-        print(temp.health_point.now_hp)
         temp.magic_point.max_mp = mp
-        print(temp.magic_point.max_mp)
         temp.magic_point.now_mp = mp * 0.3
-        print(temp.magic_point.now_mp)
         temp.shield_point.max_sp = sp
         temp.shield_point.now_sp = sp * 0.2
         temp.shield_point.one_sp = one_sp
@@ -78,9 +75,9 @@ function RoleAttribute:IncreaseHP(num)
     self.flag = true
     num  = self:CaculateBuff(num,buff_type["ITE"],buff_type["RTE"])
     self.health_point.now_hp = self.health_point.now_hp + num
-    if self.health_point.now_hp > self.health_point.max_mp then
-        local temp_hp = health_point.now_hp - self.health_point.max_hp
-        self.health_point.now_hp = self.health_point.max_mp
+   if self.health_point.now_hp > self.health_point.max_hp then
+        local temp_hp = self.health_point.now_hp - self.health_point.max_hp
+        self.health_point.now_hp = self.health_point.max_hp
         return temp_hp
     end
 end
@@ -127,15 +124,17 @@ function RoleAttribute:IncreaseMP(num)
 end
 -- 消耗法力值
 function RoleAttribute:ReduceMP(num)
-    self.flag = true
-    num  = self:CaculateBuff(num,buff_type["RMC"],buff_type["IMC"])
-    local temp_mp = self.magic_point.now_sp - num
-    if temp_mp > 0 then
-        self.magic_point.now_sp = temp_mp
-        return true
-    else
-        -- 施法失败
-        return false
+    if self.magic_point.is_mp then
+        self.flag = true
+        num  = self:CaculateBuff(num,buff_type["RMC"],buff_type["IMC"])
+        local temp_mp = self.magic_point.now_sp - num
+        if temp_mp > 0 then
+            self.magic_point.now_sp = temp_mp
+            return true
+        else
+            -- 施法失败
+            return false
+        end
     end
 end
 

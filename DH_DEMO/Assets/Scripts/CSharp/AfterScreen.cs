@@ -8,6 +8,7 @@ public class AfterScreen : MonoBehaviour
     public List<Material> mat;
     private RenderTexture temp1;
     private RenderTexture temp2;
+    public bool is_rain;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +30,15 @@ public class AfterScreen : MonoBehaviour
             //     Graphics.Blit(src,dest,item);
             //     Debug.Log("blit");
             // }
-            Graphics.Blit(src,dest,mat[0]);
+            if (is_rain)
+            {
+                Graphics.Blit(src,temp1,mat[0]);
+                Graphics.Blit(temp1,dest,mat[1]);
+            }
+            else
+            {
+                Graphics.Blit(src,dest,mat[0]);
+            }
         }
         else
         {

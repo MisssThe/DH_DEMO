@@ -14,6 +14,7 @@ local function CreatCard(card_name)
         if i_card ~= nil then
             i_card.transform:SetParent(cs_self.transform)
             i_card.transform.localScale = UE.Vector3(1.5,2.5,1)
+            i_card.transform.localPosition = UE.Vector3(0,0,0)
             table.insert(cardset_list,i_card)
         end
         --cardset_view.cardset_list[cardset_view.list_index] = i_card

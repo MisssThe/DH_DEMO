@@ -1,7 +1,10 @@
 -- 播放特殊的声音
-Global.EffectVoice = {}
+local EffectVoice = {}
 EffectVoice.source = cs_self.gameObject:GetComponent(typeof(UE.AudioSource))
 EffectVoice.source.loop = false
+local LongVoice = {}
+LongVoice.source = cs_self.gameObject:GetComponentsInChildren(typeof(UE.AudioSource))[1]
+LongVoice.source.loop = true
 -- 播放战斗开始声音
 EffectVoice.FightStartClip = AudioLoad:GetClip("FightStart")
 function EffectVoice.PlayFightStart()
@@ -95,5 +98,28 @@ function EffectVoice.PlayConjurCard()
         EffectVoice.source:Play()
     end
 end
-EventSystem.Add("PlayConjurCard",false,EffectVoice.PlayConjurCard)
 
+-- 播放呼噜声
+EffectVoice.SleepClip = AudioLoad:GetClip("Sleep")
+function EffectVoice.PlaySleep()
+    if EffectVoice.source ~= nil then
+        EffectVoice.source.clip = EffectVoice.SleepClip
+        EffectVoice.source:Play()
+    end
+end
+EventSystem.Add("PlaySleep",false,EffectVoice.PlaySleep)
+
+-- 播放下雨声
+LongVoice.RainClip = AudioLoad:GetClip("Rain")
+function LongVoice.PlayRain()
+print("播放下雨的使声音")
+    if LongVoice.source ~= nil then
+        LongVoice.source.clip = LongVoice.RainClip
+        LongVoice.source:Play()
+    end
+end
+EventSystem.Add("PlayRain",false,LongVoice.PlayRain)
+function LongVoice.EndLongVoice()
+    LongVoice.source:Stop()
+end
+EventSystem.Add("EndLongVoice",false,LongVoice.EndLongVoice)
