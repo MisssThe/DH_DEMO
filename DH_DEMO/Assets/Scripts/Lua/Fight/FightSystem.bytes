@@ -242,6 +242,12 @@ function FightSystem.RealEndFight()
     FightSystem.InitFightUI("CloseUI")
     FightSystem.InitSkill(false)
     EventSystem.Send("ClearCardSet")
+    -- 结束所有技能效果
+    for i,v in pairs(FightSystem.round_effect)
+    do
+        v.func()
+        FightSystem.round_effect[i] = nil
+    end
     if FightSystem.failed_num > FightSystem.max_failed_num then
         ExEES.Send('SceneLoad', 'SceneTran', 'Assets/Scenes/Overture/Overture.unity')
     end
